@@ -1,0 +1,254 @@
+
+ Mesaj türlerimiz
+
+hata mesajları
+
+syntax error -- sentaks hatası
+invalid code -- gecersiz kod
+illegal code -- gecersiz kod
+
+valid code
+legal code
+
+bad code
+işini yapan ama verimsiz kod
+
+wrong code
+işini yapamayan ama çalışan kod
+
+ int x = 10;
+ if(x = 10)
+    ;
+
+/*************************************************************/
+
+C ve C++ derleyicilerin optimazasyonu
+
+int x = 10;
+
+- Derleyicinin marifati aynı işi daha az komut ile yapmak
+- Derleyicilerin kaliteli codelar ortaya çıkarması -- daha verimli kodlar
+
+
+- Derleyici programcının taşörönü
+- Derleyici senin kodu koruma garantisi veriyorum
+
+Bunu yap dediğimde şunu yapan kod oluşturmayacağım
+
+- Aynı birebir koda çevirme garantisi vermiyorum
+Senin kodundan üreteceğim fakat farklı kombinasyon kodlar ortaya çıkart en verimlisini seçerim
+
+Ornek
+
+dongu(){
+ x = 10;
+ ////
+ ///
+ //
+}
+
+ derleyicinin örnek olarak çıkartacagı kod
+ x = 10;
+ dongu(){
+  ////
+  ///
+  //
+ }
+
+ /**********************************************************************************/
+
+ Derleyici cevirici program
+
+ /*alt görevleri*/
+ Derleyici bir sentaks kontrolu yapar
+ Logik kontrolu yapar ve bu logic kontroller derleyicinin bize daha verimli kod üretmesinin saglar
+
+ zero warning zero error
+
+ type static analiz programları var
+
+ PC-lint
+
+ static terimi nedemek
+ koda bakarak yapılan işlem
+
+ dongu(){
+  x = 10;
+  ////
+  ///
+  //
+ }
+
+
+ run time --> bunun içinde ayrıca kullanılan araçlar var
+
+ zero warrning zero error
+
+
+
+ #include <>
+
+ #define SIZE 100
+
+
+ compiler onişlem adımındaki kodları görmez
+
+
+/*****************************************************************/
+
+ 20 : 10
+
+/*****************************************************************/
+
+Sayı sistemleri
+
+
+2 lik sayı sistemleri -- tam sayılar
+
+tam sayı sistemleri unsigned ve signed olmak üzere iki ye yarılır
+
+ 0101 1010 1000 1001
+
+unsigned -> sayıların pozitif oldugunu soyler bize
+signed --> sayıların pozitif ve ya negatif oldugunu soyler
+
+
+ sistemlerin hemen hemen hepsinde
+
+ 8 bit  = 1 Byte
+
+ bit bit bit bit  bit bit bit bit
+  1   0   1   0   1    1   0   0    == Byte
+
+ bit = binary digit
+
+ Byte = 8 bit
+
+ Sistem programalama birimleri
+
+ 4 bit = Nibble = yarım byte
+ 2 byte = World
+ 4 byte = Double World
+
+
+/**********************************************************/
+
+ 2 ye tümleyen
+
+ işaretsiz 2 lik sistem
+
+ 0101 0100
+ 1010 1100
+
+
+ 1111 1111  =  255
+
+ 1*2^7 + 1*2^6 + ........... 1*2^0
+
+128 + 64 + 32 + 16 + 8 + 4 + 2 +1 = 255
+
+
+
+ unsigned
+ 1 byte =  1111 1111 = 255
+ 2 byte =  1111 1111 1111 1111 = 65 535
+
+
+/************************************/
+
+ işaretli 2 lik sistem
+
+
+   0 1 0 1   1 1 0 1
+
+   0 --> pozitif sayı oldugunu
+   1 --> negatif sayı oldugunu
+
+
+ işaretli sistemlerde negatif sayıyı bulmak için 2 ye tümleyini alrızı ve sayı yı bulup negatifini yazarız
+
+  -34 -->    2 lik sayı sıstemın boyle bır sayımız olsun bit sel
+
+  1- 2 ye tumleyenı sonra
+  2- pozitif degerini bul onluk sistemde
+  3- negatif ile carp
+
+  1110 1001  -->  -23
+  0001 0111 --> pozitif sayı --> 23
+
+
+ Soru :  -52 degerininn  byte karsılıgını soyleyınız
+
+  52 -- >
+
+  0011 0100  ---> 52
+  1100 1100  --> -52
+
+ /*****************************************************************/
+
+ işaretsiz en buyuk ve en kucuk degerlerı
+
+  255   0
+  65535 0
+
+  signed(işaretli)  sistemde en buyuk ve en kucuk deger
+  0111 1111 --->  127 en buyuk tam sayı deger
+  1000 0000 --->  -128 en kucuk tam sayı deger
+
+
+  -128    127
+  -32768  32767
+  ...... ......
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
