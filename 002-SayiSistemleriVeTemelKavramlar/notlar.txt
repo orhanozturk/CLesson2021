@@ -1,0 +1,216 @@
+
+Soru: İşaretli 2 lik sayı sisteminde butun bitleri 1 olan sayı nedir
+
+ 1111 1111 1111 1111  = -1 dir
+ 0000 0000 0000 0001  = 1 ' ye tumleyenı
+
+
+/********************************************/
+
+16 lık sayı sisteminde bahsedelim
+
+hexadecimal sistem
+hex system denir.
+
+16 tane sembol var
+
+0123456789ABCDEF
+
+
+Neden hex sistemi bizi ilgilendiriyor
+
+Sayı sistemi tabanı 10 degilde 16 ise daha büyük sayıları
+daha basmakla ifade etme şansı var demi
+
+
+16 lik sistem 2 nin katı olması
+2 lik sisteminden 16 lık sisteme veya tam tersine dönüşüm kolay olması
+
+16 lık sayı sistemin yazılan sayıya baktıgımızda 2 lık sayı sisteminde yazılmı
+gibi görebiliriz göz alıskanlıgı
+
+
+aslında 2 lık sayı sistemınde 4 bitlik alanı tek bir yerde gosterebılırız
+
+2DEA
+
+Soru
+2' lık sayı sıstemını 16 lık sayı sistemine cevirelim.
+1001 1110 1001 1111
+ 9     e    5   f
+
+
+Soru
+1AC ---- onluk sayı sistemine donusturelım
+
+1*16^2 + 10*16^1 + 12*16^0
+
+
+Soru : 812a abde    --> bu sayı pozitifmi negatifmi
+
+               1000 -- 8  --> sayı negatif
+
+
+/****************************************************************/
+
+
+
+Yeni Konu -- Tokenizing
+
+Derleyici program kendisi için Derleme aşamasın kullanabilmek için
+Yazılan kaynak kodu en küçük yapı taşlarına ayırıyor bu işleme Tokenizing denir
+
+Yazılımda en kucuk yapı taslarına Token denir.
+
+tokenizing  --- karsılıgı Atomlarına ayırma
+token   --- atom
+
+Peki bu tokenlar nedir?
+
+Her tokenın bir katogoresi vardır
+
+Bir token
+
+-keyword  -- anahtar sözcük
+-identifier  -- isim
+-constant -- sabit
+-operator  -- operatör
+-string literal  -- string sabiti
+-delimiter  -- ayıraç
+
+
+ keyword : Anahtar sözcükler dil tarafından özel anlam yüklenmiş
+              kullanılma mecburıyeti getirilmiş tokenlar
+
+ Bu tarz dillerde anahtar sözcülerin adeti bellidir
+
+ Örnek :
+
+ int float double if while .....
+
+ C 'nin 89 standartlarında  32 anahtar sözcük vardır
+ C  'nin 99 ve 2011 standartlarında yeni anahtasözcükler eklendi
+
+
+
+ identifier: İsim  varlıklara verilen adlardır.
+            Yani nesnelere (variable) fonksiyonlara v.b seylere verilen isimlerdir
+
+ Nelerin isimleri var:
+       Değişkenlerin (variable)
+       Sabitlerin
+       Fonksiyonların
+       Etiket (label)
+       Data type  olabilir
+
+       Bu tarz dillerde isimlerin olusturmanın kuralları var
+       Diger bazı onemlı dillerde bu kuralları C dilinden almış
+
+       Bu kurallar:
+
+        1- Dilin isimleri bu alttaki karakter setlerinden oluşmalıdır
+           A.....Z  26 tane harf karakteri - ingiliz alfabesindeki (latin-roman char set)
+           a.....z  26 tane harf karakteri - ingiliz alfabesindeki (latin-roman char set)
+           0.....9  10 tane  (arabic numerals)
+            _   	     karakteri (underscore)
+
+    2- Bir anahtar sözcük isim olarka yazılamaz kullanılamaz
+
+        3- İsmin rakam karakteri ile baslatılamaz ama herhangi karakteri olabilir
+
+        4- İsmin ilk karakteri _ ve ya alfabetik karakteri olur
+
+
+
+
+               case sensitive
+               case insensitive
+
+        case sensitive bunların hepsi farklı anlamladır demek
+        sum
+        Sum
+        SUM
+
+       case insensitive ise yukarıdakilerin bir farkının olmadıgını anlmaına gelir
+
+       C de case sensitive dildir
+
+
+
+       Constant - sabitler: bir aritmatik sabittir
+
+       İki kategoriye ayrılıyor.
+
+       Sabitlerin yazımında 3 ayrı sistem vardır
+       decimal
+       hex
+       octal
+
+        123 --> yazarsak bu dogrudan bu 10 luk sayı sıtemı
+
+         0x  --> il başlayan sabitler 16 lik sayı sisteminde yazılmıs sabitler
+         0x123
+
+
+         0 --> ile baslayan sistmler 8 lik sayı sistemidir
+         0123 gibi
+
+
+       operator - operatör
+
+        İşlem yaptıran atomlardır
+
+        C dilinin 45 tane operatorü var
+
+        Ornek:
+
+         ! + * - / > <  && || << += >>=  <<=
+
+
+        sadece bir operator varki hem operator hem anahtar sözcük
+
+        bu ---> sizeof
+
+
+     string literal  -- string sabiti
+
+
+     "orhan"  ->> bu kendi başına atom
+
+
+
+
+    -delimiter  -- ayıraç
+
+        ; , {}
+
+
+    *sabit (literals, constant) => Program içerisinde dogrudan yazılan degişkenlere sabit deriz.
+
+    *operatör (operators) =>  Derleyici bir işlem belirten ve bu işlem sonucunda bir deger üreten gruplara operator atomları denır.
+                   +, -, ., =,(), [],
+
+    *ayraçlar (separators) => Kodu gruplandırmak için kullanılan atomlardır.
+                        {	} ; ,
+
+
+
+  /******************************/
+
+    white space karakterler
+
+    Bosluk hissi veren karakterlerin olusturdugu karakter kumesi
+    bu karakterlirin kodun anlami uzerinde bir anlami yoktur
+
+
+ /******************************/
+
+     Code layout  -- Coding convention
+
+        yazdigimiz kodlarin yazim bicimi
+        Bu bir dilin kurali degil
+
+        Bu tamamiyle kendinizin belirledigi veya genelin ortak belirledigi standartlar
+
+     Yani ozetle atomlar arasindaki bosluklar derleyici tarafindan onemli degil
+        Bu kodun kolay okunup yazilmasi icin

@@ -7,5 +7,4 @@ SOURCES += \
         main.c
 
 DISTFILES += \
- notlar \
  notlar.txt

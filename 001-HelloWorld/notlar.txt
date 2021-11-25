@@ -252,3 +252,6 @@ signed --> sayıların pozitif ve ya negatif oldugunu soyler
 
 
 
+
+
+
