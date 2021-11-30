@@ -1,0 +1,289 @@
+
+Kaynak Dosyaları
+
+
+Local namespace
+Global namespace
+
+/**************************/
+
+Declaration (bildirim)
+Bir ismin C ne oldugunu anlatan cümle bildirimleri.
+Derleyiciye ismin ne oldugunu anlatmak
+
+
+-statement (deyim)
+İsimlere karsılık gelen, derleyicinin işlem koduna cevirmesi
+Bize çalışır kodların üretmesini sağlayan code.
+
+ x = a + b; //statement
+
+
+Identifier - isimler
+name lookup dediğimiz yerlerde aranır
+İsimleri nerelerde aranacağı belirlenir ve arar bunada name lookup denir.
+
+Eğer aranan isim bulunamazsa name lookup hatası alırız
+
+Eğer ismi bulur ise derleyici sentaks kurallarına göre gecerlimi diye bakar
+
+
+O zaman ilk başta
+
+1- name lookup - isim arama
+2- context control
+   isim aramadan sonra isim kuralları gecerlimi kontrolu yapılır
+
+
+
+Nesne (object)
+variable = nesne ye denk gelmektedir.
+
+nesneler programın çalışma zamanında bellekte (ram) yer kaplayan variable lardır.
+
+stroge = C de bir nesnenin bellekteki yeri demektir
+
+Nesnelerin tür bilgileri vardır ve bellekte ne kadar yer kapladıklarını bildirir.
+
+Nesnelerin olmazsa olmazı veri türü
+
+ Veri türü 2 gruba ayrılır
+
+1- Basic types - primitive types - fundemental types - default types bunların aynı anlamdadır
+
+Bunlar dilin kurallarına göre ve standartla göre önceden garanti altına alınmış türlerdir
+Dil tarafından hazır sunulan türler
+
+
+2- user defined types
+Programcı tarafından tanımlanan türler veya türdür.
+Programcı kendi türünü olusturmak için anahtar sözcük kullanır
+struct unions enums kullanılır.
+
+Kısacana  nesneler
+
+- nesnenin türleri verdır
+- nesnenin türü bellekte kac byte yer kapladığı
+- Bellek alanında tutalan birlerin ve sıfırların ne ifade ettiğini söyler
+- Nesnelerin isimleri
+- Nesnelerin adresleri vardır
+
+pointer --> nesnelerin adresleri
+
+
+Tenik terimleri unutmayalım
+
+object = variable aynı anlamdadır
+
+
+
+/*************************************************/
+
+Expression (ifade)
+
+C dilindeki temel birimlerden biridir
+bir degişken
+bir sabit
+yada bunların operatorler ile birleşmesinden olusabilir
+
+
+ a // degişken olabilir
+
+ 5 // sabit olabilir
+
+ a + 7 > b // degişken ve operatorlerin birleşiminden ortaya çıkan ifade
+
+
+ (a + c) * (x -y * 2) > 100 // ifade
+
+ /***********************/
+
+  statement  = Deyim
+  Eğer ifadeyi ; ile sonlandırıyor isek bu statement dır.
+
+  gruplara ayrılır
+
+  Expression statement
+  null statement
+  compound statement
+  control statement
+
+
+   x = 5;  //Expression statement
+
+   x++; // Expression statement
+
+ - ifadelerin degeri var
+ - ifadelerin belirleyen türleri (data type)
+
+ - Value kategorileri var
+   Bir ifadenin degeri 2 kategori gruba ayrılır
+
+   L Value Expression (sol taraf degeri)
+   R value Expression (sag taraf degeri)
+
+
+   ifade bu yukardakilerden bir tanesi olabilir
+
+
+ L value Expression  = Bu ifade bir nesneye karsılık gelir.
+                       bellekte bir yere karsılık gelir ve nesne gösteren ifadedir.
+
+
+ R Value Expression = Bir nesneye karsılık gelmez
+
+
+  Soru : ifadeleri tahmin edelim
+
+        x // L value
+        10 // R value
+
+        x + 10 // R value
+
+        a[4] // L value
+
+Not: içinde aritmatik karsılatırma logic operator bulunduran ifalerin hepsi R value bulunduran
+
+ a + b
+
+ a - b + c
+
+ a > b
+
+
+a[ ]  köşeli parantez ile oluşturualn ifadeler L value dur
+
+
+ Ornek :
+
+  int x = 5;
+
+  7 = x; // sentaks
+
+
+Not: L value, R value ya atanmaz
+
+ &   ----- > adres operatoru ileride anlatılcak
+
+  L value nereden geliyor ?
+  R value ------ ?
+
+
+  left ----- gelmiyor
+  ama suan anlamı left
+
+  L value nun ' localtors ----- kökeni bu
+
+  x = 10;
+
+  R value ---- > right value dan geliyor direk olarak
+
+
+
+  /******************************************/
+
+
+   constant expression (sabit ifadeler)
+
+   10 // constant
+
+   constant ifadeler degeri Compile time da yani derleme zamanında derleyici net olarak bilinen ifadelerdir
+
+   x + y  ---> bu ifade connstant expression mi Hayır
+
+   10 * 5 ---> bu ifade connstant expression Evet
+   144
+
+
+   C de öyle yerler var ki sabit ifadesi kullanmak zorundayız, yoksa sentaks hatası alırız
+
+
+   Dizi tanımlamalarında dizinin boyutunu belirleyen ifade
+
+   int A[10]
+
+   switch deyiminin case label lari connstant expression olmak zorunda
+
+
+   ................
+
+
+   /***************************************************************/
+
+   C nin notasyonun da kullanılan bir karakter seti var
+
+   bu karakter setinin ingilizce ve türkçe karsılıklarını bilmemiz gerekiyor
+
+   Bazı  yapılan hatalar bu alttakı lerinin hepsine parantez denmesi gibi
+
+   ( )
+   [ ]
+   { }
+
+
+   Veya bu karakterin isminin bilinmemsi gibi
+   ~
+
+   ^
+
+   Bu karakterler Punctuation denir
+
+   ASCII karakter kodlamasındaki karakterler
+
+   a- harf karakterleri olabilir --- alfabetik karakterler
+   b- rakam karaterleri oalbilir --- numerik karaterler --  digit
+   c- bunların birleştiği karakter kumesi --- alfa numerik karaterler
+   d- goruntusu olmayan karaterler --- kontrol karakterleri
+   e- goruntusu olan ama harf veya rakam karakterleri olmayan karaktererdir
+      bunlara Punctuation karakterler denir.
+
+
+    ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+
+   () parantesiss
+   [] square brackets
+   {} curly brace
+
+   | pipe
+
+   ; semi colom
+
+   Önemli :
+   Bu  karakterlerde n C de üç tanesi kullanılmıyor
+   Ama yazının karaterleri olabilir
+
+   KULLANILMIYOR
+
+   `
+   @
+   $
+
+
+  C kodu yazmamız için gerekli olan terimleri ögrendik veya temel kavramları gorendık
+
+
+  /***********************************************/
+
+  C Diline giriş yapcagızz sonraki ders
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
