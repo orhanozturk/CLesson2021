@@ -1,0 +1,227 @@
+
+
+// to define a function (function definition) // tanımlama
+// to call a function (function call) //fonksiyon cagrılması
+// to declare a function (function declaration) // bildirim
+
+
+Fonksiyon tanımlaması
+fonksiyonun kodu demektir
+fonksiyon genel bir code birimi ve tipik olarak işimizi prosedurel programalamdaki fonksiyonlara
+ayırarak yaptırma.
+
+fonksiyon cagırma
+kod akısında cagrılan fonksiyona geldiğinde o fonksiyona gidilmesi
+
+
+fonksiyon bildirimi
+Derliyiciye fonksiyon isminin tanıtan veya bilgi veren cümle.
+
+
+#include <stdio.h>
+
+// fonksiyon -- işlev -- yordam --
+
+int foo(); // declaration
+
+int main()
+{
+    printf("Hello World!\n");
+    foo(); // call
+}
+
+
+int foo() //definition
+{
+    //
+    //code
+    //
+    //
+}
+
+/********************************************************/
+
+{ // BLOCK
+    { // NESTED BLOCK
+        {
+
+
+        }
+
+    }
+}
+
+/**********************************************************
+
+#include <stdio.h>
+
+//C99 ve sonrası main fonksiyonun return ifadesi block ların sonu konur derleyici tarafından
+//C++  return main fonksiyonun ifadesi block ların sonu konur derleyici tarafından
+int main()
+{
+    printf("Hello World!\n");
+}
+
+
+
+/*********************************************************/
+
+ Veri türleri (Basic types) (user define types)
+
+(user define types) --> sonraki derslerimizde ele alacagız
+
+basic types ikiye ayrılır
+
+integer types ve floating types olarak ikiye ayırırız
+
+
+integer types --- tam sayi türleri
+floating types --- gerçel sayı türleri
+
+
+Basic type da standartlara gore değişiklik gostere bilir sonradan dile eklenenler var
+
+
+ char  -->  DERLEYİCİYE BAGLI olarak işaretli veya işaretsiz belirlenir
+ signed char
+ unsigned char
+
+ signed --> işaretli
+ unsigned --> işaretsiz
+
+ derleyici baglı durumlara --> implementation defined diyeceğiz
+
+ char türleri 1 byte (storage) yer kaplar
+
+
+ char ---------
+ signed char -128 +127
+ unsigned char 0 255
+
+ dilin kuralları storage alanlarını net olarak belirlemiyor
+ sistemden sisteme degişebilir ve sadece şu aralıkta olabilecekleri soylenır
+
+
+ char
+ short
+ int
+ long
+ long long
+
+ short <= int <= long <= long long
+
+
+/************************************************************/
+
+#include <stdio.h>
+
+int main()
+{
+
+    printf("sizeof(char) =  %zu\n", sizeof(char));
+    printf("sizeof(short) =  %zu\n", sizeof(short));
+    printf("sizeof(int) =  %zu\n", sizeof(int));
+    printf("sizeof(long) =  %zu\n", sizeof(long));
+    printf("sizeof(long long) =  %zu\n", sizeof(long long));
+
+
+}
+
+/*********************************************************/
+
+ bool türü
+
+
+ bool türü diye tür yok C dilinde
+ bool yerine  _Bool  türü eklendi C99 standartları ile
+
+ C++ java c# gibi dillerde bool türü var
+ ve bu dillerde true ve false vardır
+
+
+ C dilinde true ve false yoktur fakat define olarak tanımlanmıştır
+
+ #define true   1
+ #define false  0
+
+ C dilinde bool türü olmadıgı için _Bool türü eklendi dile
+ fakat bool türünün es değiri int türüdür
+
+
+ bool
+ boolean
+
+ bool flag = true  alacag
+
+ _Bool x = 10;
+
+
+ _Bool türü storage 1 byte yer kaplar
+
+/*************************************************************/
+
+ type alias
+
+ ileride detaylı bahsedilcek
+
+ #include <stdint.h>
+
+
+ int32_t  // 4 byte int türünü kullanmak için bu ismi kullandım
+          // türlerin es isimleri
+ int16_t
+ int64_t
+
+
+ Bunları sakın sakına tür olarak düşünemeyiniz
+
+ Bunlar türlerin eş isimleri
+
+/*************************************************************/
+
+ Gerçek Sayılar
+
+  float
+  double
+  long double
+
+ gercek sayıları ifade etmek için farklı farklı standartlar mevcut
+ en cok kullanılan standart  IEEE754 standartdı
+
+
+ 1010001.10101011
+
+ yukardaki degerin gercek degeri ifade edilmesi tam olarak dogru degildir
+
+ signle precision  --- 4 byte lık
+ double precision  --- 8 byte lık
+
+ float ---> sistemerlin hemen hepsinde 4 byte -- single precision
+ double ---> sistemden hemen hepsinde 8 byte  --- double precision
+
+ long double --- 8 10 12 16 byte olabilir
+
+ C nin standart diyor kı
+
+ float <= double <= long double --- bunu granti altına alır
+
+
+
+ /**********************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

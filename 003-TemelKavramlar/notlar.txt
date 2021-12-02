@@ -287,3 +287,4 @@ Not: L value, R value ya atanmaz
 
 
 
+
