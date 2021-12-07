@@ -1,17 +1,17 @@
 #include <stdio.h>
 
+// static anahtar sözcüğü ile static ömürlü yaptık degişkeni
+
+void func(void )
+{
+    int x;
+}
 
 int main()
 {
 
-    for(int i = 0; i < 10; ++i)
-    {
-        static int x = 10;
+    int x;
 
-        printf("x = %d\n", x);
-
-        x += 5;
-    }
 
    return 0;
 }
@@ -19,3 +19,6 @@ int main()
 
 /********************************************************/
 /********************************************************/
+
+
+

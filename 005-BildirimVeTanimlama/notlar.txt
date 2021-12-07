@@ -372,7 +372,7 @@ void func(void)
 
 int main()
 {
-
+    int x;
     func();
     func();
     func();
