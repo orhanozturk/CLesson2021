@@ -1,0 +1,542 @@
+
+Fonksiyonlar
+
+fonksiyonlar isimlemlendirme
+
+örnek
+      subroutine
+          method
+        function
+       procedure
+
+
+
+Fonksiyon nedir
+
+fonksiyon bağımsız bir koda sahip bir işi yapmakla yükümlü kod parçacıkları
+
+fonklarla ilgili 3 farklı kod türü var
+
+-to define a function (function definition)
+-to call a function (function call -- invoke)
+-to declare a function (function declaration)
+
+
+
+-to define a function (function definition)
+fonksiyonun derleyiciye isminin ne oldugu hakkında bilgi veriri
+
+-to call a function (function call -- invoke)
+fonksiyon calıstırma talimati
+
+-to declare a function (function declaration)
+fonksiyonun kodu yazmak buna da fonksiyon tanımı denir
+
+
+fonksiyon tanımlama
+
+[Geri Dönüş Türü] Fonksiyon İsmi (parametreler)
+
+double func(int x)
+{
+    //code
+    //code
+}
+
+
+//geri dönüş türü olmayan fonksiyonlar
+void func(int x)
+{
+
+}
+
+
+//C89 C99 C11
+
+//C89 geçerliydi
+
+//C99 bu geçerlilik kalktı
+//fakat yinede geçerli neden geçmişişe uyumluluk - backward compatibility
+
+func(int x)
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+//implicit int
+// örtülü gizli kapalı ==== implicit
+
+//derleyici kendisi sizin yerine implicit fonksiyonların türünü "int" kabul eder yazar
+//implicit int C++ yoktur böyle fonksiyonlar sentaks hatsıdır
+
+func(int x)
+{
+
+}
+
+int main()
+{
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+Peki bir fonksiyonun geri dönüş türleri ne olabilir
+
+
+int double float short unsigned int ........
+
+
+struct Data  ---- bunlar da olabilir
+
+
+/****************************************************/
+/****************************************************/
+
+
+fonksiyonların isimleri -- identifier
+
+snake_case    camel_case
+
+
+
+/****************************************************/
+/****************************************************/
+
+
+fonksiyon parametre parantezi
+
+int func(int x, double b)
+{
+
+}
+
+
+peki parametresi void olan fonksiyonlar
+
+void func(void) // benim parametrem yok
+{
+
+
+}
+
+
+void func() // parametreler hakkında bilgim yok
+{
+
+
+}
+
+/*******************************************************/
+
+
+func(expr)  --- fonksiyona şu parametre yi geçtim
+
+void func(int x)
+{
+
+}
+
+func(expr)  --- fonksionu argüman ile çağırdım yada arguman geçtim
+
+Terim
+parametre dediğimiz değişkenlere ---> formal parameter
+fonksiyona gödnerdiğimiz argumanlar ---> actual parameter
+
+/*******************************************************/
+
+
+bir fonksiyon içinde fonksiyon tanımlayamam
+
+//sentaks hatası
+void func(void)
+{
+    void foo()
+    {
+
+    }
+}
+
+
+c++ java C#
+function overloading
+
+Bu c de yok böyle bir mekanızma yok
+
+
+/*******************************************************/
+
+
+parametre değişkenleri nerede ömürleri biter
+
+fonksiyonun blok sonlarında ömürleri biter
+
+void func(int x)
+{
+
+
+}
+
+/*******************************************************/
+
+
+parametre değişkenleri ile aynı isimde yerel değişken tanımlanamaz
+
+void func(int x)
+{
+    double x; // sentaks hatsı tanımlayamam aynı isimde
+}
+
+
+/*******************************************************/
+
+Fonksiyonlara geri dönüş değerlerini oluşturma
+
+C de bir fonksiyonun geri dönüş degeri oluturma terimine "return statement" denir
+
+
+statement
+**********
+expression statement
+
+x++;
+a = b;
+
+compound statement
+
+{
+ statement;
+ statement;
+ statement;
+}
+
+null statement -- boş deyim
+
+   ; tek başına oluşturdugu terim
+
+control statement
+*****************
+if statement
+while statement
+do while statement
+for statement
+
+switch statement
+goto statement
+break statement
+continue statement
+
+return statement  --->  kontrol deyimlerinden bir tanesi
+
+
+/*****************************/
+
+fonksiyonların return deyimi (statement)
+
+return deyimi iki alt biçimi var
+
+1- yalın return deyimim -- ifadesiz deyim ---- az sıklıkla karsılasılan durum
+
+  return;
+
+
+2- yogun kullanılan return setanskı
+
+  return expr;
+
+  return expr + expr;
+
+/************************************/
+
+return deyimi ne için kullanılır ?
+
+
+int func()
+{
+  return;
+}
+
+int main()
+{
+  func();
+
+}
+
+
+
+/**********************************/
+
+
+void func(void)
+{
+    //statement;
+    //statement;
+    //statement;
+    //statement;  /// kod burda biter
+}
+
+
+
+öyle durumlar var ki fonksiyonun bir noktada bitmesini isteyebiliriz
+
+void func(void)
+{
+    int x = 7;
+    //statement;
+    //statement;
+    if(x > 10)
+        return;
+    //statement;
+    //statement;  /// kod burda biter
+}
+
+
+
+
+//gereksiz return deyimi
+void func(void)
+{
+    //statement;
+    //statement;
+    //statement;  /// kod burda biter
+    return; //gereksiz kod olmuş olur
+}
+
+
+/************************************************/
+
+2- ifadeli return deyimi
+
+
+void fonksiyonlarda ifadeli return kullanılmaz
+void func(void)
+{
+    //statement;
+    //statement;
+    //statement;
+    return 1; //geçersiz durum
+}
+
+
+
+int func(void)
+{
+  int x = 10;
+  int y = 20;
+
+  //code
+  //code
+  //code
+
+    return x * y;
+    return x*y*10+45;
+}
+
+int main()
+{
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+
+
+int func(void)
+{
+  int x = 10;
+  int y = 20;
+
+  //code
+  //code
+  //code
+
+    return (x*y) + 10; // daha anlınmlı hale getir
+}
+
+//return (expr)  parantez sadece yazım tarzıdır
+
+
+int main()
+{
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+return deyimi ile birden fazla deger iletilemez
+ama buna yöenlik c nin başka araçlarını ilerleyen derlerde ögrenecez
+
+
+
+/*****************************************************/
+
+
+öyle bir fonksiyon yazdımkı duruma göre bana deger döndür veya dönrdürmesin ?
+
+Hayır - C de böyle bir fonksiyon yok veya araç yoktur
+
+
+/*****************************************************/
+
+bir fonksiyonun bir tane geri dönüş degeri olabileceğine göre
+bir fonksiyonun kodu içerisinde sadece 1 return deyimi olabilir ?
+
+Hayır bir çok return deyimimiz olabilir.
+
+#include <stdio.h>
+
+
+int func(void)
+{
+  int x = 10;
+  int y = 20;
+
+  //code
+  //code
+  //code
+  if(x < 5)
+      return x;
+  else
+      return y;
+
+    return (x*y) + 10;
+}
+
+int main()
+{
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+
+//kodsal yanlışlık ama sentaks hatası değil
+int func(void)
+{
+  int x = 10;
+  int y = 20;
+
+  //code
+  //code
+  //code
+
+
+}
+
+int main()
+{
+    int y = func(); // çöp deger atanır
+    //tanımsız davranış undefined behavior
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+
+//güvenlik kontrol kodu
+int func(int x)
+{
+    if(5 == x)
+        ;
+}
+
+int main()
+{
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+
+int func(int x)
+{
+    if(x < 0)
+        return 0;
+
+    if(x > 10 && x < 20)
+        return x;
+
+}
+
+int main()
+{
+    int y = func(26); // çöp deger
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+
+int func(int x)
+{
+    if(x < 0)
+        return 0;
+
+    if(x > 10 && x < 20)
+        return x;
+
+}
+
+int main()
+{
+    int y = func(26); // çöp deger
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
