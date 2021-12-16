@@ -1,0 +1,644 @@
+#include <stdio.h>
+
+//oneliner fonksiyon denir
+//tek satırlık return deyiminden oluşan fonksiyonlar
+int sum(int a, int b)
+{
+   return a + b;
+}
+
+int main()
+{
+    return 0;
+}
+
+/***********************************************/
+/***********************************************/
+
+
+#include <stdio.h>
+
+//anlam açısından bir fark -- hayır
+// daha yavas çalışmış olmazdı
+
+int sum(int a, int b)
+{
+   return a + b;
+}
+
+int main()
+{
+    return 0;
+}
+
+/***********************************************/
+/***********************************************/
+
+#include <stdio.h>
+
+int get_max2(int a, int b)
+{
+   if(a > b)
+       return a;
+   else
+       return b;
+}
+
+int main()
+{
+    return 0;
+}
+
+/***********************************************/
+/***********************************************/
+
+#include <stdio.h>
+
+int get_max2(int a, int b)
+{
+   if(a > b)
+       return a;
+
+   return b;
+}
+
+int main()
+{
+    return 0;
+}
+
+/***********************************************/
+/***********************************************/
+
+
+#include <stdio.h>
+
+
+//ternary opeeator
+int get_max2(int a, int b)
+{
+   return a > b ? a : b;
+}
+
+int main()
+{
+    return 0;
+}
+
+/***********************************************/
+/***********************************************/
+
+#include <stdio.h>
+
+int get_max3(int a, int b, int c)
+{
+    int max = a;
+
+    if( b > max)
+        max = b;
+
+    if( c > max)
+        max = c;
+
+    return max;
+}
+
+int main()
+{
+    return 0;
+}
+
+/***********************************************/
+/***********************************************/
+
+
+#include <stdio.h>
+
+int ndigit(int x)
+{
+    if(x == 0)
+        return 1;
+
+    int digit_count = 0;
+
+    while (x != 0) {
+        x = x / 10;
+        ++digit_count;
+    }
+
+    return digit_count;
+}
+
+int main()
+{
+    return 0;
+}
+
+/***********************************************/
+/***********************************************/
+
+
+
+geri dönüş deger ine ifade eder?
+
+
+1- hesaplamaya yönelik
+2- sorulan sorulara cevap
+
+  true  false
+
+
+C99 ile _Bool türü dile eklendi
+
+aslında true ve false türü int türüne karsılık gelır
+
+zero/non-zero
+
+0 ---> false
+non-zero --> true
+
+int isalpha( int ch );
+
+
+dikkat tam terside olabilir doc. okuyunuz fonksiyon bilgisini
+
+0 ---> true
+non-zero --> false
+
+
+
+
+
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    n = printf("Hello World\n");
+
+    printf("%d\n", n);
+
+    return 0;
+}
+
+bir fonksiyonun geri dönüş degeri elde ediliyorsa ve tercihe baglı kullanımıyorsa
+böyle fonksiyonlara "discasrd the return value" denir
+
+/***********************************************/
+/***********************************************/
+
+geri dönüş degeri olmayan fonksiyonlara
+
+void function
+
+void func(int x);
+
+sadece geri dönüş degeri yok anlamında
+
+
+/***************************************/
+
+main fonksiyon
+
+program main fonksiyondan baslıyor çalışmaya
+
+int main()
+{
+
+
+}
+
+
+void main()
+{
+
+
+}
+
+not: C++ dilinde main geri dönüş türü int olmak zorundadur
+
+
+int main()
+{
+
+ rerturn 0;
+}
+
+0 --> succes
+non-zero -- unsucces
+
+#include <stdio.h>
+
+//C99 dan önce
+//derleyici bizim adımıza hiç birsey yapmazdır
+//çöp deger döndürür
+
+//fakat c99 ile birlikte
+//return 0; yazıyor
+
+
+int main()
+{
+
+}
+
+/***********************************************/
+/***********************************************/
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    FILE *f;
+
+    if((f = fopen("test.dat", "rb")) == NULL)
+    {
+        fprintf(stderr, "cannot open test.dat file\n");
+
+        return 1;
+    }
+}
+
+/***********************************************/
+/***********************************************/
+
+
+#include <stdio.h>
+
+
+int isprime(int val)
+{
+    if(val == 0 || val == 1)
+        return 0;
+
+    if(val % 2 == 0)
+        return val == 2;
+
+    if(val % 3 == 0)
+        return val == 3;
+
+    if(val % 5 == 0)
+        return val == 5;
+
+    for(int  k = 7; k * k <= val; k += 2)
+        if(val % k == 0)
+            return 0;
+
+    return 1;
+}
+
+int main()
+{
+
+}
+
+/***********************************************/
+/***********************************************/
+
+
+Fonksiyon çağrıları
+
+ingilizce fiil anlamı
+
+to call
+to invoke
+
+func()
+
+function call expression
+
+
+int func(int a, int b, int c)
+
+func(10, 20, 30);
+func(10, 20); // sentaks hatası
+
+
+soru
+
+  fuu(a + b + c); //tek arguman gönderilir
+  fuu(a+b, b, a); //3 arguman gonderılır
+
+
+
+C++ java .. diller default arguments
+
+void func(int x, int y = 10, int z = 20);
+
+func(1, 2, 3); // 1 2 3
+func(1, 2); // 1 2 20
+func(1); // 1 10 20
+func(); // sentaks hatasın
+
+
+dikkat böyle bir araç yok C dilinde
+
+/***********************************************************/
+
+
+void func(int x, int y)
+{
+
+ ///
+
+}
+int main()
+{
+  fun(10, 20); //tek basına bir statement olsuturur
+}
+
+
+
+#include <stdio.h>
+
+int sum_square(int a, int b)
+{
+    return a * a + b * b;
+}
+
+int main()
+{
+    int x = 5;
+    int y = 3;
+
+    sum_square(x, y);
+
+    int z = sum_square(x, y);
+
+    int t = sum_square(x, y) + 4;
+
+    if(sum_square(x, y) > 5){
+
+    }
+
+}
+
+/***********************************************/
+/***********************************************/
+
+
+geri dönüş degeri olan fonksiyonların kullanım biçimi
+
+#include <stdio.h>
+
+int square(int a)
+{
+    return a * a;
+}
+
+int main()
+{
+   int x;
+   x = 4;
+   //
+   //degişkene ilk deger verme
+   int  y = square(x);
+}
+
+/***********************************************/
+/***********************************************/
+
+
+static ve global değişkenlere fonksiyon çağrısı ile ilk deger verilmez
+
+
+#include <stdio.h>
+
+int square(int a)
+{
+    return a * a;
+}
+
+int main()
+{
+   int x;
+   x = 4;
+   //
+   //degişkene ilk deger verme
+   static int  y = square(x);
+}
+
+/***********************************************/
+/***********************************************/
+
+
+
+#include <stdio.h>
+
+int square(int a)
+{
+    return a * a;
+}
+
+int x;
+
+int  y = square(x);
+
+int main()
+{
+   int x;
+   x = 4;
+   //
+   //degişkene ilk deger verme
+   static int  y = square(x);
+}
+
+/***********************************************/
+/***********************************************/
+
+
+#include <stdio.h>
+
+int square(int a)
+{
+    return a * a;
+}
+
+int main()
+{
+   int x;
+   x = 4;
+   //
+
+   int  y;
+   //
+
+   y = square(x);
+
+}
+
+/***********************************************/
+/***********************************************/
+
+
+#include <stdio.h>
+
+int square(int a)
+{
+    return a * a;
+}
+
+int sum_square(int a, int b);
+
+int main()
+{
+   int x;
+   x = 4;
+   //
+
+   int  y;
+
+   int time = square(x) + sum_square(x, y);
+
+
+
+}
+
+/***********************************************/
+/***********************************************/
+
+öyle durunmlar varki fonksiyonu direk olarak kullanamka daha iyi
+
+
+#include <stdio.h>
+
+
+int main()
+{
+  if(sin(x) + cos(y) > sqrt(a)){
+
+  }
+
+}
+
+/***********************************************/
+/***********************************************/
+
+
+#include <stdio.h>
+
+int isprime(int x);
+
+int sum_square(int a, int b);
+
+int main()
+{
+    isprime(sum_square(10, 20));
+}
+
+/***********************************************/
+/***********************************************/
+
+
+
+
+
+#include <stdio.h>
+
+int isprime(int x);
+
+int sum_square(int a, int b);
+
+int main()
+{
+    // bunu abartmayın
+    isprime(sum_square(10, 20) + ndigit(a) * xyz() / tt());
+}
+
+/***********************************************/
+/***********************************************/
+
+
+
+#include <stdio.h>
+
+
+//soru
+
+int max2(int x, int y)
+{
+    if(x > y)
+        return x;
+
+    return y;
+}
+
+int main()
+{
+    max2(2, 5); // sentaks hatası degıl ama logic hata
+}
+
+/***********************************************/
+/***********************************************/
+
+
+#include <stdio.h>
+
+
+//attribute
+//[[fallthrough]]
+//[[likely]]
+//[[nodiscard]]
+
+//C++ böyle araçlar mevcut
+//fakat derleyiciden derleyiciye degişebiliypor
+
+//C de böyle araçlar ne yazikki yok
+
+[[nodiscard]]int max2(int x, int y)
+{
+    if(x > y)
+        return x;
+
+    return y;
+}
+
+int main()
+{
+    max2(2, 5);
+}
+
+/***********************************************/
+/***********************************************/
+
+
+printf("Merhaba Dunya\n");
+
+printf("%d %d %d\n", x, y, z);
+
+printf("max = %d\n", max2(a, b));
+
+1. 1 tane arguman
+
+2. 4 tane arguman
+
+3. 2 tane arguman
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
