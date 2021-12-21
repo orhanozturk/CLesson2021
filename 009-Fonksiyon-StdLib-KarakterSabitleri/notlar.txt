@@ -1,0 +1,580 @@
+printf("Merhaba Dunya\n");
+
+printf("%d %d %d\n", x, y, z);
+
+printf("max = %d\n", max2(a, b));
+
+1. 1 tane arguman
+
+2. 4 tane arguman
+
+3. 2 tane arguman
+
+
+
+C de böyle fonksiyonlara variadic fonksiyon denir
+
+Peki variadic fonksiyon olduugunu nasıl anlarız
+
+
+... ---> tek bir atom olusturur
+
+buna ellipsis atomu denir
+
+
+int printf(const char *p, ...);
+
+not -> variadic fonksiyonları ileride detaylı görecez
+
+
+#include <stdio.h>
+
+
+void func(int a, int b, ...);
+
+int main()
+{
+    func(); // gecersiz
+    func(1); // gecersiz
+    func(1, 2); // gecerli
+    func(1, 2, 3); // gecerli
+    func(1, 2, 3, 4); // gcerli
+
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+int printf(const char *p, ...);
+
+printf(); // gecersiz
+
+printf en az bir arguman geçmeliyiz
+
+
+/*******************************************/
+
+standart kutuphanede boyle fonksiyonlar mevcut
+
+printf
+scanf
+sprintf
+fprintf
+
+..
+
+/*******************************************/
+
+
+eski derleyicilerde gecerli fonksiyon bildirim
+
+fakat yeni derleyicilerde gecerli değil ama gecmişe uyumluluk korunmamaktadır
+
+void func(a, b, c)
+double a, b, c;
+{
+
+
+}
+
+
+#include <stdio.h>
+
+
+void func(a, b, c)
+double a, b, c;
+{
+
+
+}
+
+int main()
+{
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+
+#include <stdio.h>
+
+//paramtere turu gecılmezse turu int
+//implicit int
+void func(a, b, c)
+{
+
+
+}
+
+int main()
+{
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+#include <stdio.h>
+
+//paramtere turu gecılmezse turu int
+//implicit int
+//a ve b int  c double
+void func(a, b, c)
+double c;
+{
+
+
+}
+
+int main()
+{
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+
+#include <stdio.h>
+
+//implicit int fonksiyon
+//implicit int parametre
+
+func(a, b, c)
+{
+
+
+}
+
+int main()
+{
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+
+standart kutuphane -- standard library
+
+standard C library
+standard C++ library
+
+
+Peki Bu standard kutaphaneler ne işimize yarar
+
+standart kutuphane
+
+standart c fonksiyonlar
+std macro
+    object-like macro
+    function-like macro
+std type alias -- tur es isimleri
+std user defıned types
+....
+
+
+stdio
+math
+string
+ctype
+....
+
+
+Soru Neden standart kutuphane ihtiyacımız var?
+
+1- herkesin aynı isme bakarak aynı anlamı anlaması
+
+   int abs() ----
+
+
+2- kod yazma zahmetinden kurtarma
+   neden
+   -yazabilmek için uzmanlık alanı gerektırmez
+   -cok iyi test edilmiştir
+   -efficiency
+   -kod hatasının önüne geçme
+
+
+3- taşınabilirlik
+
+   örnek FILE işlmleri
+   unix ve wibdows ta ne yazdıgınzla ilgilenmezsiniz
+   o kendisi arkda tarafta halleder
+
+
+
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    for(int i = 0; i <= 100; ++i)
+    {
+        printf("%3d = %f\n", i, sqrt(i));
+    }
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    double base, exp;
+    printf("iki gercek sayi giriniz : ");
+    scanf("%lf%lf", &base, &exp);
+
+    printf("%f ==> %f = %f\n", base, exp, pow(base, exp));
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+void func(int x)
+{
+    x = 8888;
+}
+
+int main()
+{
+    int a = 20;
+
+    func(a);
+
+    printf("a = %d\n", a);
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+
+ne tarz cagrılar var ?
+
+call by value (pass by value)
+call by reference (pass b y reference)
+
+
+
+call by value (pass by value)
+nesnenin kendisini değil degerini gönderir
+
+
+call by reference (pass by reference)
+nesnenin kendisini gönderir
+
+
+default olarak C de butun fonksiyon cagrıları call by value
+
+fakat cagrıay pointer göndererek
+fonksiyon carsını call by reference a dönüştürürüz
+
+
+
+#include <stdio.h>
+#include <math.h>
+
+//call by value
+void func(int x)
+{
+    printf("x = %d\n", x);
+    x = 8888;
+    printf("x = %d\n", x);
+}
+
+int main()
+{
+    int a = 20;
+
+    func(a);
+
+    printf("a = %d\n", a);
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+
+#include <stdio.h>
+#include <math.h>
+
+//call by value
+void func(int *x)
+{
+    *x = 8888;
+}
+
+int main()
+{
+    int a = 20;
+
+    //call by reference
+    func(&a);
+
+    printf("a = %d\n", a);
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+
+std scanf fonksiyonunu ele alalım
+
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    int ival = 20;
+
+    printf("bir tam sayi giriniz : ");
+    scanf("%d", &ival); //adress ile cagrı yanı call by reference
+
+    printf("ival = %d\n", ival);
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    int a = 10;
+    int b = 20;
+
+    printf("a = %d    b = %d\n", a, b);
+
+    //swap takas işlemi
+
+    int temp = a;
+    a = b;
+    b = temp;
+
+    printf("a = %d    b = %d\n", a, b);
+
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+
+
+#include <stdio.h>
+#include <math.h>
+
+//fonksiyon ile bu işlemi ypmak istiyrum
+
+//pass by value
+void Swap(int x, int y)
+{
+    int temp = x;
+    x = y;
+    y = temp;
+}
+
+int main()
+{
+    int a = 10;
+    int b = 20;
+
+    printf("a = %d    b = %d\n", a, b);
+
+    //call by value
+    Swap(a, b);
+
+    printf("a = %d    b = %d\n", a, b);
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+#include <stdio.h>
+#include <math.h>
+
+//fonksiyon ile bu işlemi ypmak istiyrum
+
+//pass by reference
+void Swap(int *x, int *y)
+{
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+int main()
+{
+    int a = 10;
+    int b = 20;
+
+    printf("a = %d    b = %d\n", a, b);
+
+    //call by reference
+    Swap(&a, &b);
+
+    printf("a = %d    b = %d\n", a, b);
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+Constants == sabitler
+
+ornek
+123
+12.3
+
+
+C de sabitlerin türleri var
+
+int, long, long long
+
+
+
+Soru sabitin türü nedir
+
+0x1AC2  --> sakın sayının türü hex cevabı yanlıs
+
+decimal
+hexadecimal
+octal
+
+sayı sistemleri
+
+C++ da bu default olarak var
+
+binary
+
+C de kullanılan 16 lık ve 8 lık sayı sistemi
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    //10 luk sayı sistemi
+    int a = 10;
+
+    printf("a = %d    b = %d\n", a);
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    //16 lık sayı sistemi -- 0x ile baslatmam lazım
+    int a = 0x10;
+
+    printf("a = %d \n", a);
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    //16 lık sayı sistemi -- 0x ile baslatmam lazım
+    //harflerin kucuk buyuk olması fark etmez
+    int a = 0xBa;
+    //int a = 0xBA;
+    //Ama siz buyuk kullanmaya dikkat edin
+
+
+    printf("a = %d \n", a);
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    //8 lık sayı sistemi -- 0 ile baslatmam lazım
+    int a = 025;
+
+    printf("a = %d \n", a);
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    int a = 025;
+    int b = 25;
+    int c = 0x25;
+
+    printf("a = %d \n", a);
+    printf("b = %d \n", b);
+    printf("c = %d \n", c);
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+
+
+
+
+
+
+
