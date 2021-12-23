@@ -1,0 +1,297 @@
+
+Karekter Sabitleri ---- Character Constant
+
+özel amaclarla kullanılan, özel bir notasyonla yazılan türü "int" olan sabitler
+
+C++ dilinde karakter sabitlerinin türü "char" dir
+
+' '  --> tek tırnak içine yazılan karakterler
+
+'A'
+
+'\012'
+
+
+Tek tırnak içine yazılan karater ile aslında tam sayı sabiti yazmıs oluruz
+
+karaterlerin kod numarası mevcut
+
+Character encoding
+Character code
+coding place
+
+ASCII karater kodlaması bunlar bir tanesi
+
+ASCII kaç karaktere sahip
+
+128 tane karater var
+
+her bir karaktere bir tam sayı eslenir buna Character code number denir.
+
+0 dan 128 kadar olan karater kod numarası
+
+#include <stdio.h>
+
+int main()
+{
+    int x = 'A'; // x A karaterinin ASCII numarası atanır
+
+    printf("%d\n",x);
+
+    return 0;
+}
+
+/******************************************/
+/******************************************/
+
+#include <stdio.h>
+
+int main()
+{
+    int x = '5'; // x 5 karaterinin ASCII numarası atanır
+
+    printf("%d\n", x);
+
+    return 0;
+}
+
+/******************************************/
+/******************************************/
+
+ASCII karaterleri kaç bitte tutulur
+
+0 - 127 arasında deger alıyor
+
+7 bit yeterli 1 bit bosta kalır
+
+1 byte --> 8 bit
+
+
+/******************************************/
+
+UNICODE karater sistemi 1 milyon kusur tane karater mevcut
+
+34567 --> kod numarası  nasıl 1 byte lık yerde tutabılırm
+
+1 - 2 - 3 -4 -5 ... byte ne kadarlık yere ıhtıyaç
+
+UTF8 kodlamsı
+
+10101010 1010101010 101010101 .....  --> ilk byte karakterin kaç byte oldgunu söyler
+
+
+/******************************************/
+
+karakterin sözel tanımı ile görsel tanımını karıstırmaayalım
+
+glyph denir --> görseli demek
+
+A
+
+C --> C with cedilla --> sözel tanımı
+
+/******************************************/
+
+ASCII de 128 tane karater var
+
+bazı karakterlerin görüntüsü yok bunlara control Character denir
+
+görüntüsü olan karalere printable Character denir
+
+harf ve rakamdan  olusan karaterlere alphanumeric Character denir
+
+görüntüsü var ama harf ve rakam karateri olmayan punctuation karakterler denir
+
+( ' - gibi
+
+
+
+A   65   41
+B   66   42
+.
+.
+.
+Z   90
+
+-
+-
+-
+-
+-
+-
+
+a   97
+b   98
+.
+.
+
+.
+
+Sebebi buyuk harf kucuk harf donusumu kolay yapılabılmesı için
+
+eger ardısıl olsaydı 26 karater karter farkı olacaktı
+
+suna aradaki fark 32   ---> 2 kuvveti oldugu için
+
+
+0001 0101 ---> A
+0001 0111 ---> a
+
+
+
+0  48
+1  49
+2  50
+...
+...
+
+0 48  --> binary olarak  0011 0000
+1 49  --> binary olarak  0011 0001
+2 50  --> binary olarak  0011 0010
+3 50  --> binary olarak  0011 0011
+
+
+
+
+
+
+00       0    KONTROL KARAKTERLERI
+01       1    KONTROL KARAKTERLERI
+02       2    KONTROL KARAKTERLERI
+03       3    KONTROL KARAKTERLERI
+04       4    KONTROL KARAKTERLERI
+05       5    KONTROL KARAKTERLERI
+06       6    KONTROL KARAKTERLERI
+07       7    KONTROL KARAKTERLERI
+08       8    KONTROL KARAKTERLERI
+09       9    KONTROL KARAKTERLERI
+0A      10    KONTROL KARAKTERLERI
+0B      11    KONTROL KARAKTERLERI
+0C      12    KONTROL KARAKTERLERI
+0D      13    KONTROL KARAKTERLERI
+0E      14    KONTROL KARAKTERLERI
+0F      15    KONTROL KARAKTERLERI
+10      16    KONTROL KARAKTERLERI
+11      17    KONTROL KARAKTERLERI
+12      18    KONTROL KARAKTERLERI
+13      19    KONTROL KARAKTERLERI
+14      20    KONTROL KARAKTERLERI
+15      21    KONTROL KARAKTERLERI
+16      22    KONTROL KARAKTERLERI
+17      23    KONTROL KARAKTERLERI
+18      24    KONTROL KARAKTERLERI
+19      25    KONTROL KARAKTERLERI
+1A      26    KONTROL KARAKTERLERI
+1B      27    KONTROL KARAKTERLERI
+1C      28    KONTROL KARAKTERLERI
+1D      29    KONTROL KARAKTERLERI
+1E      30    KONTROL KARAKTERLERI
+1F      31    KONTROL KARAKTERLERI
+20      32
+21      33    !
+22      34    "
+23      35    #
+24      36    $
+25      37    %
+26      38    &
+27      39    '
+28      40    (
+29      41    )
+2A      42    *
+2B      43    +
+2C      44    ,
+2D      45    -
+2E      46    .
+2F      47    /
+30      48    0
+31      49    1
+32      50    2
+33      51    3
+34      52    4
+35      53    5
+36      54    6
+37      55    7
+38      56    8
+39      57    9
+3A      58    :
+3B      59    ;
+3C      60    <
+3D      61    =
+3E      62    >
+3F      63    ?
+40      64    @
+41      65    A
+42      66    B
+43      67    C
+44      68    D
+45      69    E
+46      70    F
+47      71    G
+48      72    H
+49      73    I
+4A      74    J
+4B      75    K
+4C      76    L
+4D      77    M
+4E      78    N
+4F      79    O
+50      80    P
+51      81    Q
+52      82    R
+53      83    S
+54      84    T
+55      85    U
+56      86    V
+57      87    W
+58      88    X
+59      89    Y
+5A      90    Z
+5B      91    [
+5C      92    \
+5D      93    ]
+5E      94    ^
+5F      95    _
+60      96    `
+61      97    a
+62      98    b
+63      99    c
+64     100    d
+65     101    e
+66     102    f
+67     103    g
+68     104    h
+69     105    i
+6A     106    j
+6B     107    k
+6C     108    l
+6D     109    m
+6E     110    n
+6F     111    o
+70     112    p
+71     113    q
+72     114    r
+73     115    s
+74     116    t
+75     117    u
+76     118    v
+77     119    w
+78     120    x
+79     121    y
+7A     122    z
+7B     123    {
+7C     124    |
+7D     125    }
+7E     126    ~
+7F     127    KONTROL KARAKTERLERI
+Press <RETURN> to close this window...
+
+
+
+
+
+
+
+
+
+
+

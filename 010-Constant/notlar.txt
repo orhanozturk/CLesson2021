@@ -1,0 +1,295 @@
+Constant Türleri
+
+Not : Constant da sayı sistemlerini türleri ile karıştırmayın
+
+_Bool
+
+char
+signed char
+unsigned char
+
+signed short
+unsigned short
+
+
+int türünden sabitler
+
+int türü benim sistem de 4 byte yer kaplar
+
+2147483647
+
+eger 2 byte olsaydı
+
+32767
+
+
+445 ---  int
+
+
+#include <stdio.h>
+
+int main()
+{
+    //bunların hepsi int
+    int a = 025;
+    int b = 25;
+    int c = 0x25;
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+#include <stdio.h>
+
+int main()
+{
+    //dikkat - sadece bir operator
+    //sign opretoru
+    -567;
+
+    return 0;
+}
+
+/*********************************************/
+
+int türünden sabitler için
+
+sabitin sonuna büyük veya küçük harf u - U son ekinin kullanırsam
+
+unsigned int
+
+7u -> unsigned int
+
+9U  --> unsigned int
+
+0x3Fu --> unsigned int
+
+0671u  --> unsigned int
+
+
+long türünden sabit için
+küçük veya büyük farketmez
+
+41L --> long
+
+41l  --> long
+
+dikkat kucuk l kullanımı 1 ile karabldiği için kullnmayınız
+
+
+#include <stdio.h>
+
+//Mülakat sorusu
+//fora girmez ekrana birşey yazdırmaz
+int main()
+{
+    for(int i = 93; i < 10l; ++i)
+    {
+        printf("%d ", i);
+    }
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+unsigned long
+
+U ve L kullanılır kucuk buyuk harf farketmez
+
+
+13UL
+13LU
+13ul
+
+
+long long türü için
+
+LL kullancaz
+
+35LL
+
+unsigned long long için
+
+ULL veya LLU kucuk buyuk farketmez
+
+
+
+
+
+
+#include <stdio.h>
+
+//Soru
+
+int main()
+{
+    //derleyici
+    //implicit type convertion yapıyo
+    //123 int türünü short türüne ceviriyor
+
+    short x = 123;
+    short y;
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+implicit type convertion nernelerde olabilir
+
+atama
+ilk deger verme işleme
+return
+func() parametleri
+
+..
+..
+
+/****************************************/
+
+Eğer işaretli bir tür sıgmazsa
+
+derleyici sırası ile sunlara bakacak
+
+sayı decimal ise
+
+int => long => unsigned long => long long => unsigned long long
+
+
+octal / hexadecimal ise
+
+int => unsigned int => long => unsigned long => long long => unsigned long long
+
+kural bu
+
+/**************************************************/
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    cout << typeid (12).name() << endl;
+    cout << typeid (12u).name() << endl;
+    cout << typeid (12L).name() << endl;
+    cout << typeid (12LU).name() << endl;
+    cout << typeid (0xACLU).name() << endl;
+    cout << typeid (122345678532334456).name() << endl;
+
+    return 0;
+}
+
+/*******************************************/
+/*******************************************/
+
+Soru eger yazdıgımız tam sayı sistemdeki tam sayı sınırları aşarsa
+Ne olur ?
+
+Cevap --> sentaks hatası
+
+
+/*******************************************/
+
+ İşaretli türlerde taşma (OVERFLOW) tanımsız davranış......
+
+
+/*******************************************/
+
+Gerçek sayı sabitleri
+
+bir sayıyı noktalı olarak ifade ediyor isek gercek sayıdır
+
+double ifadeler
+
+5.5
+5.  --> 5.0
+.67  -> 0.67
+
+
+float ifade
+
+2.3F
+2.3f
+
+
+long double ifade
+
+2.3L
+
+/*******************************************/
+
+scientific notation (üstel notasyon)
+
+34.5e12   --> 34.5 * 10^12
+34.5E12   --> 34.5 * 10^12
+
+34.5e-12  --> 34.5 * 10^-12
+34.5e+12  --> 34.5 * 10^12
+
+üstel notasyonda tür sabit double
+
+3e2 --> double türü 300
+3e-2 --> double türü 0.03
+
+/*******************************************/
+
+ C++ da default olarak bu yapı mevcut
+
+ long A = 234'567'890;
+
+ Ama C de böyle bir yapıyok fakat eklentilerle gercekleştirilebilir
+
+/*******************************************/
+
+binary format
+
+0b ile baslatıyoruz
+
+0b1010101 gibi
+
+C de bu yapı standart değil fakat extentionlar la eklenbilir
+
+
+/*******************************************/
+
+
+Yeni Konu
+
+Karekter Sabitleri ---- Character Constant
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
