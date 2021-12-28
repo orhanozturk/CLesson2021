@@ -283,7 +283,110 @@ suna aradaki fark 32   ---> 2 kuvveti oldugu için
 7D     125    }
 7E     126    ~
 7F     127    KONTROL KARAKTERLERI
-Press <RETURN> to close this window...
+
+
+#include <stdio.h>
+#include <ctype.h>
+
+int main()
+{
+    for(int i = 0; i < 128; ++i)
+    {
+        if(iscntrl(i))
+            printf(" %02X     %3d    KONTROL KARAKTERLERI\n", i, i);
+        else
+            printf(" %02X     %3d    %c\n", i, i, i);
+    }
+
+    return 0;
+}
+
+/******************************************/
+/******************************************/
+
+--------------------------------------------------
+
+' '  bunun içine yazdıgımız karaterler int türden sabit -- Character Constant denir
+
+
+
+#include <stdio.h>
+#include <ctype.h>
+
+int main()
+{
+
+    printf("%d\n", '?');
+
+    return 0;
+}
+
+/******************************************/
+/******************************************/
+
+
+escape---kaçış
+
+
+escape sequence (kaçış dizgesi)
+
+herhangi bir kodlama sisteminde kendi anlamı dışında ozel anlam olusturan karakterler
+escape dir.
+
+
+ '\a'   ---> alert kontrol karateri (çan sise)
+ '\b'   ---> backspace -- geri bosluk
+ '\n'  ---> newline -- yeni satır
+ '\f'  --> form feed
+ '\t' ---> horizontal tab --- yatay tab karateri
+ '\v'  ---> vertical tab --- duşey
+ '\r'  ---> carriage return
+ '\''  -->  tek tırnagın kendsi
+
+ '\'   --> derleyici bunu escape karakteri olarak degerlendirecek
+
+
+#include <stdio.h>
+#include <ctype.h>
+
+int main()
+{
+
+    printf("null character %d\n", '\0');
+    printf("alert %d\n", '\a');
+    printf("back space %d\n", '\b');
+    printf("newline %d\n", '\n');
+    printf("horizontal tab %d\n", '\t');
+    printf("vertical tab %d\n", '\v');
+    printf("carriage return %d\n", '\r');
+    printf("form feed %d\n", '\f');
+
+    printf("single quote %d\n", '\'');
+    printf("double quote %d\n", '\"');
+    printf("double quote %d\n", '"');
+    printf("back slash %d\n", '\\');
+    printf("question mark %d\n", '?');
+    printf("question mark %d\n", '\?');
+
+
+    return 0;
+}
+
+/******************************************/
+/******************************************/
+
+escape olusturmanın dıger yolu
+
+
+hexadecimal
+
+'\x1A' gibi
+
+octal
+
+'\102'   gibi
+
+
 
 
 

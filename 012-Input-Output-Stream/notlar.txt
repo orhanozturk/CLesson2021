@@ -1,0 +1,247 @@
+
+input - output operatoins
+Giriş Çıkış işlemleri
+
+std. kütüphanede formatlı giriş çıkış işlemlerin yapan fonksiyonlar
+printf
+scanf
+
+C nin std . ktühanesi ---> <stdio.h>
+
+C++ std. ktüp. ---> <iostream>
+
+
+giriş akımı --> input stream
+çıkış akımı --> output stream
+
+
+--------------
+
+stdandard output ---> demek ekrana yamak demektir
+default olarak ekrana baglıdır
+
+Fakat biz bu standard output'u yönlendirebiliriz
+
+
+standard input
+
+programın çalışmasıyla başlayan giriş akımı
+default olarak klavyeye baglıdır
+
+
+Fakat biz bu standard input'u yönlendirebiliriz
+
+
+----------------------------------------------
+
+giriş çıkış işlemlerinde formatlı formatsız yapı
+
+
+unformatted  ---> bellekte kullanılan byt ların hiç oynamadan gönderme işlemidir
+formatted ----> bellekte tutulan byte karaterlerini sabitlerine çevirme gönderme işlemi
+
+
+
+unformatted  --- byte gönderme
+
+00001111
+00000000
+
+
+formated  -- - yazının karakterlerini gönderme
+
+int x = 15;
+
+49 53 --> 15 ASCII degerlerinin gönderilmesi -- insanların anlayacagı sekilde gönderme biçimi
+
+
+--------------------------------------------
+
+C nnin std. kutuphanesindeki printf fonksiyonu formatlı çıkış yapan c fonksiyonudur
+
+printf == printformat   tan gelir
+
+
+---------------------------------
+
+ x = 15
+
+4953
+
+---------------------------------
+
+formatlı giriş çıkış ilemleri fonksiyonlar
+
+printf
+scanf
+
+sprintf  --> belleğe
+fprintf ---> dosyaya
+
+sscanf
+fscanf
+
+
+----------------------------------------
+
+integer --- tam sayı
+
+
+65   ----->> 65 -- onluk
+     ------  41   -- 16 lık sıstem
+     ------  101  -- 8 lık sayı sistemi
+
+
+0x41
+0101
+
+0x1ab5
+0X1AB5
+
+----------------------------
+
+
+output width  ----> yazma alanı genişliği
+
+int x = 456;
+
+456
+     456
+
+
+65  orhan
+123243  hakan
+123  ayşe
+
+
+fill character
+
+65___ orhan
+123243%%% hakan
+123/// ayşe
+
+------------------------------------
+
+gerçek sayı -- float formatlama
+
+yazma biçimleri
+
+fixed  ---> 1.234234
+scientific ---> 3.5e12
+
+
+precision --- hasssaiyet
+noktadan sonra kaç basamak yazılmalı
+
+
+chaining --
+Birden fazla ifadenin degerinin yazdırılması
+
+bunu nasıl yapıyorduk
+
+variadic fonksiyonlarla
+
+----------------------------------------
+
+printf fonksiyonu
+
+<stdio.h> ktuphanesinde yer alır
+
+
+int printf(const char *p, ...);
+
+printf fonksiyonuna en az bir parametre göndermek zorundayız
+
+
+string literalleri
+
+"Orhan" --> char *
+
+printf("Orhan"); ---> yapılan sey parametreye adres gönderme char türünden
+
+#include <stdio.h>
+
+int main()
+{
+    // 'O' 'r' 'h' 'a' 'n' '\0'
+
+    //printf("Orhan\n");
+    //printf("Orhan\nOZTURK\nMustafaOZTURK\n");
+
+    printf("Orhan\tOZTURK\t123\nMustafa\tOZTURK\t555\n");
+
+
+    return 0;
+}
+
+
+
+------------------------------------------
+
+
+#include <stdio.h>
+
+int main()
+{
+
+    printf("\x42URS\x41\n");
+
+    return 0;
+}
+
+/**************************/
+
+#include <stdio.h>
+
+int main()
+{
+    printf("\102\101\102\101\012");
+
+    return 0;
+}
+
+/**************************/
+
+
+#include <stdio.h>
+
+int main()
+{
+    int n = printf("hello world\n");
+
+    printf("n : %d\n", n);
+
+    return 0;
+}
+
+/**************************/
+
+
+#include <stdio.h>
+
+int main()
+{
+    int n = printf("\102\101\102\101\012");
+
+    printf("n : %d\n", n);
+
+    return 0;
+}
+
+/**************************/
+
+
+printf ile bir yada birden fazla ifadenin degerinin / degerlerininstd.çıkış akımına
+yazdırma işlemleri
+
+
+
+
+
+
+
+
+
+
+
+
