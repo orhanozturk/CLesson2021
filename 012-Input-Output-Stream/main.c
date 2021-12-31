@@ -1,12 +1,24 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
+#include <math.h>
+
 
 int main()
 {
-    int n = printf("\102\101\102\101\012");
+    int x, y, z;
 
-    printf("n : %d\n", n);
+    printf("bir tam sayi giriniz : ");
+    int retval = scanf("%d%d%d", &x, &y, &z);
+
+    printf("retval = %d \n", retval);
 
     return 0;
 }
 
-/**************************/
+/*************************************/
+/*************************************/
+
+
+
+

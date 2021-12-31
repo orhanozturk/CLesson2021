@@ -231,8 +231,713 @@ int main()
 /**************************/
 
 
-printf ile bir yada birden fazla ifadenin degerinin / degerlerininstd.çıkış akımına
+printf ile bir yada birden fazla ifadenin degerinin / degerlerinin std.çıkış akımına
 yazdırma işlemleri
+
+
+ifade  --> a , 10 , 5 + b
+
+
+
+Nasıl  bu ifadeleri 10luk - 16lık- 8lık sisteme göre yazdıracaz ?
+
+
+%... --> yuzde ve yuzdeden sonra gelen n tane karateri yorumlar printf
+
+
+#include <stdio.h>
+
+int main()
+{
+    // eger format karaterine argüman verilmezse çöz deger yazdırır
+    int x = 10;
+    printf("n : %d\n");
+
+    return 0;
+}
+
+/*******************************/
+/*******************************/
+
+#include <stdio.h>
+
+// x = 20
+// orhan
+
+int main()
+{
+    int x = 20;
+    printf("x = %d\norhan\n", x);
+
+    return 0;
+}
+
+/*******************************/
+/*******************************/
+#include <stdio.h>
+
+int main()
+{
+    //soru
+    int x = 20;
+
+    printf("degeri = %d\n", x*2 + x); //2 tane argüman gönderilmiştir
+
+    //%d --> işaretli int türünden ifadeinin degernin 10 luk - decimal olarak yazdır demek
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+#include <stdio.h>
+
+int main()
+{
+    //soru
+    int x = 20;
+
+    printf("degeri = %o\n", x);
+
+    //%o --> işaretli int türünden ifadeinin degernin 8 luk - decimal olarak yazdır demek
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+#include <stdio.h>
+
+int main()
+{
+    //soru
+    int x = 20;
+
+    printf("degeri = %x\n", x);
+
+    //%x --> işaretli int türünden ifadeinin degernin 16 luk - decimal olarak yazdır demek
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+#include <stdio.h>
+
+int main()
+{
+
+    int x = 10, y = 20, z = 30;
+
+    printf("x = %d\ny = %d\nz = %d\n", x, y, z);
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+#include <stdio.h>
+
+int main()
+{
+
+    int x, y;
+    printf("iki tam sayi giriniz : ");
+    scanf("%d%d", &x, &y);
+
+    // 10 * 10 + 20 * 20 = 500
+
+    printf("%d * %d + %d * %d = %d \n", x, x, y, y, x*x + y*y);
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+#include <stdio.h>
+
+int main()
+{
+
+    // double türünü yazdırmak için  %f format kullanılır
+    double dval = 3.333;
+
+    printf("dval = %f\n", dval);
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    for(int i = 0; i <= 100; ++i)
+    {
+        printf("%d--->%f\n", i, sqrt(i));
+    }
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    for(int i = 0; i <= 100; ++i)
+    {
+        printf("%3d--->%f\n", i, sqrt(i));
+    }
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+
+    int x = -234;
+    unsigned y = 123;
+
+    printf("x = %d\ny = %u\n", x, y);
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    double dval = 3.333;
+
+    printf("x = %d\n", dval); //tanımsız davranış
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    int ival;
+    printf("bir tam sayi giriniz : ");
+    scanf("%d", &ival);
+
+    printf("decimal     : %d\nhex   : %x\noctal     : %o\n", ival, ival, ival);
+
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+#include <stdio.h>
+#include <math.h>
+
+//%c bir tam sayı ifadesiinin karaterini gösteren format
+int main()
+{
+    int ival;
+    printf("bir tam sayi giriniz : ");
+    scanf("%d", &ival);
+
+    printf("%d kod numarali karater  %c\n", ival, ival);
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+#include <stdio.h>
+#include <math.h>
+
+//%c bir tam sayı ifadesiinin karaterini gösteren format
+int main()
+{
+    for(int i = 0; i < 127; ++i)
+    {
+        printf("%d kod numarali karater  %c\n", i, i);
+    }
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+#include <stdio.h>
+#include <math.h>
+
+//%c bir tam sayı ifadesiinin karaterini gösteren format
+int main()
+{
+    for(int i = 0; i < 127; ++i)
+    {
+        printf("%3d kod numarali karater  %c\n", i, i);
+    }
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+#include <stdio.h>
+#include <math.h>
+
+int ndigit(int val)
+{
+    if(val == 0)
+        return 1;
+
+    int digit_count = 0;
+
+    while (val) {
+        ++digit_count;
+        val /= 10;
+    }
+
+    return digit_count;
+}
+
+int main()
+{
+    int ival;
+    printf("bir tam sayi giriniz : ");
+    scanf("%d", &ival);
+
+    printf("%d sayisi %d basamaklidir\n", ival, ndigit(ival));
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    int x = 1, y = 2, z = 3;
+
+    printf("x = %d\n", x);
+    printf("y = %d\n", y);
+    printf("z = %d\n", z);
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+#include <stdio.h>
+#include <math.h>
+
+//Mulakat Sorusu
+
+int main()
+{
+    int x = 12345;
+
+    //1234551
+    printf("%d\n", printf("%d", printf("%d", x)));
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    double base, exp;
+    printf("iki gercek sayi giriniz : ");
+    scanf("%lf%lf", &base, &exp);
+
+    printf("%f sayisinin %f. kuvveti = %f\n", base, exp, pow(base, exp));
+
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+#include <stdio.h>
+#include <math.h>
+
+// printf % karekteri escape oalrak kullanılır
+// % yazdırmak ıstyorum
+
+// %%
+
+
+int main()
+{
+    int x, y;
+    printf("iki tam sayi giriniz : ");
+    scanf("%d%d", &x, &y);
+
+    printf("%d %% %d = %d\n", x, y, x % y);
+
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+scanf
+
+<stdio.h>
+
+scanf --> variadic fonksiyon
+
+scanf --> call by reference
+
+formatlama var
+
+%... formatı soyler
+
+%d----> int türü
+%u ---> işaretsiz değişken
+
+int scanf(const char *p, ...); --> variadic function
+
+
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x;
+    printf("bir tam sayi giriniz : ");
+    scanf("%d", &x);
+
+    printf("x = %d \n", x);
+
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x;
+    printf("bir tam sayi giriniz : ");
+    scanf("%x", &x);
+
+    printf("x = %d \n", x);
+
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x;
+    printf("bir tam sayi giriniz : ");
+    scanf("%o", &x);
+
+    printf("x = %d \n", x);
+
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+
+
+standard input buffer
+
+asd123
+
+scanf --> satır tamponlu bir formatlı giriş fonksiyonudur --> line-buffered
+
+enter tusuu --> newline  gelene bekler
+
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    //123orhan
+    //orhan hala buffer bekliyor
+    int x;
+    printf("bir tam sayi giriniz : ");
+    scanf("%d", &x);
+
+    printf("x = %d \n", x);
+
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    //14B3.7
+
+    int x;
+    printf("bir tam sayi giriniz : ");
+    //scanf("%d", &x);
+    scanf("%x", &x);
+
+    printf("x = %x \n", x);
+
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    //14B3.7
+
+    int x;
+    printf("bir tam sayi giriniz : ");
+    //scanf("%d", &x);
+    //scanf("%x", &x);
+    scanf("%o", &x);
+
+
+    printf("x = %o \n", x);
+
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+Not
+
+  double in türü scanf te %lf
+  printf te --> %f
+
+Not: Scanf bosluk karakterlerini atlar yok sayar
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int ival;
+    double dval;
+
+    printf("bir tam sayi giriniz : ");
+    scanf("%d%lf", &ival, &dval);
+
+    printf("ival = %d \n", ival);
+    printf("dval = %f \n", dval);
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int ival;
+    double dval;
+    int x;
+
+    printf("bir tam sayi giriniz : ");
+    scanf("%d%lf%x", &ival, &dval, &x);
+
+    printf("ival = %d \n", ival);
+    printf("dval = %f \n", dval);
+    printf("x = %x\n", x);
+
+    //li hala bufferda
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+int scanf(....
+
+scanf --> 0 döndürürse başarısız
+
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int ival;
+
+    printf("bir tam sayi giriniz : ");
+    int retval = scanf("%d", &ival);
+
+    printf("retval = %d \n", retval);
+
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+scanf("%d%d%d", &x, &y, &z);
+
+x y z set ederse ---> 3
+
+x y set etti --> 2
+x -----> 1
+hiç set edemedi ---> 0
+
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x, y, z;
+
+    printf("bir tam sayi giriniz : ");
+    int retval = scanf("%d%d%d", &x, &y, &z);
+
+    printf("retval = %d \n", retval);
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
