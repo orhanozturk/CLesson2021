@@ -908,6 +908,566 @@ int main()
 /*************************************/
 
 
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x;
+
+    while(1)
+    {
+        printf("bir tam sayi giriniz : ");
+        int retval = scanf("%d", &x);  //ali 3
+
+        if(retval == 1)
+            break;
+    }
+
+    //printf("retval = %d \n", retval);
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+void clear_input_buffer(void)
+{
+    int ch;
+
+    while((ch = getchar()) != '\n' && ch != EOF)
+    {
+        //
+    }
+}
+
+
+int main()
+{
+    int x;
+
+    while(1)
+    {
+        printf("bir tam sayi giriniz : ");
+        int retval = scanf("%d", &x);  // 3 ali
+
+        if(retval == 1)
+            break;
+
+        clear_input_buffer();
+    }
+
+    /*
+    int ch;
+
+    //Homework // 3 ali
+    scanf("%c", &ch);
+
+    printf("c = %c \n", ch);
+    */
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+getchar fonksiyonu
+
+int getchar(void);
+
+std. inputtan ilk karateri alıyo onun tam sayı degerini donduruyor
+
+line buffer
+
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    int x;
+
+    printf("bir tam sayi giriniz : ");
+
+    x = getchar();
+
+    printf("x = %d\n", x);
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+//scanf ve getchar aynı buffer paylaşır
+
+int main()
+{
+    int x, y;
+    int c;
+
+    printf("bir giris yapiniz : ");
+
+    scanf("%d", &x);
+
+    c = getchar();
+
+    scanf("%d", &y);
+
+
+    printf("x = %d\n", x);
+    printf("c = %d\n", c);
+    printf("y = %d\n", y);
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+//scanf ve getchar aynı buffer paylaşır
+
+int main()
+{
+    int c;
+
+    printf("evet mi [e] hayir mi [h] : ");
+    c = getchar();
+
+    if(c == 'e')
+        printf("evet dediniz\n");
+    else if(c == 'h')
+        printf("hayir dediniz\n");
+    else
+        printf("yanitiniz gecersiz\n");
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int c;
+
+    printf("bir yazi giriniz : ");
+
+    while((c = getchar()) != '\n'){
+        printf("%c        %d\n", c, c);
+    }
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int c;
+
+    printf("bir tam sayi giriniz : ");
+
+    while((c = getchar()) != '\n'){
+        printf("%d        %d\n", c, c - '0');
+    }
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int ival = 0;
+    int c;
+
+    printf("bir tam sayi giriniz : "); // 3456
+
+    while((c = getchar()) != '\n'){
+        ival = ival * 10 + c - '0';
+    }
+
+    printf("ival = %d\n", ival);
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int c;
+
+    printf("bir tam sayi giriniz : ");
+    scanf("%d", &c);
+
+    if(c % 3 == 0)
+       printf("EVET TAM BOLUNUR\n");
+    else
+        printf("hayir tam bolunmez\n");
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+//soru
+
+int main()
+{
+    int sum = 0;
+    int c;
+
+    printf("bir tam sayi giriniz : "); //
+
+    while((c = getchar()) != '\n'){
+        sum += c - '0';
+    }
+
+    if(sum % 3 == 0)
+       printf("EVET TAM BOLUNUR\n");
+    else
+        printf("hayir tam bolunmez\n");
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+unformatted
+line buffered
+
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+//soru
+
+int main()
+{
+    int ival;
+
+    printf("bir giris yapiniz : "); //
+
+    int c1 = getchar();
+    int c2 = getchar();
+    int c3 = getchar();
+
+    scanf("%d", &ival);
+
+    printf("c1 = %d\n", c1);
+    printf("c2 = %d\n", c2);
+    printf("c3 = %d\n", c3);
+    printf("ival = %d\n", ival);
+
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+//soru
+
+int main()
+{
+    int ival;
+
+    printf("bir giris yapiniz : "); //
+
+    ival = getchar();
+
+    /*
+    if(ival == -1){
+        printf("Bir giris yapmadiniz\n");
+    }
+    */
+    if(ival == EOF){  // EOF ---> -1
+        printf("Bir giris yapmadiniz\n");
+    }
+
+    printf("ival = %d\n", ival);
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+//soru
+
+int main()
+{
+    int x, y;
+
+    printf("bir giris yapiniz : "); //
+    scanf("%d", &x);
+
+    printf("bir giris yapiniz : "); //
+    scanf("%d", &y);
+
+    printf("\nx = %d\n", x);
+    printf("y = %d\n", y);
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <math.h>
+
+//soru
+
+void clear_input_buffer(void)
+{
+    int ch;
+
+    while((ch = getchar()) != '\n' && ch != EOF)
+        ;
+}
+
+int main()
+{
+    int x, y;
+
+    printf("bir giris yapiniz : "); //
+    scanf("%d", &x);
+
+    clear_input_buffer();
+
+    printf("ikinci giris yapiniz : "); //
+    scanf("%d", &y);
+
+    printf("\nx = %d\n", x);
+    printf("y = %d\n", y);
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+putchar
+
+int putchar(int);
+
+
+
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int main()
+{
+
+    putchar('A');
+
+    printf("%c", 'A');
+
+    putchar('\n');
+
+    putchar(97);
+
+    putchar('\n');
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int main()
+{
+    for(int i = 'A'; i <= 'Z'; ++i)
+        putchar(i);
+
+    putchar('\n');
+
+    for(int i = 'a'; i <= 'z'; ++i)
+        putchar(i);
+
+    putchar('\n');
+
+    for(int i = '0'; i <= '9'; ++i)
+        putchar(i);
+    putchar('\n');
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int main()
+{
+    for(int i = 33; i <= 127; ++i)
+        putchar(i);
+
+    putchar('\n');
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <Windows.h>
+
+
+//rand --> 0 32767   deger uretir
+
+int main()
+{
+    for(;;) {
+        putchar('A' + rand() % 26);
+        Sleep(20);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+/*************************************/
+/*************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

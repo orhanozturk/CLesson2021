@@ -1,24 +1,24 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
-#include <math.h>
+#include <Windows.h>
 
+
+//rand --> 0 32767   deger uretir
 
 int main()
 {
-    int x, y, z;
+    for(;;) {
+        putchar('A' + rand() % 26);
+        Sleep(20);
+    }
 
-    printf("bir tam sayi giriniz : ");
-    int retval = scanf("%d%d%d", &x, &y, &z);
-
-    printf("retval = %d \n", retval);
+    putchar(a);
 
     return 0;
 }
 
 /*************************************/
 /*************************************/
-
-
 
 
