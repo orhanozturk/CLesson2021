@@ -1,0 +1,569 @@
+
+
+1- tanımsız davranış --- undefined behavior
+2- belirlenmemiş davranış --- unspespcified behavior
+ a -derleyiciye baglı davranış -- implemnetation defined
+
+
+
+1- tanımsız davranış --- undefined behavior
+Sizin yazdıgınız kod eger tanımsız davranış ise kodunuz herseyi yapabilit
+run time zamamnın
+
+
+#include <stdio.h>
+
+int main()
+{
+    int x;
+
+    //
+    //
+
+    printf("x = %d\n", x); // bu bir tanımsız davranış çöp deger ekrana bastırır
+
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+#include <stdio.h>
+
+int main()
+{
+    //işaretli türlerde tasma -- tanımsız davranış
+    int x = 2147483647;
+
+    //
+    //
+
+    int y = x + 123235346; // artık burası tasma oldu ve tanımsız davranış
+
+    printf("y = %d\n", y); // bu bir tanımsız davranış taşma oldgu için
+
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+#include <stdio.h>
+
+int main()
+{
+    int x = 2147483647;
+
+    int y = 0;
+
+    int z = x / y;
+
+    printf("z = %d\n", z); // bu bir tanımsız davranış taşma oldgu için
+
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+2- belirlenmemiş davranış --- unspespcified behavior
+
+dikkat bunlar hatalı kodlar olmak zorunda değil
+derleyici tarafında dokumante edilmez
+
+
+
+#include <stdio.h>
+
+
+int foo(void);
+int func(void);
+
+int main()
+{
+    int x;
+
+    //derleyici istediği gibi kod ürettiği için istediğini cagırabilir
+    x = foo() + func();
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+#include <stdio.h>
+
+int g = 10;
+
+int foo(void)
+{
+    return g;
+}
+
+int func(void){
+    return g = 50;
+}
+
+int main()
+{
+    int x;
+
+    //derleyici istediği gibi kod ürettiği için istediğini cagırabilir
+    x = foo() + func(); // 10 + 50
+                        // 50 + 50
+
+    printf("x = %d\n", x);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+ a -derleyiciye baglı davranış -- implemnetation defined
+
+ bu olay dokumante edilir
+
+  x >> y
+
+  111  veya 000 bu işlem hangisi ile besleyeceği derleyiciye baglı ama derleyici dokumante eder
+
+
+
+ ----------
+
+char x;  -->
+
+signed
+unsigned olması tamammıyle derleyiciye baglı
+
+int  --> türü derleyici 4 byte
+
+2 byte  int türü olabilir derleyiciden derleyiciye degiişir
+
+<stdint.h>
+
+int32_t  --> 4 byte lik olması garanti altın
+
+
+--------------------------------------------------------
+
+Operators -- Operator-- işleç
+
+Operator --> bir token
+
+C de 45 tane operator var
+
+
+Tek karaterli operator
+
+!
+&
+=
+
+iki karaterli operator
+
++=
+!=
+
+3 karaterli operator
+
+>>=
+<<=
+
+bir operator anahtar sözcük
+
+sizeof
+
+
+-------------------------------
+
+işleme dokulan degerlere ---> operand denir
+
+ a + b --> a ve b 4 operatornun operanddır
+
+
+
+--------------------------------------------
+
+unary op.  ---> tek terimli operator   ---- !a   &b
+binary op.  ---> iki terimli operator  ----- a + b   z > b
+ternary op.  ---> üç terimli operator (conditional op.)  --   a ? b : c;
+
+
+operatorun urettiği degerlere verilen isimleri
+
+return ---> generate value ---> yield value denir
+
+
+
+--------------------------------------------
+
+constaraint  -----
+
+
+L value  -- nesne
+R value  -- deger
+
+
+
+% --> operand ları tam sayı olmak zorun
+
+
+--------------------------------------------
+
+operatörlerin önceliği
+(precendence / priority)
+
+
+#include <stdio.h>
+
+//Mulakat soru
+
+int foo(int x)
+{
+    return x*x;
+}
+
+int func(int x)
+{
+    return x + 7;
+}
+
+int main()
+{
+    int ival;
+
+    //hangi fonksiyon daha önce cagrılır
+
+    //* operatoru daha öncelikli operator
+    //fakat func daha önce cagrılır anlamına gelmez
+
+    //tamamıyle derleyiciye baglı durumdur
+
+    ival = foo(2) + func(3) * 5;
+
+    printf("ival = %d\n", ival);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+15 seviyelik öncelik tablosu
+
+-----------------------------------
+1- () [] . ->                     ---> soldan sağa
+-----------------------------------
+2- + - ! ~sizeof(type) & * ++ --   <--- sagdan sola
+-----------------------------------
+3- * / %                         ---> soldan sağa
+-----------------------------------
+4- + -                           ---> soldan sağa
+-----------------------------------
+5- >>  <<                        ---> soldan sağa
+-----------------------------------
+6- > >= < <=                     ---> soldan sağa
+-----------------------------------
+7-  == !=                       ---> soldan sağa
+-----------------------------------
+8- &                           ---> soldan sağa
+-----------------------------------
+9- ^                            ---> soldan sağa
+-----------------------------------
+10-  |                          ---> soldan sağa
+-----------------------------------
+11- &&                           ---> soldan sağa
+-----------------------------------
+12- ||                          ---> soldan sağa
+-----------------------------------
+13- ? :                             <--- sagdan sola
+-----------------------------------
+14- = += -= *= /= %= >>= &= ^= |=        <--- sagdan sola
+-----------------------------------
+15- ,                           ---> soldan sağa
+-----------------------------------
+
+z = a * b + !c > x
+z = d2 + d1 > x
+z = d3 > x
+z = d4
+
+
+Aynı seviyede olan birden fazla operator var ise
+öncelik yönü vardır (associativity)
+soldan sağa --- left associative
+sagdan sola --- right associative
+
+
+
+side effect --- yan etki
+++
+--
+atam operatörleri
+
+
+aritmatik işlem yapan operatorler
+
++ - ++ --
+* % /
++ -
+
+relational operator
+> >= < <=
+== !=
+
+logical operators
+! && ||
+
+pointer operators
+& * [ ]  ->
+
+bitwise operators
+~  << >> & ^ |
+<<=   >>= &= ^= |=
+
+
+comma operator
+,
+
+
+assigmnet operators
+=
+
+compound assigmnet
+
++= -= *= /= %= >>= &= ^= |=
+
+-----------------------------------
+
++ - toplama çıkartma operator
+
+4. öncelik seviyesinde
+yan etkileri yok
+
+
+
+#include <stdio.h>
+
+int main()
+{
+    int x, y;
+
+    printf("iki tam sayi giriniz : ");
+    scanf("%d%d", &x, &y);
+
+    printf("%d + %d = %d\n", x, y, x + y);
+    printf("%d - %d = %d\n", x, y, x - y);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+Dikkat
+
+işaretli türlerde taşma var
+işsarsiz türlerde taşma yoktur
+
+
+-------------------------------------------------
+
+2. öncelik seviyesi
+
+sign operator
+
++ -
+
+#include <stdio.h>
+
+int main()
+{
+    int x = 10;
+    int y = 15;
+
+    +x;
+    -y;
+
+    //bu operatorlerin ürettigi degerler R value
+
+    +x = 25;// sentaks hatası
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+3. öncelik seviyesine
+
+* / %  (multiplication) operators
+
+
+*  --- multiplication
+/  --- division
+%  --- modulus (reminder)
+
+yan etkisi yoktur
+
+binary infix operators
+
+#include <stdio.h>
+
+int main()
+{
+    int x = 10;
+    int y = 15;
+
+    int z = x * y / x;
+
+    // % operatorunun operandları tam sayı olmak zorunda
+
+    double d1 = 2.3;
+    double d2 = 1.2;
+
+    d1 % d2; // sentaks hatası
+
+    x % y;
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+
+
+#include <stdio.h>
+#include <math.h>
+
+//fmod(d1, d2)
+
+int main()
+{
+    // % operatorunun operandları tam sayı olmak zorunda
+
+    double d1 = 2.3;
+    double d2 = 1.2;
+
+    printf("mod = %f\n", fmod(d1, d2));
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+#include <stdio.h>
+#include <math.h>
+
+//fmod(d1, d2)
+
+int main()
+{
+    int x, y;
+    printf("iki tam sayi giriniz : ");
+    scanf("%d%d", &x, &y);
+
+    printf("%d * %d = %d\n", x, y, x * y);
+    printf("%d / %d = %d\n", x, y, x / y);
+    printf("%d %% %d = %d\n", x, y, x % y);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+#include <stdio.h>
+#include <math.h>
+
+//fmod(d1, d2)
+
+int main()
+{
+    int hour, n;
+
+    printf("saat kac : ");
+    scanf("%d", &hour);
+    printf("kac saat sonra : ");
+    scanf("%d", &n);
+
+    printf("saat %d ve %d saat sonra saat %d olacak\n", hour, n, (hour + n) % 12);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x;
+
+    printf("4 basamakli bir sayi giriniz : ");
+    scanf("%d", &x);
+
+    printf("binler basamagi = %d\n", x / 1000);
+    printf("yuzler basamagi = %d\n", x % 1000 / 100);
+    printf("yuzler basamagi = %d\n", x / 100 % 10);
+    printf("onlar basamagi = %d\n", x % 100 / 10);
+    printf("birler basamagi = %d\n", x % 10);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x;
+
+    printf("4 basamakli bir sayi giriniz : ");
+    scanf("%d", &x);
+
+    printf("%d sayisinin tersi %d\n", x, x / 1000 + x / 100 % 10 * 10 + x % 100 / 10 * 100 + x % 10 * 1000);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+++ ve -- operators
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
