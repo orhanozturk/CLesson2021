@@ -553,6 +553,709 @@ int main()
 
 ++ ve -- operators
 
+2. öncelik seviyede
+
+++ increment -- plus plus
+-- decrement -- minus minus
+
+side effect -- yan etki
+
+unary operatorler
+Lvalue expre. almak zorundadır
+
+
+++x ---> prefix operator
+x++ ---> posfix operator
+
+
+--x
+x--
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x = 10;
+
+    printf("x = %d\n", x);
+    ++x; //11
+    printf("x = %d\n", x);
+    x++; //11
+    printf("x = %d\n", x); //12
+    x = x + 1;
+    printf("x = %d\n", x);
+    x += 1;
+    printf("x = %d\n", x);
+
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x = 10;
+
+    printf("x = %d\n", x);
+    --x; //11
+    printf("x = %d\n", x);
+    x--; //11
+    printf("x = %d\n", x); //12
+    x = x - 1;
+    printf("x = %d\n", x);
+    x -= 1;
+    printf("x = %d\n", x);
+
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x = 10;
+
+    printf("x = %d\n", ++x); // 11
+    printf("x = %d\n", x++); // 11
+    printf("x = %d\n", x);   // 12
+    printf("x = %d\n", --x); // 11
+    printf("x = %d\n", x--); // 11
+    printf("x = %d\n", x);   // 10
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+#include <stdio.h>
+#include <math.h>
+
+
+
+int main()
+{
+    int x = 12;
+
+    printf("x = %d\n", x++); // 12
+    printf("x = %d\n", ++x); // 14
+    printf("x = %d\n", x);   // 14
+
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+
+int main()
+{
+    int x = 7;
+
+    printf("x = %d\n", ++x); // 8
+    printf("x = %d\n", x++); // 8
+    printf("x = %d\n", x);   // 9
+    printf("x = %d\n", x--); // 9
+    printf("x = %d\n", --x); // 7
+    printf("x = %d\n", x);   // 7
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+
+int main()
+{
+    int x = 7;
+
+    //gecerlimi
+    //+x = 5; // L value cıkar  R value oldgu için sentaks hatası
+    //+++x;
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+maximum munch
+maximal munch
+
+sum-->=x>>=val
+
+maximal munch kuralını dikkate alırım
+
+1. token
+  sum
+  sum- olmayacagına göre
+
+2. token
+  --
+
+3. token
+
+  >=
+
+4. token
+  x
+
+5. token
+
+ >>=
+
+6. token
+
+ val
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+
+int main()
+{
+    int x = 12;
+    int y = 5;
+
+    int a = x+++y;
+    //int a = x++ + y;
+
+    printf("a = %d\n",a); //17
+    printf("x = %d\n", x); //13
+    printf("y = %d\n", y);  //5
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x = 12;
+
+    ++x = 10; // Rvalue atama yapılamaz
+    //eger C++ kodu olsaydı gecerliydi
+    //operator sol taraftaysa Lvalue
+
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+c++ da ise
+
+Lvalue
+++x
+--x
+
+Rvalue
+x++
+x--
+
+ama iki durumda C de Rvalue
+
+
+/*************************************************/
+/*************************************************/
+
+relational operators -- ilişkisel operatorler
+
+
+--------------------
+6. > < >= <=
+
+--------------------
+7. == !=
+--------------------
+
+
+binary infix operatorler
+no side effects
+Rvalue expr
+
+
+C dilinde karşılatırma op.lerinin urettiği
+deger işaretli int türündendir
+
+
+1 dogru
+0 yanlıs
+
+
+C de true veya false değildir
+C++ true ve false dur
+
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x;
+
+    printf("bir tam sayi girin : ");
+    scanf("%d", &x);
+
+    //x + veya - oldgunu nasıl buulurum
+    printf("sign(%d) = %d\n", x, (x>0) - (x<0));
+
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x, y, z, t;
+
+    printf("4 tam sayi girin : ");
+    scanf("%d%d%d%d", &x, &y, &z, &t);
+
+    //kac tanesi sıfırdan buyuk
+    int pos_count = 0;
+
+    if(x > 0)
+        ++pos_count;
+
+    if(y > 0)
+        ++pos_count;
+
+    if(z > 0)
+        ++pos_count;
+
+    if(t > 0)
+        ++pos_count;
+
+    //ikinci yontemle
+    int pos_count_V2 = (x > 0) + (y > 0) + (z > 0) + (t > 0);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+=   assigmnet op
+==  equal to
+
+
+x == 5
+x = 5
+
+if(x = 5)
+if(5 = x) // gecersiz
+if(5 == x) // gecerli
+
+
+/*************************************************/
+/*************************************************/
+
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x, y;
+
+    printf("2 tam sayi girin : ");
+    scanf("%d%d", &x, &y);
+
+    printf("%d > %d = %d\n", x, y, x > y);
+    printf("%d >= %d = %d\n", x, y, x >= y);
+    printf("%d < %d = %d\n", x, y, x < y);
+    printf("%d <= %d = %d\n", x, y, x <= y);
+    printf("%d == %d = %d\n", x, y, x == y);
+    printf("%d != %d = %d\n", x, y, x != y);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+lojik operatorler
+
+logik değil -- logical not
+
+
+p          - dogru   yanlıs
+degili p   - yanlıs  dogru
+
+1--- dogru
+0--- yanlıs
+
+logic and
+           p     q    p ve q
+           1     1       1
+           1     0       0
+           0     1       0
+           0     0       0
+
+
+logic  or
+           p     q    p ve q
+           1     1       1
+           1     0       1
+           0     1       1
+           0     0       0
+
+
+logic exorr
+           p     q    p ve q
+           1     1       0
+           1     0       1
+           0     1       1
+           0     0       0
+
+
+ !   logical not
+ &&  logical and
+ ||  logical or
+
+
+ C de lojik ifade bekelenen yerlerde herhangi
+ türden bir ifade kullanıabilir
+
+
+ ifadenin aritmatik deger hesapları
+
+ non-zero  ---> true
+ zero      ---> false
+
+logik ifade olan terimler
+
+  !expr
+   expr1 && expr2
+   expr1 || expr2
+
+   expr ? x : y
+
+ if(expr)
+
+ while(expr)
+
+ do....while(expr)
+
+ for( ; expr;  )
+
+
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x;
+
+    printf("bir tam sayi girin : ");
+    scanf("%d", &x);
+
+    if(x)
+        printf("doguru\n");
+    else
+        printf("yanlis\n");
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+  ! operator
+
+  unary prefix, yan etkisi olmayan operator
+
+  !x  ---> 0 ise 1
+      ---> 0 dışında herhangi bir deger ise 0
+
+
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x;
+
+    printf("bir tam sayi girin : ");
+    scanf("%d", &x);
+
+    printf("!%d = %d\n", x, !x);
+    printf("!!%d = %d\n", x, !!x);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x, y;
+
+    printf("iki tam sayi girin : ");
+    scanf("%d%d", &x, &y);
+
+    printf("%d exorr %d = %d\n", x, y, !!x != !!y);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x, y;
+
+    printf("iki tam sayi girin : ");
+    scanf("%d%d", &x, &y);
+
+    printf("%d exorr %d = %d\n", x, y, x && y);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x, y;
+
+    printf("iki tam sayi girin : ");
+    scanf("%d%d", &x, &y);
+
+    if(x && y)
+        printf("logik ve DOGRU\n");
+    else
+        printf("Logik ve YANLIS\n");
+
+    //Dikkat
+    if(x & y)
+        printf("bitsel ve DOGRU\n");
+    else
+        printf("bitsel ve YANLIS\n");
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x, y;
+
+    printf("iki tam sayi girin : ");
+    scanf("%d%d", &x, &y);
+
+    printf("%d exorr %d = %d\n", x, y, x || y);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+De morgan kuralları
+
+!(exp1 && expr2)  --->  !exp1 || !expr2
+!(exp1 || expr2)  --->  !exp1 && !expr2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

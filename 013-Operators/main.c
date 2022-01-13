@@ -4,15 +4,28 @@
 
 int main()
 {
-    int x;
+    int x, y;
 
-    printf("4 basamakli bir sayi giriniz : ");
-    scanf("%d", &x);
+    printf("iki tam sayi girin : ");
+    scanf("%d%d", &x, &y);
 
-    printf("%d sayisinin tersi %d\n", x, x / 1000 + x / 100 % 10 * 10 + x % 100 / 10 * 100 + x % 10 * 1000);
+    printf("%d exorr %d = %d\n", x, y, x || y);
 
     return 0;
 }
 
 /*************************************************/
 /*************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
