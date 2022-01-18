@@ -1142,6 +1142,640 @@ De morgan kuralları
 
 
 
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x, y;
+
+    printf("iki tam sayi girin : ");
+    scanf("%d%d", &x, &y);
+
+    printf("%d < %d = %d\n", x, y, x < y);
+    printf("%d > %d = %d\n", x, y, y < x);
+    printf("%d >= %d = %d\n", x, y, !(x < y));
+    printf("%d <= %d = %d\n", x, y, !(y < x));
+    printf("%d == %d = %d\n", x, y, !(x < y) && !(y < x));
+    printf("%d != %d = %d\n", x, y, (x < y) || (y < x));
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+equality
+==
+
+equivalance
+!(x < y) && !(y < x)
+
+#include <stdio.h>
+#include <math.h>
+
+//Mulakat sorusu
+
+int getmid(int a, int b, int c)
+{
+    if(!(a > b && a > c) && !(a < b && a < c))
+        return a;
+
+    if(!(b > a && b > c) && !(b < a && b < c))
+        return b;
+
+    return c;
+}
+
+int main()
+{
+    int x, y, z;
+
+    printf("3 tam sayi girin : ");
+    scanf("%d%d%d", &x, &y, &z);
+
+    printf("%d %d ve %d sayilarinin ortancasi %d\n", x, y, z, getmid(x, y, z));
+
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+
+#include <stdio.h>
+#include <math.h>
+
+//soru
+
+int main()
+{
+    int x = 0;
+    int y = 12;
+    int z;
+
+    z = x && y++;//kısa devre davranısı gerceklesiyor
+
+    printf("z = %d\n", z);
+    printf("y = %d\n", y);
+
+
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+short circuit behavior
+(kısa devre davranışı)
+
+
+if(a > 10)
+    if(b < 20)
+      ++x;
+
+
+if(a > 10 && b < 20)
+    ++x;
+
+
+left operand && // sol yanlıs ise saga bakılmaz
+
+  x = 0;
+  y = 12;
+
+   x && y++;
+
+left operand || // sol dogru ise saga bakılmaz
+
+  x || y;  --> 1
+
+
+#include <stdio.h>
+#include <math.h>
+
+//soru
+
+int main()
+{
+    int x = 1;
+    int y = 12;
+    int z;
+
+    z = x || y++;//kısa devre davranısı gerceklesiyor
+
+    printf("z = %d\n", z);
+    printf("y = %d\n", y);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+int func(void)
+{
+    printf("func\n");
+    return 0;
+}
+
+
+int foo(void)
+{
+    printf("foo\n");
+    return 1;
+}
+
+
+int main()
+{
+
+    func() && foo();
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+
+
+order of evaluation
+
+   exp1 &&
+   exp1 ||
+
+   exp1 ? op2: op3;
+   expr1 , expr2
+
+
+/*************************************************/
+
+ atam operatorleri
+
+ = //yalın atam operatoru
+
+
+ += -= *=  /= %= >>= <<= &= ^= |=
+
+14. öncelik seviyede ve soldan saga öncelik yonune sahipler
+
+
+atama operatorlerinin yan etkileri var
+
+
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x = 10;
+
+    x = 33;
+
+    5 = x; // Lvalue ifade olması gerekli sentaks htası
+    +x = 2; // Rvalue ifade oldugu için sentaks hatası
+    ++x = 5; // Rvalue ifade urettiği için sentaks hatası
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+#include <stdio.h>
+#include <math.h>
+
+
+int main()
+{
+    int x = 10;
+
+    printf("%d\n", x = 5);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+#include <stdio.h>
+
+int func(void);
+
+int main()
+{
+    int x;
+
+    if((x = func()) == -1)
+        printf("hata hata\n");
+    else
+        printf("x = %d\n", x);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+#include <stdio.h>
+
+
+int main()
+{
+    FILE* f;
+
+    if((f = fopen("orhn.txt", "r")) == NULL){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    fclose(f);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+#include <stdio.h>
+
+
+int main()
+{
+    int x, y, z, t;
+
+    t = 10;
+
+    //zincirleme atama
+    x = y = z = t;
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+compound assigment operators
+
+işlemli atama operatorleri
+
+   x = x + 10;
+   x += 10;
+
+   y = y - 5;
+   y -= 5;
+
+   m = m *3;
+   m *= 3;
+
+   t = t / 3;
+   t /= 3;
+
+   k = k % 2;
+   k %= 2;
+
+/*************************************************/
+/*************************************************/
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    int day, hour, min, sec;
+
+    printf("gun, saat, dakika ve saniye olarak sureyi giriniz : ");
+    scanf("%d%d%d%d", &day, &hour, &min, &sec);
+
+    min += sec / 60;
+    sec %= 60;
+
+    hour += min / 60;
+    min %= 60;
+
+    day += hour / 24;
+    hour %= 24;
+
+    printf("sure %d gun %d saat %d dakika ve %d saniye gecmistir\n", day, hour, min, sec);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    int x = 915, y = 6, t = 3;
+
+    x %= y += t *= 12;
+
+    printf("x = %d\n", x);
+    printf("y = %d\n", y);
+    printf("t = %d\n", t);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+sequence point --- yan etki noktası
+
+int x = 10;
+
+++x;
+
+peki ne zaman oluyor 11 ?
+
+deyimin sonu ;  gelince yan etki gercekleşmiş oluyor
+
+#include <stdio.h>
+
+
+int main()
+{
+    int a = 10, b = ++a, c = ++b, d = c;
+
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+sequence point olan yerler
+
+deyim sonu
+ilk deger verme listesi
+if parantezi içindeki ifade
+while parantezi içindeki ifade
+do while
+for ; ; içindeki ifade
+
+lojik &&
+lojik ||
+ternary
+comma
+
+
+
+ornek
+
+    x++ && foo(x); // x++ sequence point oldugu için c artmıs degeri kullanılır
+
+    x++ > 10 ? foo(x) : func(x); //x artar ve foo func içine gelmeden
+
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    int x = 10;
+
+    int y = x + x++; //tanımsız davranıs
+
+    printf("y = %d\n", y);
+
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+#include <stdio.h>
+
+//soru mulakat
+
+int main()
+{
+    int x = 10;
+
+    int y = x + ( x = 19 ); // tanımsız davranıs
+
+    printf("y = %d\n", y);
+    printf("x = %d\n", x);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+
+
+#include <stdio.h>
+
+//soru mulakat
+
+int main()
+{
+    int x = 10;
+    int y = 12;
+
+    int z = x++ + y++;
+
+    printf("z = %d\n", z);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+comma operator
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,15 +1,15 @@
 #include <stdio.h>
-#include <math.h>
 
+//soru mulakat
 
 int main()
 {
-    int x, y;
+    int x = 10;
+    int y = 12;
 
-    printf("iki tam sayi girin : ");
-    scanf("%d%d", &x, &y);
+    int z = x++ + y++;
 
-    printf("%d exorr %d = %d\n", x, y, x || y);
+    printf("z = %d\n", z);
 
     return 0;
 }
