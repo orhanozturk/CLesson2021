@@ -1,15 +1,12 @@
 #include <stdio.h>
 
-//soru mulakat
 
 int main()
 {
-    int x = 10;
-    int y = 12;
+     int x = 20;
 
-    int z = x++ + y++;
-
-    printf("z = %d\n", z);
+     //Lvalue
+     (((x))) = 12;
 
     return 0;
 }

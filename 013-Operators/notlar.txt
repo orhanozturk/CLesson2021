@@ -1616,6 +1616,375 @@ int main()
 
 comma operator
 
+kaynak kod her gördüğümüz virgül operator degil
+
+
+//ornekteki virgüller operator deildir
+
+#include <stdio.h>
+
+void foo(int, int);
+
+int main()
+{
+    int x = 10, y = 4, z = 3;
+    int a[3] = {1, 2, 3};
+    foo(2, 3);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+binary infix
+
+expr1 , expr2
+
+
+bir sequence point olusturur
+
+  x++, y = x
+
+
+
+expr1;
+expr2;
+
+expr1, expr2;
+
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    int x = 10, y = 4, z = 0;
+
+    ++x, ++y, z = x + y;
+
+    printf("z = %d\n", z);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+#include <stdio.h>
+
+
+int main()
+{
+    int x = 10, y = 4, z = 0;
+
+    x++, y = ++x, z = ++x;
+
+    printf("z = %d\n", z);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+virgül operatorun urettiği bir deger var
+virgül operatorunun urettiği deger sag operandı degeridir
+
+
+int x = 10;
+int y = 25;
+
+z = x , y;  --> 25
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    int x = 10, y = 4;
+
+    int z = (x, y);
+
+    printf("z = %d\n", z);
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+#include <stdio.h>
+
+
+int main()
+{
+    int c;
+
+    while (c = getchar(), c != '\n') {
+        printf("%d    %c\n", c, c);
+    }
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    int i, j;
+
+    for(i = 5, j = 7; i < 100; ++i, j+=1){
+
+    }
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    int i, j;
+
+    for(i = 5, j = 7; i < 10; ++i, j+=1){
+        printf("for dongusu\n");
+    }
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    int x = 3;
+    int a = 5, b = 5;
+
+    if(x > 5)
+        ++a, ++b;
+
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+#include <stdio.h>
+
+
+int main()
+{
+     double dval = 3.3;
+
+    if(dval > 5,3)
+        printf("evet dogru\n");
+    else
+        printf("hayir yanlis\n");
+
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+comma operator --> R value deger uretir C de
+
+C++ da Lvalue deger üretir
+
+
+/*************************************************/
+
+() öncelik parantezi
+
+ sequence point olusturmaz
+
+ işlemin daha önce yapılır anlamına gelmez
+
+ öncelik parantezi ifadenin Rvalue Lvalue sunu degiştirmez
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+     int x = 20;
+
+     int y = (x = 5) + x; //tnaımsız davranıs
+
+     printf("y = %d\n", y);
+
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+     int x = 20;
+
+     //Lvalue
+     (((x))) = 12;
+
+    return 0;
+}
+
+/*************************************************/
+/*************************************************/
+
+
+ if((x * y) > z + (x / 2) * 3)
+ if((x * x * x) + (y * y * y) + (z * z * z))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

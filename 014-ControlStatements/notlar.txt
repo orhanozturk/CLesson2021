@@ -1,0 +1,272 @@
+
+Kontrol deyimleri -- Control Statements
+
+
+if statement
+
+while
+do while
+for
+
+switch
+goto
+
+break
+continue
+
+return
+
+--------------------------------
+
+if statement
+
+if --> anahtar sözcük
+else --> anahtar sözcük
+
+
+if(expr)  --> //void türünden olmayacak
+
+non-zero ise ifade -- true
+zero ise ifade ---> false
+
+
+if(expr)
+
+
+else if(expr)
+
+
+else
+
+
+----------------
+
+if(expr)
+  statement; //true path
+
+
+compound statement -- birleşik deyim
+
+if(expr){
+ statement1;
+ statement2;
+ statement3;
+}
+
+
+---------------------------
+
+  Null statement
+
+  if(expr)
+     ;
+
+  if(expr)
+   {}
+
+
+--------------------------------------
+
+ if(x != 0)  --> if(x) yazabilirim
+
+
+ if sequence point tir
+
+ if(x++ > 10)
+
+dikkat
+
+ x = 10;
+
+ if(x++ > 10)
+
+
+#include <stdio.h>
+
+int main()
+{
+    int x = 9;
+
+    if(x++ > 10)
+        printf("dogru\n");
+    else
+        printf("yanlis\n");
+
+    return 0;
+}
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+int foo(void);
+
+int main()
+{
+    int x;
+
+    if((x = foo()) > 10)
+        printf("dogru\n");
+    else
+        printf("yanlis\n");
+
+    return 0;
+}
+
+/*****************************************/
+/*****************************************/
+
+
+x = 6
+
+if(x == 5) // yyanlıs
+if(x = 5) // dogru
+
+if(x & y) //&& yazmak istediğim yerde
+
+
+int func();
+
+if(func) // gecerli // always true
+
+
+#include <stdio.h>
+
+int foo(void)
+{
+    printf("foo cagrildi\n");
+    return 0;
+}
+
+int main()
+{
+    if(foo())
+        printf("orhn cagrildi\n");
+
+    return 0;
+}
+
+/*****************************************/
+/*****************************************/
+
+
+if with initialize durumu gecerli degil
+
+#include <stdio.h>
+
+int foo(void)
+{
+    return 12;
+}
+
+int main()
+{
+
+    if(int x = foo(), x > 0)
+        printf("orhn cagrildi\n");
+
+    return 0;
+}
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+int main()
+{
+
+   int c;
+
+   c = getchar();
+   if(c != '\n'){
+        //dothis
+   }
+
+   if(c = getchar(), c != '\n'){
+        //dothis
+   }
+
+   if((c = getchar()) != '\n'){
+        //dothis
+   }
+
+
+
+    return 0;
+}
+
+/*****************************************/
+/*****************************************/
+
+  if(expr)
+     statement; //true path
+  else
+     statement; //false path
+
+
+#include <stdio.h>
+
+int main()
+{
+
+   int x;
+
+    printf("bir tam sayi giriniz : ");
+    scanf("%d", &x);
+
+    if(x % 2 == 0)
+        printf("%d cift sayi\n", x);
+    else
+        printf("%d tek sayi\n", x);
+
+
+    return 0;
+}
+
+/*****************************************/
+/*****************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
