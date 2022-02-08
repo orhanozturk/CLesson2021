@@ -858,6 +858,400 @@ int main()
 /*****************************************/
 /*****************************************/
 
+ternary operator -- conditional operator
+
+koşul operatorü
+
+3 operand alan operator
+
+13. öncelik seviyesinde bulunmakta. sagdan sola (right associative)
+
+14. atama operatorleri
+
+15. virgül operatörü
+
+
+ op1 ? op2 : op3;
+
+ op1 dogru veya yanlıslıgına göre
+
+dogru ise op2
+yanlıs ise op3
+
+ x > 10 ? x : y;
+
+ x >= 0 = ? x : -x;  // mutlak deger
+
+
+kosul operatorü sqwuence point olusturu
+
+
+ x++ > 10 ? a : x  ---> buradaki x in artmıs degeridir
+
+
+#include <stdio.h>
+#include <ctype.h>
+
+int max2(int a, int b)
+{
+    return a > b ? a : b;
+}
+
+int main()
+{
+    //
+    //
+
+    return 0;
+}
+
+/*****************************************/
+/*****************************************/
+
+
+   func(a > b ? a : b)
+
+   if((x > y ? a : b) > 20)
+
+
+ ---------------------------------------
+
+
+ if(a > 10)
+    x = b;
+ else
+    y = b;
+
+    a > 10 ? x : y = b;
+
+   L value olması lazım
+
+   C de kosul operatörünün ürettiği deger R value bu işlem gecersiz
+
+   C++ kosul operatörünün ürettiği deger Lvalue
+
+
+#include <stdio.h>
+
+int main()
+{
+    int a = 10, x = 3, b = 8, y = 5;
+
+    if(a > 10)
+        x = b;
+    else
+        y = b;
+
+    a > 10 ? x : y = b; //kosul op. Rvalue deger urettiği için atama yapılamaz
+
+    return 0;
+}
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+int main()
+{
+    int a = 10, x = 3, b = 8, y = 5;
+
+    if(a > 10)
+        x = b;
+    else
+        y = b;
+
+    *(a > 10 ? &x : &y) = b; //ileride pointer konusunda daha net anlayacagız
+
+    return 0;
+}
+
+/*****************************************/
+/*****************************************/
+
+
+    a > 0 ? 5 : b > 0 ? 7 : 13;    //sagdan sola
+
+    a > 0 ? 5 : (b > 0 ? 7 : 13);  // bu daha hos duruyor
+
+
+
+
+
+#include <stdio.h>
+
+int main()
+{
+    int x, y, z;
+
+    printf("uc tam sayi giriniz : ");
+    scanf("%d%d%d", &x, &y, &z);
+
+
+    printf("%d\n", x > 10 ? 3:
+                   y > 20 ? 7:
+                   z > 30 ? 12: 57);
+
+    printf("%d\n", x > 10 ? 3:(y > 20 ? 7: (z > 30 ? 12: 57)));
+
+
+    return 0;
+}
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+int main()
+{
+    int x = 10;
+    int y = 10;
+    int a = 7;
+    double dval = 3.;
+
+    printf("%f\n", (x > 5 ? y : dval) / 3);
+
+
+    return 0;
+}
+
+/*****************************************/
+/*****************************************/
+
+
+
+loop statements
+
+kod parcacıgının yenilemeli olarak yürütülmesine dongu deyimleri denir
+
+
+3 tane dongu deyimimiz var
+
+
+while statement
+do while statement
+for statement
+
+
+-----------------------------
+
+
+while statement
+
+ while(expr)
+     statement;
+
+
+ while() // içi boş sentaks hatası
+ while(;)  // ; atamu kullanırsam sentaks hatası
+ while(expr)  // expr ifadesinin void türnde olamaz sentaks hatası
+
+
+
+ while(expr)
+     ++a;
+
+
+while(expr){
+     ++a;
+     ++b;
+     ////
+   ///
+}
+
+
+while null statement durumları
+
+while(expr)
+   ;
+
+while(expr)
+{}
+
+
+while(expr)
+   ++a, ++b;
+
+while(isprime(x))
+    ///
+
+while(x > 100)
+    ///
+
+
+zero --> dongu durur
+non zero ---> donguye devam et
+
+
+#include <stdio.h>
+
+int main()
+{
+    int ch;
+
+    printf("bir giris yapin : ");
+
+    while ((ch = getchar()) != '\n') {
+        printf("%c    %d\n", ch, ch);
+    }
+
+
+    return 0;
+}
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+int main()
+{
+    int ch;
+
+    printf("bir giris yapin : ");
+
+    while (ch = getchar(), ch != '\n') {
+        printf("%c    %d\n", ch, ch);
+    }
+
+
+    return 0;
+}
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+int main()
+{
+    int i = 0;
+
+    //dikkat
+    while(i < 100)
+        printf("%d ", i);
+        ++i;
+
+    return 0;
+}
+
+/*****************************************/
+/*****************************************/
+
+Tavsiyeler
+
+1- git - github     ------------------------> svn  cvs
+https://youtu.be/rWG70T7fePg
+
+
+2- java
+https://www.udemy.com/course/java-the-complete-java-developer-course/
+
+
+3- C++
+https://www.udemy.com/course/beginning-c-plus-plus-programming/
+
+
+4- Python
+https://www.udemy.com/course/100-days-of-code/
+
+
+5- Gömülü sistem
+https://www.youtube.com/c/StateMachineCOM
+
+6- FPGA
+https://www.youtube.com/watch?v=PstK7sQ3Tdk&list=PLZyLAHn509339oyv3vi-3Gdyb8bfPx7Ro
+
+
+
+   C, C++
+   Python, Java
+
+   Gömülü sistem
+
+   form --> istediği yazcaksınız
+
+   sistem mühendis
+
+
+   Fintech
+
+   oyun motoru
+
+
+
+  unity   -->  C#
+  unreal engine  --> c++
+
+   C dili -->
+
+/*****************************************/
+/*****************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

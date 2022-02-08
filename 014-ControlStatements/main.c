@@ -1,22 +1,13 @@
 #include <stdio.h>
-#include <ctype.h>
-
-//yazıdaki rakam karaterlerinin sayısını sayan program
-
 
 int main()
 {
-   printf("bir yazın girin : ");
-   int ch;
-   int count = 0;
+    int i = 0;
 
-   while ((ch = getchar()) != '\n') {
-       if(isdigit(ch))
-           ++count;
-   }
-
-
-    printf("%d  tane \n", count);
+    //dikkat
+    while(i < 100)
+        printf("%d ", i);
+        ++i;
 
     return 0;
 }
