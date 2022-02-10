@@ -1,13 +1,19 @@
 #include <stdio.h>
+#include <conio.h>
 
 int main()
 {
-    int i = 0;
+    int c;
 
-    //dikkat
-    while(i < 100)
-        printf("%d ", i);
-        ++i;
+    printf("evet mi (e) hayir mi (h) : ");
+
+
+    while((c = _getch()) != 'e' && c != 'h')
+        ;// null statment
+
+    putchar(c);
+    putchar('\n');
+
 
     return 0;
 }
