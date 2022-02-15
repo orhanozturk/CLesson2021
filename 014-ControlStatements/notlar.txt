@@ -1584,6 +1584,563 @@ array kullanılmayacak
 // rand()
 
 
+#include <stdio.h>
+#include <conio.h>
+#include <limits.h>
+
+//2 byte -32768  32767
+//4 byte -2147483648  2147483647
+
+
+int main()
+{
+    int c;
+    int ival;
+    int sum = 0;
+    int counter = 0;
+    int max;
+    int min;
+
+    while (1) {
+        printf("bir tamsayi girecekmisiniz (e) (h) : ");
+
+        while((c = _getch()) != 'e' && c != 'h')
+            ;// null statment
+
+        printf("\n%c\n", c);
+        if(c == 'h')
+            break;
+
+        printf("tam sayi girin : ");
+        ival = (rand() % 2 ? 1 : -1) * rand();
+
+        printf("%d\n", ival);
+
+
+        if(counter == 0){
+            min = max = ival;
+        }else if(ival > max){
+            max = ival;
+        }else if(ival < min){
+            min = ival;
+        }
+
+        ++counter;
+        sum += ival;
+
+    }
+
+    if(counter == 0){
+        printf("hic giris yapilmadi\n");
+    } else {
+        printf("toplam %d sayi girdiniz\n", counter);
+        printf("ortalama = %d\n", (double)sum/counter); ///ileri konu
+        printf("max = %d\n", max);
+        printf("min = %d\n", min);
+
+    }
+
+
+    return 0;
+}
+
+/*****************************************/
+/*****************************************/
+
+nesnted loops -- ic ice döngü
+
+while(exp1){
+  while(exp2){
+
+    if(exp)
+      break;
+ }
+ statement a; //break ile cıktıgında buraya gelecek
+
+}
+statement b;
+
+
+---------------------------
+
+
+while(exp1){
+  while(exp2){
+      while(exp3){
+         if(exp)
+           goto OUT;
+      }
+ }
+ statement a;
+
+}
+OUT: //etiket
+statement b;
+
+---------------------------
+
+#include <stdio.h>
+#include <conio.h>
+#include <limits.h>
+
+//Mülakat sorusu
+//noktalı virgül atamonu kullanmadan gecerli C programı olacak
+//ekrana "merhaba dunya" yazdıracak
+
+int main()
+{
+
+    if(printf("Hello world\n")){}
+
+    while(!printf("Hello world\n")){}
+
+   switch(printf("Hello world\n")){}
+
+}
+
+/*****************************************/
+/*****************************************/
+
+continue statement
+
+kullanımı
+
+continue;
+
+continue deyimini kullanabildigimiz yer sadece bir döngü gövdesibde kullanabiliriz
+
+
+
+while(exp)
+{
+  statement1;
+  statement2;
+  statement3;
+  if(expr)
+     continue; //bu kısma yürütülür ve döngü başına gecer
+
+ statement1;
+ statement2;
+ statement3;
+
+}
+
+#include <stdio.h>
+
+int main()
+{
+
+    int i = 0;
+
+    while (i++ < 100) {
+        printf(".");
+        if(i % 5 == 0)
+            continue;
+        printf("%d\n", i);
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+do while statement -- deyimi
+
+amacı donguye girmeden önce yapılması istenilenleri yapmak
+ama dongu dogru ise aynı seyleri yapılsın değil ise yapılmasın
+
+
+kullanımı
+
+do{
+ statement;
+
+}while(expr);
+
+
+
+#include <stdio.h>
+
+int ndigit(int val)
+{
+    int digit_count = 0;
+
+    do {
+       ++digit_count;
+        val /= 10;
+    } while (val);
+
+    return digit_count;
+}
+
+int main()
+{
+
+    int x;
+
+    printf("bir tam sayi giriniz : ");
+    scanf("%d", &x);
+
+    printf("%d sayisi %d basamaklidir\n", x, ndigit(x));
+
+}
+
+/*****************************************/
+/*****************************************/
+#include <stdio.h>
+
+int main()
+{
+
+    int x;
+
+    do {
+        printf("bir tam sayi giriniz : ");
+        scanf("%d", &x);
+    } while (x <0 || x >= 100);
+
+    printf("girilen sayi = %d\n", x);
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+for statement
+
+2 tane ; olması zorun
+
+for(;;)  //sonsuz dongu denir
+   statement;
+
+for(exp1; exp2; exp3)
+     satement;
+
+
+for(f1(); f2(); f3())
+    statement;
+
+
+
+
+#include <stdio.h>
+
+int main()
+{
+
+    int i;
+
+    for(i = 0; i < 10; ++i){
+        printf("%d\n", i);
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+int main()
+{
+
+    int i = 0;
+
+    for( ; i < 100; ){
+        printf("%d\n", i);
+        ++i;
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+int main()
+{
+
+    for(int i = 0, k = 2; i < 100; ++i){
+        printf("%d\n", i);
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+int main()
+{
+    //C++ da sentaks hatası
+    //C de gecerli
+
+    int k = 0;
+    for(int i = 0; i < 100; ++i){
+      int i = 34;
+      printf("%d . %d\n", k++, i);
+    }
+
+    //C de derleyici arka tarafta böyle yapıyor
+    /*
+    for(int i = 0; i < 100; ++i){
+        {
+            int i = 34;
+            printf("%d\n", i);
+        }
+    }
+
+    */
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+for(int i = 0; i < 10; ++i)
+{
+}
+
+
+for(int i = 0; i < 10; ++i)
+{
+}
+
+
+for(int i = 0; i < 10; ++i)
+{
+}
+
+
+
+
+
+#include <stdio.h>
+
+int main()
+{
+    //n kes donen dongu deyimi
+
+    for(int i = 0; i < 20; ++i){
+        printf("orhan\n");
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+int main()
+{
+
+    int i, k;
+
+    for(i = 0, k = 2; i < 200; ++i, i += k){
+        printf("orhan\n");
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+int main()
+{
+
+    for(int i = 0; i < 10; ++i);{
+        printf("%d ", i);
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+
+
+int main()
+{
+    for(int i = 0; i < 10; ++i)
+        ;
+
+    {
+        printf("%d ", i); //sentaks hatası
+    }
+}
+
+/*****************************************/
+/*****************************************/
+
+
+
+#include <stdio.h>
+
+int main()
+{
+    for(int i = 0; i < 10; ++i){
+        //
+        continue;
+        //
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+amstrom sayilari
+
+ub basamaklı sayinin basamak degerlerinin kupleri toplamına eşit olan sayı
+
+abc  = a3 + b3 + c3
+
+dort basamaklı sayinin basamak degerlerinin kupleri toplamına eşit olan sayı
+
+abcd  = a4 + b4 + c4 + d4
+
+
+#include <stdio.h>
+
+int main()
+{
+    for(int i = 1000; i < 10000; ++i){
+
+        int d1 = i / 1000;
+        int d2 = i / 100 % 10;
+        int d3 = i / 10 % 10;
+        int d4 = i % 10;
+
+        if(i == d1*d1*d1*d1 + d2*d2*d2*d2 + d3*d3*d3*d3 + d4*d4*d4*d4)
+            printf("%d\n", i);
+
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
