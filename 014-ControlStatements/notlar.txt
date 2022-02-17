@@ -2036,6 +2036,712 @@ int main()
 /*****************************************/
 
 
+#include <stdio.h>
+
+//kalit --- henuz kanıtlamamıs matematiksel terim
+
+/*sayıınn sureklı 2 ye bolunme kontrolu var
+ * eger bolunmuyor ıse 3 katının 1 fazlası alınır
+ * tekrar 2 ye bolunup bolunmedıgı kontrol edilir
+ */
+
+//45 136 68 34 17 52 26 13 40 20 10 5 16 8 4 2 1
+
+int main()
+{
+    unsigned long long uval;
+    printf("bir tam sayi giriniz : ");
+    scanf("%llu", &uval);
+
+    while (uval != 1) {
+        printf("%llu\n", uval);
+        if(uval % 2 == 0)
+            uval /= 2;
+        else
+            uval = uval * 3 + 1;
+    }
+
+    printf("1\n");
+
+}
+
+/*****************************************/
+/*****************************************/
+#include <stdio.h>
+
+int factorial(int n)
+{
+    int result = 1;
+
+    for(int i = 1; i <= n; ++i)
+        result *= i;
+
+    return result;
+}
+
+//int 4 byte oldugu ıcın en fala 13 faktoriyele kadar gidebilirim yoksa tasar
+
+int main()
+{
+    for(int i = 0; i < 13; ++i){
+        printf("%d!  =  %d\n", i, factorial(i));
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+long long factorial(int n)
+{
+    long long result = 1;
+
+    for(int i = 1; i <= n; ++i)
+        result *= i;
+
+    return result;
+}
+
+//long long 8 byte oldugu ıcın en fala 20 faktoriyele kadar gidebilirim yoksa tasar
+
+int main()
+{
+    for(int i = 0; i < 20; ++i){
+        printf("%d!  =  %lld\n", i, factorial(i));
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+//recursive func.
+//oneliner func.
+long long factorial(int n)
+{
+    return n <= 1 ? 1 : n * factorial(n-1);
+}
+
+int main()
+{
+    for(int i = 0; i < 20; ++i){
+        printf("%d!  =  %lld\n", i, factorial(i));
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+//(1/1) - (1/3) - (1/5) - (1/7) .....  pi/4 yakınsıyor
+
+int main()
+{
+   int n;
+   double sum = 0;
+
+   printf("serinini kaç terimi toplansın: ");
+   scanf("%d", &n);
+
+   for (int i = 0; i < n; ++i) {
+        if(i % 2 == 0)
+            sum += 1./ (2 * i + 1);
+        else
+            sum -= 1./ (2 * i + 1);
+   }
+
+   printf("%lf\n", 4*sum);
+}
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+
+int isprime(int x)
+{
+    if(x < 2)
+        return 0;
+
+    if(x % 2 == 0)
+        return x == 2;
+
+    if(x % 3 == 0)
+        return x == 3;
+
+    if(x % 5 == 0)
+        return x == 5;
+
+    for(int i = 7; i*i <= x; ++i){
+        if(x % i == 0)
+            return 0;
+    }
+
+    return 1;
+}
+
+int main()
+{
+
+    for(int i = 1875951000; i < 1875952000; ++i){
+        if(isprime(i))
+            printf("%d ", i);
+    }
+
+    printf("\n");
+
+
+}
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+int ndigit(int x)
+{
+    int digit_count = 0;
+    if(x == 0)
+        return 1;
+    while (x) {
+        ++digit_count;
+        x /= 10;
+    }
+
+    return digit_count;
+}
+
+int sumdigit(int x)
+{
+    int digit_sum = 0;
+
+    while (x) {
+        digit_sum += x % 10;
+        x /= 10;
+    }
+
+    return digit_sum;
+}
+
+int dreverse(int x)
+{
+    int result = 0;
+
+    while (x) {
+        result = result * 10 + x % 10;
+        x /= 10;
+    }
+
+    return result;
+}
+
+int main()
+{
+    int ival;
+    printf("bir tam sayi giriniz : ");
+    scanf("%d", &ival);
+
+    printf("%d sayisisinin %d basamaklidir\n", ival, ndigit(ival));
+    printf("%d sayisisinin basamak degerleri toplami %d\n", ival, sumdigit(ival));
+    printf("%d sayisisinin tersi %d\n", ival, dreverse(ival));
+
+}
+
+/*****************************************/
+/*****************************************/
+
+ic ice donguler
+nesnted loops
+
+dongu(){
+  dongu(){
+   ...
+ }
+}
+
+
+
+
+#include <stdio.h>
+
+int main()
+{
+
+    for(int i = 0; i < 10; ++i)
+        for(int k = 0; k < 20; ++k)
+            printf("(%d %d)  ", i, k);
+
+}
+
+/*****************************************/
+/*****************************************/
+#include <stdio.h>
+
+int main()
+{
+
+    for(int i = 0; i < 10; ++i){
+        for(int k = 0; k < 20; ++k)
+            printf("(%d %d)  ", i, k);
+        printf("\n");
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+int main()
+{
+    int count = 0;
+
+    for(int i = 0; i < 10; ++i){
+        for(int k = 0; k < 20; ++k){
+          for(int j = 0; j < 30; ++j){
+                    ++count;
+          }
+        }
+    }
+
+    printf("count = %d\n", count);
+}
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+
+int main()
+{
+    for(int i = 1; i <= 9; ++i){
+        for(int k = 0; k <= 9; ++k){
+          for(int j = 0; j <= 9; ++j){
+                printf("%d%d%d  ", i, j, k);
+          }
+        }
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+
+
+#include <stdio.h>
+
+//amstrom sayılarını bulmak
+
+int main()
+{
+    int ival = 100;
+
+    for(int i = 1; i <= 9; ++i){
+        for(int k = 0; k <= 9; ++k){
+          for(int j = 0; j <= 9; ++j){
+              if(i*i*i + k*k*k + j*j*j == ival)
+                  printf("%d\n", ival);
+              ++ival;
+          }
+       }
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+
+n = 5
+
+*
+**
+***
+****
+*****
+
+
+#include <stdio.h>
+
+int main()
+{
+
+    int n;
+
+    printf("bir tam sayi giriniz : ");
+    scanf("%d", &n);
+
+    for(int i = 1; i <= n; ++i){
+        for(int j = 0; j < i; ++j){
+            putchar('*');
+        }
+        putchar('\n');
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+//48
+
+// 2 2 2 2 3
+
+int main()
+{
+
+    int n;
+
+    printf("bir tam sayi giriniz : ");
+    scanf("%d", &n);
+
+    int x = 2; //ilk sal sayi degeri ile baslatık
+
+    while (n != 1) {
+        while (n % x == 0) {
+            printf("%d ", x);
+            n /= x;
+        }
+        ++x;
+    }
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+/*soru
+ * alttaki kodda tek bir karater silip veya ekleyip veya yer değiştirip
+ * aynı cıktıyı elde etmek sitiyoruz
+ */
+
+int main()
+{
+
+    int n = 5;
+
+    /*
+    for(int i = 0; i < n; ++i)
+        printf("orhan\n");
+    */
+
+
+    /*
+    for(int i = 0; i < n; n--)
+        printf("orhan\n");
+
+        */
+
+    /*
+    for(int i = 0; -i < n; --i)
+        printf("orhan\n");
+    */
+
+    for(int i = 0; i + n; --i)
+        printf("orhan\n");
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+
+
+#include <stdio.h>
+
+//soru
+//ekrana ne yazdırır
+
+int main()
+{
+
+    int i = 1;
+
+    do {
+        printf("%d\n", i);
+        i++;
+        if(i < 15)
+            continue;
+        //
+    } while (0);
+
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+yorum satrıları -- comment lines
+
+fonksiyon bildirimier fonksiyon prototipleri
+
+önişlemci
+switch
+goto
+
+tur donuşümü
+
+rastgele sayi üretme
+
+--------------
+diziler --arrays
+
+-------------------------
+
+yorum satrıları -- comment lines
+
+
+kaynak kodda bulundurulması gerekn bazi yazılar var
+ama cevirici - derleyici program bunları görmezden gelir kaynak koddan cıkartılmıs olur
+
+
+--önce acıklamalar koddan cıkartılıyor
+--sonra önişlemci komutları yürütülüyor
+
+
+
+C99 sadece yorum satırı olarak
+
+/*
+asdasdas
+asdasd
+
+*/
+
+/* asdasd */
+
+
+
+C99
+
+//yorum
+
+int x; // yarı capı gostersın
+
+
+---------------------------------
+
+en iyi acıklama hic yapılmayan acıklamadır
+
+
+/*******************************
+    file    :   string.h
+    author  :   orhan ozturk
+    update  :   12.12.2045
+
+    Aim     :  bla bla ......
+
+*******************************/
+
+
+#include <stdio.h>
+
+
+
+int main()
+{
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+
+fonksiyon bildirimleri --- to declare a function (declaration)
+
+onceden function definition gorduk
+function call
+
+
+fonksiyon hakkında bilgi dderleyiciye  ve okuyana veren,  buna fonksiyon bildirimi denir
+
+
+fonksiyon tanımı ile bagımsızdır
+
+
+function declaration
+function prototype
+
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    func();
+    //derleyici namelookup -- berlirli alanlarda ismi araması yapıyor
+    //bulmazsa sentaks hatası oluyor
+    //c++ da kesin olarak hata
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
