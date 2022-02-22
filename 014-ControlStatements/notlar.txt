@@ -2603,6 +2603,363 @@ int main()
 /*****************************************/
 /*****************************************/
 
+#include <stdio.h>
+
+//C99 dan once farklılık var
+
+//implicit function declaration olarak kabul edilir derleyici tarafından
+
+
+int main()
+{
+
+    func();
+    //derleyici namelookup -- berlirli alanlarda ismi araması yapıyor
+    //bulmazsa sentaks hatası oluyor
+    //c++ da kesin olarak hata
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+int foo(int, int);
+int func(double);
+
+int main()
+{
+
+    func(2, 33);
+    //derleyici isim arar
+    //bulur ama kodun tanımı ile ilgilenmez
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+
+
+#include <stdio.h>
+
+int foo(int, int);
+int func(double);
+
+int main()
+{
+
+    int x = foo(12, 33);
+    x = func(x);
+
+}
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+int foo(int, int, double);
+
+int main()
+{
+
+    int x = foo(1, 2, 3.5);
+    x;
+}
+
+
+
+
+/*****************************************/
+/*****************************************/
+#include <stdio.h>
+
+int foo(int, int, double);
+
+int main()
+{
+
+    //narrowing  convertion
+    //bilgi kaybı yasanır
+
+    int x = foo(2.3, 4.5, 2);
+    //2  4  2.0
+}
+
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+int foo(int, int, double);
+
+int main()
+{
+
+    //narrowing  convertion
+    //bilgi kaybı yasanır
+
+    foo(2.3, 4.5, 2);
+    //2  4  2.0
+}
+
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+
+#include <stdio.h>
+
+//bildirim
+int func(int, int);
+
+int main()
+{
+    //call
+    int x = func(2, 3);
+
+    printf("x = %d\n", x);
+}
+
+//tanım
+//parametreyi kullanmamız için ismi olmak zorunda
+int func(int a, int b)
+{
+    return a+b;
+}
+
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+//aşağıdaki bildirimi yapılan func işlevinin değişkenlerinini
+//olmadıgını söylemez
+//parametreleri hakkında derleyicinin bir fikri yok
+int func();
+
+//derleyicinin bu fonksiyon bildiriminden anladıgı
+//parametrelere sahip değil
+int fooo(void);
+
+//C++ iki durumda parametre yok demek anlamına gelir
+
+int main()
+{
+
+    func(2, 3, 4);
+
+    fooo(2, 3);
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+//bir fonksiyonun bir çok bildirimini yapabilirm sentaks hatası değil
+void func(int, int);
+void func(int, int);
+void func(int, int);
+void func(int, int);
+void func(int, int);
+
+//bir fonksiyonun tanımı bir kere olur, aksi takdirde sentaks hatası
+
+int main()
+{
+
+}
+
+
+/*****************************************/
+/*****************************************/
+
+Header file
+
+module de denebilir
+
+
+baslık dosyasında  -- header file da neler bulunur
+
+1- fonksiyon bildirimleri
+2- makrolar -- önişlemci programa tanıtılan isimler
+   object-like macro
+   function-like macro
+   ...
+3- type alias
+ typedef declaration
+
+bunların bazılarını ilerleyn derlerde görecez
+
+
+
+fakat static bir fonksiyon tanımlar isek
+örnek
+static int func()
+{
+  bu fonksiyon sadece kaynak dosya tarafıdan cagrılabilir
+
+  baskası erişemez
+
+}
+
+
+------------------------------------------------
+
+onişlemci preprocessor
+
+donanımsal olarak hiç bir ilişki yok
+metin işleyen anlamındadır
+
+
+derleyici programın giriş programı gibi dir
+
+onişlemci kendi komutlarını yürütür ve C dili ile alakası yoktur
+
+
+ortak noktası # ile başlamaları
+
+#   (null directive)
+#include
+#define
+#undef
+#if
+#else
+#elif
+#ifdef
+#ifndef
+#line
+#error
+#pragma
+
+
+derleyici bu komutları görmez derleyicinin işi gelince
+
+bu komutların sonunda ; atamonu kullanmayınız
+
+----------------------
+
+conditional compiling (kosullu derleme)
+
+
+
+#  //tek basına bir anlamı yok
+   //görsel hizalama amacında kullanılır ve derleme aşamasında koddan cıkartılır
+
+#include
+
+bir baslık dosyasındaki bildirimleri o kaynak dosyanın içine yapıstırmak
+
+
+//ikisinin amacı ismi verilen dosyanın içindeki bildirimleri kaynak dosyanın içina yapıstırmak
+
+#include <stdio.h> //boyle kullanımlar standart dosylar için,
+//defult directory de arar önceden belirleniştir
+//include directory gelir ararım
+//bazen derleyicilerde standart olmayan yada olmasada bu directory kendi baslık dosyalarını koyabilir
+
+#include "utility.h" //programcı tarafından tanımlanan dosyalarda kullanılır
+//kaynak dosyanın bulundugu dizinde ara
+//eger bulamazsa gider default directory arar.
+
+
+
+koşullu derleme
+
+#if  KOSUL //bu da dogru ise arada kalanı derleyecek eger dogru değil ise burayı pas gececek
+ void func()
+ //
+ //
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

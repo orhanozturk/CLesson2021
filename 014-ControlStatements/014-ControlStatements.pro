@@ -8,3 +8,6 @@ SOURCES += \
 
 DISTFILES += \
  notlar.txt
+
+HEADERS += \
+ utility.h
