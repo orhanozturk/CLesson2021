@@ -2895,6 +2895,699 @@ koşullu derleme
 #endif
 
 
+----------------------------------
+
+#define
+
+bu koutun birkaç kullanımı detaylı olarak görecez
+
+define önişlmeciye bu komut işmi yapmak istediğimiz işlevin ismini tanıtmak
+
+#define ORHAN   //burada ORHAN ismi tanıtılmıştır
+
+tanıtılan isimler buyuk harf tercih edilmelidir
+
+
+#define MAX  100 // MAX yazını gordugu heryerde 100 yazısını yerlestirir
+
+
+boyle makrolara symbolik constant veya manifest constant denir.
+
+değiştirme işlemi define komutu altında kalan kısım oluyor
+
+
+a = MAX  // burada yer değişmez define altta kaldıgı için
+
+#define MAX 100
+
+
+bu kullanımda yanlıs
+
+
+#define MAX 100
+
+int a = MAXSIZE // MAX burada case sensitive olarak aranacak
+
+
+#include <stdio.h>
+
+#define     SIZE    100
+
+
+int main()
+{
+    printf("SIZE"); //burdaki SIZE yerine konamaz
+    //string literaldir burası
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+
+#include <stdio.h>
+
+#define     SIZE    100 + 200
+
+
+int main()
+{
+    int x = 5 * SIZE;
+
+    //int x = 5 * 100 + 200
+
+    printf("x = %d \n", x);
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+#define     SIZE    (100 + 200)
+
+
+int main()
+{
+    int x = 5 * SIZE;
+    //5 * (100 + 200)
+
+    printf("x = %d \n", x);
+}
+
+
+
+/*****************************************/
+/*****************************************/
+#include <stdio.h>
+
+#define     SIZE    100; //noktalı virgl kullanıldıgında
+        //sentaks hatası olabilir veya legal veya tanımsız davranış olabilir
+
+
+int main()
+{
+    int x = SIZE;
+    x = 100;;
+
+    ++x;
+
+    if(x == SIZE)
+    //if(x == 100;)
+        printf("dogrudur\n");
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+#define     ERROR_MESSAGE       "bellek yetersiz\n"
+
+
+int main()
+{
+    printf(ERROR_MESSAGE);
+    //printf("bellek yetersiz" );
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+#define INIT    12, 33, 55, 66 \
+                35, 66, 88, 99 \
+                1,  33, 55, 66
+
+int main()
+{
+    int a[] = { INIT };
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+#define     MIN     100
+#define     MAX     400
+#define     AVG     ((MIN + MAX) / 2)
+
+int main()
+{
+    int x = AVG;
+    //((MIN + MAX) / 2)
+    //((100 + 400) / 2)
+
+    printf("x = %d\n", x);
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+//bu makro gecerlimi
+//gecerli ise dosya sonuna kadar mı gecerli
+//yoksa sadece fonksiyon içindemi
+
+//Cevap bulundukları noktadan dosya sonuna kadar gecerlidir
+
+void func(void)
+{
+    #define     MIN     100
+}
+
+
+int main()
+{
+    int x = MIN;
+
+    printf("x = %d\n", x);
+
+}
+
+
+/*****************************************/
+/*****************************************/
+
+object-like makroları == nesnesel makroların kullanılma tanımları
+
+
+sabitleri dogrudan yazmak yerşne sabit yada sabit ifadesi ile yer değiştirilir
+
+
+#include <stdio.h>
+
+#define  NUMBER_OF_PEOPLE   82334234
+
+int main()
+{
+    int x = NUMBER_OF_PEOPLE;//nedir bu sayi
+    //
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+makro tanımlamada birinci fayda kodu okuyan kişi daha rahat anlması
+diger bir taraftan kodu yanlıs yazma olasılıgını dusurmesi
+
+#include <stdio.h>
+#include <stdbool.h>
+
+int main()
+{
+    _Bool c;
+    bool flag = true;
+    //_Bool flag = 1;
+
+    //_BuyukHarf ile baslayan kelimeleri rezerve kominite tarafında
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+#include <stdbool.h>
+#include <limits.h>
+
+
+
+int main()
+{
+    int max = INT_MAX;
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+//cok sık kullanılan bir sabiti bu sekılde kullanmak daha iyidir
+//kod hatasından kaçınmamızı saglar
+//işimizi kolyalaştırı
+
+#define  ARRAY_SIZE      100
+
+int main()
+{
+    int a[ARRAY_SIZE];
+
+    for(int i = 0; i < ARRAY_SIZE; ++i)
+    {
+        a[i] = i;
+    }
+
+
+    for(int i = 0; i < ARRAY_SIZE; ++i)
+    {
+        printf("%d ", a[i]);
+    }
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+Fonksiyonel makrolar -- functional macro
+
+
+
+
+#include <stdio.h>
+
+//fonksiyonel macrolar
+
+//fonksiyonel makro olması için
+//ismi verilen macrodan sonra boşluk olmayacak sekılde parantez konulmalı yoksa olmaz
+//yine aynı şekilde yerdeğiştemr ismi tanımlanan makro ile devam ediyor
+
+
+#define SQUARE(a)  a * a
+
+int main()
+{
+
+    int x = 10;
+
+    int y = SQUARE(x);
+    //int y = x*x;
+
+    printf("y = %d\n", y);
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+//fonksiyonel macrolar
+
+//kimse boyle yazma makro yu
+//bunu kullanırsak bazı hatalar alabiliriz
+
+#define SQUARE(a)  (a) * (a)
+
+int main()
+{
+
+    int x = 3;
+
+    int y = SQUARE(x + 5);
+    //y = (x + 5) * (x + 5)
+
+
+    printf("y = %d\n", y);
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+//fonksiyonel macrolar
+
+
+
+#define SQUARE(a)  (a) * (a)
+
+int main()
+{
+
+    int x = 5;
+
+    int y = 100/SQUARE(x);
+    //y = 100 / (5) * (5)
+
+
+    printf("y = %d\n", y);
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+//fonksiyonel macrolar
+
+
+#define SQUARE(a)  ((a) * (a))
+
+int main()
+{
+
+    int x = 5;
+
+    int y = 100/SQUARE(x);
+    //y = 100 / ((5) * (5))
+
+
+    printf("y = %d\n", y);
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+//fonksiyonel macrolar
+
+#define     MAX(a, b)   ((a) > (b) ? (a) : (b))
+
+int max(int a, int b)
+{
+    if(a > b)
+        return a;
+    return b;
+}
+
+int main()
+{
+
+    int x, y;
+    printf("iki  tam sayi giriniz : ");
+    scanf("%d%d", &x, &y);
+
+    //int z = max(x, y);
+    int z = MAX(x, y);
+    //((x) > (y) ? (x) : (y))
+
+    printf("max = %d\n", z);
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+#include <stdio.h>
+#include <ctype.h>
+
+//fonksiyonel macrolar
+
+#define     ISUPPER(x)    ( (x) >= 'A'  && (x) <= 'Z' )
+
+int main()
+{
+    int ch;
+    printf("bir karater giriniz : ");
+    ch = getchar();
+
+    //if(isupper(ch))
+    if(ISUPPER(ch)){
+        printf("evet buyuk harf\n");
+    }
+    else{
+        printf("hayir buyuk harf degildir\n");
+    }
+
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+#include <ctype.h>
+
+//fonksiyonel macrolar
+
+#define     TOUPPER(x)    ( (x) >= 'a'  && (x) <= 'z' ? (x) - 'a' + 'A' : (x))
+
+int main()
+{
+    int ch;
+    printf("bir karater giriniz : ");
+    ch = getchar();
+
+    //printf("%c ===> %c\n", toupper(ch));
+    printf("%c ===> %c\n", ch, TOUPPER(ch));
+
+
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+#include <ctype.h>
+
+//fonksiyonel macrolar
+
+#define     ISLEAP(x)       ( (x) % 4 == 0 && ( (x) % 100 || (x) % 400 == 0 ) )
+
+int main()
+{
+    int y;
+    printf("yil giriniz : ");
+    scanf("%d", &y);
+
+    if(ISLEAP(y)){
+        printf("artik yil\n");
+    }
+    else {
+        printf("artik yil deildir\n");
+    }
+
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+
+ int max2(int a, int b)
+ {
+    if(a > b)
+      return a;
+
+    return b;
+ }
+
+1- fonksiyon için giriş kodu   -- 2t
+2- fonksiyonun kendi kodu
+3- fonksiyoın çıkış üretiyor   -- 2t
+
+
+hız kazanıyoruz
+
+
+#define MAX(x, y)    ((x) > (y) ? (x) : (y))
+
+
+int z = ((x) > (y) ? (x) : (y))
+
+
+ic ice macrolarda kullanabiliriz
+
+#define ISLOWER(x)      ( (x) >= 'a' && (x) <= 'z' )
+#define TOUPPER(x)      ( ISLOWER(x) ? (x) - 'a' + 'A' : (x))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
