@@ -3437,6 +3437,758 @@ ic ice macrolarda kullanabiliriz
 
 
 
+İşlevsel Makrolar C de eb tipik hata kaynaklarından biridir
+kullanırken dikkatli kullanalım
+
+
+----------------------------------------------------------------
+
+önişlemci programın operatörleri
+
+preprocessor operators
+
+
+#    --> stringify
+##   --> token pasting
+defined
+
+
+
+
+#    --> stringify
+
+amacı aynındaki karateri stringe cevirme
+
+#a    -->  "a" seklini alır
+
+
+#include <stdio.h>
+
+
+#define     str(a)      #a
+
+
+
+int main()
+{
+    printf(str(Orhan));
+    putchar('\n');
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+#define     iprint(x)     printf("%d\n", x);
+
+
+int main()
+{
+    int a = 12;
+
+    iprint(a);
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+int main()
+{
+   printf("Orhan "
+            "OZTURK "
+            "Kastamonu");
+
+   putchar('\n');
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+#define     iprint(x)   printf(#x " : %d\n", x);
+
+int main()
+{
+
+    int a = 12;
+    int b = 33;
+
+    iprint(a);
+    iprint(a + b);
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+#define     iprint(x)   printf(#x " : %d\n", x);
+
+int main()
+{
+
+    int a = 12;
+    int b = 33;
+
+    iprint(a);
+    iprint(a * a + b * b );
+
+    printf("a * a + b * b"  " : %d\n", a * a + b * b );
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+##   --> token pasting
+
+
+amacı atom papıştırma olarak kullanılır
+
+a##b    --> ab
+
+#include <stdio.h>
+
+#define     uni(a, b)           a##b
+
+int main()
+{
+    int counter  = 0;
+
+    ++uni(coun, ter);
+    ++uni(coun, ter);
+    ++uni(coun, ter);
+    //++counter
+
+    printf("counter  :  %d\n", counter);
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+defined   bunuda ileride  ders saklıyorum
+
+
+------------------------------------------------------
+
+conditional compiling
+
+kosullu derleme
+
+
+yaptıgı iş:  derleyiciye butun kodu değilde kosullu derleme aşamasında onceden
+gerekli kodlar belirlenir ve derleyiciye verilir
+
+
+
+#undef
+#if
+#else
+#elif
+#endif
+#ifdef
+#ifndef
+
+
+bunlara neden ihtiyacımız var
+
+1- farklı donanımlar için
+2- farklı işletim sistemleri için
+3- farklı dil
+4- versiyon farklılıgı
+5- localizasyona farklı ülkeler
+
+-----------------------------------
+
+
+#include <stdio.h>
+#include <assert.h>
+
+
+void func(int x)
+{
+    assert( x >= 0 );
+
+}
+
+int main()
+{
+    func(-2);
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+kosullu derleme
+
+#if exp    //exp dogru ise
+///
+//
+
+#endif
+
+
+#include <stdio.h>
+
+#if 10
+    double a;
+    int b[10];
+    typedef int World;
+#endif
+
+
+int main()
+{
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+#define     SIZE        100
+
+#if     SIZE > 20
+    double a;
+    int b[10];
+    typedef int World;
+#endif
+
+
+int main()
+{
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+önişlmeci kosul ifadeleri
+
+tam sayi sabit ifadeleri almalıdır
+
+
++ = * /
+& ^ |
+<<  >>
+? :
+
+
+#include <stdio.h>
+
+#define     MIN     10
+#define     MAX     100
+
+#if   (MIN + MAX) / 2 > 10
+    double a;
+    int b[10];
+    typedef int World;
+#endif
+
+
+int main()
+{
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+#define     MIN     1.2
+#define     MAX     10.5
+
+#if   (MIN + MAX) / 2 > 10  //sentaks hatası almanıza neden olur
+    double a;
+    int b[10];
+    typedef int World;
+#endif
+
+
+int main()
+{
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+#include <stdio.h>
+
+#define     MIN     10
+#define     MAX     100
+
+#if   MIN > 5 && MAX > 99
+    double a;
+    int b[10];
+    typedef int World;
+#endif
+
+
+int main()
+{
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+#define     SIZE    100
+
+#if   SIZE > 50
+    double a;
+    int b[10];
+    typedef int World;
+#else
+    int b[10];
+    typedef int World;
+#endif
+
+
+int main()
+{
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+#define     SIZE    100
+
+#if   SIZE > 500
+    double a;
+    int b[10];
+    typedef int World;
+#elif SIZE > 90
+    double a;
+    int b[10];
+#else
+    int b[10];
+    typedef int World;
+#endif
+
+
+int main()
+{
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#if
+#elif
+#else
+#endif
+
+
+---------------------------------
+
+
+#ifdef   --->   if defined    tan turemıstır
+
+#ifndef ---> if not defined tan türemiştir
+
+-----------------------------
+
+#include <stdio.h>
+
+#define ORHAN
+
+//ifdef ten sonra önişlmeci komutu gelir
+//makrı tanımlı ise burayı dikkate alacak
+//degil ise dikkate almayacak
+#ifdef  ORHAN
+    int a;
+    double b;
+#endif
+
+
+int main()
+{
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+#include <stdio.h>
+
+//#define ORHAN
+
+//ifndef ten sonra önişlmeci komutu gelir
+//makrı tanımlı degil ise burayı dikkate alacak
+//tanımlı ise dikkate almayacak
+#ifndef  ORHAN
+    int a;
+    double b;
+#endif
+
+
+int main()
+{
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+defined ORHAN
+
+if defined ORHAN  --
+
+#include <stdio.h>
+
+#define   ORHAN
+
+#if defined (ORHAN)  //ORHAN tanımlı macro ise defined edilmiş ise dikkate al
+    int a;
+    double b;
+#endif
+
+    //ifdef   -- if defined
+
+int main()
+{
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+//#define   ORHAN
+
+#if !defined (ORHAN)  //ORHAN tanımlı değil ise dikkate al
+    int a;
+    double b;
+#endif
+
+    //ifndef   -- if defined
+
+int main()
+{
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#include <stdio.h>
+
+//ORHAN ve ORM makroları tnaımlı ise dikkate al
+
+#define   ORHAN
+#define   ORM
+
+#if defined (ORHAN) && defined (ORM)  //ORHAN ve ORMtanımlı değil ise dikkate al
+    int a;
+    double b;
+#endif
+
+
+
+int main()
+{
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+#ifndef UTILITY_H  //ifndef -- eger bu macro tanımlı degil ise bunun icindeki kodu dikkate al
+#define UTILITY_H
+
+
+struct Data{
+    int a;
+};
+
+
+
+#endif // UTILITY_H
+
+
+---------
+
+#include <stdio.h>
+#include <utility.h>
+#include <utility.h>
+
+
+int main()
+{
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+yukarıdaki aynı kodları tanımlamamk için alınan önelmi
+bu kod parcası ilede aynı sekilde yparsınız
+
+#pragma once
+
+fakat bu standart değil ondan kullanmayınız
+
+
+
+------------------------------------------------------------
+
+#undef    ----> undefine
+
+bir makroyu tanımsız hale getiriyor
+
+
+Ornek
+
+#define   MAX   100
+
+////kodlar tanımları
+//MAX
+
+#undef  MAX  /// bundan sonrakı yerlerde MAX tanıma , yani MAX gördüğün yerde 100 yazma
+
+MAX // artık degısılık yapmaz
+
+
+---------------------------------------------------
+
+ilerleyenleyen derslerde
+
+
+#define
+#undef
+#line
+#error
+
+---------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

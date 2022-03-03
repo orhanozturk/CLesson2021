@@ -1,24 +1,35 @@
 #include <stdio.h>
-#include <ctype.h>
+#include "utility.h"
 
-//fonksiyonel macrolar
+#define MAX   100
+//
+///
+/// \brief main
+/// \return
+///
+///
+///
+///
 
-#define     ISLEAP(x)       ( (x) % 4 == 0 && ( (x) % 100 || (x) % 400 == 0 ) )
+#undef  MAX
+
+////
+
+//
+
+
+
+#define  MAX 200
+
+////
+/// \brief main
+/// \return
+///
+///
 
 int main()
 {
-    int y;
-    printf("yil giriniz : ");
-    scanf("%d", &y);
-
-    if(ISLEAP(y)){
-        printf("artik yil\n");
-    }
-    else {
-        printf("artik yil deildir\n");
-    }
-
-
+    ////
 
 }
 

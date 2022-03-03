@@ -1,8 +1,11 @@
-#ifndef UTILITY_H
+#ifndef UTILITY_H  //ifndef -- eger bu macro tanımlı degil ise bunun icindeki kodu dikkate al
 #define UTILITY_H
 
-#define MAX        100
 
-int isprime(int);
+struct Data{
+    int a;
+};
+
+
 
 #endif // UTILITY_H
