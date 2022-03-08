@@ -1,38 +1,16 @@
 #include <stdio.h>
-#include "utility.h"
 
-#define MAX   100
-//
-///
-/// \brief main
-/// \return
-///
-///
-///
-///
-
-#undef  MAX
-
-////
-
-//
-
-
-
-#define  MAX 200
-
-////
-/// \brief main
-/// \return
-///
-///
+#define  isupper(c)
 
 int main()
 {
-    ////
+    int c;
+
+    if isupper(c){
+
+    }
 
 }
-
 
 
 /*****************************************/

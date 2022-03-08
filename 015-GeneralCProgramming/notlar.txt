@@ -1,0 +1,137 @@
+
+#include "utility.h"
+#include <stdio.h>
+
+int main()
+{
+    int x, y;
+    printf("iki tam sayi girin : ");
+    scanf("%d%d", &x, &y);
+
+    for (int i = x; i < y; ++i) {
+        if(isprime(i)){
+            printf("%d ",i);
+            sleep(0.08);
+        }
+    }
+
+    dashline();
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+switch kontrol deyimi
+goto kontrol deyimi
+
+
+switch kontrol deyimi
+programın akışını expression ifadesine göre farklı noktalara yönlendirir
+
+integer expression ---> gercerk sayı ve pointer ifade olamaz
+
+case label
+
+switch(integer expression)
+{
+case integer_constant_exp1:
+   statement1;
+   statement2;
+   statement3;
+case integer_constant_exp2:
+   statement1;
+   statement2;
+case integer_constant_exp3:
+   statement1;
+   statement2;
+   statement3;
+
+}
+
+
+#include "utility.h"
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    printf("haftanin kacinci gunu : ");
+    scanf("%d", &n);
+
+    switch (n) {
+        case 1: printf("pazartesi\n");
+        case 2: printf("sali\n");
+        case 3: printf("carsamba\n");
+        case 4: printf("persembe\n");
+        case 5: printf("cuma\n");
+        case 6: printf("cumartesi\n");
+        case 7: printf("pazar\n");
+    }
+
+    printf("switch deyimi yurutuldu\n");
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    printf("haftanin kacinci gunu : ");
+    scanf("%d", &n);
+
+    switch (n) {
+        case 1: printf("pazartesi\n");break;
+        case 2: printf("sali\n");break;
+        case 3: printf("carsamba\n");break;
+        case 4: printf("persembe\n");break;
+        case 5: printf("cuma\n");break;
+        case 6: printf("cumartesi\n");break;
+        case 7: printf("pazar\n");break;
+    }
+
+    printf("switch deyimi yurutuldu\n");
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+case label 'larında ne kullanabilirim
+
+
+tam sayı türlerinden sabit ifadeleri olmak zorunda
+
+case 'A'    bu gecerli
+
+case 3
+
+
+#define    BLUE   1
+#define    BLACK  2
+
+switch(n){
+ case BLUE:
+ case BLACK:
+}
+
+//bunu kullanmayın
+switch(n){
+ case 5*2-6+7:
+}
+
+
+
+
+
+

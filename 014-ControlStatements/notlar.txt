@@ -4024,6 +4024,333 @@ ilerleyenleyen derslerde
 
 ---------------------------------------------------
 
+#include <stdio.h>
+#include "utility.h"
+
+//tanımsız davranış
+#define MAX   100
+
+
+#define MAX   200
+
+
+
+
+int main()
+{
+    ////
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+//bu artık gecerli macro tnaımı olur
+#define MAX   100
+
+
+#undef  MAX
+#define MAX   200
+
+
+
+
+int main()
+{
+    ////
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#line önişlemci komutu
+
+
+ bunu anlatmadan önce bir kaç konuya deyinmem lazım
+
+
+predefined symbolic constants
+ön tanımlı sembolik sabitler
+
+bir define komutu ile tanımlanmamış olmalarına karşın önişlemci program
+tarafından tanımlı kabul edilen, dil tarafından önceden belirlenmiş önişlemci isimleri
+
+
+__LINE__
+__FILE__
+__DATE__
+__TIME__
+__STDC__
+
+bunların bir define komutu yoktur, ve yer değiştirme özelliğine sahiptirler
+
+
+#include <stdio.h>
+
+int main()
+{
+    //sırada derleyiciye gelemden LINE yerine 7 sabitini yazar
+    //yani satır numarasını yazar
+   printf("%d\n", __LINE__);
+
+   //hangi soyada kullanılmışsa o dosya ismi ile yer değiştirecek
+   printf("%s\n", __FILE__);
+
+   //derleme tarihhini anltan bir string literali ile yer değiştiriyor
+   printf("%s\n", __DATE__);
+
+   //derleme zamanını anltan bir string literali ile yer değiştiriyor
+   printf("%s\n", __TIME__);
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+__STDC__
+
+eger derleyici standart C  derleyici ise (ve extensionlar lkapalı ise)
+
+
+#ifdef   __STDC__
+
+#endif
+
+
+aynı sekılde C++ kodu içerir
+
+
+#ifdef __cplusplus
+
+
+#endif
+
+
+-----------------------------------------------
+
+__func__
+
+eger bir donksiyonun içinde bu macroyu kullanır isek
+0 fonksiyonuun ismi verilir
+
+
+#include <stdio.h>
+
+void foo(int a)
+{
+    printf("%s\n", __func__);
+}
+
+int main()
+{
+   printf("%s\n", __func__);
+
+   foo(2);
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+standart olmaya makrolar
+
+birbirinin karşılıgı niteliinde
+
+fonksiyonun imzasını geri verir
+
+Linux ortamında
+
+PRETTY__FUNCTION
+
+Windows ortamında
+
+__FUNCSIG__
+
+
+#include <stdio.h>
+
+void foo(int a)
+{
+    printf("%s\n", __FUNCSIG__);
+}
+
+int main()
+{
+   printf("%s\n", __FUNCSIG__);
+
+   foo(2);
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#line makrosu
+
+__LINE__ makrosunu degiştirmek için kullanılır
+
+
+#include <stdio.h>
+
+
+
+int main()
+{
+
+#line  2000
+  printf("%d\n", __LINE__);
+
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+eger line karosuna bir argüman daha ekler isem bude file ismin değiştirir
+
+
+#include <stdio.h>
+
+
+
+int main()
+{
+
+#line  2000     "orhan.c"
+  printf("%d\n", __LINE__);
+  printf("%s\n", __FILE__);
+
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+#error makrosu
+
+önişlmeci programı bu komutu yürüttüğünde önişlemci programı yürütüldügü yerde
+sonlanır
+
+
+#error HATA DERLEME ISLEMI BITTI
+
+
+
+#include <stdio.h>
+
+#ifndef __cplusplus
+    #error BU PROGRAM SADECE C++ DERLEYICISI ILE DERLENMELI
+#endif
+
+int main()
+{
+    printf("main.c\n");
+
+}
+
+
+
+/*****************************************/
+/*****************************************/
+
+
+#pragma önişlmeci komutu
+
+#pragma once  --->  multiple define guard için
+#pragma pack(1)  ->>
+
+#pragma warning(disable: 4244)
+
+ne işe yarayacağı konusunda derleyiciye bırakılmıs
+
+
+---------------------------------
+
+//
+while(n --> 10){
+
+}
+
+------------------------
+
+// makro olablir
+if isupper(c){
+
+}
+
+
+--------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
