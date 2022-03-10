@@ -6,7 +6,7 @@
 int isprime(int);
 int ndigit(int);
 void dashline(void);
-void sleep(double sec);
+void xSleep(double sec);
 
 
 

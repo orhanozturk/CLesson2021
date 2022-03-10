@@ -130,6 +130,569 @@ switch(n){
  case 5*2-6+7:
 }
 
+----------
+
+C dilinde her labeldan sonra bir deyim olmak zorunda
+
+
+#include "utility.h"
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    printf("haftanin kacinci gunu : ");
+    scanf("%d", &n);
+
+    switch (n) {
+    case 1:
+    case 2:
+    case 3: printf("carsamba\n");
+    case 4:
+
+    }
+
+
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    printf("haftanin kacinci gunu : ");
+    scanf("%d", &n);
+
+    //içi boş switch gecerli
+    switch (n) {
+
+    }
+
+
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include "utility.h"
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    printf("haftanin kacinci gunu : ");
+    scanf("%d", &n);
+
+    switch (n) {
+        case 1: printf("pazartesi\n");break;
+        case 2: printf("sali\n");break;
+        case 3: printf("carsamba\n");break;
+        case 4: printf("persembe\n");break;
+        case 5: printf("cuma\n");break;
+        case 6: printf("cumartesi\n");break;
+        case 7: printf("pazar\n");break;
+    default: printf("gecersiz\n");
+    }
+
+    printf("switch deyimi yurutuldu\n");
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include "utility.h"
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    printf("haftanin kacinci gunu : ");
+    scanf("%d", &n);
+
+    switch (n) {
+        default: printf("gecersiz\n"); break;
+        case 1: printf("pazartesi\n");break;
+        case 2: printf("sali\n");break;
+        case 3: printf("carsamba\n");break;
+        case 4: printf("persembe\n");break;
+        case 5: printf("cuma\n");break;
+        case 6: printf("cumartesi\n");break;
+        case 7: printf("pazar\n");break;
+
+    }
+
+    printf("switch deyimi yurutuldu\n");
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    printf("haftanin kacinci gunu : ");
+    scanf("%d", &n);
+
+    switch (n) {
+        case 4: printf("persembe\n");break;
+        case 1: printf("pazartesi\n");break;
+        case 7: printf("pazar\n");break;
+        case 3: printf("carsamba\n");break;
+        default: printf("gecersiz\n"); break;
+        case 5: printf("cuma\n");break;
+        case 2: printf("sali\n");break;
+        case 6: printf("cumartesi\n");break;
+
+    }
+
+    printf("switch deyimi yurutuldu\n");
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    printf("haftanin kacinci gunu : ");
+    scanf("%d", &n);
+
+    //7
+    switch (n) {
+        case 4: printf("persembe\n");break;
+        case 1: printf("pazartesi\n");break;
+        case 7: printf("pazar\n");
+        case 3: printf("carsamba\n");break;
+        default: printf("gecersiz\n"); break;
+        case 5: printf("cuma\n");
+        case 2: printf("sali\n");break;
+        case 6: printf("cumartesi\n");break;
+
+    }
+
+    printf("switch deyimi yurutuldu\n");
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include "utility.h"
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    printf("haftanin kacinci gunu : ");
+    scanf("%d", &n);
+
+
+    switch (n)
+    case 4: printf("persembe\n");
+        break;//bu sentaks hatası switch scope da değil
+
+
+    printf("switch deyimi yurutuldu\n");
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+#include "utility.h"
+#include <stdio.h>
+
+
+//militry format
+//5th May 1992
+
+void display_date(int day, int month, int year)
+{
+    printf("%d", day);
+
+    switch (day) {
+        case 1:
+        case 21:
+        case 31: printf("st "); break;
+        case 2:
+        case 22: printf("nd "); break;
+        case 3:
+        case 23: printf("rd "); break;
+        default: printf("th "); break;
+    }
+
+    switch (month) {
+        case 1: printf("Jan "); break;
+        case 2: printf("Feb "); break;
+        case 3: printf("Mar "); break;
+        case 4: printf("Apr "); break;
+        case 5: printf("May "); break;
+        case 6: printf("Jun "); break;
+        case 7: printf("Jul "); break;
+        case 8: printf("Aug "); break;
+        case 9: printf("Sep "); break;
+        case 10: printf("Oct "); break;
+        case 11: printf("Nov "); break;
+        case 12: printf("Dec "); break;
+    }
+
+    printf("%d\n", year);
+
+}
+
+int main()
+{
+    int day, month, year;
+
+    printf("gun ay yil olarak tarih girin : ");
+    scanf("%d%d%d", &day, &month, &year);
+
+    display_date(day, month, year);
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include "utility.h"
+#include <stdio.h>
+
+
+int main()
+{
+    int day, month, year;
+
+    printf("gun ay yil olarak tarih girin : ");
+    scanf("%d%d%d", &day, &month, &year);
+
+    switch (day) {
+      case 1: printf("1\n"); //fallthrough
+      case 2: printf("2\n"); break;
+      case 3: printf("3\n"); break;
+    }
+
+    //C++
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include "utility.h"
+#include <stdio.h>
+
+int day_of_year(int d, int m, int y)
+{
+    int sum = d;
+
+    switch (m-1) {
+        case 11: sum += 30; //fallthrough
+        case 10: sum += 31; //fallthrough
+        case 9: sum += 30; //fallthrough
+        case 8: sum += 31; //fallthrough
+        case 7: sum += 31; //fallthrough
+        case 6: sum += 30; //fallthrough
+        case 5: sum += 31; //fallthrough
+        case 4: sum += 30; //fallthrough
+        case 3: sum += 31; //fallthrough
+        case 2: sum += (isleap(y) ? 29 : 28); //fallthrough
+        case 1: sum += 31; //fallthrough
+    }
+
+    return sum;
+}
+
+int main()
+{
+    int day, month, year;
+
+    printf("gun ay yil olarak tarih girin : ");
+    scanf("%d%d%d", &day, &month, &year);
+
+    printf("%d yilin %d. gunu\n", year, day_of_year(day, month, year));
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+
+goto statement
+
+programın akısını belirli bir noktaya yönlendirme işlemidir
+
+
+goto deyimi local jump görevi vardır
+
+void func()
+{
+}
+
+gercek bir ihtiyac olmadıgı sürece kullanmayın
+
+
+labe lar
+
+identifier dır
+
+etiket:  seklinde kulanacaz
+
+etiketten sonra bir statement gelmek zorunda
+
+label:
+   statement;
+
+
+#include "utility.h"
+#include <stdio.h>
+
+
+int main()
+{
+
+    http://github.com
+        ;
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <stdio.h>
+
+
+int a = 10;
+
+int func(void)
+{
+    //statement
+    //statement
+    //statement
+
+    goto OUT;
+
+    //statement
+    //statement
+    //statement
+    //statement
+OUT:
+   a = 5;
+
+}
+
+int main()
+{
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <stdio.h>
+
+
+int a = 10;
+
+int func(void)
+{
+
+OUT:
+   a = 5;
+
+    //statement
+    //statement
+    //statement
+
+    goto OUT;
+
+    //statement
+    //statement
+    //statement
+    //statement
+
+}
+
+
+int main()
+{
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+ne zamn goto kullanabiliriz
+
+nested loops iç içe donguler
+
+
+
+
+#include "utility.h"
+#include <stdio.h>
+
+
+int main()
+{
+    int flag = 0;
+
+    for (int i = 0; i < 10; ++i) {
+        int  n = 20;
+
+        while (--n) {
+            //statement
+
+            for (int k = 0; k < 10000; ++k) {
+                if(1){
+                    flag = 1;
+                    break;
+                }
+            }
+
+            if(flag)
+                break;
+        }
+
+        if(flag)
+            break;
+    }
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <stdio.h>
+
+void foo(void);
+
+int main()
+{
+    for (int i = 0; i < 10; ++i) {
+        int  n = 20;
+
+        while (--n) {
+            //statement
+
+            for (int k = 0; k < 10000; ++k) {
+                if(1){
+                    goto out;
+                }
+            }
+        }
+    }
+out:
+    foo();
+
+    //
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+#include "utility.h"
+#include <stdio.h>
+
+int a = 10;
+
+int func(void)
+{
+    //statement
+    //statement
+    //statement
+
+    int OUT;
+
+    goto OUT;
+
+    //statement
+    //statement
+    //statement
+    //statement
+OUT:
+   a = 5;
+
+}
+
+int main()
+{
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+type conversions -- tur donusumleri
+
+
+()
+
+
+
+
+
+
+
+
+
+
 
 
 

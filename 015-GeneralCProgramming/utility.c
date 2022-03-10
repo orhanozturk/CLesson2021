@@ -1,6 +1,11 @@
 #include "utility.h"
 #include <stdio.h>
+
+#ifdef  __linux__
+#include <unistd.h>
+#elif _WIN32
 #include <Windows.h>
+#endif
 
 int isprime(int val)
 {
@@ -43,7 +48,11 @@ void dashline()
     printf("\n----------------------------------------------------------------------\n");
 }
 
-void sleep(double sec)
+void xSleep(double sec)
 {
+#ifdef __linux__
+    sleep((double)sec * 1000);
+#elif _WIN32
     Sleep((double)sec * 1000);
+#endif
 }
