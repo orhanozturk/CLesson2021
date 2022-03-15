@@ -678,11 +678,687 @@ int main()
 /****************************************************/
 /****************************************************/
 
-
 type conversions -- tur donusumleri
 
+bir ifadenin dogrudan kullanılması yerine onun
+farklı bir turde ifade edilerek o turde kullanılması işlemidir
 
-()
+
+iki gruba ayırıyoruz
+
+implicit type conversions // gizli tür dönüşümleri
+   kodda boyle bir talep olmasına ragmen derleyici durumdan vazife çıkartıp
+   tur donusumu gercekleştiriyor
+
+
+explicit type conversions  //acık tur donusumu
+ kullanıcı tarafından gerceklestirilen
+ yani bilerek ve isteyerek
+ bunun için type-cast operatoru kullanılır
+
+
+
+implicit type conversions
+
+iki ayrı senoryoda karşımıza çıkacak
+  usual arithmetic convertion
+   operatorlerin kullanılması durumunda yapılan conversionlar
+
+   a+b
+   +x
+   a > b
+
+  as if assignment
+  atam donusumleri
+
+   x = y // atama
+   T a = b; //ilk deger verme
+   func(i) // fonksiyon cagırma
+   return ival // deger donme
+
+  hepsinin ortak özelliği kopyalama
+
+
+
+
+#include "utility.h"
+#include <stdio.h>
+
+
+int main()
+{
+    int x = -1;
+    unsigned int y = 234;
+
+    if( x > y)
+        printf("DOGRU\n");
+    else
+        printf("YANLIS\n");
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include "utility.h"
+#include <stdio.h>
+
+
+int main()
+{
+    char c = 165;
+
+    if( c == 165)
+        printf("DOGRU\n");
+    else
+        printf("YANLIS\n");
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <stdio.h>
+
+
+int main()
+{
+    float f = 0.4f;
+
+    if( f == 0.4)
+        printf("DOGRU\n");
+    else
+        printf("YANLIS\n");
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <stdio.h>
+
+//usual aritmatic conversion
+
+int main()
+{
+    int x = 10;
+    double d = x / 3;
+
+    printf("sonuc = %f\n", d);
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+neden donusume ihtiyac var
+cunkü veri kaybını onelmek ve yanlıs işlemlerdden kacınmak için
+
+
+operandlardan biri long double turunde ise
+ digerinin long double turunde ise
+ işlem long double türünde yacaz
+
+
+operandlardan biri double turunde ise
+ digerinin double turunde ise
+ işlem double türünde yacaz
+
+
+operandlardan biri float turunde ise
+ digerinin float turunde ise
+ işlem float türünde yacaz
+
+--------------------------------
+
+
+
+------------------------------------------->
+char short int logn float double long double
+rank
+
+operandların turu ve rank aynı ise aynı turden işlem yapılır
+
+ranklar farklı ise ve yuksek olan rank işaretsiz ve düşük olan rank işaretli
+ise işlem işaretsiz yüksek rankta yapılacak.
+unsigned long  signed int   ---> unsigned long
+
+
+rank aynı işaretler farklı ise, herzaman türler işaretsiz olan türde yapıalcak
+signed int unsigned int   --> unsigned int
+
+ranklar farklı işaretler farklı ve buyuk olan rank işaretli kucuk olan rank işaretsiz ise
+örnek
+   signed long  unsigned int
+     4 byte      4 byte        --> unsigned long      -32344  32343     0   65345
+     4 byte      2 byte        --> signed long       -32344  32452     0   1284
+
+eger signed long unsigned int degerlerini kapsar ise signed long ta
+işlem yapıalcak
+kapasamaz ise unsigned long te işlem yapıalcak
+
+
+long long / unsigned long long
+long / unsigned long
+int / unsigned int
+
+
+
+---------------------------------------
+
+
+int türünden daha kucuk türler işleme sokukmadan önce
+int türüne yukseltiliyorlar
+buna integral promotion denir...
+
+
+short
+char / signed char unsigned char
+_Bool
+
+------------------------------------------------
+
+#include "utility.h"
+#include <iostream>
+
+int main()
+{
+    char ch1 = 4;
+    char ch2 = 5;
+
+    std::cout << typeid (ch1 + ch2).name() << "\n";
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <iostream>
+
+int main()
+{
+    char ch1 = 4;
+    short ch2 = 5;
+
+    //integral type  ile int  yukselyme olur
+    std::cout << typeid (ch1 + ch2).name() << "\n";
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include "utility.h"
+#include <iostream>
+
+int main()
+{
+    short ch1 = 4;
+    short ch2 = 5;
+
+    //integral type  ile int  yukselyme olur
+    std::cout << typeid (ch1 + ch2).name() << "\n";
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include "utility.h"
+#include <iostream>
+
+int main()
+{
+    int ch1 = 4;
+    unsigned int ch2 = 5;
+
+    //integral type  ile int  yukselyme olur
+    std::cout << typeid (ch1 + ch2).name() << "\n";
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include "utility.h"
+#include <iostream>
+
+int main()
+{
+    long ch1 = 4;
+    unsigned long ch2 = 5;
+
+    //integral type  ile int  yukselyme olur
+    std::cout << typeid (ch1 + ch2).name() << "\n";
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include "utility.h"
+#include <iostream>
+
+int main()
+{
+    int ch1 = 4;
+    unsigned long ch2 = 5;
+
+    //integral type  ile int  yukselyme olur
+    std::cout << typeid (ch1 + ch2).name() << "\n";
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <iostream>
+
+int main()
+{
+    unsigned int ch1 = 4;
+    long ch2 = 5;
+
+    //integral type  ile int  yukselyme olur
+    std::cout << typeid (ch1 + ch2).name() << "\n";
+
+    //std::cout << sizeof (unsigned int) << "\n";
+    //std::cout << sizeof (long) << "\n";
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include "utility.h"
+#include <iostream>
+
+int main()
+{
+    char c = 12;
+
+    std::cout << typeid (+c).name() << "\n";
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include "utility.h"
+#include <iostream>
+
+int main()
+{
+
+    //kousl operatoru her iki operandın turene bakıp karaverioyr
+    //aynı ise turleri aynı türden uretıyor
+    //farklı ise hangisinin ranki ve işaretli işsaretsiz olmasına göre  degerlendiriyor
+    std::cout << typeid (10 > 5 ? 3 : .5).name() << "\n";
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <iostream>
+
+int main()
+{
+    int x = 12;
+    int y = 5;
+
+    double dval = x / y;
+
+    std::cout << typeid (x / y).name() << "\n";
+    std::cout << typeid (dval).name() << "\n";
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+    int x = -1;
+    unsigned int y = 1;
+
+    //unsigned int
+
+    // -1  butun bitler  1111 1111 1111  1111 1111
+    //4 byte alabilecegi en buyuk tam sayıya donusur
+
+
+    if(x > y)
+        printf("DOGRU\n");
+    else
+        printf("YANLIS\n");
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+dikkat
+
+işsaretli türlerde taşma tanımsız davranış
+
+işsaretsiz türlerde taşma - modüler aritmatic devreye girer
+x ve y unsigned int türünden olsun
+
+x * y // eger sonuc alabilecek degerin üsütndey ise
+
+
+carpma sonucu degeri unsigned int  türünün en buyuk deger + 1
+
+peki bu ne demek
+
+en büyük degere  + 1 toplar iseniz bu size 0 degerini verir
+
+
+
+
+
+
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+    unsigned x = UINT_MAX;
+
+    printf("x  = %u\n", x);
+    ++x;
+    printf("x  = %u\n", x);
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+    unsigned x = UINT_MAX;
+
+    printf("x  = %u\n", x);
+    x += 20;
+    printf("x  = %u\n", x);
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+atama tür dönüşümleri
+
+1- bir değişkene ilk degerme
+2- atama yapıldıgında
+3- bir fonksiyona argüman olarak gönderildiğinde
+4- fonksiyonun return deyimiydi
+
+
+atama hangi türe ise donusum o yöne yapıalcak
+
+
+int = double // int türne donuusm olacak
+burda veri kaybı yasarsınız
+
+
+float = short // float
+veri kaybı olmaz
+
+
+
+
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+
+    unsigned int x = -1;
+
+    //1111 1111 1111 1111 1111 ...
+
+    printf("x = %u\n", x);
+    printf("x = %u\n", UINT_MAX);
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+
+    unsigned long long x = -1;
+
+    //-1 --  signed int
+    //1111 1111 1111 1111 1111 1111 1111 11111
+
+    //burada sign extention yapılır 1111 ile doldurulur unsigned oldugu için
+    // 1111 1111 1111 1111 1111 1111 1111 11111 1111 1111 1111 1111 1111 1111 1111 11111
+
+
+    printf("x = %llu\n", x);
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+
+    double dval = 67542;
+
+    printf("dval = %f\n", dval);
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+    //ufak kayıplar yasanır dikkatli olun
+    //boyle buyuk sayılarda
+    float dval = 2000000001;
+
+    printf("dval = %f\n", dval);
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+truncation  --- budama
+
+
+2a bc 14 fa
+
+eger bu deger i 2 bute lik sisteme atar isek
+
+yuksek anlamlı bitleri
+
+14 fa degerlerini alır
+
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+    unsigned short x = 0x1ac4d2e5;
+
+    printf("x = %x\n", x);
+    printf("x = %d\n", x);
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+    //short 2 byte
+    short s = 1000000;  // F 42 40
+
+    printf("s = %d\n", s); // 16 960
+    printf("s = %x\n", s);
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+    //ufak kayıplar yasanır dikkatli olun
+    //boyle buyuk sayılarda
+
+    float dval = 20000001;
+
+    printf("dval = %f\n", dval);
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
