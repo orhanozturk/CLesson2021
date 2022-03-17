@@ -1,15 +1,20 @@
-#include "utility.h"
 #include <stdio.h>
-#include <limits.h>
+
+// 3.4   --> 3
+// 3.7   --> 4
+// -2.8  --> -3
+// -2.2  --> -2
 
 int main()
 {
-    //ufak kayıplar yasanır dikkatli olun
-    //boyle buyuk sayılarda
+    int x = 10;
+    int y = 3;
 
-    float dval = 20000001;
+    //double dval = x / y;
+    double dval = (double)x / y;
 
     printf("dval = %f\n", dval);
+
 
     return 0;
 }

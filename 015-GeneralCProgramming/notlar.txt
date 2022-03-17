@@ -1313,6 +1313,376 @@ int main()
 /****************************************************/
 /****************************************************/
 
+truncation -- budama
+
+2a bc 14 fa
+
+
+eger bu degeri 2 byte lık sisteme atar isek
+
+yuksek anlamlı bitleri atar keser
+
+14 fa degerleri elimiz de kalır
+
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+    unsigned short x = 0x1ac4d2e5;
+
+    printf("x = %x\n", x);
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+    short x = 1000000; // F 4240
+                        //4240
+    printf("x = %d\n", x); //16960
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+    short x = 1000000; // F 4240
+                        //4240
+    char c = 1000000; //40   char 1 byte
+
+
+    printf("x = %d\n", x); //16960
+    printf("c = %d\n", c); //64
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+    short x = 0x16245080;
+
+    char c =  0x80;
+
+    // 0x80
+    // 1010 0000  --> -128
+
+    //signed ise ve geri kalan bitlerini  1111 1111 1111
+    //unsigned ise geri kalan bitleri   0000 0000 0000 0000
+
+    //char // unsigned signed
+            //bende signed diyor
+    //1010 0000 --> -128
+
+
+    printf("x = %x\n", x);
+    printf("c = %x\n", c);
+    printf("x = %d\n", x);
+    printf("c = %d\n", c);
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+    //negatif anlamlı birler 1111 lerle doldurulur
+    //pozitif anlamlı bitler 0000 lar ile doldurulur
+
+    //char türü derleyiciye göre işaretli veya işaretsiz olabilir
+    //bizdeki işaretli ve bit düzeni değişmeyecek
+    //1011 0000 c ye atanan -80 degeri atanı
+
+
+    //int türüne yukseltirim   1111 1111 1111 1111 1111 1111 1111 1011 0000
+    //unsigned int türünden    0000 0000 0000 0000 0000 0000 0000 1011 0000
+
+    char c = 176; //0xB0  1011 0000
+
+    printf("c = %x\n", c);
+    printf("c = %d\n", c);
+
+    if(c ==  176)
+        printf("dogru\n");
+    else
+        printf("yanlis\n");
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+gercek sayı türünden tam sayı türne atama yapıldıgında
+
+ondalık kısmı dogrudan atar
+ilgili kısım ifade edilebiliyor ise gecerli olur
+eger edilemiyor ise tanımsız davranış olur ..
+
+
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+    double dval = 7234.2344234;
+
+    int ival;
+
+    ival = dval;
+
+    printf("ival = %d\n", ival);
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include "utility.h"
+#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+    double dval = 9882334512.2344234;
+
+    int ival;
+
+    ival = dval;
+
+    printf("ival = %d\n", ival);
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+tür dönüşüm operatoru
+
+type cast operatoru --->  ()
+
+unary bir operator
+
+içine tür bilgisi yazılır (data type)
+
+2. öncelik seviyesindedir
+
+
+int x;
+
+(target type)operand;
+
+(double)x; seklinde kullanılır
+
+
+
+
+#include "utility.h"
+#include <stdio.h>
+
+
+int main()
+{
+    int x = 10;
+    int y = 3;
+
+    //double dval = x / y;
+    double dval = (double)x / y;
+
+    printf("dval = %f\n", dval);
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+const cast (const luk donusumu)
+adreslerle ilgili donusum (pointer)
+
+konuları gelince ileriki derte anlatacaz
+
+
+farklı bir casting olayına deyinelim
+
+
+
+#include "utility.h"
+#include <stdio.h>
+
+int foo(int a)
+{
+    return 1;
+}
+
+int main()
+{
+    //ihtiyaç oldugun da kullanabiliriz
+    //bilinçli olarak geri dönüş türünü kullanmıyacagım
+    (void)foo(12);
+
+    //hayır boylede bir sıkıntı olmaz
+    foo(13);
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include "utility.h"
+#include <stdio.h>
+
+int foo(int a)
+{
+    return 1;
+}
+
+int main()
+{
+    int x = 10, y = 23;
+
+    //bilinçli olarak printfin geri donus degerinin kullanmıyacam
+    (void)printf("%d%d\n", x, y);
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+// 3.4   --> 3
+// 3.7   --> 4
+// -2.8  --> -3
+// -2.2  --> -2
+
+int main()
+{
+    double dval;
+
+    printf("[-5 +5] aralgiinda bir gercek sayi giriniz : ");
+    scanf("%lf\n", &dval);
+
+    printf("%d\n", (int)(dval + (dval > 0. ? .5 : -.5)));
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+Rastgele sayi üretimi
+
+random number generation
+
+Rastgele sayi üretimi oyun programlama - genetik algoritma
+- kriptoloji --  test işlemleri -- simulasyon programları
+gibi cogu yerde cokca kullanılmakta
+
+
+iki Rastgele sayi uretimi mevcut
+1- true randım number generation
+   Dogadan faydalanarak üretılen rastgele sayılar
+
+2- pseudo random number generation
+  sozde - aslında gercek sayı uretımı yok sadece varsaymak
+
+bilgisayarın rastgele sayı uretme ozellıgı yok
+cunku bilgisayar deterministik bir yapıya sahip
+
+bir algoritma ile rastgele sayı uretımı hissiyatı verilen bir yapı kurulur
+ama aslında rastgelelık yoktur bir algoritma oldugu için
+
+
+seed value (tohum degeri)
+tohum degerine göre rastgele sayı uretımı bize farklı sayı zinciri sunacaktır.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
