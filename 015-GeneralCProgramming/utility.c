@@ -1,5 +1,7 @@
 #include "utility.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #ifdef  __linux__
 #include <unistd.h>
@@ -56,3 +58,13 @@ void xSleep(double sec)
     Sleep((double)sec * 1000);
 #endif
 }
+
+void randomize()
+{
+    srand((unsigned)time(NULL));
+}
+
+
+
+
+

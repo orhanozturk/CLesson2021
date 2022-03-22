@@ -7,7 +7,7 @@ int isprime(int);
 int ndigit(int);
 void dashline(void);
 void xSleep(double sec);
-
+void randomize();
 
 
 #endif // UTILITY_H

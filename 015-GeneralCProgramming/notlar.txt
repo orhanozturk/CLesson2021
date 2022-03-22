@@ -1646,6 +1646,712 @@ seed value (tohum degeri)
 tohum degerine göre rastgele sayı uretımı bize farklı sayı zinciri sunacaktır.
 
 
+kullanılan bu algoritmalar içinde random generation için
+mersene twister algoritması kullanılmakta
+
+
+bu algoritmalar aslında yaptıgı sey
+1010101010101010101010 rasgele bitleri saglamak
+
+
+uniform distribution
+1-10 --> 1 2 3 10
+uretilecek bu sayıların gelme ve ya olusma olasilipği aynı olmasını saglamtadır.
+
+farklı yontemler de mevcut
+Gauss distribution -->
+
+
+C ve C++ random generation da aralarında buyuk farklılıklar mevcut
+C sadece 2 tane fonksiyon ile destek veriririken
+C++ ise bunun için bir kütüphanesi mevcut ve çokca fazla destek vermektedir
+
+C de cok fazla ıhtıyac var ise
+Thirt Party uyglma veya kutuphane kullanabiliriz
+
+
+
+<stdlib.h> kutupohanesinde
+rand ile srand fonksiyonları
+
+bir de Makro
+
+RAND_MAX --> maksimum üretilebilecek en buyuk tam sayı degerını temsıl eder
+RAND_MAX derleyiciye baglı olarak degisebilir
+
+#include <stdio.h>
+#include <stdlib.h>
+
+//rand işlevi default olarak seed value degeri 1 i kullanır
+int main()
+{
+    for (int i = 0; i < 10; ++i) {
+        printf("%d \n", rand());
+    }
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+//rand işlevi default olarak seed value degeri 1 i kullanır
+int main()
+{
+
+    srand(10u); //tohum degeri
+
+//yeni tohum degeri fakat sabit oldugu için yine aynı sayıları uretecek
+    for (int i = 0; i < 10; ++i) {
+        printf("%d \n", rand());
+    }
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+
+void print_random_numbers(unsigned int seed)
+{
+    srand(seed);
+
+    for (int i = 0; i < 10; ++i) {
+        printf("%d \n", rand());
+    }
+}
+
+int main()
+{
+
+    for (int i = 1; i < 1000; ++i) {
+        printf("seed value is %5d\n", i);
+        print_random_numbers(i);
+        getchar();
+        system("cls");
+    }
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+int rand(void) yapıya sahip
+void srand(unsigne int) yapiya sahip;
+
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int main()
+{
+
+//uniform dağılım için mod operatoru kkullanmayınız
+
+    for (int i = 1; i < 1000; ++i) {
+        printf("%d ", rand() % 6 + 1);
+    }
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define     RANDOM_MIN_YEAR     1960
+#define     RANDOM_MAX_YEAR     2010
+
+int main()
+{
+    for (int i = 1; i < 100; ++i) {
+        printf("%d ", rand() % (RANDOM_MAX_YEAR - RANDOM_MIN_YEAR + 1) + RANDOM_MIN_YEAR);
+    }
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+cleander time dediğimiz bir mekanizma var
+
+01.01.1970 12:33
+
+bunun arkda tarafta şu şekilde
+
+456456234234 gibi bir degere takabul ediyor
+
+bunun için time kutuphanesi gerekli
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+int main()
+{
+    printf("%lld\n", time(NULL));
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+int main()
+{
+    for (;;) {
+        printf("%lld\r", time(NULL));
+    }
+
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+int main()
+{
+    srand((unsigned)time(NULL));
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    randomize();
+
+    for (int i = 0; i < 5; ++i) {
+        printf("%d\n", rand());
+    }
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    randomize();
+
+    for (int i = 0; i < 5; ++i) {
+        printf("%d\n", rand());
+    }
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    randomize();
+
+    for (;;) {
+        putchar(rand() % 26 + 'A');
+        xSleep(0.05);
+    }
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include "utility.h"
+
+int main()
+{
+    randomize();
+
+    for (;;) {
+        int val = rand() % 128;
+        if(isupper(val)){
+            putchar(val);
+            xSleep(0.05);
+        };
+    }
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include "utility.h"
+
+int main()
+{
+    randomize();
+
+    for (;;) {
+        int val = rand() % 128;
+        if(ispunct(val)){
+            putchar(val);
+            xSleep(0.05);
+        };
+    }
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include "utility.h"
+
+int get_random_char(void)
+{
+    int c;
+
+    while (1) {
+        c = rand() % 128;
+        if(isalpha(c)){
+            return c;
+        }
+    }
+}
+
+void print_random_password(void)
+{
+    int len;
+
+    len = rand() % 10 + 4;
+    for (int i = 0; i < len; ++i) {
+        putchar(get_random_char());
+    }
+
+    putchar('\n');
+}
+
+int main()
+{
+    randomize();
+
+    for (int i = 0; i < 10; ++i) {
+        print_random_password();
+    }
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include "utility.h"
+
+int get_random_char(void)
+{
+    int c;
+
+    while (1) {
+        c = rand() % 128;
+        if(isalpha(c)){
+            return c;
+        }
+    }
+}
+
+void print_random_password(void)
+{
+    int len;
+
+    //randomize();
+    len = rand() % 10 + 4;
+    for (int i = 0; i < len; ++i) {
+        putchar(get_random_char());
+    }
+
+    putchar('\n');
+}
+
+int main()
+{
+    randomize();
+    for (int i = 0; i < 10; ++i) {
+        print_random_password();
+    }
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include "utility.h"
+
+#define     NTOSS       100000
+#define     HEADS       1   //tura
+
+
+int main()
+{
+    randomize();
+
+    int heads_count = 0;
+
+    for (int i = 0; i < NTOSS; ++i) {
+        if(rand() % 2 == HEADS)
+            ++heads_count;
+    }
+
+    printf("olasilik = %f\n", (double) heads_count / NTOSS);
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include "utility.h"
+
+
+/*
+ * oyun kuralları
+ *
+ * zarların taoplamı en dusuk 2 en buyuk 12
+ *
+ * atılan zarların toplamına göre oyuncy ya para kaybetcek ya para kazancak
+ *
+ * eger zarların 1. atılışında
+ * toplam
+ *
+ * 7 - 11 ise ---> oyuncu kazanır
+ * 2 - 3 - 12 ise --> oyuncu kayber kasa kazanır
+ * 4 - 5 - 8 - 9 - 10 ise --> oyunun kuralları değişir
+ *
+ * eger oyunun kuralları değişirse
+ * örnek
+ * 9 attık ve tekrar 9 atar isek kazandık
+ * 5
+ * 11
+ * 3
+ * 8
+ * 6
+ * 9 eger burada 9 yerine 7 atsaydım kasa kazandı ben kaybettim
+ *
+ *
+ * soru su oyuncunun oyunu kazanma olasılıhı nedir
+ * %49,3455   -->  kasıının ki -->%50.23434
+ *
+ *
+ *
+ *
+ */
+
+#define     NGAMES      1000000
+
+int roll_dice(void)
+{
+    int dice_1 = rand() % 6 + 1;
+    int dice_2 = rand() % 6 + 1;
+
+    return dice_1 + dice_2;
+}
+
+int gameRule(int dice)
+{
+    while (1) {
+        int new_dice = roll_dice();
+        if(new_dice == dice)
+            return 1;
+        if(new_dice == 7)
+            return 0;
+    }
+}
+
+int game(void)
+{
+    int dice = roll_dice();
+
+    switch (dice) {
+    case 7:
+    case 11: return 1;
+    case 2:
+    case 3:
+    case 12: return 0;
+    default: return gameRule(dice); break;
+    }
+
+}
+
+int main()
+{
+    randomize();
+
+    int win_count = 0;
+
+    for (int i = 0; i < NGAMES; ++i) {
+        win_count += game();
+    }
+
+    printf("kazanma olasiligi = %f\n", 100. * win_count / NGAMES);
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+C+++ random fnksiyonlarını yazalım
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include "utility.h"
+#include <random>
+
+
+/*
+ * oyun kuralları
+ *
+ * zarların taoplamı en dusuk 2 en buyuk 12
+ *
+ * atılan zarların toplamına göre oyuncy ya para kaybetcek ya para kazancak
+ *
+ * eger zarların 1. atılışında
+ * toplam
+ *
+ * 7 - 11 ise ---> oyuncu kazanır
+ * 2 - 3 - 12 ise --> oyuncu kayber kasa kazanır
+ * 4 - 5 - 8 - 9 - 10 ise --> oyunun kuralları değişir
+ *
+ * eger oyunun kuralları değişirse
+ * örnek
+ * 9 attık ve tekrar 9 atar isek kazandık
+ * 5
+ * 11
+ * 3
+ * 8
+ * 6
+ * 9 eger burada 9 yerine 7 atsaydım kasa kazandı ben kaybettim
+ *
+ *
+ * soru su oyuncunun oyunu kazanma olasılıhı nedir
+ * %49,3455   -->  kasıının ki -->%50.23434
+ *
+ *
+ *
+ *
+ */
+
+#define     NGAMES      1000000
+
+int roll_dice(void)
+{
+    static std::mt19937 eng;
+    static std::uniform_int_distribution<int> dist{1, 6};
+
+    int dice_1 = dist(eng);
+    int dice_2 = dist(eng);
+
+    return dice_1 + dice_2;
+}
+
+int gameRule(int dice)
+{
+    while (1) {
+        int new_dice = roll_dice();
+        if(new_dice == dice)
+            return 1;
+        if(new_dice == 7)
+            return 0;
+    }
+}
+
+int game(void)
+{
+    int dice = roll_dice();
+
+    switch (dice) {
+    case 7:
+    case 11: return 1;
+    case 2:
+    case 3:
+    case 12: return 0;
+    default: return gameRule(dice); break;
+    }
+
+}
+
+int main()
+{
+    //randomize();
+
+    int win_count = 0;
+
+    for (int i = 0; i < NGAMES; ++i) {
+        win_count += game();
+    }
+
+    printf("kazanma olasiligi = %f\n", 100. * win_count / NGAMES);
+
+    return 0;
+}
+
+/****************************************************/
+/****************************************************/
+
+Ödev Sorusu
+
+1- monte-carlo yöntemi ile pi sayısını hesapmanız isteniyor
+
+
+2- Kumar oyunun sümilasyonu
+
+oyuncunun 100 doları va ve kasaya karsı oynuyor kasanında 100 doları var
+
+oyuna girebilmek için 10 doları verilir ve  yazı tura atıyor
+
+kural şu
+
+arka arkaya YAZI YAZI gelir ise 35 Dolar verir kasa size
+Arka arkaya TURA TURA TURA gelir ise 60 dolar verir kasa size
+
+soru şu oyuncunun bu oyunu kazanma olasılıgı nedir
+
+
+kasanın kaybetmesi için 60 altına düştümü yani ödeme tutarının altına düşmesiyle kaybeder
+ornek odemsi olacak kasanın 59 elinde kaldı o zamn kaybetti
+
+oyuncuda 10 doların altına duser ise tekrar oyuna göremez ise kaybeder
+
+2 Yazı gelince sayac sıfırlanır
+3 T gelince sayac sıfırlanır
+
+/*****************************************************/
+/*****************************************************/
+
+veri yapıları
+algoritma
+
+Array konusuna giriş
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
