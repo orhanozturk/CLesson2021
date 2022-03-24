@@ -2287,6 +2287,774 @@ Array konusuna giriş
 
 
 
+veri yapıları ve algoritmalar
+
+veri yapsının  --> data structure
+buna en yakın ADT(abstract data type) bahsedecez
+
+Verilerin bellekte ne şekilde tutulduguna ilişkin organizasyon
+Neden bu gerekli bu tutgumuz verilerin ne sekılde tutuyorsanız bu verielere
+ulasmanız farklılık gosterebilir ve onemlidir
+
+
+
+çok sayıda veri yapısı var işimize hangisi yarıyor ise onu seçmemiz lazım
+veri yapısı C ye ozgu değil bir çok dile özgü genel bir konu
+
+En çok hangi veri yapsıı kullanılıyor diyorsanız ---> dynamic array
+
+
+sırası ile gelmesi verielerin avantajı
+Fixed arrayın avantajı
+
+index bilgisi ile veri elemnalrından birisine
+constant time (sabit zamanda) ulasabiliriz
+
+eger sık sık verielerde yuksek maliyet olmadan erişmek istiyor isek
+en iyi veri yapsıı dinamik dizi
+
+
+ayrıca dinamik dizilere veri ekleme maliyeti az
+yani sondan ekleme işlemi constant time  da
+
+
+
+Algoritma
+programlama ile ilgili değil
+amacı bir işi nasıl yapmalıyım hangi aşamalardan geçirmeliyim
+
+
+algoritma elimizde bir veri yapısı olması lazım ki devre ye girebilsin
+
+bir işi ne kadar surede ne kadar az işlemle yapılması için
+kullanılan paremetreleeri iyi seçmeleyiz
+ve kurdugumuz algoritmada en hızlısı ve en az işlemlisini seçmeliyiz
+kullandıgı bellekte onemlidir.
+
+algoritma karmaşıklıgı ---> complexcity karmaşıklıgı
+
+iki faktor önemli
+1- kaç tane işlemde devreye giriyor
+2- kullanılan bellek açısından ele alınır
+
+
+Big O notasyonu
+
+Veri yapsıınıdaki öge sayısının artışıyla yapılan işlem sayısı arasındaki ilişki
+
+O() --> parantez içine yazdıgımız ifadeler algortimanın karmasıklıgını gösteriyor
+
+O(1)  constant time -->  veri yapısındaki öge sayısı ne kadar artarsa artsın maliyet
+                        değişmiyor
+
+O(n) liner complexcity  --> veri yapısındaki öge ne kadar artarsa maliyeti o kdar artıyor
+
+O(n*log n)
+
+O(n^2)  --> veri yapsıındaki oge sayısının karesı ile dogru orantılı olarak artıyot işlem maliyeti
+
+
+O(n2 * log n)
+
+O(n^3)
+O(n!)
+
+---------------------------------------------------------------------
+
+C Array
+
+teknik ismi --> Fix Array
+
+-->Dynamic Array
+
+
+--------------------------
+teknik ismi --> Fix Array
+
+bellekte ardışık olarak yerleştirilen  ve sonradan ekleme ve çıkartma olamayn data struct Fixed array
+compile time da C derleyicisi bunu sabit ifadesi olarak alır
+
+ardık olması ile index bilgisi ile constant time da ulaşılır
+
+
+C de dizi tanımlama sentakslarından bahsedelim
+
+
+
+#include <stdio.h>
+
+int main()
+{
+    //boyutunu constan exprestion yazmanız lazım
+    //tam saıy turu olması lazım yoksa sentaks hatası olur
+    //boyutu sıfır olamaz sentaks hatası
+    //negatif de olmaz senyaks hatası
+    int arr[10];
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+#define     ARRAYSIZE       100
+
+int main()
+{
+
+    int arr[ARRAYSIZE];
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+#define     ARRAYSIZE       100
+
+int main()
+{
+
+    //böylebir yazım yapaibliriz ama yapmayalım görüntü kotu
+    int x, arr[ARRAYSIZE] , b[10], t;
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+#define     ARRAYSIZE       100
+
+//globak dizi
+//ilk deger vermezsek hayata elemanları 0 degeri ile gelir
+int a[10];
+
+void func()
+{
+    //otomatik ömürlü elemanlarına deger vermez isek
+    //çöp degeri ile hayata gelirler
+    int b[20];
+
+    //static omurlu dizi elemanlarına deger vermezsek 0 ile hayat gelir
+    static int c[30];
+
+}
+
+
+int main()
+{
+
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+C dilinde bir gonksiyonun parametre değişkeni dizi olamaz
+
+#include <stdio.h>
+
+//dizi niyeti ile yapmayın dizi değil çünkü
+void func(int a[])
+{
+
+
+}
+
+
+int main()
+{
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+C dilinde bir fonsksiyonun geri donus türü dizi olamaz
+
+bu işlemleri pointerlarda görecez
+
+
+
+----------------------
+
+assignable  --> atanabilir varlıklar anlamına gelir
+
+int a[]
+int b[]
+
+a = b;  seklın bir kurduk
+
+
+bir çok dilde diziyi boyle atayabiliriz
+fakat C de böyle bir atma yok yapamayız
+
+C de atama operatorunun sol operandı bir dizi olamz
+
+-----------------------------------------
+
+int a[];
+
+a  --> &a[0]  bu ikiside aynı yeri işaret eder
+
+dizinin ilk elemanın adresidir
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    //bende int türünden 10 tane var demek
+    int a[10];
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+bir dizinin elemanlarına erişmek için pointer kullanılır
+şuan için ezbere kullanmıl olacaz ana detaylı oalrak pointer konusunda görecez
+
+[] -> & *  bunlar pointer operatorudur
+
+
+-----------------------------------------
+
+
+dizinin ilk elemanına erişmek için 0 index'ine erişmek gerekli
+
+dizi 10 eleman lı olsun
+
+a[0]  --> birinci eleman
+a[9]  --> son eleman
+
+
+
+eger index biglisinnii buyuk veya kucuk verdim aşarsak sentaks hatası
+tanımsız davranışa duser
+
+bundan programcı sorumludur
+
+#include <stdio.h>
+
+
+int main()
+{
+    int a[100];
+
+    //operator işlemlerinni yapabiliriz
+    a[6];
+
+    int x;
+
+    a[7] = x;
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+traverse -- traversal  --> dizi yi dolaşmak anlamında kullanılır
+
+iterate
+
+bu terimler kullanılır diziyi dolaşmak için
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    int a[100];
+
+    for (int i = 0; i < 100; ++i) {
+        a[i] = 1;
+        ++a[i];
+        a[i] += 1;
+    }
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+#define     SIZE        10
+
+int main()
+{
+    int a[SIZE];
+
+    for (int i = 0; i < SIZE; ++i) {
+        printf("%d ", a[i]);
+    }
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+#define     SIZE        10
+
+int a[SIZE];
+
+int main()
+{
+
+    for (int i = 0; i < SIZE; ++i) {
+        printf("%d ", a[i]);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+#define     SIZE        10
+
+
+
+int main()
+{
+    static int a[SIZE];
+
+    for (int i = 0; i < SIZE; ++i) {
+        printf("%d ", a[i]);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+#define     SIZE        10
+
+int main()
+{
+    int a[SIZE];
+
+    int i;
+    while (i < SIZE) {
+        printf("%d ", a[i++]);
+        //i++;
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+diziye ilk deger verme
+
+
+#include <stdio.h>
+
+#define     SIZE        5
+
+int main()
+{
+    int a[SIZE] = {1, 3, 4 ,6, 7};
+
+    for (int i = 0; i < SIZE; ++i) {
+        printf("%d ", a[i]);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+#define     SIZE        5
+
+int main()
+{
+    //boyutunda fazla eleman vermek sentaks hatasına neden olur
+    int a[SIZE] = {1, 3, 4 ,6, 7, 45, 23};
+
+    for (int i = 0; i < SIZE; ++i) {
+        printf("%d ", a[i]);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+
+#define     SIZE        10
+
+int main()
+{
+    //boyutun az eleman verir isek kalan ogeleri 0 ile dolduruyor
+    int a[SIZE] = {1, 3, 4 ,6, 7, 45, 23};
+
+    for (int i = 0; i < SIZE; ++i) {
+        printf("%d ", a[i]);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+#define     SIZE        10
+
+int main()
+{
+
+    int a[SIZE] = {1};
+
+    for (int i = 0; i < SIZE; ++i) {
+        printf("%d ", a[i]);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+#define     SIZE        10
+
+int main()
+{
+
+    //sentaks hatası olur
+    int a[SIZE] = {};
+
+    for (int i = 0; i < SIZE; ++i) {
+        printf("%d ", a[i]);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+#define     SIZE        10
+
+int main()
+{
+
+    int a[SIZE] = {0};
+
+    for (int i = 0; i < SIZE; ++i) {
+        printf("%d ", a[i]);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+
+#define     SIZE        5
+
+int main()
+{
+
+    //dizinin son elemanından sonra , kona bilir
+    //bu virgule trailing comma denir
+    int a[SIZE] = {1, 2, 3, 4, 5,};
+
+    for (int i = 0; i < SIZE; ++i) {
+        printf("%d ", a[i]);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+#define     SIZE        5
+
+int main()
+{
+
+    //sentka shatası dizinin bu durumda boyutunu yazmak zorundayım
+    int a[];
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+
+#define     SIZE        5
+
+int main()
+{
+
+    //EGER ildk deger verirlıyor ve dizinin boyutu verilmiyor ise
+    //compile time da derleyici sizin yerine sayar ve dizinin boyutunu veririr
+    int a[] = {1, 2, 3, 4};
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+#define     SIZE        100
+
+int main()
+{
+    //C99
+    //designated initializer
+
+    int a[SIZE] = {[22] = 65, [12] = 39, [55] = 441};
+
+    for (int i = 0; i < SIZE; ++i) {
+        printf("a[%d] = %d\n", i, a[i]);
+    }
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+
+#define     SIZE        100
+
+int main()
+{
+    //C99
+    //designated initializer
+
+    int a[] = {[22] = 65, [12] = 39, [49] = 441};
+
+    for (int i = 0; i < 50; ++i) {
+        printf("a[%d] = %d\n", i, a[i]);
+    }
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+C99 ile variable length array (VLA) dizi farklıdır Fixed arrayden
+VLA derleyiciye baglı olarak desteklenir
+
+VLA ilerleyen derlerde bahsedecez onemli oldugu için
+
+/****************************************************/
+
+
+temel algoritmları C de kolayacagız
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        100
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

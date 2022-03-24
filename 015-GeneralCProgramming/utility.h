@@ -8,6 +8,8 @@ int ndigit(int);
 void dashline(void);
 void xSleep(double sec);
 void randomize();
+void set_array_random(int *p, int size);
+void print_array(const int *p, int size);
 
 
 #endif // UTILITY_H
