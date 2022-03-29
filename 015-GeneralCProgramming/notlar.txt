@@ -2971,6 +2971,539 @@ int main()
 /****************************************************/
 /****************************************************/
 
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        100
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int sum = 0;
+
+    for (int i = 0; i < SIZE; ++i) {
+        sum += a[i];
+    }
+
+    printf("sum = %d\n", sum);
+    printf("avg = %f\n", (double)sum / SIZE);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        100
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int odd_count = 0;
+    int odd_sum = 0;
+
+    for (int i = 0; i < SIZE; ++i) {
+        if(a[i] % 2){
+            odd_sum += a[i];
+            odd_count++;
+        }
+    }
+
+    printf("teklerin toplami = %d\n", odd_sum);
+
+    if(odd_count)
+        printf("teklerin ortalamasi = %f\n", (double)odd_sum / odd_count);
+    else
+        printf("dizide tek sayi yok\n");
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        100
+
+//dizinin standart sapmasını hesaplayalım
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int sum = 0;
+
+    for (int i = 0; i < SIZE; ++i) {
+        sum += a[i];
+    }
+
+    double mean = (double) sum / SIZE;
+
+    double sum_square = 0;
+
+    for (int i = 0; i < SIZE; ++i) {
+        sum_square += (a[i] - mean) * (a[i] - mean);
+    }
+
+    double std_dev = sqrt(sum_square / (SIZE - 1));
+
+    printf("std_dev = %f\n", std_dev);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        100
+
+//dizinin standart sapmasını hesaplayalım
+
+//Big O Notasyonu
+//O(n)
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int sum = 0;
+
+    for (int i = 0; i < SIZE; ++i) {
+        sum += a[i];
+    }
+
+    double mean = (double) sum / SIZE;
+
+    double sum_square = 0;
+
+    for (int i = 0; i < SIZE; ++i) {
+        sum_square += (a[i] - mean) * (a[i] - mean);
+    }
+
+    double std_dev = sqrt(sum_square / (SIZE - 1));
+
+    printf("std_dev = %f\n", std_dev);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+arama algoritmalarından bahsedelim
+
+
+linear search
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int sval;
+
+    printf("arama degeri giriniz : ");
+    scanf("%d", &sval);
+
+    int i;
+    for (i = 0; i < SIZE; ++i) {
+        if(a[i] == sval)
+            break;
+    }
+
+    if(i < SIZE)
+        printf("bulundu dzinin %d indisli elemani\n", i);
+    else
+        printf("bulunamadi\n");
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int sval;
+
+    printf("arama degeri giriniz : ");
+    scanf("%d", &sval);
+
+    int i;
+    for (i = 0; i < SIZE && a[i] != sval; ++i)
+        ;
+
+    if(i < SIZE)
+        printf("bulundu dzinin %d indisli elemani\n", i);
+    else
+        printf("bulunamadi\n");
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+soru : alttaki linear search algoritmasında
+
+3 işlmede gercekleşen işlemi
+3*SIZE işlem yapılıyor
+
+biz bunu
+2*SIZE da gercekleştirmek istiyoruz nasıl yaparız
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int sval;
+
+    printf("arama degeri giriniz : ");
+    scanf("%d", &sval);
+
+    int i;
+    for (i = 0; i < SIZE; ++i) {
+        if(a[i] == sval)
+            break;
+    }
+
+    if(i < SIZE)
+        printf("bulundu dzinin %d indisli elemani\n", i);
+    else
+        printf("bulunamadi\n");
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+reverse algoritması
+
+ilk eleman son elemanla degişir
+ikinci eleman ile sondaki ikinci eleman
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        10
+
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    for (int i = 0; i < SIZE / 2; ++i) {
+        int temp = a[i];
+        a[i] = a[SIZE - 1 - i];
+        a[SIZE - 1 - i] = temp;
+    }
+
+    print_array(a, SIZE);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+max element
+min element
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        10
+
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int max = a[0];
+    int max_idx = 0;
+
+    for (int i = 1; i < SIZE; ++i) {
+        if(max < a[i]){
+            max = a[i];
+            max_idx = i;
+        }
+    }
+
+    printf("max : %d ve dizinin %d indisli elemani\n", max, max_idx);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        10
+
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int max = a[0];
+    int min = a[0];
+
+    for (int i = 1; i < SIZE; ++i) {
+        if(a[i] > max)
+            max = a[i];
+        else if(a[i] < min)
+            min = a[i];
+    }
+
+    printf("min = %d\n", min);
+    printf("max = %d\n", max);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+runner_up --> ikinci
+
+veri yapılarında en buyuk ikinci eleman anlamına gelir
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        10
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int max = a[0];
+    int runner_up = a[1];
+
+    if(max < runner_up){
+        max = a[1];
+        runner_up = a[0];
+    }
+
+    for (int i = 2; i < SIZE; ++i) {
+        if(a[i] > max){
+            runner_up = max;
+            max = a[i];
+        }
+        else if(a[i] > runner_up){
+            runner_up = a[i];
+        }
+    }
+
+    printf("max = %d\n", max);
+    printf("runner_up = %d\n", runner_up);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+20  11   1  18  13   7   8  15  16  11
+
+birinci satır 20 *
+ikinci satır 11 *
+üçüncü satır 1*
+....
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        10
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    for(int i = 0; i < SIZE; ++i){
+        a[i] = rand() % 20 + 1;
+    }
+
+    print_array(a, SIZE);
+
+    for (int i = 0; i < SIZE; ++i) {
+        for (int k = 0; k < a[i] ; ++k) {
+            putchar('*');
+        }
+        putchar('\n');
+    }
+
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+Ödev
+
+Yukarıda ki sorunun çıktısını 90 saat yönün tersine çevrilmiş
+şekilde ekran çıktısı üretmenizi bekliyorum
+
+
+yani dikey bir histogram olusacak....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
