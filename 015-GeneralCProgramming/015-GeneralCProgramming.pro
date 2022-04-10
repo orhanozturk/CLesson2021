@@ -8,6 +8,7 @@ SOURCES += \
         utility.c
 
 DISTFILES += \
+ HomeWork.txt \
  notlar.txt
 
 HEADERS += \

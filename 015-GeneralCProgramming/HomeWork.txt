@@ -1,0 +1,87 @@
+HomeWork
+
+//maximum subsequence problem
+
+-2 -5 7 -3 6 4 -1 7 8
+
+1. soru
+en az bir tane negatif degere sahip olmak zorunda
+bu dizinin butun subsequence dahil oldugunda
+en buyuk toplam degeri ne olabilir
+bunu bulmanız isitiyoruz
+
+2.soru
+bunu bulan algoritmayı buldugunuz karmasıklıgı ne olabilir
+O(n) dir
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+#define     SIZE        100
+
+
+
+
+int main()
+{
+    int a[] = {241, 884, -972, -777, 969, 158, 572, 399, 563, 325,
+                   -492, -153, -257, 156, 197, -184, -476, 404, 21, -20,
+                   -883, -952, -589, 94, 651, -490, 882, -293, 153, 387,
+                   389, -601, -666, 263, -827, -915, 19, -814, 717, 643,
+                   -257, -813, 369, -568, -947, 891, -807, 20, 491, 964,
+                   717, -157, -241, 673, 332, 493, -88, -838, -32, 442,
+                   911, -483, 964, -807, 753, -251, -828, 906, 997, -464,
+                   -313, 92, 271, 582, -993, -540, -205, 987, -412, 188,
+                   370, 485, 496, 482, -927, -436, -582, -513, -517, 907,
+                   874, 877, 876, 76, 367, 851, 848, 33, -865, 670};
+
+    printf("%zu\n", asize(a));
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+//HomeWork
+//Hollanda bayrağı algoritması
+
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+
+    for (int i = 0; i < SIZE; ++i) {
+        a[i] = rand() % 3;
+    }
+
+    print_array(a, SIZE);
+
+    //yukaradıka diziyi sıralayınız
+    //dizininin sıralar iken ilave dizi kullanılmyacak
+    //O(n) karmasıklıgında bir algoritma oalcak
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+

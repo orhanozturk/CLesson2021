@@ -85,6 +85,17 @@ void print_array(const int *p, int size)
 }
 
 
+void sgets(char *p)
+{
+    int c;
+
+    while ((c = getchar()) != '\n') {
+        *p++ = (char )c;
+    }
+
+    *p = '\0';
+}
+
 
 
 

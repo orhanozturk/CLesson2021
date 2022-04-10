@@ -3473,6 +3473,3003 @@ yani dikey bir histogram olusacak....
 
 
 
+/****************************************************/
+/****************************************************/
+
+Ödev
+
+unique --> eşsiz
+
+
+16  20  11  10  11   6  18   3  13   7  15   8  11   7   6  11  20  17   2  15
+-------------------------------------------------------------------------------
+
+unique
+16 10 18 3 13 8 17 2
+
+unique degerleri bulun  ve bunları kucukten buyuge sıralayın
+
+2 yöntemle istiyorum
+1. yeni bir dizi kullanarak
+2. ikinci bir dizi kullanmadan
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+binary search algoritması
+
+
+sıralı bir veri yapsıında bir key in olup olmadıını araması
+
+
+
+
+13  13  22  32  32  74  75  81  94  95  95  96 100 129 145 154 171 176 189 200
+203 215 223 231 242 259 259 266 280 286 288 295 296 327 331 357 359 385 387 402
+404 406 406 413 413 421 431 443 461 494 500 504 505 506 508 519 536 539 553 567
+569 580 580 581 583 587 588 606 637 644 649 665 669 669 674 683 694 747 784 797
+798 800 801 814 819 824 832 873 892 894 895 934 955 955 974 978 994 996 997 999
+-------------------------------------------------------------------------------
+
+
+819  bulmak istedigimiz deger
+
+aramaya ortadan baslıyoruz
+
+eger aradıgım deger bu degerden buyuk ise aramaya kcuukerı katmıyoruz
+
+kalan egerlerin ortasına bakıyoruz tekrar aynı kontrol kcuukleru at
+
+aynı kontrol yap taki bulana kadar bulamaz
+
+döngüden cıkıyor
+
+
+binary search algoritması karmasıklıgı O(log n) karmasıklı
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+int icmp(const void *vp1, const void *vp2)
+{
+    return *(const int *)vp1 - *(const int *)vp2;
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    qsort(a, SIZE, sizeof (int), &icmp);
+    print_array(a, SIZE);
+
+    int sval;
+    printf("aranan degeri giriniz : ");
+    scanf("%d", &sval);
+
+    int idx_first = 0;
+    int idx_last = SIZE - 1;
+    int idx_mid;
+
+
+    while (idx_first <= idx_last) {
+        idx_mid = (idx_first + idx_last) / 2;
+
+        if(a[idx_mid] == sval)
+            break;
+
+        if(a[idx_mid] > sval){
+            idx_last = idx_mid - 1;
+        } else {
+            idx_first = idx_mid + 1;
+        }
+    }
+
+
+    if(idx_first > idx_last)
+        printf("aranan deger bulunamadi\n");
+    else
+        printf("bulundu dizinin %d indisli elemani\n", idx_mid);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+int icmp(const void *vp1, const void *vp2)
+{
+    return *(const int *)vp1 - *(const int *)vp2;
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    qsort(a, SIZE, sizeof (int), &icmp);
+    print_array(a, SIZE);
+
+    int sval;
+    printf("aranan degeri giriniz : ");
+    scanf("%d", &sval);
+
+    int idx_first = 0;
+    int idx_last = SIZE - 1;
+    int idx_mid;
+
+
+    int cnt = 0;
+    while (idx_first <= idx_last) {
+        cnt++;
+        idx_mid = (idx_first + idx_last) / 2;
+
+        if(a[idx_mid] == sval)
+            break;
+
+        if(a[idx_mid] > sval){
+            idx_last = idx_mid - 1;
+        } else {
+            idx_first = idx_mid + 1;
+        }
+    }
+
+
+    if(idx_first > idx_last)
+        printf("aranan deger bulunamadi\n");
+    else
+        printf("bulundu dizinin %d indisli elemani\n", idx_mid);
+
+    printf("cnt = %d\n", cnt);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+sizeof operator
+
+hem operator hem anahtar sözcük
+
+önemli fonksiyon değil
+
+bu operatorun urettıgı deger compile time gercekleşir
+
+amacı : bir türün stroge da kaç byte yer kapladıgının bilgisini vermek
+
+2. öncelik seviyesinde
+
+sizeof(type)
+
+sizeof(int)
+sizeof(double)
+
+use define types lar da olablir
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    printf("sizeof(char) = %zu\n", sizeof (char));
+    printf("sizeof(short) = %zu\n", sizeof (short));
+    printf("sizeof(_Bool) = %zu\n", sizeof (_Bool));
+    printf("sizeof(int) = %zu\n", sizeof (int));
+    printf("sizeof(long) = %zu\n", sizeof (long));
+    printf("sizeof(long long) = %zu\n", sizeof (long long));
+    printf("sizeof(float) = %zu\n", sizeof (float));
+    printf("sizeof(double) = %zu\n", sizeof (double));
+    printf("sizeof(long double) = %zu\n", sizeof (long double));
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+
+    //compile timedda gercekleştigi için bunu yapabiliriz
+    int a[sizeof (double)] = {0};
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    int x = 10;
+
+    //bu iki ifade arasında fark yoktur
+    printf("%zu\n", sizeof (x));
+    printf("%zu\n", sizeof x);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    int x = 10;
+
+    //bu iki ifade arasında fark yoktur
+    printf("%zu\n", sizeof (x));
+    printf("%zu\n", sizeof x);
+
+    //double kontrolu yapar
+    printf("%zu\n", sizeof(x * 1.2));
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+sizeof --> unsigned int
+
+döndürür
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    int x = 10;
+
+    unsigned int uval = sizeof x * 5;//20
+    unsigned int uval1 = sizeof (x * 5); //4
+    unsigned int uval2 = sizeof (x) * 5; //20
+
+    printf("uval = %d\n", uval);
+    printf("uval1 = %d\n", uval1);
+    printf("uval2 = %d\n", uval2);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    int x = 10;
+    int a = 5;
+    double b = 4.5;
+
+    printf("%zu\n", sizeof (x > 0 ? a : b));
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    int x = 3;
+
+    //sizeof içindeki ifade eger yan etkisi va ise onu gercekleştirmez
+    printf("%zu\n", sizeof (x++));
+    printf("%d\n", x);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+double foo(void)
+{
+    printf("orhan ozturk\n");
+    return 4.5;
+}
+
+int main()
+{
+    int x = 3;
+
+    //sizeof içindeki ifade eger yan etkisi va ise onu gercekleştirmez
+    printf("%zu\n", sizeof (x++));
+    printf("%d\n", x);
+    printf("%zu\n", sizeof (foo()));
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+   char s[30] = {0};
+   int s1[100] = {0};
+   double s2[40] = {0};
+
+
+   printf("size(s) = %zu\n", sizeof (s));
+   printf("size(s1) = %zu\n", sizeof (s1));
+   printf("size(s2) = %zu\n", sizeof (s2));
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+   char s[30] = {0};
+   int s1[100] = {0};
+   double s2[40] = {0};
+
+
+   printf("size(s) = %zu\n", sizeof (s));
+   printf("size(s1) = %zu\n", sizeof (s1));
+   printf("size(s2) = %zu\n", sizeof (s2));
+
+   printf("sizeof(s1[0] = %zu\n", sizeof (s1[0]));
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+   char s[30] = {0};
+   int s1[100] = {0};
+   double s2[40] = {0};
+
+
+   printf("bout s = %zu\n", sizeof (s) / sizeof (s[0]));
+   printf("boyut s1 = %zu\n", sizeof (s1) /sizeof (s1[0]));
+   printf("boyut s2 = %zu\n", sizeof (s2) /sizeof (s2[0]));
+
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+   int a[] = {2, 5, 7, 8, 2, 3, 9, 6, 13};
+
+
+   //tabi böyle yazmamınızı tavsiye ediyorum
+   for (int i = 0; i < sizeof (a) / sizeof (a[0]); ++i) {
+       printf("%d ", a[i]);
+   }
+
+
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+   int a[] = {2, 5, 7, 8, 2, 3, 9, 6, 13, 234, 2344, 13, 122, 23,4};
+   double da[2* sizeof (a) / sizeof (a[0])];
+
+
+
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+#define     SIZE        100
+
+
+int main()
+{
+   int a[] = {2, 5, 7, 8, 2, 3, 9, 6, 13};
+   double da[asize(a)];
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+#define     SIZE        100
+
+
+int main()
+{
+   int a[] = {2, 5, 7, 8, 2, 3, 9, 6, 13};
+
+   for (int i = 0; i < asize(a); ++i) {
+       printf("%d ", a[i]);
+   }
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+#define     SIZE        100
+
+//mülakat sorusu
+
+
+int main()
+{
+   int a[] = {1, 2, 3, 4, 5};
+
+   //sizeof unsigned int dönüyor dedik
+   //int ten unsigned donusum oluyor
+   //i nin turu unsigned cast ediliyor
+   // max alabilecegi deger oluyor
+
+   for (int i = -1; i < asize(a) - 1; ++i) {
+       printf("%d ", a[i + 1]);
+   }
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+#define     SIZE        100
+
+//mülakat sorusu
+
+
+int main()
+{
+   int a[] = {1, 2, 3, 4, 5};
+
+
+   for (int i = -1; i < (int)asize(a) - 1; ++i) {
+       printf("%d ", a[i + 1]);
+   }
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+sıralama algoritmaları
+
+sorthing algorithms
+
+belirli bir düzne göre dizme işlemi için kullanılır
+
+bu düzün buyukten kucuge veya kucukten buyuge olabilir
+
+
+genel sıralama algoritmalarının karmasıklıgı O(n* log n) veya O(n2)
+aransında olabilir
+
+
+buble sort
+insertion  sort
+selection sort
+heap sort
+merge sort
+shell sort
+radix sort
+quick sort
+
+
+buble sort algortiması ikili sıra seklinde kontrol ve takas işlemi gercekletirir
+
+
+
+495 421  97 896 541 902 688  24 564 254
+421 495  97 896 541 902 688  24 564 254
+421 97  495 896 541 902 688  24 564 254
+421 97  495 541 896 902 688  24 564 254
+421 97  495 541 896 688 902  24 564 254
+421 97  495 541 896 688  24 902 564 254
+421 97  495 541 896 688  24 564 902 254
+421 97  495 541 896 688  24 564 254 902  -- en buyuk elemanı en son getirdi n-1 defa da yaptı işlemi
+
+dongum (n-1)(n-1) defa yapar isek işlem sıralı hale gelir // This is available in all editors.
+
+#include <stdio.h>
+#include "utility.h"
+
+
+#define     SIZE        10
+
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    for (int i = 0; i < SIZE - 1; ++i) {
+        for (int k = 0; k < SIZE - 1 -i; ++k) {
+            if(a[k] > a[k+1]){
+                int temp = a[k];
+                a[k] = a[k+1];
+                a[k+1] = temp;
+            }
+        }
+    }
+
+    print_array(a, SIZE);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+#define     SIZE        10
+
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    for (int i = 0; i < SIZE - 1; ++i) {
+        for (int k = 0; k < SIZE - 1 -i; ++k) {
+            if(a[k] < a[k+1]){
+                int temp = a[k];
+                a[k] = a[k+1];
+                a[k+1] = temp;
+            }
+        }
+    }
+
+    print_array(a, SIZE);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+
+
+#define     SIZE        10
+
+//mulakat soru
+
+//if(exp) oylebir ifade yazalım ki
+//tekler basa sıralı
+//ciftler sona sıralı olacak sekilde yazdıralım
+
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    for (int i = 0; i < SIZE - 1; ++i) {
+        for (int k = 0; k < SIZE - 1 -i; ++k) {
+            if((a[k] % 2 ==0  && a[k+1] % 2 != 0) || (a[k] % 2 == a[k+1] % 2 && a[k] > a[k+1])){
+                int temp = a[k];
+                a[k] = a[k+1];
+                a[k+1] = temp;
+            }
+        }
+    }
+
+    print_array(a, SIZE);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+#define     SIZE        10
+
+
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    for (int i = 0; i < SIZE - 1; ++i) {
+        for (int k = 0; k < SIZE - 1 -i; ++k) {
+            if(a[k] > a[k+1]){
+                int temp = a[k];
+                a[k] = a[k+1];
+                a[k+1] = temp;
+            }
+        }
+        print_array(a, SIZE);
+        getchar();
+    }
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+merge algoritması
+
+sıralı birleştirme işlemi demektir
+
+iki diziyi sıralı şekilde birleştirme işlemidir
+dizilerin boyutları aynı olmak zorunda değildir
+
+linear O(n) karmasıklıgındadır
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+#define     SIZE        10
+
+int icmp(const void *vp1, const void* vp2)
+{
+    return *(const int *)vp1 - *(const int*)vp2;
+}
+
+
+int main()
+{
+    int a[SIZE];
+    int b[SIZE];
+    int c[SIZE * 2];
+
+    randomize();
+    set_array_random(a, SIZE);
+    set_array_random(b, SIZE);
+
+    qsort(a, SIZE, sizeof (int), &icmp);
+    qsort(b, SIZE, sizeof (int), &icmp);
+
+    print_array(a, SIZE);
+    print_array(b, SIZE);
+
+
+    int idx_a = 0;
+    int idx_b = 0;
+
+    for (int i = 0; i < 2*SIZE; ++i) {
+        if(idx_a == SIZE){
+            c[i] = b[idx_b++];
+        }
+        else if(idx_b == SIZE){
+            c[i] = a[idx_a++];
+        }
+        else if (a[idx_a] < b[idx_b]) {
+            c[i] = a[idx_a++];
+        }
+        else{
+            c[i] = b[idx_b++];
+        }
+    }
+
+    print_array(c, SIZE*2);
+
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+HomeWork
+
+//maximum subsequence problem
+
+-2 -5 7 -3 6 4 -1 7 8
+
+1. soru
+en az bir tane negatif degere sahip olmak zorunda
+bu dizinin butun subsequence dahil oldugunda
+en buyuk toplam degeri ne olabilir
+bunu bulmanız isitiyoruz
+
+2.soru
+bunu bulan algoritmayı buldugunuz karmasıklıgı ne olabilir
+O(n) dir
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+#define     SIZE        100
+
+
+
+
+int main()
+{
+    int a[] = {241, 884, -972, -777, 969, 158, 572, 399, 563, 325,
+                   -492, -153, -257, 156, 197, -184, -476, 404, 21, -20,
+                   -883, -952, -589, 94, 651, -490, 882, -293, 153, 387,
+                   389, -601, -666, 263, -827, -915, 19, -814, 717, 643,
+                   -257, -813, 369, -568, -947, 891, -807, 20, 491, 964,
+                   717, -157, -241, 673, 332, 493, -88, -838, -32, 442,
+                   911, -483, 964, -807, 753, -251, -828, 906, 997, -464,
+                   -313, 92, 271, 582, -993, -540, -205, 987, -412, 188,
+                   370, 485, 496, 482, -927, -436, -582, -513, -517, 907,
+                   874, 877, 876, 76, 367, 851, 848, 33, -865, 670};
+
+    printf("%zu\n", asize(a));
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        20
+
+//HW cevap 1. soru
+
+int main()
+{
+    //unique
+
+    int a[SIZE];
+
+    randomize();
+    for (int i = 0; i < SIZE; ++i) {
+        a[i] = rand() % 20;
+    }
+
+    print_array(a, SIZE);
+
+    int k;
+    for (int i = 0; i < SIZE; ++i) {
+        for (k = 0;  k < SIZE; ++k) {
+            if(i != k && a[i] == a[k])
+                break;
+        }
+
+        if(k == SIZE){
+            printf("%3d ", a[i]);
+        }
+    }
+
+    printf("\n");
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        20
+
+//HW cevap 2. cevap
+
+int main()
+{
+    //unique
+
+    int a[SIZE];
+
+    randomize();
+    for (int i = 0; i < SIZE; ++i) {
+        a[i] = rand() % 20;
+    }
+
+    print_array(a, SIZE);
+
+
+    int flags[SIZE] = {0};
+
+    for (int i = 0; i < SIZE; ++i) {
+        ++flags[a[i]];
+    }
+
+    /*
+    for (int i = 0; i < SIZE; ++i) {
+        printf("%d %d\n", i, flags[i]);
+    }
+    */
+
+    for(int i = 0; i < SIZE; ++i){
+        if(flags[i] == 1){
+            printf("%d ", i);
+        }
+    }
+
+    printf("\n");
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+2 çizüm karmasıklıgı O(n2) den O(n) düşürdük
+fakat bellekten kaybettik
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdlib.h>
+
+#define     SIZE        100
+
+//HomeWork
+//Hollanda bayrağı algoritması
+
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+
+    for (int i = 0; i < SIZE; ++i) {
+        a[i] = rand() % 3;
+    }
+
+    print_array(a, SIZE);
+
+    //yukaradıka diziyi sıralayınız
+    //dizininin sıralar iken ilave dizi kullanılmyacak
+    //O(n) karmasıklıgında bir algoritma oalcak
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <time.h>
+
+#define     SIZE        1000000
+
+//buble sort
+//1000  ---> 0.001
+//10000 ---> 0.123
+//100000  --> 12.738000
+
+int main()
+{
+    unsigned char a[SIZE];
+
+    randomize();
+
+    for (int i = 0; i < SIZE; ++i) {
+        a[i] = rand() % 256;
+    }
+
+    printf("siralama basladi\n");
+    clock_t start = clock();
+    for (int i = 0; i < SIZE -1; ++i) {
+        for (int k = 0; k < SIZE - 1 -i; ++k) {
+            if(a[k] > a[k+1]){
+                unsigned char temp = a[k];
+                a[k] = a[k+1];
+                a[k+1] = temp;
+            }
+        }
+    }
+    clock_t end = clock();
+
+    printf("siralama bitti %f saniyede\n", (double)(end-start) / CLOCKS_PER_SEC);
+    getchar();
+
+    for (int i = 0; i < SIZE; ++i) {
+        printf("%u", a[i]);
+    }
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <time.h>
+#include <stdlib.h>
+
+#define     SIZE        100000
+
+//buble sort
+//O(n2)
+//1000  ---> 0.001
+//10000 ---> 0.123
+//100000  --> 12.738000
+
+int main()
+{
+    //unsigned char a[SIZE];
+    unsigned char *a = (unsigned char *)malloc(SIZE);
+    if(!a){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+    randomize();
+
+    for (int i = 0; i < SIZE; ++i) {
+        a[i] = rand() % 256;
+    }
+
+    printf("siralama basladi\n");
+    clock_t start = clock();
+    for (int i = 0; i < SIZE -1; ++i) {
+        for (int k = 0; k < SIZE - 1 -i; ++k) {
+            if(a[k] > a[k+1]){
+                unsigned char temp = a[k];
+                a[k] = a[k+1];
+                a[k+1] = temp;
+            }
+        }
+    }
+    clock_t end = clock();
+
+    printf("siralama bitti %f saniyede\n", (double)(end-start) / CLOCKS_PER_SEC);
+    getchar();
+
+    for (int i = 0; i < SIZE; ++i) {
+        printf("%u", a[i]);
+    }
+
+    free(a);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <time.h>
+#include <stdlib.h>
+
+#define     SIZE        100000000
+
+//buble sort
+//O(n2)
+//1000  ---> 0.001
+//10000 ---> 0.123
+//100000  --> 12.738000
+
+//qsort
+//1000 ---> 0.000000
+//10000 ---> 0.001000
+//100000 ---> 0.006000
+
+//buble sort O(n2) karmasıklıta yapılıyor
+//qsort  O(n) karasıklıkta
+
+int mycmp(const void *vp1, const void* vp2)
+{
+    if(*(unsigned char *) vp1 > *(unsigned char *)vp2)
+        return 1;
+
+    if(*(unsigned char *) vp1 < *(unsigned char *)vp2)
+        return -1;
+
+    return 0;
+}
+
+int main()
+{
+    //unsigned char a[SIZE];
+    unsigned char *a = (unsigned char *)malloc(SIZE);
+    if(!a){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+    randomize();
+
+    for (int i = 0; i < SIZE; ++i) {
+        a[i] = rand() % 256;
+    }
+
+    printf("siralama basladi\n");
+    clock_t start = clock();
+    qsort(a, SIZE, 1, mycmp);
+    clock_t end = clock();
+
+    printf("siralama bitti %f saniyede\n", (double)(end-start) / CLOCKS_PER_SEC);
+    getchar();
+
+    for (int i = 0; i < SIZE; ++i) {
+        printf("%u", a[i]);
+    }
+
+    free(a);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <time.h>
+#include <stdlib.h>
+
+#define     SIZE        100000000
+
+//soru
+//alttaki kodda problem varmı
+
+//yok gayette calısır
+//a[i] ile i[a] anı seyi ifade eder
+//konu tamamiyle pointerlarla alakalı
+//pointerlarda anlatılacak
+
+
+int main()
+{
+    int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    for (int i = 0; i < 10; ++i) {
+        printf("%d ", i[a]);
+    }
+
+    printf("\n");
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+char türden diziler ve yazı işlemleri
+
+
+char str[100];
+
+
+BABA dizisi olsun
+
+ B 65
+ A 64
+ B 65
+ A 64
+
+aslında ascıı kodnumarası mevcut
+
+NTBS
+null terminated byte string
+
+yazının son karaterinden sonra '\0' null karateri olur
+
+
+BABA
+
+BABA'\0'
+
+null karaterin ascii karşılık --> 0
+
+0000 0000 bitlerinden olsuur aslında
+
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    printf("%d\n", '0');
+    printf("%d\n", '\0');
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+0 ile '\0' yazmak arasında fark yok
+ama char türünden dizilerin kullanımında '\0' null karaterinin kullanmalıyız
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    char str[100];
+
+    str[0] = 'B';
+    str[1] = 'A';
+    str[2] = 'B';
+    str[3] = 'A';
+    str[4] = '\0'; //yazının sonunu belirtmiştir
+
+    for (int i = 0; str[i] != '\0'; ++i) {
+        putchar(str[i]);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    char str[100];
+
+    str[0] = 'B';
+    str[1] = 'A';
+    str[2] = 'B';
+    str[3] = 'A';
+    //str[4] = '\0'; //yazının sonunu belirtmiştir
+
+    //run  time hatası
+    //null karater olmasaydı
+
+    for (int i = 0; str[i] != '\0'; ++i) {
+        putchar(str[i]);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    char str[100];
+
+    str[0] = 'B';
+    str[1] = 'A';
+    str[2] = 'B';
+    str[3] = 'A';
+    str[4] = '\0'; //yazının sonunu belirtmiştir
+
+    //dogur bir ifade
+    //cunku str[4] yani null karateri 0 a denk geliyor buda false temsil eder
+    for (int i = 0; str[i]; ++i) {
+        putchar(str[i]);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+char str[100];
+
+int main()
+{
+
+    str[0] = 'B';
+    str[1] = 'A';
+    str[2] = 'B';
+    str[3] = 'A';
+    //str[4] = '\0'; //yazının sonunu belirtmiştir
+
+    //burada hata yok
+    //global değişkenlerin elemanları hata sıfır degeri ile gelir
+    //sıfır degeride null karatere denk geldigi için problem yoktur
+    for (int i = 0; str[i] != '\0'; ++i) {
+        putchar(str[i]);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    static char str[100];
+
+    str[0] = 'B';
+    str[1] = 'A';
+    str[2] = 'B';
+    str[3] = 'A';
+    //str[4] = '\0'; //yazının sonunu belirtmiştir
+
+    //{'B', 'A', 'B', 'A', '\0', '\0', '\0', '\0' ....... '\0'}
+
+    //burada hata yok
+    //static değişkenlerin elemanları hata sıfır degeri ile gelir
+    //sıfır degeride null karatere denk geldigi için problem yoktur
+    for (int i = 0; str[i] != '\0'; ++i) {
+        putchar(str[i]);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    char str[100];
+
+    str[0] = 'B';
+    str[1] = 'A';
+    str[2] = 'B';
+    str[3] = 'A';
+    str[4] = '\0';
+
+    printf("%s\n", str);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    char str[100];
+
+    str[0] = 'B';
+    str[1] = 'A';
+    str[2] = 'B';
+    str[3] = 'A';
+    str[4] = '\0';
+
+    //printf("%s\n", str);
+
+    //puts fonksiyonu '\n' karaterinin dahil eder kendisi
+    //char türünden dizileri %s formatında kolaycana yazdırabiliriz
+    puts(str);
+    printf("Hiiii");
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+
+int main()
+{
+    char name[100];
+    char surname[100];
+
+    printf("%s %s", name, surname);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+yazıl tutan dizilere ilk deger verebilimiyiz
+
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    // 0 -> '\0'
+
+    char str[100] = {'Y', 'A', 'V', 'U', 'Z'};
+    //bu dizinin sonu null karakteri ile doludur
+
+    puts(str);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    // 0 -> '\0'
+
+    //dizinini sonunda '\0' yoktur
+    char str[5] = {'Y', 'A', 'V', 'U', 'Z'};
+
+    //dikkat yazdırdıgına aldanmayın
+    puts(str);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+
+
+int main()
+{
+
+    // 0 -> '\0'
+
+    //dizinini sonunda '\0' yok
+    char str[] = {'Y', 'A', 'V', 'U', 'Z'};
+
+    //dikkat yazdırdıgına aldanmayın
+    puts(str);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    //bunun sonunda null karakteri var
+    char str[20] = "orhan ozturk";
+
+    printf("%s\n", str);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    //bunun sonunda null karakteri var
+    //dizinin boyutu 6 oluyor
+    char str[] = "orhan";
+
+    printf("dizi boyutu  = %zu\n", sizeof (str) / sizeof (str[0]));
+
+    puts(str);
+    printf("%s\n", str);
+
+    for (int i = 0; str[i] != '\0'; ++i) {
+        printf("%c", str[i]);
+    }
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    //hangi durumlarda null karateri olmaz
+
+    char s1[4] = {'A', 'K', 'I', 'N'};
+    char s2[] = {'A', 'K', 'I', 'N'};
+    //char s3[] = {'A', 'K', 'I', 'N', '\0'};
+
+    char s4[10];
+    s4[0] = '0';
+    s4[1] = 'K';
+
+    //conunda null karekteri yok
+    //C de gecerli durum tanımsız davranıs
+    //C++ sentaks hatası
+    char s5[4] = "mert";
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+
+#define     SIZE    100
+
+int main()
+{
+
+    char str[SIZE];
+
+    //bos yazı denir
+    //uzunlugu sıfırdır
+    //null string denir
+    str[0] = '\0';
+
+    //bu yazının en fazla uzunlugu 99 olabilir
+    // en az 0 olabilir
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+#define     SIZE    100
+
+int main()
+{
+
+    char str[SIZE];
+
+    printf("bir isim girin : ");
+    scanf("%s", str);
+
+    printf("isim (%s)\n", str);
+
+    //orhan
+    //orhan ozturk
+    //girişleri yaotık
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+#define     SIZE    100
+
+int main()
+{
+
+    char name[SIZE];
+    char surname[SIZE];
+    int birth_year;
+
+    printf("bir isim soyisim tarih girin : ");
+    scanf("%s%s%d", name, surname, &birth_year);
+
+    printf("%d dogumlu %s soyisimli %s isimli kisi\n", birth_year, surname, name);
+
+    //orhan
+    //orhan ozturk
+    //girişleri yaotık
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+#define     SIZE    100
+
+int main()
+{
+    char a[10] = {0};
+
+    //a
+    //&a
+    //bu adresler farklıdır pointerda detaylı girecez konuya
+
+
+    char str[SIZE];
+    scanf("%s", str);
+    scanf("%s", &str[0]);
+    //aynı anlama gelir
+
+    //bu farklı anlama gelir boyle değil dikkat pointerlarda değincez
+    scanf("%s", &str);
+
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+#define     SIZE    100
+
+int main()
+{
+    char str[10];
+
+    printf("bir isim girin : ");
+    scanf("%s", str);
+
+    //eger dizi boyutundan fazla ver i girisi olur ise
+    //scanf burada alma işlemlerin problemler olusturabilir
+
+    printf("%s\n", str);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+#define     SIZE    100
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir isim girin : ");
+    scanf("%s", str);
+
+    //eger dizi boyutundan fazla ver i girisi olur ise
+    //scanf burada alma işlemlerin problemler olusturabilir
+
+    printf("%s\n", str);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE    100
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir isim girin : ");
+    sgets(str);
+
+    printf("%s\n", str);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE    100
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir isim girin : ");
+    sgets(str);
+    printf("%s\n", str);
+
+    int len = 0;
+
+    for (int i = 0; str[i] != '\0'; ++i) {
+        ++len;
+    }
+
+    printf("uzunluk = %d\n", len);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE    100
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir isim girin : ");
+    sgets(str);
+    printf("%s\n", str);
+
+    int i;
+    for (i = 0; str[i] != '\0'; ++i)
+        ;
+
+    printf("uzunluk = %d\n", i);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE    100
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir isim girin : ");
+    sgets(str);
+    printf("%s\n", str);
+
+    int i;
+    for(i = 0; str[i] != '\0'; ++i)
+        ;
+
+    for (--i; i >= 0; --i) {
+        putchar(str[i]);
+    }
+
+    putchar('\n');
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE    100
+
+//count algoritması denir
+//yazının belirli karakterlerinden kac tane oldugunu bulma işlemi
+//O(n)
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir isim girin : ");
+    sgets(str);
+    printf("%s\n", str);
+
+    int c;
+    printf("Bir karakter girin : ");
+    c  = getchar();
+
+    int count = 0;
+
+    for (int i = 0; str[i] != '\0'; ++i) {
+        if(str[i] == c)
+            ++count;
+    }
+
+    printf("%d tane sayildi\n", count);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE    100
+
+//count algoritması denir
+//yazının belirli karakterlerinden kac tane oldugunu bulma işlemi
+//O(n)
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir isim girin : ");
+    sgets(str);
+    printf("%s\n", str);
+
+    int c;
+    printf("Bir karakter girin : ");
+    c  = getchar();
+
+    int count = 0;
+
+    for (int i = 0; str[i] != '\0'; ++i) {
+        if(toupper(str[i]) == toupper(c))
+            ++count;
+    }
+
+    printf("%d tane sayildi\n", count);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE    100
+
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir isim girin : ");
+    sgets(str);
+    printf("%s\n", str);
+
+    for(int c = 'a'; c <= 'z'; ++c) {
+        int count = 0;
+        for (int i = 0; str[i] != '\0'; ++i) {
+            if(toupper(str[i]) == toupper(c))
+                ++count;
+        }
+        if(count)
+            printf("%c adet --> %d\n", c, count);
+    }
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE    100
+
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir isim girin : ");
+    sgets(str);
+    printf("%s\n", str);
+
+    int counts[26] = {0};
+
+    for (int i = 0;  str[i] != '\0'; ++i) {
+        if(isalpha(str[i])){
+            ++counts[toupper(str[i]) - 'A'];
+        }
+    }
+
+    for (int i = 0; i < 26; ++i) {
+        if(counts[i]){
+            printf("%c  %d\n", 'A' + i, counts[i]);
+        }
+    }
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE    100
+
+//mulukat sorusu
+
+//O(n) karmasıklıkta yapınız
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir isim girin : ");
+    sgets(str);
+    printf("%s\n", str);
+
+
+    //yazınıın sonuna X karakteri ekleyin
+
+    int i;
+    for (i = 0; str[i] != '\0'; ++i)
+        ;
+
+    str[i] = 'X';
+    str[i+1] = '\0';
+
+    printf("(%s)\n", str);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE    100
+
+//mulukat sorusu
+
+//O(n) karmasıklıkta yapınız
+
+int main()
+{
+    char s1[SIZE];
+    char s2[SIZE];
+
+    printf("iki sim girin : ");
+    scanf("%s%s", s1, s2);
+
+    printf("%s %s\n", s1, s2);
+
+    //s1 dizisini s2nin sonu eklemek
+
+    int i;
+
+    for (i = 0; s1[i] != '\0'; ++i)
+        ; //null statement
+
+    int k;
+    for (k = 0; s2[k] != '\0'; ++k) {
+        s1[i+k] = s2[k];
+    }
+
+    s1[i+k] = '\0';
+
+    printf("|%s|\n", s1);
+
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE    100
+
+//mulukat sorusu
+
+//O(n) karmasıklıkta yapınız
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir isim girin : ");
+    sgets(str);
+    printf("%s\n", str);
+
+    int len;
+
+    for (len = 0; str[len] != '\0'; ++len)
+        ; //null statement
+
+    for (int i = 0; i < len / 2; ++i) {
+        char temp = str[i];
+        str[i] = str[len -1 -i];
+        str[len -1 -i] = temp;
+    }
+
+    printf("|%s|\n", str);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+Polidrom
+
+Para hazır ama Rıza harap!
+At sahibi gibi hasta
+Madam, I'm Adam.
+
+
+HomeWork
+
+yazının polidrom olup olmadıgını kontrol edecek program
+
+2 cozum var
+1.kolay olan ilave bir dizi
+2.zorise ilave bir dizi olmadan cozebilmek
+
+
+/****************************************************/
+/****************************************************/
+
+
+HomeWork
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE    100
+
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir isim girin : ");
+    sgets(str);
+    printf("%s\n", str);
+
+    //orhan ozturk  giriş
+    //ozturk orhan  istenilen
+    //mustafa keser giriş
+    //keser mustafa istenilen
+
+    /*Kod*/
+
+
+
+    printf("|%s|\n", str);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+remove algoritması
+remove copy algoritması
+
+
+remove copy
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE    100
+
+
+int main()
+{
+    char source[SIZE];
+
+    printf("bir yazi girin : ");
+    sgets(source);
+    printf("%s\n", source);
+
+    int ch;
+    char dest[SIZE];
+
+    printf("silinecek karateri girin :");
+    ch = getchar();
+
+    int write_idx = 0;
+
+    for (int i = 0; source[i] != '\0'; ++i) {
+        if (source[i] != ch) {
+            dest[write_idx++] = source[i];
+        }
+    }
+
+    dest[write_idx] = '\0';
+
+    printf("|%s|\n", dest);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE    100
+
+
+int main()
+{
+    char source[SIZE];
+
+    printf("bir yazi girin : ");
+    sgets(source);
+    printf("%s\n", source);
+
+    int ch;
+    char dest[SIZE];
+
+    int write_idx = 0;
+
+    for (int i = 0; source[i] != '\0'; ++i) {
+        if (!isdigit(source[i])) {
+            dest[write_idx++] = source[i];
+        }
+    }
+
+    dest[write_idx] = '\0';
+
+    printf("|%s|\n", dest);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE    100
+
+//iki yazının eşitliğini sınamak
+
+int main()
+{
+    char s1[SIZE];
+    char s2[SIZE];
+
+    printf("bir yazi girin : ");
+    scanf("%s%s", s1, s2);
+    printf("(%s) (%s)\n", s1, s2);
+
+    int i = 0;
+    int flag = 0;
+
+    while (s1[i] == s2[i]) {
+        if(s1[i] == '\0'){
+            flag = 1;
+            break;
+        }
+        ++i;
+    }
+
+    if(flag)
+        printf("yazilar esit\n");
+    else
+        printf("yazilar esit degil\n");
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE        100
+
+//yazının keilme sayısı
+//ankara eskisehir zonguldak  --> 3 keilme
+
+#define     IN_WORD     1
+#define     OUT_WORD    0
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir yazi girin : ");
+    sgets(str);
+    printf("%s\n", str);
+
+    int word_flag = OUT_WORD;
+    int word_count = 0;
+
+    for (int i = 0; str[i] != '\0'; ++i) {
+        if(isspace(str[i])){
+            word_flag = OUT_WORD;
+        }
+        else if(word_flag == OUT_WORD){
+            ++word_count;
+            word_flag = IN_WORD;
+        }
+    }
+
+    printf("kelime sayisi %d dir \n", word_count);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE        100
+
+//yazının keilme sayısı
+//ankara eskisehir zonguldak  --> 3 keilme
+
+#define     IN_WORD     1
+#define     OUT_WORD    0
+
+int is_spec(int c)
+{
+    return isspace(c) || !isalnum(c);
+}
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir yazi girin : ");
+    sgets(str);
+    printf("%s\n", str);
+
+    int word_flag = OUT_WORD;
+    int word_count = 0;
+
+    for (int i = 0; str[i] != '\0'; ++i) {
+        if(is_spec(str[i])){
+            word_flag = OUT_WORD;
+        }
+        else if(word_flag == OUT_WORD){
+            ++word_count;
+            word_flag = IN_WORD;
+        }
+    }
+
+    printf("kelime sayisi %d dir \n", word_count);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+yazi  -->sayı
+sayı  --> yazi ya dönüştürme
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE        100
+
+//yazının keilme sayısı
+//ankara eskisehir zonguldak  --> 3 keilme
+
+#define     IN_WORD     1
+#define     OUT_WORD    0
+
+int is_spec(int c)
+{
+    return isspace(c) || !isalnum(c);
+}
+
+int main()
+{
+    int ival = 0;
+    printf("bir tam sayi girin : ");
+    scanf("%d", &ival);
+
+    char str[SIZE];
+    int temp = ival;
+
+    int idx = 0;
+
+    while (temp) {
+        str[idx++] = temp % 10 + '0';
+        temp /= 10;
+    }
+
+    str[idx] = '\0';
+
+    printf("|%s|\n", str);
+
+    for (int i = 0; i < idx / 2; ++i) {
+        char temp = str[i];
+        str[i] = str[idx -1 -i];
+        str[idx -1 -i] = temp;
+    }
+
+    printf("|%s|\n", str);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+HomeWork
+
+yukarıdaki örnek  negatif tam sayı oldugunda calısacak
+hale getiriniz
+
+negatif tam sayı girisi yapılıncada çalışmasını isityoruz
+
+
+/*****************************************************/
+/*****************************************************/
+
+
+yazıyı sayiya cevirme
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir tam sayi girin : ");
+    sgets(str);
+    printf("%s\n", str);
+
+    int ival = 0;
+
+    for (int i = 0; str[i] != '\0'; ++i) {
+        ival = ival * 10 + str[i] - '0';
+    }
+
+    printf("ival = %d\n", ival);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+HomeWork
+
+yukarıdaki örnek  negatif tam sayı oldugunda casmayacak
+
+negatif tam sayı girisi yapılıncada çalışmasını isityoruz
+
+
+/*****************************************************/
+/*****************************************************/
+
+partisyon algoritması
+
+bir veri yapsıını bir kosulu saglayanlar ve saglamayanlar olarak
+bolunmlemek, saglayanlar basta olacak saglamayanlar sonda olacak
+
+O(n) karmasıklıgınd aolmalı
+
+mulakat sorusu
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE        20
+
+int is_even(int x)
+{
+    return x % 2 == 0;
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int i;
+
+    for (i = 0; i < SIZE && is_even(a[i]); ++i)
+        ;
+
+    int k;
+
+    if(i == SIZE){
+        printf("butun ogeler kosulu salıyor\n");
+    }
+    else{
+        for (k = i+1; k < SIZE; ++k) {
+            if (is_even(a[k])) {
+                int temp = a[i];
+                a[i] = a[k];
+                a[k] = temp;
+                ++i;
+            }
+        }
+    }
+
+    printf("partisyon noktasi indxsi = %d\n", i);
+    print_array(a, SIZE);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE        20
+
+int is_even(int x)
+{
+    return x % 2 == 0;
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int i;
+
+    for (i = 0; i < SIZE && isprime(a[i]); ++i)
+        ;
+
+    int k;
+
+    if(i == SIZE){
+        printf("butun ogeler kosulu salıyor\n");
+    }
+    else{
+        for (k = i+1; k < SIZE; ++k) {
+            if (isprime(a[k])) {
+                int temp = a[i];
+                a[i] = a[k];
+                a[k] = temp;
+                ++i;
+            }
+        }
+    }
+
+    printf("partisyon noktasi indxsi = %d\n", i);
+    print_array(a, SIZE);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE        20
+
+int is_than(int x)
+{
+    return x < 500;
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int i;
+
+    for (i = 0; i < SIZE && is_than(a[i]); ++i)
+        ;
+
+    int k;
+
+    if(i == SIZE){
+        printf("butun ogeler kosulu salıyor\n");
+    }
+    else{
+        for (k = i+1; k < SIZE; ++k) {
+            if (is_than(a[k])) {
+                int temp = a[i];
+                a[i] = a[k];
+                a[k] = temp;
+                ++i;
+            }
+        }
+    }
+
+    printf("partisyon noktasi indxsi = %d\n", i);
+    print_array(a, SIZE);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+HomeWork
+
+
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include "utility.h"
+#include <ctype.h>
+
+#define     SIZE        20
+
+#define     SIZE        200
+
+//HomeWork
+
+// 2 yazı var
+// 2.ci yazının 1 yazıda gectigi yeri isteniyor
+// ilk gecetigi yerin index numnarası isteniyor
+
+
+int main()
+{
+    char str[SIZE];
+
+    printf("bir sayi giriniz : ");
+    sgets(str);
+    printf("|%s|\n", str);
+
+    char s[SIZE];
+
+    printf("aranacak yaziyi giriniz : ");
+    scanf("%s", s);
+
+    // ekran cıktısı su sekılde olacak
+    // ya bulunamadı
+    // yada bulundu indeks = 12
+
+}
+
+
+
+/*****************************************************/
+/*****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
