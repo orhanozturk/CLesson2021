@@ -6314,6 +6314,1051 @@ int main()
 /*****************************************************/
 
 
+Pointer
+
+Pointer demek adres demektir
+
+Adresler 2 kategoriye ayrılır
+
+1- nesne adresi -- object pointer
+2- fonksiyon adresi -- function pointer
+
+
+
+1- nesne adresi -- object pointer
+
+nesnelerin bellekteki konumlarını adressler ile gösterme biçimi
+
+x eger bir T türünden değişken ise
+ve bir ifade böyle bir değişkenin adresi anlamına geliyorsa
+
+o ifadeinni türü T* dır
+
+int *
+double *
+...
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int *ptr;
+    //ptr, int türünden bir değişkennin adresinin tutacak bir değikendir
+    //ptr'nin türü int * dir
+    //ptr is a pointer to int
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int *p1, p2;
+    //p1 pointer
+    //p2 onject nesne değişken
+
+    int *ptr1, *ptr2;
+    //bunlar pointer tanımları
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    //int x, y[5], z;
+    int x, y[5], z, *ptr;
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    //bir pointer sistem kaç byte yerkaplar
+
+    printf("size char    = %zu\n", sizeof (char));
+    printf("size char*    = %zu\n", sizeof (char *));
+
+    printf("size short    = %zu\n", sizeof (short));
+    printf("size short*    = %zu\n", sizeof (short *));
+
+    printf("size int    = %zu\n", sizeof (int));
+    printf("size int*    = %zu\n", sizeof (int *));
+
+    printf("size long    = %zu\n", sizeof (long));
+    printf("size long*    = %zu\n", sizeof (long *));
+
+    printf("size float    = %zu\n", sizeof (float));
+    printf("size float*    = %zu\n", sizeof (float *));
+
+    printf("size double    = %zu\n", sizeof (double));
+    printf("size double*    = %zu\n", sizeof (double *));
+
+    printf("size long double    = %zu\n", sizeof (long double));
+    printf("size long double*    = %zu\n", sizeof (long double *));
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+long double* p;
+
+int main()
+{
+
+    printf("sizeof = %zu\n", sizeof (p));
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int* p;
+
+void func(int *gp)
+{
+    int *px;
+    static int * py;
+}
+
+int main()
+{
+
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+//hayata null pointer ile başlar
+int* p;
+
+//hayata 0 degeri ile
+int a;
+
+void func(int *gp)
+{
+    //hayata çöp değeri ile baslar
+    int *px;
+
+    //hayata null pointer ile baslar
+    static int * py;
+
+    //hayata garbage value ile baslar
+    int b;
+
+    //hayata 0 ile baslardı
+    static int c;
+}
+
+int main()
+{
+
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+pointer operatorlerin
+
+işaretçi -- gösterici telefuzları kullanılıyor
+
+
+&  --> adress of (adres opeatoru)
+   bitwise ile karıstırmıyoruz a&b
+
+
+* --> dereferencing / indirection -- içerik opeatörü
+[ ]  --> index / subscript  --- köşeli parantez operatörü
+
+->  --> member selection op // arrow (ok operatörü)
+
+
+/******************************************/
+
+
+&  --> adress of (adres opeatoru)
+
+2. öncelik seviyesinde -- unary opeator sagdan sola right associative
+
+
+adres operatorünün operandı L value olması zorunlulugu vardır
+
+int x;
+
+&x;
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+
+    int x = 10;
+
+    &x; // bu demek adresi demek x in
+    &(x + 5); // (x + 5) R value odugu için adress operatoru ile işleme giremez
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+&x; --> adres operatorunu  uretecegi deger R value
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+
+    int x = 10;
+
+    //bu ifadenin türü
+    &x; //int *
+
+    char c;
+    &c; // char *
+
+    double d;
+    &d; // double *
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+
+    int x = 10;
+
+    int *p = &x; //p ye ilk deger verdim
+
+    int y;
+
+    p = &y; // p ye atama yaptım
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+
+    int x = 10, *p = &x, y = 56, *q = &y;
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+
+    int x = 10;
+    int *p = &x;
+
+    //p nin degeri x in adresi
+    //p ' x i gösteriyor
+    //p, x e işaret ediyor
+    //p points to x
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+
+    int x = 10;
+    int *p = &x;
+
+    //adreler 16 sayı sisteminde temsil edilir
+
+    printf("x   = %d\n", x);
+    printf("&x  = %p\n", &x);
+    printf("p   = %p\n", p);
+    printf("&p  = %p\n", &p);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+
+    int x = 10;
+    int *p = &x;
+
+    //adreler 16 sayı sisteminde temsil edilir
+
+    printf("x   = %d\n", x);
+    printf("&x  = %p\n", &x);
+    printf("p   = %p\n", p);
+    printf("&p  = %p\n", &p);
+
+    int y = 56;
+
+    p = &y;
+
+    printf("y   = %d\n", y);
+    printf("&y  = %p\n", &y);
+    printf("p   = %p\n", p);
+    printf("&p  = %p\n", &p);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+
+    int x = 10;
+    int *p1 = &x;
+    int *p2 = &x;
+
+    //adreler 16 sayı sisteminde temsil edilir
+
+    printf("x   = %d\n", x);
+    printf("&x  = %p\n", &x);
+    printf("p1   = %p\n", p1);
+    printf("&p1  = %p\n", &p1);
+    printf("p2   = %p\n", p2);
+    printf("&p2  = %p\n", &p2);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+
+    int x = 10;
+    int *p1 = &x;
+    int *p2 = p1;
+
+    //adreler 16 sayı sisteminde temsil edilir
+
+    printf("x       = %d\n", x);
+    printf("&x      = %p\n", &x);
+    printf("p1      = %p\n", p1);
+    //printf("&p1   = %p\n", &p1);
+    printf("p2      = %p\n", p2);
+    //printf("&p2   = %p\n", &p2);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+
+    int x = 10, *p1 = &x, *p2 = p1;
+
+    //adreler 16 sayı sisteminde temsil edilir
+
+    printf("x       = %d\n", x);
+    printf("&x      = %p\n", &x);
+    printf("p1      = %p\n", p1);
+    //printf("&p1   = %p\n", &p1);
+    printf("p2      = %p\n", p2);
+    //printf("&p2   = %p\n", &p2);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+
+    int x = 10
+    int* p = &x;
+    int *ptr;
+
+    ptr = p;
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+
+    int a[10] = { 0 };
+
+    //array decay
+    //array to pointer convertion denir
+    &a[0];
+
+    //ikiside aynı anlamda
+    int *ptr1 = &a[0]; //array decay
+    int *ptr2 = a;
+
+    printf("&a[0]       = %p\n", &a[0]);
+    printf("a           = %p\n", a);
+    printf("ptr1        = %p\n", ptr1);
+    printf("ptr2        = %p\n", ptr2);
+
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+
+    int a[10] = { 0 };
+
+    printf("sizeof(a)           = %zu\n", sizeof (a)); //bu dizinin hepsinin ne kadar kaplapdıgını söyler
+    printf("sizeof(&a[0])       = %zu\n", sizeof (&a[0])); //bu tek bir nesneyi sorgular // char *
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int a[10] = {0};
+    int x = 10;
+
+    int *p = &x;
+
+    int *ptr = a;
+
+    p = ptr;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 100;
+    int *p = x; //C de yanlış ama gecerli ve asla yapmayın
+    //C++ ise direk sentaks hatası
+
+    //boyle durumlara
+    //invalid pointer denir
+
+    //C de tam sayılar ile pointer arasında otomatik tür donusumu var iken
+    //C++ da bu snetaks hatası
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 100;
+    int* p = (int *)x; //kullanıcı eger yapmak istiyor ise
+    //boyle yapmalı
+
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    double x = 1.2;
+    int *p = &x; //C de gecerli ama yanlıs
+    //C++ da ise direk sentask hatası
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+
+    &x = 2500;
+    //sentaks hatası adres değiştirlemez
+    //adres operatorunun ürettiği deger Rvalue dur
+    //bu sebepten atam yapamayız
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+& opeatoru ile olsuturlan ifadeler
+ Rvalue expression deger kategorisindedir
+
+
+asla atma operatorunun sol operandı olamazlar
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+    int y = 30;
+    int z = 40;
+
+    int *p = &x;
+
+    p = &y;
+
+    p = &z;
+
+    &z; //Rvalue olacak
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+dereferencing / indirection -- içerik operatoru
+
+*
+
+2. öncelik seviyesinde
+
+----------------------------------
+& * ++ -- + - ! sizeof      sagdan sola
+---------------------------------
+
+(*) içerik operatürünün openradı olan  ifade bir adres türünden olmalı
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+    int* ptr; //içerik operatorunu tanımlama sentaksı ile karıstırmayın
+
+    //*46; //sentask hatası
+    //*x; // sentaks hatası
+
+    *&x;
+    x;
+
+
+    int *ptr = &x;
+
+    *ptr; //x nesnesi
+
+    int a[] = {1, 2, 3};
+    *a;
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+a- bir sol taraf degeridir
+b- openradı adress olmalıdır
+
+
+(*adres) demek --> nesne demektir
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+
+    *&x = 55; //
+    //x = 55;
+
+    printf("x = %d\n", x);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+
+    printf("x = %d\n", x);
+    ++*&x;
+    printf("x = %d\n", x);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+
+    printf("x = %d\n", x);
+
+    //böyle kodlar yazmayın
+    //ben sadece işelvi gosteriyorum
+    ++*&*&*&*&*&*&*&*&*&*&x;
+    //++x; bun karsılık gelir
+
+    printf("x = %d\n", x);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int a[] = {10, 20, 30, 40};
+
+    *a = 999;
+
+    printf("a[0] = %d\n", a[0]);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+    int *p = &x;
+
+    printf("x = %d\n", x);
+
+    *p = 888;
+
+    printf("x = %d\n", x);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+    int *p1 = &x, *p2 = p1, *p3 = p2;
+
+    ++* p1;
+    ++* p2;
+    ++* p3;
+
+    printf("x = %d\n", x);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int a = 10;
+    int b = 20;
+    int c = 30;
+
+    int *p;
+
+    p = &a;
+    ++*p;
+    //++a
+
+    p = &b;
+    ++*p;
+    //++b
+
+    p = &c;
+    ++*p;
+    //++c
+
+    printf("a = %d\n", a);
+    printf("b = %d\n", b);
+    printf("c = %d\n", c);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int a = 10;
+    int b = 20;
+
+    int* p1 = &a, * p2 = &b;
+
+    //hiç bir fark yok
+    *p1 = *p2;
+    //a = b;
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+    int y = 20;
+    int z = 50;
+
+    //bu ifade Lvalue expression mı dır
+    x > 5 ? y: z;
+
+    //C de R value
+    //C++ Lvalue
+
+    //x > 5 ? y: z = 5; // C de sentaks hatası
+    //C++ gecerliydi
+
+    *(x > 5 ? &y: &z) = 5;
+    //artık bu hile kosul operatorunun
+    //urettigi deger atama yapailirm
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+call by value suana kadar fonksiyonlar bunu yapıyorduk
+
+
+call by reference şimdi fonksiyonlar bunu yapmaaya baslıyacaz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
