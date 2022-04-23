@@ -1,19 +1,16 @@
 #include <stdio.h>
 #include "utility.h"
 
-
-
 int main()
 {
-    int x = 10;
+    int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-
-    printf("%zu\n", sizeof x * 5);
-    printf("%zu\n", sizeof (x * 5));
-    printf("%zu\n", sizeof (x) * 5);
+    for(int i = 0; i < 10; ++i){
+        printf("%d    %d\n", a[i], i[a]);
+        //*(a + i)  ---- *(i + a)
+    }
 
 }
-
 
 
 /****************************************************/

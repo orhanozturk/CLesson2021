@@ -96,7 +96,12 @@ void sgets(char *p)
     *p = '\0';
 }
 
-
+void swap(int* a, int* b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
 
 

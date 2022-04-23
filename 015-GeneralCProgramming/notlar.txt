@@ -7258,6 +7258,847 @@ call by value suana kadar fonksiyonlar bunu yapıyorduk
 call by reference şimdi fonksiyonlar bunu yapmaaya baslıyacaz
 
 
+#include <stdio.h>
+#include "utility.h"
+
+void foo(int a)
+{
+    a = 99;
+}
+
+int main()
+{
+  int x = 45;
+
+  //call by value
+  foo(x);
+
+  printf("x = %d\n", x);
+}
+
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+void foo(int *a)
+{
+    *a = 99;
+}
+
+int main()
+{
+  int x = 45;
+
+  //call by reference
+  foo(&x);
+
+  printf("x = %d\n", x);
+}
+
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+void foo(int a)
+{
+
+    printf("&a  = %p\n", &a);
+
+}
+
+int main()
+{
+  int x = 45;
+
+  printf("&x = %p\n", &x);
+  foo(x);
+}
+
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+void foo(int *a)
+{
+    printf("a  = %p\n", a);
+    *a = 222;
+}
+
+int main()
+{
+  int x = 45;
+
+  printf("&x = %p\n", &x);
+
+  foo(&x);
+
+  printf("x = %d\n", x);
+}
+
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+void foo(int *a)
+{
+    printf("a  = %p\n", a);
+    *a = 222;
+}
+
+int main()
+{
+  int x = 45;
+
+  printf("&x = %p\n", &x);
+
+  foo(&x);
+
+  printf("x = %d\n", x);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+   int x = 222, y = 444;
+
+   int temp = x;
+   x = y;
+   y = temp;
+
+   printf("x = %d   y = %d\n", x, y);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+void swap(int a, int b)
+{
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+
+int main()
+{
+   int x = 222, y = 444;
+   //call by value
+   swap(x, y);
+
+   printf("x = %d   y = %d\n", x, y);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+void swap(int* a, int* b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+
+int main()
+{
+   int x = 222, y = 444;
+
+   //call by refeence
+   swap(&x, &y);
+
+   printf("x = %d   y = %d\n", x, y);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+   int x = 222, y = 444;
+
+   //call by refeence
+   swap(&x, &y);
+
+   printf("x = %d   y = %d\n", x, y);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+   int x = 222, y = 444;
+
+   //call by refeence
+   scanf("%d%d", &x, &y);
+
+   printf("x = %d   y = %d\n", x, y);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int a[] = {1, 2, 3, 4, 5};
+    int b[] = {-1, -2, -3, -4, -5};
+
+    swap(a, b);
+
+    printf("a[0]  = %d\n", a[0]);
+    printf("b[0]  = %d\n", b[0]);
+
+    for (int i = 0; i < (int)asize(a); ++i) {
+        printf("a[%d]  =  %d\n", i, a[i]);
+    }
+
+    for (int i = 0; i < (int)asize(b); ++i) {
+        printf("b[%d]  =  %d\n", i, b[i]);
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int x = 34, y = 11;
+    int* p1 = &x, * p2 = &y;
+
+    printf("x = %d   y = %d\n", x, y);
+
+    swap(p1, p2);
+
+    printf("x = %d   y = %d\n", x, y);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+double get_circle_area(double radius)
+{
+    return 3.14 * radius * radius;
+}
+
+int main()
+{
+    double r;
+    printf("dairenin alanini giriniz : ");
+    scanf("%lf", &r);
+
+    double area = get_circle_area(r);
+
+    printf("area = %f\n", area);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+void get_circle_area(double radius, double* pArea)
+{
+    *pArea = 3.14 * radius * radius;
+}
+
+int main()
+{
+    double r;
+    printf("dairenin alanini giriniz : ");
+    scanf("%lf", &r);
+
+    double area;
+    get_circle_area(r, &area);
+
+    printf("area = %f\n", area);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+void get_circle_vals(double radius, double* pPerimeter, double* pArea)
+{
+    *pPerimeter = 2. * 3.14 * radius;
+    *pArea = 3.14 * radius * radius;
+}
+
+int main()
+{
+    double r;
+    printf("dairenin alanini giriniz : ");
+    scanf("%lf", &r);
+
+    double area;
+    double perimeter;
+
+    get_circle_vals(r, &perimeter, &area);
+
+    printf("perimeter = %f\n", perimeter);
+    printf("area = %f\n", area);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+void func(T* ptr); // out-param
+void fooo(const T* ptr); //in-param
+
+/****************************************************/
+/****************************************************/
+
+pointer aritmetigi
+
+C dilinde
+
+bir adres ile bir tam sayı toplanabilir
+bir tam sayı ile bir adres toplanabilir
+bir adresten bir tam sayı çıkartılabilir
+
+ilem sonuçları bir adrestir
+
+adres + n
+n + adres
+adres - n
+
+bir tam sayıdan bir adresi çıkartmak sentask hatası
+n-adres
+
+bir dizinin bir elemanının adresine 1 toplarsak dizinini bir sonraki elamnına erişmiş olruuz
+adres + 1
+
+bir dizinin bir elemanının adresine 1 çıkartırsak dizinini bir önceki elamnına erişmiş olruuz
+adres - 1
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    //ikiside aynı ifade
+    a + 1; // bu adres 1 indexsin adresi olur
+    &a[1];
+
+    //a + i;
+    //&a[i];
+
+    for (int i = 0; i < 10; ++i) {
+        printf("%p   %p\n", a+i , &a[i]);
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    short a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    for (int i = 0; i < 10; ++i) {
+        printf("%p   %p\n", a+i , &a[i]);
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    double a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    for (int i = 0; i < 10; ++i) {
+        printf("%p   %p\n", a+i , &a[i]);
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    for (int i = 0; i < 10; ++i) {
+        printf("%d   %d\n", *(a+i) , a[i]);
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int *ptr = a;
+
+    printf("*ptr = %d\n", *ptr);
+    ptr = ptr + 1;
+    printf("*ptr = %d\n", *ptr);
+    ++ptr;
+    printf("*ptr = %d\n", *ptr);
+    ++ptr;
+    printf("*ptr = %d\n", *ptr);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int *ptr = a;
+
+    for (int i = 0; i < 10; ++i) {
+        printf("%d  %d  %d\n", a[i], *ptr, *(a+i));
+        ++ptr;
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    short a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    short *ptr = a;
+
+    for (int i = 0; i < 10; ++i) {
+        printf("%d  %d  %d\n", a[i], *ptr, *(a+i));
+        ++ptr;
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    double a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    double *ptr = a;
+
+    for (int i = 0; i < 10; ++i) {
+        printf("%f  %f  %f\n", a[i], *ptr, *(a+i));
+        ++ptr;
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int *ptr = a + 5;
+    //int *ptr = &a[5];
+
+
+    printf("ptr = %p\n", ptr);
+    printf("&a[5] = %p\n", &a[5]);
+
+    printf("*ptr = %d\n", *ptr);
+    printf("a[5] = %d\n", a[5]);
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int *ptr = a + 5;
+    //int *ptr = &a[5];
+
+
+    printf("ptr = %p\n", ptr);
+    printf("&a[5] = %p\n", &a[5]);
+
+    printf("*ptr = %d\n", *ptr);
+    printf("a[5] = %d\n", a[5]);
+
+
+    --ptr;
+    printf("*ptr = %d\n", *ptr);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int *ptr = a + 5;
+
+    ptr - 3; //gecerli
+    3 - ptr; //sentaks hatası
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+C dilin iki tane adresin toplanması geçersiz
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int *p1 = a + 2;
+    int *p2 = a + 3;
+
+    p1 + p2;// sentaks hatsı
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+C dilinde iki adresin birbirinden çıkartılabilir
+Bu iişlemin sonucu işaretli bir tam sayıdır
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int *p1 = a + 2;
+    int *p2 = a + 5;
+
+    p1 - p2; // -3
+    p2 - p2; // +3
+
+    printf("%d\n", p1 - p2);
+    printf("%d\n", p2 - p1);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int x = 22;
+    int y = 11;
+
+    &x - &y; //bu ifade geçerli
+    //fakat faydalanmak yanlış
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    double a[10] = { 0 };
+
+    &a[8] - &a[3];  // 5 sonucu
+
+    //bu ifadede türlerin char shor tint double olması sonucu etkilemez
+
+    printf("%d\n", &a[8] - &a[3]);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    char a[10] = { 0 };
+    int b[10] = { 0 };
+
+    //bu ifade gecerli degil
+    //gecerlide olsa bize faydası yok
+    //cunku farklı iki nesenin adresi
+    printf("%d\n", &a[8] - &b[3]);
+                   //char *   int *
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+index operatorü
+subscript operatörü
+
+1. öncelik seviyeesinde
+
+() [] . ->  soldan saga left associative
+
+
+a[i];  derleyici tarafıdnan bu ifadeye çeviriliyor
+
+ *(a + i) // ceviri bu
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+    for(int i = 0; i < 10; ++i){
+        printf("%d    %d\n", a[i], i[a]);
+        //*(a + i)  ---- *(i + a)
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
