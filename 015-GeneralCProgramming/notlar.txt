@@ -8014,6 +8014,1024 @@ int main()
 /****************************************************/
 
 
+adres[tam sayı];
+
+a[i];
+int *ptr = a;
+ptr[i];
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int x = 10;
+
+    (&x)[0] = 41;
+
+    //böyle bir kod yazmıyoruz
+    //sadece göztermek amaclı
+    printf("x = %d\n", x);
+
+    *(&x + 0) = 22;
+    printf("x = %d\n", x);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    int *p = a + 6;
+
+    printf("%d\n", *p); //6
+    printf("%d\n", p[0]); //6
+    printf("%d\n", p[2]); //8  *(p + 2)
+    printf("%d\n", *(p+2)); //8
+    printf("%d\n", p[-3]); // 3 *(p - 3)
+    printf("%d\n", *(p-3)); // 3
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+
+    a[10]; //sentask hatası deil ama uanlıs pointer hatası
+    a[-1]; //setnak hatası deil programın calısma zamnında verilen bir hata
+    //tanımsız davranıs denir
+
+    int *p = a;
+
+    p[-5]; //tanımsız davranıs
+    p[12]; //tanımsız davranıs
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+valid pointer
+invalid pointer
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    //invalid pointer
+    int *p;
+
+    *p = 12; //tanımsız davranıs
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int ival;
+
+    //valid
+    int *p = &ival;
+
+    *p = 12; //
+
+    //invalid pointer
+    p + 1;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int x = 10;
+
+    int *ptr = &x;
+
+    //hayatı devam etmek te olan bir aedresin nesnesi
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int a[5] = {0};
+
+    //dizinini son elemanın adresi
+    &a[4];
+
+    //dizinin bittigi adresi kullanmak yeri gelince uygun
+    int *p =  a + 5;
+    &a[5];
+
+    a[5]; //mantıklı degil tanımsız davranıs
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int *p;
+
+    //bu noktada gecerli bir oointer değil
+    if(1)
+    {
+        int x = 10;
+
+        p = &x; //artık valid pointer tutar
+        //
+        //
+
+    }
+
+    //bu noktada gecerli bir oointer değil
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    int a[10] = {0};
+    int *p;
+
+    p += 10; //gecerli
+    //(p + 10)
+
+    //dizinin boytunu elde etmede kullanabiliriz
+    //dizinin bittigi yerin adresini
+    printf("size = %d\n", p - a);
+
+
+    printf("a = %d\n", p -= 3);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+   int *p = NULL;
+   //gecerli pointer
+   //hiçbir yeri göstermiyor anlamında
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+const anahtar sözcüğü
+
+değişkenlerin bildirimlerinde kullanılan bir anahtasr sözcük
+
+const değişkenler hayata gelirken ilk deger alıyorlar
+hayatı botunca bu ş-ilk degeri koruyorlar
+degeri degismiyor
+degeri degistirlirse sentask hatası
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+   const int x = 10;
+   x = 20; //sentask hatası
+   ++x;//sentask hatası
+   --x;//sentask hatası
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    const int a[] = {2, 3, 4, 5, 6, 7};
+
+    a[2] = 23; //sentask ahtası
+
+    int x = a[2];
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+    //ikiside aynı ifade
+    const int x = 10;
+    int const y = 10;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     PI      3.1415
+
+int main()
+{
+    const double pi = 3.1415;
+
+    &pi;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+#define SIZE 10
+
+int main()
+{
+    const int size = 10;
+
+    int a[size]; //gecerli bir ifade olmaz dikkat
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+const int xSize;
+//gecerli ifade ve kullanıma uygun
+//hayata 0 degeri ile geldigi için
+
+int main()
+{
+    const int size;
+    //gecerli bir ifade ama kullanımı tanımsız davranıs
+    //C++ sentaks hatası
+
+   // static const int size;
+    //gecerli ifade ve kullanıma uygun
+    //hayata 0 degeri ile geldigi için
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int func(void);
+
+int main()
+{
+    const int x = func(); // bu sekilde kullanım mevcut
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int func(void);
+
+int main()
+{
+    static const int x = func(); // sentaks hatası
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int func(void);
+
+int main()
+{
+    const int x = 10;
+    int *ptr = (int *)&x;
+
+    *ptr = 444; //bu gecerli
+    //ama kensilik tanısmız davranıs
+    //buna aldınmayın yoksa basınız belaya girer
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+const anahatar sozcugu ile pointer ilişkisinie
+
+int x = 10;
+
+//bu iki aynı anlamdadır
+const int *ptr = &x;
+int const *ptr = &x;
+
+
+//burada anlam farkı olsuyor
+int *const ptr = &x;
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int func(void);
+
+int main()
+{
+    int x = 10;
+    int *const ptr = &x;
+    //ptr'nin degeri hic degişmeyecek
+    //ptr hayatı boyunca x in adresinin tutacak
+    //ptr yi degistimeye yonelık kodlar sentaks hatası
+    //ptr is a const pointer to int
+    //C++ top level const
+
+    int y = 1;
+    ptr = &y; //sentaks hatası
+
+    *ptr = 123; //gecerli
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int func(void);
+
+int main()
+{
+    int a[] = {1, 2, 3, 4, 5};
+    int *const ptr = a;
+
+    //ptr e hep a adresinin tutacak
+
+    int y = 1;
+
+    ptr = &y;//sentask hatası
+
+    *ptr = 22; //gecerli
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int func(void);
+
+int main()
+{
+    int x = 10;
+    //int const * ptr = &x; //aynı anlamdadır
+    const int * ptr = &x;
+
+    //ptr yolu ile otr2nin gösterdiği adresi değiştirmeme
+    //yani *ptr nesnesinini asla atama yapamazsın
+
+
+    *ptr = 12; //sentask ahatası
+
+    int y = 11;
+
+    ptr = &y; //gecerli
+
+    x = 15;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int func(void);
+
+int main()
+{
+    int a[] = {1, 2, 3, 4, 5};
+    const int * ptr = &a;
+
+    *ptr = 55; //sentaks hatasıü
+
+    int y = 1;
+
+    ptr = &y;
+
+    *ptr = 12;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int func(void);
+
+int main()
+{
+    int x = 10;
+
+    int * const p1 = &x;
+    //const pointer to int
+    //c++ top level const
+    //right const
+
+
+    const int * p2 = &x;
+    //pointer to const int
+    //c++ low level const
+    //left const
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int func(void);
+
+int main()
+{
+    int x = 10;
+    int y = 11;
+
+    int * const p1 = &x; //top level const
+    const int * p2 = &x; //low level const
+
+    p1 = &y; //sentask hatası
+    *p1 = 23; //gecerli
+
+
+    p2 = &y; //gecerli
+    *p2 = 23; //sentask hatası
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+const ne den önce gelirse const olan odur
+
+int *const ptr = &x; //ptr yi degistirirsem hata
+const int *ptr = &x; //*ptr yi degistirirsem hata
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int func(void);
+
+int main()
+{
+    int x = 10;
+    int y = 11;
+
+    const int * const p1 = &x;
+
+    p1 = &y; //sentask hatası
+    *p1 = 55; //setnaks hatası
+
+    int z = *p1;
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+void func(T *p);  //out parameter
+//set fonction
+//setter
+
+
+void func(const T *p); //in parameter
+//get function
+//getter
+//acccessor
+
+
+const correctness -- const dgorulugu denir
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+void printArray(int *p, int size);
+
+
+int main()
+{
+    const int a[] = { 1, 2, 3, 4, 5};
+
+    printArray(a, 5);
+    //C de uyarı mesajı alırsınız
+    //C++ da sentask hatası verir
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+void printArray(const int *p, int size);
+
+
+int main()
+{
+    const int a[] = { 1, 2, 3, 4, 5};
+
+    printArray(a, 5);
+    //C degecerli
+    //C++ gecerli
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+tür dönüşümü ve tür uyumu -- const anahatar sözcüğü ile ilgili
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+    const int y = 20;
+
+    &x; //int * türü
+    &y; //const int * türü
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+    int *ptr = &x;
+
+    ptr; // int * türü
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+    const int *ptr = &x;
+
+    ptr; //const int * türü
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int a[100] = {0};
+
+    a; //int *
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    const int a[100] = {0};
+
+    a; //const int *
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+tür dünüşümü
+
+
+T*  --> const T*   yapılması gecerli
+
+const T* --> T*    yapılması uygun degoil  /// C++ setnaks hatası
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+
+    const int *ptr = &x; //gecerli  T* --> const T*
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    const int x = 10;
+
+    int *ptr = &x; //gecerli fakat yanlıs durum  const T* --> T* uygun ifade değil
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    const int x = 10;
+
+    int *ptr = &x; //gecerli fakat yanlıs durum  const T* --> T* uygun ifade değil
+
+    *ptr = 22; //tanımsız davranıs
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+asla const T* türünden T* türüne atama / kopyalama yapmayın
+
+bazı nadir durumlar hariç
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    const int x = 10;
+    const int *ptr = &x;
+
+    //*ptr = 12; //sentask hatası
+
+    int *p;
+
+    p = ptr; //yanlıs durum olsuur const T* --> T* dosunum var
+
+    *p = 4545; //tanımsız davranıs
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+dizilerin fonksiyonlara argüman olarak geçilmesi
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+void printArray(const int *p, int size)
+{
+    for (int i = 0; i < size; ++i) {
+        printf("%d ", p[i]);
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 11};
+
+    //T* --> const T* gecerli durum
+    printArray(a, 10);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+void printArray(const int *p, int size)
+{
+    while(size--){
+        printf("%d ", *p);
+        p++;
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 11};
+
+    //T* --> const T* gecerli durum
+    printArray(a, 10);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        20
+
+int main()
+{
+    int a[SIZE];
+
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+    print_array(a, 5); //ilk 5 elemanı
+    print_array(a + 5, 3); //5 index dahil ile 8 index arasını yazdıracam
+    print_array(&a[5], 3); //5 index dahil  ile 8 index arasını yazdıracam
+    print_array(a + SIZE -4, 4); //son 4 elemanı yazdıracam
+    print_array(&a[SIZE -4], 4); //son 4 elemanı yazdıracam
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
