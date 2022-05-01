@@ -1,19 +1,17 @@
 #include <stdio.h>
 #include "utility.h"
+#include <stdbool.h>
 
-#define     SIZE        20
+typedef int Bool;
 
 int main()
 {
-    int a[SIZE];
+    bool flag = false; //_Bool falg = 0 derleyicinin gördüğü
 
-    set_array_random(a, SIZE);
-    print_array(a, SIZE);
-    print_array(a, 5); //ilk 5 elemanı
-    print_array(a + 5, 3); //5 index dahil ile 8 index arasını yazdıracam
-    print_array(&a[5], 3); //5 index dahil  ile 8 index arasını yazdıracam
-    print_array(a + SIZE -4, 4); //son 4 elemanı yazdıracam
-    print_array(&a[SIZE -4], 4); //son 4 elemanı yazdıracam
+    flag = true;
+
+    size_t size;
+
 
 }
 

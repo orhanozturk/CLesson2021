@@ -12,7 +12,7 @@ void randomize();
 void set_array_random(int *p, int size);
 void print_array(const int *p, int size);
 void sgets(char *p);
-void swap(int* a, int* b);
+void swap(int *a, int *b);
 
 
 #endif // UTILITY_H

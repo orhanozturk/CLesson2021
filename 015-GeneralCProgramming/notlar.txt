@@ -8929,6 +8929,1291 @@ int main()
 /****************************************************/
 /****************************************************/
 
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+/*
+int sum_array(const int *p, int size)
+{
+    int sum = 0;
+    for (int i = 0; i < size; ++i) {
+        sum += p[i];
+    }
+
+    return sum;
+}
+*/
+
+int sum_array(const int *p, int size)
+{
+    int sum = 0;
+
+    while (size--) {
+        sum += *p;
+        ++p;
+    }
+
+    return sum;
+}
+
+double get_mean(const int *p, int size)
+{
+    return (double)sum_array(p, size) / size;
+}
+
+double get_std_deviation(const int *p, int size)
+{
+    double mean = get_mean(p, size);
+    double sum_square = 0;
+
+    for (int i = 0; i < size; ++i) {
+        sum_square += (p[i] - mean) * (p[i] - mean);
+        //sum_square += pow((p[i] - mean), 2);
+    }
+
+    return  sqrt(sum_square / (size -1));
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    printf("sum = %d\n", sum_array(a, SIZE));
+    printf("mean = %f\n", get_mean(a, SIZE));
+    printf("std = %f\n", get_std_deviation(a, SIZE));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+int get_array_max(const int *p, int size)
+{
+    int max = *p;
+
+    for (int i = 1; i < size; ++i) {
+        if(p[i] > max)
+            max = p[i];
+    }
+
+    return max;
+}
+
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+
+    printf("max = %d\n", get_array_max(a, SIZE));
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+int get_array_max(const int *p, int size)
+{
+    int max = *p;
+
+    for (int i = 1; i < size; ++i) {
+        if(p[i] > max)
+            max = p[i];
+    }
+
+    return max;
+}
+
+
+int get_array_min(const int *p, int size)
+{
+    int min = *p;
+
+    for (int i = 1; i < size; ++i) {
+        if(p[i] < min)
+            min = p[i];
+    }
+
+    return min;
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+
+    printf("max = %d\n", get_array_max(a, SIZE));
+    printf("min = %d\n", get_array_min(a, SIZE));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+void get_array_min_max(const int *p, int size, int *pmax, int *pmin)
+{
+    *pmax = *pmin = *p;
+
+    for (int i = 1; i < size; ++i) {
+        if(p[i] > *pmax)
+            *pmax = p[i];
+        else if(p[i] < *pmin)
+            *pmin = p[i];
+    }
+}
+
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int max, min;
+
+    get_array_min_max(a, SIZE, &max, &min);
+
+    printf("max = %d\n", max);
+    printf("min = %d\n", min);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+void reverse_array(int *p, int size)
+{
+    for (int i = 0; i < size / 2; ++i) {
+        int temp = p[i];
+        p[i] = p[size -1 -i];
+        p[size -1 -i] = temp;
+    }
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    reverse_array(a, SIZE);
+
+    print_array(a, SIZE);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+void reverse_array(int *p, int size)
+{
+    for (int i = 0; i < size / 2; ++i) {
+        swap(&p[i], &p[size -1 -i]);
+    }
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    reverse_array(a, SIZE);
+
+    print_array(a, SIZE);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+//buble sort
+void sort_array(int *p, int size)
+{
+    for (int i = 0; i < size -1; ++i) {
+        for (int k = 0; k < size -1 -i; ++k) {
+            if(p[k] > p[k+1])
+                swap(p + k, p + k + 1);
+        }
+    }
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    sort_array(a, SIZE);
+
+    print_array(a, SIZE);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+fonksiyonlara pointer geçmede 2 yöntem var
+
+
+int *  -> void sort_array(int *p, int size)
+int [] -> void sort_array(int p[], int size)  -- kullanımı az
+
+
+ikiside pointer bildirimi
+
+int [] -> void sort_array(int p[10], int size)
+
+p içindeki index degerini dikkate almaz
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+//buble sort
+void sort_array(int p[], int size)
+{
+    for (int i = 0; i < size -1; ++i) {
+        for (int k = 0; k < size -1 -i; ++k) {
+            if(p[k] > p[k+1])
+                swap(p + k, p + k + 1);
+        }
+    }
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    sort_array(a, SIZE);
+
+    print_array(a, SIZE);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+pointer idioms
+
+-----------------------------------------------
+
+++ -- operator
+2.öncelik seviyesinde
+sagdan sola
+operand olan ifade Lvalue expression
+++x
+x++
+--y
+
+yan etkisi var - side effect
+
+bu ifadeler ile olsutrulan ifadeler Rvalue
+
+C++ da önek konumu ise Lvalue son ek konumu ise Rvalue deger üretir
+
+-----------------------------------------------
+
+* dereferencing / subscript
+
+2.öncelik seviyeesinde
+deref. ope'nün operandı olan ifade adres olmak zorunda
+
+*ptr  ifade Lvalue expression dır
+
+*operandı ile olustulan ifadeler Lvalue
+
+-----------------------------------------------
+
+& adres operatorü
+
+2. öncelik seviyesinde
+operatorun operandı Lvalue olmak zorunda
+
+üretilen deger operand olan nesnesinin aderesi
+
+&x ifadesi Rvalue expression
+&operandı ile olsturulan ifade Rvalue
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+int main()
+{
+    int x = 10;
+    //&x++;
+    //x++; //rvalue
+
+    &x++;//gecerli değil
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+int main()
+{
+    int x = 10;
+
+    //++&x;
+    &x; //rvalue
+    ++&x;// gecerli değil
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+int main()
+{
+    int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int *p = a;
+
+    *p++ = 55;
+
+    print_array(a, 10);
+
+    *p = 11;
+
+    print_array(a, 10);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+void copy_array(int *pdest, const int *psource, int n)
+{
+    /*
+    while(n--){
+        *pdest = *psource;
+        pdest++;
+        psource++;
+    }
+    */
+
+    while (n--)
+        *pdest++ = *psource++;
+
+}
+
+int main()
+{
+    int a[SIZE];
+    int b[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+    copy_array(b, a, SIZE);
+    print_array(b, SIZE);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+void copy_array(int *pdest, const int *psource, int n)
+{
+    while (n--)
+        *pdest++ = *psource++;
+}
+
+int main()
+{
+    int a[SIZE];
+    int b[SIZE] = {0};
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int idx_a, idx_b, n;
+
+    printf("a dizinin hangi indexli elemanindan baslayarak ? ");
+    scanf("%d", &idx_a);
+
+
+    printf("b dizinin hangi indexli elemanindan baslayarak ? ");
+    scanf("%d", &idx_b);
+
+
+    printf("kac eleman kopyalanacak ? ");
+    scanf("%d", &n);
+
+    copy_array(&b[idx_b], &a[idx_a], n);
+    print_array(b, SIZE);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+int main()
+{
+    int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int *p = a;
+
+    *++p = 99;
+    print_array(a, 10);
+    *p = 33;
+    print_array(a, 10);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+void reverse_array(int *p, int size)
+{
+    int n = size / 2;
+    int *pe = p + size;
+
+    while (n--) {
+        swap(p++, --pe);
+    }
+
+}
+
+int main()
+{
+    int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+    reverse_array(a, 10);
+
+    print_array(a, 10);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+void reverse_copy(int *pdest, const int *psource, int n)
+{
+    pdest += n;
+    while (n--) {
+        *--pdest = *psource++;
+    }
+}
+
+int main()
+{
+    int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int b[10];
+
+    reverse_copy(b, a, 10);
+
+    print_array(b, 10);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+int main()
+{
+    int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int *p = a;
+
+    *p++ = 44;
+    *a++ = 99; //gecersiz
+    //&a[0]   --> a
+    //*&a[0]++ = 11;
+    //bir dizinin ismi ++ -- sol operandı olamaz
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+int main()
+{
+    int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int *p = a;
+
+    *p++ = 44;
+    *a++ = 99; //gecersiz -- arraydecay convertion
+    //&a[0]   --> a
+    //*&a[0]++ = 11;
+    //bir dizinin ismi ++ -- sol operandı olamaz
+
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+int main()
+{
+    int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int *p = a;
+
+    ++*p;
+
+
+    print_array(a, 10);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+int main()
+{
+    int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int *p = a;
+
+    *p++;
+    print_array(a, 10);
+    (*p)++;
+    print_array(a, 10);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+int main()
+{
+    int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int *p = a;
+
+    ++*a; //gecerli
+
+    print_array(a, 10);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+//mulakat sorusu
+//fonksiyonun görevi nedir
+
+void strange(int *p, int size)
+{
+    while (size--) {
+        ++*p++;
+        //p++ //rvalue
+        //*p++ //lvalue
+        //++*p++
+    }
+}
+
+
+int main()
+{
+    int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    strange(a, 10);
+    print_array(a, 10);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+adreslerde karşılaştırma işlemleri
+
+
+geçersiz adresler asla karşılaştıra op.lerinin operandı yapmayın
+
+
+
+1- ptr'nin degeri haytata olan bir nesnenin adresi ise
+2- ptr'nin degeri bir dizinini bittiği yerin adresi ise
+3- ptr'nin degeri nullptr ise
+
+
+==
+>
+
+adreslerin eşit olabilmesi için
+
+aynı nesnelerin adresleri olması gerekiyor
+aynı dizinini bittiği yerin adresi olmasu gerekiyor
+nullptr olması gerekiyor
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+int main()
+{
+    int x = 10, y = 20;
+
+    int *p1 = &x, *p2 = &y;
+
+    if(p1 == p2)
+        printf("esit\n");
+    else
+        printf("esit degil\n");
+
+    p1 = &y;
+
+    if(p1 == p2)
+        printf("esit\n");
+    else
+        printf("esit degil\n");
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+void printarray(const int *ps, const int *pe)
+{
+    while (ps != pe) {
+        printf("%3d ", *ps++);
+    }
+
+    printf("\n");
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+
+    //printarray(a, a+SIZE);
+    printarray(a, a+3);
+
+    printarray(a+3, a+7);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+
+int main()
+{
+    int a[5] = {1, 2, 3, 4, 5};
+    int b[5] = {1, 2, 3, 4, 5};
+
+    if(a == b)
+        printf("esit\n");
+    else
+        printf("esit degil\n");
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+int is_equal(const int *px, const int *py, int size)
+{
+    while (size--) {
+        if(*px != *py)
+            return 0;
+        ++px, ++py;
+    }
+
+    return 1;
+}
+
+int main()
+{
+    int a[5] = {1, 2, 3, 4, 5};
+    int b[5] = {1, 2, 3, 4, 5};
+
+    if(is_equal(a, b, 5))
+        printf("esit\n");
+    else
+        printf("esit degil\n");
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+adreslerin karsılasyıtırılması
+
+c de dizilerin adresleri karsılastırışdıgında
+dizinin buyuk elemanın adresi daha buyuk
+
+
+a + 3 > a + 5
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+
+int main()
+{
+    int a[100] = {0};
+    int *p1 = a + 5;
+    int *p2 = a + 15;
+
+    printf("p1 > p2 = %d\n", p1 > p2);
+    printf("p1 < p2 = %d\n", p1 < p2);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <math.h>
+
+#define     SIZE        20
+
+
+
+int main()
+{
+    int x = 13, y = 13;
+    int *p1 = &x;
+    int *p2 = &y;
+
+    if(p1 > p2) //anlamsız bir ifade
+        ;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+typedef bildirimleri - tür eş isimleri - V1
+
+
+var olan bir isme yeni isim verme işlemidir
+
+
+typedef -- type alias olarak ta görebilirz
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+typedef int Word;
+
+Word func(Word);
+
+int main()
+{
+
+    Word x = 4; //int x = 4
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+typedef int* IPTR;
+
+int main()
+{
+
+    int x = 10;
+    IPTR p = &x;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#define  int  A
+typedef  int  B
+
+
+define    precompile da yapılan işlem
+typedef  compile time da yapılan işelm
+
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define   IPTR  int*
+
+typedef int* Iptr;
+
+int main()
+{
+    IPTR  p1, p2;  //sadece p1 pointer  tanım int *p1, int p2
+    Iptr  p3, p4;  //p3 ve p4 pointer tanım pint *p3 int *p4
+
+    //*p1;
+    //*p2;
+    *p3;
+    *p4;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+tür eş isim verme yolu şu şekildedir
+
+
+1- hangi türe eş isim vereceksek o türden bir değişken tnaıumlayın
+2- tanımlamanın başına typedef anahtar sözcüğü yerleştirin
+3- değişkene verdiğiniz isim o değişkeninin türünd verecekseniz eş isimle değiştirin
+
+
+
+typedef  int Myint;
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+typedef const int * CIPTR;
+
+int main()
+{
+    int x = 11;
+    CIPTR ptr = &x;
+
+    *ptr = 12; //gecerli degil const oldugu için
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+typedef int  INTA10[10];
+
+int main()
+{
+    INTA10 a, b, c;  //int a[10] b[10] c[10]
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+typedef bildirimi
+
+karmaşık bildirimleri daha basit hale getirmemize yardım olur
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+//int (func(int(*)(int), int(*)(int)))(int, int);
+
+
+typedef int (*FPTR)(int);
+
+
+FPTR func(FPTR, FPTR);
+
+//bu fonksiyon tanımlarını yapabilecez
+
+int main()
+{
+
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+typedef int Word;
+typedef Word* Wordptr;
+
+
+int main()
+{
+    Wordptr ptr;
+    *ptr = 12;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+typedef int Word,  *Wordptr;
+
+
+int main()
+{
+    Wordptr ptr;
+    *ptr = 12;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <stdbool.h>
+
+typedef int Bool;
+
+int main()
+{
+    bool flag = false; //_Bool falg = 0 derleyicinin gördüğü
+
+    flag = true;
+
+    size_t size;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
