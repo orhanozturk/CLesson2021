@@ -10149,6 +10149,673 @@ int main()
 /****************************************************/
 
 
+#include <stdio.h>
+#include "utility.h"
+#include <stdbool.h>
+
+typedef double Dollar;
+typedef double Euro;
+typedef double Pound;
+
+int main()
+{
+    Dollar sum = 23.1;
+    Euro balance = 12.2;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+std. kütüphanede
+
+size_t
+
+
+1- okunabilirlik
+2- taşınabilirlik
+
+amaçlı kullanılır
+
+
+size_t strlen(const char *)
+
+
+standart lar diyor ki
+
+typeid unsigned int size_t
+
+
+unsigned int derleyici göre değişebilir
+unsigned long ta olabilir
+
+ama ortak olan size_t
+
+sizeof operatorünün üretiği degerin türüdür
+
+
+ornek std typedef lere
+
+size_t
+ptrdifft_t
+time_t
+clock_t
+fpos_t
+ldiv_t
+int64_t
+
+
+/****************************************************/
+/****************************************************/
+
+
+size_t std bildirimi birden çok fazla kutuphanede bulunmaktadır
+
+
+
+
+#include <stdio.h>
+
+int main()
+{
+    size_t x = 12;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stddef.h>
+
+int main()
+{
+    size_t x = 12;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+size_t türü standart kütüphanenin bazı fonksiyonlarında
+ 1- parametre türü olarak kullanılır
+ 2- geri dönüş türü olarak kullanılır
+
+
+a- bir dizi boyutu isteyen fonksiyon parametrelerin türünde
+b- yazı uzunlugu türü
+c- sizeof degeri isteyen parametre
+d- tane adet türü
+
+
+
+#include <stdio.h>
+
+int main()
+{
+
+    printf("sizeof(int) = %zu\n", sizeof (int));
+    //%zu formatlama size_t nin formatlaması için seçilmiştir
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+iki adresi birbirinden çıkartırsak ptrdiff_t eş ismi ile karşılaşırız
+
+
+/****************************************************/
+/****************************************************/
+
+
+Function returning pointers
+
+
+
+#include <stdio.h>
+
+int foo(void);
+int *func(void);
+//T* isim(Ta, T b)
+
+
+int main()
+{
+    int x = foo();
+    int *p = func();
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+int g = 10;
+
+int *func(void)
+{
+    //
+    //
+    return &g;
+}
+
+int main()
+{
+
+    int *p = func();
+
+    printf("*p = %d\n", *p);
+    *p = 123;
+    printf("*p = %d\n", *p);
+    printf("g = %d\n", g);
+
+    ++*p;
+    printf("g = %d\n", g);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+
+int g = 10;
+
+int *func(void)
+{
+    //
+    //
+    return &g;
+}
+
+int main()
+{
+
+    ++*func();
+
+    printf("g = %d\n", g);
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+int g = 10;
+
+int *func(void)
+{
+    //
+    //
+    return &g;
+}
+
+void foo(int *p)
+{
+    ++*p;
+}
+
+int main()
+{
+
+    foo(func());
+
+    printf("g = %d\n", g);
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+int *foo(void)
+{
+    int sum = 0;
+
+    for (int i = 0; i < 10; ++i) {
+        sum += 1;
+    }
+
+    return &sum;
+}
+
+int main()
+{
+    //geçerli ama yanlış durum yani tanımsız davranış
+    //invalid pointer
+    //yerel değişken  - otomotik ömürlü değişken adresi döndürüyor
+    int *ptr = foo();
+
+    printf("*ptr = %d\n", *ptr);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+char *get_name(void)
+{
+    char str[100];
+
+    printf("bir isim girin: ");
+    sgets(str);
+
+    return str;
+}
+
+int main()
+{
+    //geçerli ama yanlış durum yani tanımsız davranış
+    //invalid pointer
+    //yerel değişken  - otomotik ömürlü değişken adresi döndürüyor
+    char *ptr = get_name();
+
+    printf("isim = %s\n", ptr);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+char *get_name(void)
+{
+    static char str[100];
+
+    printf("bir isim girin: ");
+    sgets(str);
+
+    return str;
+}
+
+int main()
+{
+    //artık geçerli bir ifade ve valid pointer
+    char *ptr = get_name();
+
+    printf("isim = %s\n", ptr);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+Asla otomotik ömürlü bir nesne adresi döndürmemliyiz - dikkat
+
+
+şunları döndürebilirz
+static ömürlü nesnee adresi döndüren fonksiyonlar
+ a- global değişkenler adresleri
+ b- static yerel değişkenler
+ c- string literalleri
+
+fonksiyon dinamik ömürlü bir nesne adresi döndürebilir --- ileride görecez
+
+
+#include <stdio.h>
+#include <time.h>
+
+int main()
+{
+    time_t timer = time(NULL);
+
+    for (;;) {
+        printf("%p\n", localtime(&timer));
+        getchar();
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+int *foo(int *p)
+{
+    *p = 123;
+
+    return p;
+}
+
+int main()
+{
+   int a = 10;
+
+   printf("a = %d\n", *foo(&a));
+   printf("a = %d\n", a);
+
+   int *p = foo(&a);
+
+   printf("*p = %d\n", *p);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        10
+
+//mulakat sorusu
+//bir dizinin en buyuk elemanını adresinin döndüren
+//array_max isimli bir donksiyon tanımlayın
+
+int *array_max(const int *pa, size_t size)
+{
+    //const T * --- T*
+    int *pmax = (int *)pa;
+
+    for (size_t i = 1; i < size; ++i) {
+        if(pa[i] > *pmax)
+            pmax = (int *)(pa + i);
+    }
+
+    return pmax;
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int *pmax = array_max(a, SIZE);
+
+
+    printf("max = %d\n", *pmax);
+    printf("max dizinini %d indisli elemani\n", (int)(pmax - a));
+    *pmax = -1;
+
+    print_array(a, SIZE);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        10
+
+//bir dizinin en buyuk elemanını adresinin döndüren
+//array_max isimli bir donksiyon tanımlayın
+
+int *array_max(const int *pa, size_t size)
+{
+    //const T * --- T*
+    int *pmax = (int *)pa;
+
+    for (size_t i = 1; i < size; ++i) {
+        if(pa[i] > *pmax)
+            pmax = (int *)(pa + i);
+    }
+
+    return pmax;
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int *pmax = array_max(a, SIZE);
+
+    //sadece print_array işlevinin kullanacaz
+    //dizinin ilk elemanından baslayarak en buyuk elemanına kadar (dahil) yazdırsın
+    print_array(a, pmax - a + 1);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        10
+
+//bir dizinin en buyuk elemanını adresinin döndüren
+//array_max isimli bir donksiyon tanımlayın
+
+int *array_max(const int *pa, size_t size)
+{
+    //const T * --- T*
+    int *pmax = (int *)pa;
+
+    for (size_t i = 1; i < size; ++i) {
+        if(pa[i] > *pmax)
+            pmax = (int *)(pa + i);
+    }
+
+    return pmax;
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int *pmax = array_max(a, SIZE);
+
+    //sadece print_array işlevinin kullanacaz
+    //dizinin en büyük elemanından baslayarak en son elemanına kadar (dahil) yazdırsın
+    print_array(pmax, SIZE - (pmax - a));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        10
+
+//bir dizinin en buyuk elemanını adresinin döndüren
+//array_max isimli bir donksiyon tanımlayın
+
+int *array_max(const int *pa, size_t size)
+{
+    //const T * --- T*
+    int *pmax = (int *)pa;
+
+    for (size_t i = 1; i < size; ++i) {
+        if(pa[i] > *pmax)
+            pmax = (int *)(pa + i);
+    }
+
+    return pmax;
+}
+
+int *array_min(const int *pa, size_t size)
+{
+    //const T * --- T*
+    int *pmin = (int *)pa;
+
+    for (size_t i = 1; i < size; ++i) {
+        if(pa[i] < *pmin)
+            pmin = (int *)(pa + i);
+    }
+
+    return pmin;
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int *pmax = array_max(a, SIZE);
+    int *pmin = array_min(a, SIZE);
+
+    //sadece print_array işlevinin kullanacaz
+    //dizinin en kucuk elemanından baslayarak en buyuk elemanına kadar (dahil) yazdırsın
+
+    if(pmax > pmin)
+        print_array(pmin, pmax - pmin + 1);
+    else
+        print_array(pmax, pmin - pmax + 1);
+
+    //yada
+
+    print_array(pmax < pmin ? pmax : pmin, abs(pmax - pmin) + 1);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        10
+
+//bir dizinin en buyuk elemanını adresinin döndüren
+//array_max isimli bir donksiyon tanımlayın
+
+int *array_max(const int *pa, size_t size)
+{
+    //const T * --- T*
+    int *pmax = (int *)pa;
+
+    for (size_t i = 1; i < size; ++i) {
+        if(pa[i] > *pmax)
+            pmax = (int *)(pa + i);
+    }
+
+    return pmax;
+}
+
+int *array_min(const int *pa, size_t size)
+{
+    //const T * --- T*
+    int *pmin = (int *)pa;
+
+    for (size_t i = 1; i < size; ++i) {
+        if(pa[i] < *pmin)
+            pmin = (int *)(pa + i);
+    }
+
+    return pmin;
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int *pmax = array_max(a, SIZE);
+    int *pmin = array_min(a, SIZE);
+
+    //tek bir deyim ile dizinini en buyk ve en kucuk degerlerini degistirelim
+
+    swap(pmax, pmin);
+
+    print_array(a, SIZE);
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

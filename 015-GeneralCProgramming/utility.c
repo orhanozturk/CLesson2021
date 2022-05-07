@@ -65,7 +65,7 @@ void randomize()
 }
 
 
-void set_array_random(int *p, int size)
+void set_array_random(int *p, size_t size)
 {
     while (size--){
         *p++ = rand() % 1000;
@@ -73,9 +73,9 @@ void set_array_random(int *p, int size)
 }
 
 
-void print_array(const int *p, int size)
+void print_array(const int *p, size_t size)
 {
-    for (int i = 0; i < size; ++i) {
+    for (size_t i = 0; i < size; ++i) {
         if(i && i % 20 == 0)
             printf("\n");
         printf("%3d ", p[i]);
