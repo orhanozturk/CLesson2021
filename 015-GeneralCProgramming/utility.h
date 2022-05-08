@@ -15,6 +15,7 @@ void set_array_random(int *p, size_t size);
 void print_array(const int *p, size_t size);
 void sgets(char *p);
 void swap(int *a, int *b);
+void print_str(const char *);
 
 
 #endif // UTILITY_H

@@ -103,7 +103,15 @@ void swap(int* a, int* b)
     *b = temp;
 }
 
-
+void print_str(const char *p)
+{
+    //ikiside aynı ifade
+    //while(*p != '\0') {
+    while(*p) {
+        printf("%c ", *p++);
+    }
+    putchar('\n');
+}
 
 
 

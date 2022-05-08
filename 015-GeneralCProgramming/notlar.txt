@@ -10767,6 +10767,522 @@ int main()
 /****************************************************/
 /****************************************************/
 
+selection sort algorithms
+
+
+139 760 736 588 434 987 140 118 742 912
+
+118 760 736 588 434 987 140 139 742 912
+118 139 736 588 434 987 140 760 742 912
+118 139 140 588 434 987 736 760 742 912
+118 139 140 434 588 987 736 760 742 912
+...
+...
+
+(n - i)
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        10
+
+int *array_min(const int *pa, size_t size)
+{
+    //const T * --- T*
+    int *pmin = (int *)pa;
+
+    for (size_t i = 1; i < size; ++i) {
+        if(pa[i] < *pmin)
+            pmin = (int *)(pa + i);
+    }
+
+    return pmin;
+}
+
+void selection_sort(int *p, size_t size)
+{
+    for (size_t i = 0; i < size - 1; ++i) {
+        swap(array_min(p + i, size - i),  p + i);
+    }
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    selection_sort(a, SIZE);
+
+    print_array(a, SIZE);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+NULL pointer
+
+NULL bir standart makrodur
+
+
+bir anahatar sözcük değildir
+bir isim(identifier) değildir
+
+C nin alttaki bazı kütüphanelerinde NULL makrosu tanımlanmıştır
+
+stdio.h
+stddef.h
+stdlib.h
+time.h
+string.h
+...
+
+
+
+NULL pointer olarak okuyalım soyleyelım
+
+null character
+null string
+null statement
+null directive
+
+
+NULL pointer herhangi bir türden pointer değişkenine atanabilen, ilk deger olarak verilebilen bir sabit ifadedir
+
+Dğeri NULL pointer olan bir pointer değişken "geçerli durumda" (valid state) olan bir pointer değişken
+semantik olarak NULL pointer hiç bir nesnenin adresi olmayan geçerli bir adrestir
+
+değeri NULL pointer olan bir pointer değişken hiçbir nesneyi göstermeyen bir pointer değişkendir
+değeri NULL olan bir pointer değişken "dereferencing etmek" Tanımsız davranıstır
+NULL pointer + - ++ -- += *= gibi işlemlere sokmayın
+
+
+
+Bir adresin pointer olup olmadıgını == yada != operatorleri ile kullanılabilir
+
+#include <stdlib.h>
+
+int main()
+{
+    int *ptr = NULL;
+    double *dtr = NULL;
+    char *chrt = NULL;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdlib.h>
+
+int main()
+{
+    int x = 3;
+    int *p = &x;
+    int *ptr = NULL; //değeri hiç bir yeri göstermiyor anlamında dır
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdlib.h>
+
+int main()
+{
+    int *p;
+    //bu yanlıs durum
+    //invalid pointer
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+
+int main()
+{
+    int x = 3;
+    int *p = &x;
+
+    if(p == NULL)
+        printf("dogrudur\n");
+    else
+        printf("yanlis\n");
+
+    p = NULL;
+
+
+    if(p == NULL)
+        printf("dogrudur\n");
+    else
+        printf("yanlis\n");
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+ikiside aynı ifade
+
+while(ptr != NULL)
+{
+
+}
+
+
+while(ptr)
+{
+
+}
+
+
+//p1 ve p2 NULL pointer degil ise
+if(p1 && p2){
+
+}
+
+----------------------------------
+
+aritmatik türden statik ömürlü değişkenlere ilk degeri verilmediginde bunlar hayata 0 degeri ile baslar
+
+
+aritmatik türden statik ömürlü pointer değişkenlere ilk degeri verilmediginde bunlar hayata NULL pointer degeri ile baslar
+
+
+
+
+#include <stdio.h>
+
+double *dp;
+
+int main()
+{
+    static int *ptr;
+
+    //bu pointer nesneleri hayata NULL pointer ile geldi
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+bir pointer değişkenine bir tam sayı degeri atanması C de yanlıs / C++ da sentaks hatası
+Ancak
+ bir istisna vardır.
+ Bir pointer değişkenine tam sayı sabiti 0 atanırsa bu geçerlidir
+ bu durumda derleyici 0 tam sayı sabitini NULL pointer a dönüştürür
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    int x = 1;
+
+    int *p = x;
+    //C de gecerli ama yanlıstır
+    //C++ direk hata sentak hatası
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    int *p = NULL;
+    int *p2 = 0;
+    //ikiside aynı ifade dir
+    //NULL pointer kullanmanızı tavisye ederiz
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    int x = 0;
+
+    int *p = x;
+    //C de gecerli ama yanlıs
+    //C++ da sentaks hatası
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+
+int main()
+{
+    int x;
+    //x --> int
+
+    int *ptr;
+    //int *
+
+    int a[5] = {1, 2, 3};
+
+    //a nın türü  --- int [5]
+
+
+    double da[20];
+    //double [20]
+
+    //cunku arraydecay convertion sonrada olur
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+
+int main()
+{
+    int a[5] = {1, 2, 3};
+    //3 ve 4 elemanlarının degerleri veya hayata 0 degeri ile gelir
+
+
+    int x ,y;
+
+    int *b[20] = {&x, &y};
+    //geri kalan elemnlar NULL pointer olarak hayata baslayacak
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        10
+
+//bir int dizisinde bir deger (key) arayan
+//search_int_array isimli bir fonksiyon tanımlayınız
+//bulunursa bulundugu yerin adresi döndürmeli
+//bulunamazsa NULL pointer döndürmeli
+
+/*
+int *search_int_array(const int *p, size_t size, int val)
+{
+    for (size_t i = 0; i < size; ++i) {
+        if(p[i] == val)
+            return (int *)(p+i);
+    }
+
+    return NULL;
+}
+*/
+
+int *search_int_array(const int *p, size_t size, int val)
+{
+    while(size--){
+        if(*p == val)
+            return (int *)p;
+        ++p;
+    }
+
+    return NULL;
+}
+
+
+int main()
+{
+   int a[SIZE];
+   randomize();
+   set_array_random(a, SIZE);
+   print_array(a, SIZE);
+
+   int val;
+   printf("aranacak degeri giriniz : ");
+   scanf("%d", &val);
+
+   int *ptr = search_int_array(a, SIZE, val);
+
+   if(ptr == NULL){
+       printf("%d degeri bulunamadi\n", val);
+   }
+   else {
+       printf("bulundu.. dizinin %d idsli elemani, %d\n", ptr - a, *ptr);
+
+       *ptr = -1;
+       print_array(a, SIZE);
+   }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+
+
+int main()
+{
+   int x = 10, y = 20;
+   int *p1 = &x, *p2 = NULL;
+
+   swap(p1, p2);
+   //NULL pointer swap ta dereferencing edildigi için tanımsız davranıs olur
+   //bu durumlara dikkat
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+time_t time(NULL);
+burada NULL time kutuphanesi için anlamlı bir ifadedir
+
+
+dinamik bellek yönetimi
+
+nesneinn hayatı programcının elinde olan bir bellek yontemine donusecek
+
+pointer değişknelerinin degerini Dinamik omurlu yapacaz
+
+Eger dinamik omurlu pointer nesnelerinin yer almadıgımı durumda NULL pointer atayacagız
+
+/****************************************************/
+/****************************************************/
+
+pointer parametreli baz ıstd C fonksiyonları
+
+
+Yazılarla ilgili std destek veren string.h kutuphanesi
+
+strlen
+strchr
+strrchr
+strcpy
+strcat
+strcmp
+strncmp
+strtok
+strspn
+strcspn
+strpbrk
+strerror
+...
+
+
+bu fonksiyonların ortak ozelligi parametreleri char * olmasıdır
+
+func(char *)
+ --adlgı adrese yazı yerlestirelecek
+ //aldıgı adresin yazsının degistirecek
+
+
+func(const char *)
+ --aldıgı yazıyı okuma amaclı
+
+
+NOt: Bazı fonksiyonun parameteresi sadece const char *, ne boyut ne de baska birşey
+    func(const char *)
+    --yazı sonunda null terminated karateri var
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+#define     SIZE        100
+
+int main()
+{
+   char str[SIZE];
+
+   printf("bir yazi giriniz : ");
+   sgets(str);
+
+   print_str(str);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
