@@ -11241,12 +11241,1168 @@ int main()
    sgets(str);
 
    print_str(str);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+eger bir fonksiyon
+
+1- aldıgı adresteki diziye bir yazı yerleştirecek ise
+2- aldıgı adresteki yazıyı degiştirecek ise
+
+
+Diziyi taşırma riski var
+-taşarsa taşsın! bunu çağıran düşünsü
+-asla taşırmasın . fonksiyon dizinin boyutunu da alır ve diziye kontrolü olarak yazar
+
+
+
+strlen
+
+size_t strlen(const char *p);
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int main()
+{
+   char str[SIZE];
+
+   printf("bir yazi giriniz : ");
+   sgets(str);
+
+   size_t len = strlen(str);
+
+   printf("len = %zu\n", len);
 
 }
 
 
 /****************************************************/
 /****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+
+void revprint(const char *p)
+{
+    for (int i = (int)strlen(p)-1;  i >= 0; --i) {
+        putchar(p[i]);
+    }
+    putchar('\n');
+}
+
+int main()
+{
+   char str[SIZE];
+
+   printf("bir yazi giriniz : ");
+   sgets(str);
+
+   revprint(str);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int main()
+{
+   char str[SIZE];
+
+   printf("bir yazi giriniz : ");
+   sgets(str);
+
+   size_t len = strlen(str);
+
+   for (size_t i = 0; i < len; ++i) {
+       printf("%s\n", str+i);
+   }
+
+   //orhan
+   //orhan
+   //rhan
+   //han
+   //an
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+size_t strlen1(const char *p)
+{
+    size_t len = 0;
+
+    while (*p != '\0') {
+        ++len;
+        ++p;
+    }
+
+    return len;
+}
+
+size_t strlen2(const char *p)
+{
+    size_t len = 0;
+
+    while (*p++)
+        ++len;
+    return len;
+}
+
+size_t strlen3(const char *p)
+{
+    const char *pbeg = p;
+
+    while (*p)
+        ++p;
+
+    return (size_t)(p - pbeg);
+}
+
+int main()
+{
+   char str[SIZE];
+
+   printf("bir yazi giriniz : ");
+   sgets(str);
+
+   size_t len = strlen3(str);
+
+   printf("len = %zu\n", len);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+strchr
+
+bastan sona yazıda karakter arama işlemi
+
+char * strchr(const char *p, int ch)
+
+bulursa buldugu indexteki yerin adresinin donduruyor
+bulmazsa NULL pointer dondurur
+
+
+
+strrchr
+
+sondan başa yazıda karakter arama işlemi
+
+char * strrchr(const char *p, int ch)
+
+bulursa buldugu indexteki yerin adresinin donduruyor
+bulmazsa NULL pointer dondurur
+
+
+dikkat
+
+her ne kadar yazının sonundaki null karakteri yazının uzunlugna dahil olmasada
+strchr ile null karateri de aratabiliriz
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+   char str[SIZE];
+
+   printf("bir yazi giriniz : ");
+   sgets(str);
+
+   printf("aranacak karateri girin : ");
+
+   int ch = getchar();
+
+   char *p = strchr(str, ch);
+
+
+   if(p == NULL){
+       printf("bulunamadi\n");
+   }
+   else{
+       printf("bulundu (%s) , indeks = %d\n", p, p-str);
+
+   }
+
+   p = strchr(str, '\0');
+
+   *p = 'X';
+   *(p+1) = '\0';
+
+   puts(str);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+char *strchr1(const char *p, int c)
+{
+    while (*p != '\0') {
+        if(*p == c){
+            return (char *)p;
+        }
+        ++p;
+    }
+
+    if(c == '\0')
+        return (char *)p;
+
+    return NULL;
+}
+
+
+int main()
+{
+   char str[SIZE];
+
+   printf("bir yazi giriniz : ");
+   sgets(str);
+
+   printf("aranacak karateri girin : ");
+
+   int ch = getchar();
+
+   char *p = strchr1(str, ch);
+
+
+   if(p == NULL){
+       printf("bulunamadi\n");
+   }
+   else{
+       printf("bulundu (%s) , indeks = %d\n", p, p-str);
+
+   }
+
+   p = strchr1(str, '\0');
+
+   *p = 'X';
+   *(p+1) = '\0';
+
+   puts(str);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+strrchr
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+char *strchr1(const char *p, int c)
+{
+    while (*p != '\0') {
+        if(*p == c){
+            return (char *)p;
+        }
+        ++p;
+    }
+
+    if(c == '\0')
+        return (char *)p;
+
+    return NULL;
+}
+
+
+int main()
+{
+   char str[SIZE];
+
+   printf("bir yazi giriniz : ");
+   sgets(str);
+
+   printf("aranacak karateri girin : ");
+
+   int ch = getchar();
+
+   printf("arama strchr ile yapiliyor\n");
+   char *p = strchr(str, ch);
+
+
+   if(!p){
+       printf("bulunamadi\n");
+   }
+   else{
+       printf("bulundu (%s) , indeks = %d\n", p, p-str);
+   }
+
+   printf("arama strrchr ile yapiliyor\n");
+   p = strrchr(str, ch);
+
+
+   if(!p){
+       printf("bulunamadi\n");
+   }
+   else{
+       printf("bulundu (%s) , indeks = %d\n", p, p-str);
+   }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+char *strchr1(const char *p, int c)
+{
+    while (*p != '\0') {
+        if(*p == c){
+            return (char *)p;
+        }
+        ++p;
+    }
+
+    if(c == '\0')
+        return (char *)p;
+
+    return NULL;
+}
+
+
+char *strrchr1(const char *p, int c)
+{
+    const char *pfound = NULL;
+
+    while (*p != '\0') {
+        if(*p == c){
+            pfound = p;
+        }
+        ++p;
+    }
+
+    if(c == '\0')
+        return (char *)p;
+
+    return (char *)pfound;
+}
+
+
+int main()
+{
+   char str[SIZE];
+
+   printf("bir yazi giriniz : ");
+   sgets(str);
+
+   printf("aranacak karateri girin : ");
+
+   int ch = getchar();
+
+   printf("arama strchr ile yapiliyor\n");
+   char *p = strchr1(str, ch);
+
+
+   if(!p){
+       printf("bulunamadi\n");
+   }
+   else{
+       printf("bulundu (%s) , indeks = %d\n", p, p-str);
+   }
+
+   printf("arama strrchr ile yapiliyor\n");
+   p = strrchr1(str, ch);
+
+
+   if(!p){
+       printf("bulunamadi\n");
+   }
+   else{
+       printf("bulundu (%s) , indeks = %d\n", p, p-str);
+   }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+HomeWork
+
+fonksiyon tanıtacam kodunu siz yazacaksınız
+
+
+char *strstr(const char *p, const char *pkey);
+
+yazı içinde yazı aranıyor
+eger yazı bulunursa bulundugu adresin baslangıc adresını dondurur
+
+
+orhan ozturk
+
+han -->  orhan  h karaterinini adresinin dondurecek
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+
+
+
+int main()
+{
+   char s1[SIZE];
+   char s2[SIZE];
+
+   printf("icinde atama yapilacak yazi giriniz : ");
+   sgets(s1);
+   printf("aranacak yazi giriniz : ");
+   sgets(s2);
+
+   char *p = strstr(s1, s2);
+
+    if(p){
+        printf("buundu ... (%s)  indeks = %d\n", p, p-s1);
+    }
+    else{
+        printf("bulunamadi\n");
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+//mulakat sorusu
+
+//orhan ozturk mehmet dogan hasan uygur
+//orhan ozturk mehmet dogan !!!!! uygur
+
+//s1 yazsıını icindeki hasan yazının oldugu yeri !!!!! karakteri ile dolduracaz
+
+int main()
+{
+   char s1[SIZE];
+   char s2[SIZE];
+
+   printf("icinde atama yapilacak yazi giriniz : ");
+   sgets(s1);
+   printf("aranacak yazi giriniz : ");
+   sgets(s2);
+
+   char *p = strstr(s1, s2);
+
+    if(p){
+        size_t len = strlen(s2);
+
+        while (len--) {
+            *p++ = '!';
+        }
+
+        printf("buundu ... (%s)\n", s1);
+    }
+    else{
+        printf("bulunamadi\n");
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+yazının sonun daki null karaterine nasıl gideriz
+
+
+1.
+
+while(*p)
+   ++p;
+
+2
+while(*p++)
+   ;
+--p;
+
+3.
+p += strlen(p);
+
+
+4
+p = strchr(p, '\0');
+
+
+/****************************************************/
+/****************************************************/
+
+
+NULL pointer / null character
+
+NULL bir macro
+ama bir adres sabiti
+pointer değişkenlere atanır
+
+
+null character
+'\0'
+
+null character bir tam sayı sabiti
+bir yazının sonlanıyor mu anlamına galiyor, yazıın sonunu kestreblmek için kullanılır
+
+//bu ikisi aynı anlamdadır
+if(ptr != NULL && *ptr != '\0')
+
+if(ptr && *ptr)
+
+//bu sekildede yazabılırız
+if(ptr == NULL || *ptr == '\0')
+
+if(!ptr || !*ptr)
+
+
+********************************************************
+
+strcpy
+
+
+kopyalama işlemleri için kullanılır
+
+char *strcpy(char *pdest, const char *psource);
+
+strcpy kopyalama yapılan yerin adresini dondurur
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int main()
+{
+   char dest[SIZE];
+   char source[SIZE];
+
+   printf("bir yazi girin : ");
+   sgets(source);
+
+   printf("|%s|\n", source);
+   strcpy(dest, source);
+   printf("|%s|\n", dest);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int main()
+{
+   char dest[5];
+   char source[SIZE];
+
+   printf("bir yazi girin : "); //mehmet adigüzel
+   sgets(source);
+
+   printf("|%s|\n", source);
+   strcpy(dest, source); //tanımsız davranış olur
+   printf("|%s|\n", dest);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+char *strcpy1(char *pdest, const char *psource)
+{
+    char *pret = pdest;
+
+    while (*psource != '\0') {
+        *pdest = *psource;
+        ++pdest;
+        ++psource;
+    }
+
+    *pdest = '\0';
+
+    return pret;
+}
+
+char *strcpy2(char *pdest, const char *psource)
+{
+    char *pret = pdest;
+
+    /*
+    while (*psource != '\0') {
+        *pdest++ = *psource++;
+    }
+    */
+
+    while(*pdest++ = *psource++)
+        ;
+
+    return pret;
+}
+
+int main()
+{
+   char dest[SIZE];
+   char source[SIZE];
+
+   printf("bir yazi girin : ");
+   sgets(source);
+
+   printf("|%s|\n", source);
+   strcpy2(dest, source);
+   printf("|%s|\n", dest);
+
+
+   puts(strcpy2(dest, source));
+}
+
+
+/****************************************************/
+/****************************************************/
+
+dikkatttt
+
+strcpy
+
+kesişen (overlapped) bloklar --> tanımsız davranış
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int main()
+{
+   char str[SIZE]; //ozturk ozozturk
+   printf("bir yazi girin : ");
+   sgets(str);
+
+   //overlapped
+   strcpy(str+2, str); //tanımsız davranıs
+
+   printf("%s\n", str);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+strcat işlevi
+
+
+bir yazının souna bir yazı ekleme
+
+append --> sonuna ekleme
+concatanate -> birleştirme
+
+char *strcat(char *pdest, const char *psource);
+
+yazıyı birleştirilen yazıların adreslerini doner
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int main()
+{
+   char s1[SIZE];
+   char s2[SIZE];
+
+   printf("iki yazi girin : ");
+   scanf("%s%s", s1, s2);
+   printf("(%s)(%s)\n", s1, s2);
+
+   strcat(s1, s2);
+   printf("(%s)(%s)\n", s1, s2);
+
+   puts(strcat(s1, s2));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int main()
+{
+   char s1[SIZE];
+   char s2[SIZE];
+   char s3[SIZE];
+
+   printf("iki yazi girin : ");
+   scanf("%s%s", s1, s2);
+
+   //s3 dizsinde s1 + s2 orhan ozturk
+
+   /*
+    strcpy(s3, s1);
+    strcat(s3, s2);
+    */
+    strcat(strcpy(s3, s1), s2);
+
+
+    printf("(%s) + (%s) = (%s)", s1, s2, s3);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+char *strcat1(char *p1, const char *p2)
+{
+    char *pret = p1;
+
+    while (*p1)
+        ++p1;
+
+    while(*p1++ = *p2++)
+        ;
+
+    return pret;
+}
+
+char *strcat2(char *p1, const char *p2)
+{
+    strcpy(p1 + strlen(p1), p2);
+
+    return p1;
+}
+
+char *strcat3(char *p1, const char *p2)
+{
+    strcpy(strchr(p1, '\0'), p2);
+
+    return p1;
+}
+
+int main()
+{
+    char s1[SIZE];
+    char s2[SIZE];
+
+    printf("iki yazi girin : ");
+    scanf("%s%s", s1, s2);
+    printf("(%s)(%s)\n", s1, s2);
+
+    strcat3(s1, s2);
+    printf("(%s)(%s)\n", s1, s2);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+yazıların karsılastırılması
+
+
+int compare
+
+
+retcal > 0  ilk yazı buyuk
+retcal < 0  ikinci yazı buyuk
+retcal == 0  iki yazı eşit
+
+
+
+strcmp
+
+int strcmp(const char *p1, const char *p2);
+
+lexicographical compare algprtiması ile karsılaştırma yapar
+
+
+veri yapıları
+
+1 5 3 6 7 8
+
+1 5 3 6 7 8
+
+bu iki veri yapsıı eşit olması için hem boyları hemde elemnaları eşit olması gerekyor
+
+1 5 3 6 7 8
+
+2
+
+karşılaştırma
+lemanları tek tek karsılastırıyor
+2 için daha buyuk sonucu donuyor
+
+1 5 3 6 7 8
+
+1 5 3
+
+elemnalrı karsılastırdım 1 5 3  daha buyuk
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int main()
+{
+    char s1[SIZE];
+    char s2[SIZE];
+
+    printf("iki isim girin : ");
+    scanf("%s%s", s1, s2);
+
+    int cmp_result = strcmp(s1, s2);
+
+    if(cmp_result > 0)
+        printf("(%s) > (%s)\n", s1, s2);
+    else if(cmp_result < 0)
+        printf("(%s) < (%s)\n", s1, s2);
+    else
+        printf("(%s) == (%s)\n", s1, s2);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int main()
+{
+    char s1[SIZE];
+    char s2[SIZE];
+
+    printf("iki isim girin : ");
+    scanf("%s%s", s1, s2);
+
+    /*
+   if(strcmp(s1, s2) == 0)
+       ;
+   */
+
+    if(!strcmp(s1, s2))
+        printf("evet esit\n");
+    else
+        printf("hayir esit degil\n");
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int mystrcmp(const char *p1, const char *p2)
+{
+    while (*p1 == *p2) {
+        if(*p1 == '\0')
+            return 0;
+
+        ++p1;
+        ++p2;
+    }
+
+    return *p1 - *p2;
+}
+
+
+int main()
+{
+    char s1[SIZE];
+    char s2[SIZE];
+
+    printf("iki isim girin : ");
+    scanf("%s%s", s1, s2);
+
+    /*
+   if(strcmp(s1, s2) == 0)
+       ;
+   */
+
+    if(!mystrcmp(s1, s2))
+        printf("evet esit\n");
+    else
+        printf("hayir esit degil\n");
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+//orhanozturk
+//ozturk ile biteni kontrol eden fonksiyon yazmak isityorum
+
+
+int ends_with(const char *p1, const char *p2)
+{
+    size_t len1 = strlen(p1);
+    size_t len2 = strlen(p2);
+
+    if(len1 < len2)
+        return 0;
+
+    return !strcmp(p1 + len1 - len2, p2);
+}
+
+
+int main()
+{
+    char s1[SIZE];
+    char s2[SIZE];
+
+    printf("birinci yaziyi girin : ");
+    sgets(s1);
+
+    printf("ikinci yaziyi girin : ");
+    sgets(s2);
+
+    if(ends_with(s1, s2))
+        printf("evet var sonunda\n");
+    else
+        printf("hayir yok sonunda\n");
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int main()
+{
+    char s1[SIZE];
+    char s2[SIZE];
+
+    printf("birinci yaziyi girin : ");
+    sgets(s1);
+
+    printf("ikinci yaziyi girin : ");
+    sgets(s2);
+
+    //dikkat
+    //iki yazıınn baslandıg adresini karsılastırırsınız
+    //boyle bir karsılastırma yok c de
+    if(s1 == s2) //yanlıs durum karsılastırma
+        printf("evet \n");
+    else
+        printf("hayir\n");
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+//stricmp
+//orhan ORHAN
+//buyuk kuck farketmeksızin karsılastıma işelmi yapar
+
+
+int main()
+{
+    char s1[SIZE];
+    char s2[SIZE];
+
+    printf("birinci yaziyi girin : ");
+    sgets(s1);
+
+    printf("ikinci yaziyi girin : ");
+    sgets(s2);
+
+    if(!stricmp(s1, s2))
+        printf("evet \n");
+    else
+        printf("hayir\n");
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
