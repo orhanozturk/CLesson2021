@@ -12407,6 +12407,1730 @@ int main()
 /****************************************************/
 /****************************************************/
 
+strpbrk
+
+bir yazıda karakter aranıyor
+
+ aeiou  aranacak karaterler
+
+malatya --> a donuyor
+ordu ---> o donuyor
+
+
+char *strpbrk(const char *p1, const char *p2);
+
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+
+int main()
+{
+    char str[SIZE];
+    char letters[SIZE];
+
+    printf("icinde arama yapilacak yaziyi girin : ");
+    sgets(str);
+
+    printf("aranacak karaterleri igirin : ");
+    sgets(letters);
+
+    printf("(%s) yazisinda (%s) katerlerinden biri aranyiyor\n", str, letters);
+    char *p= strpbrk(str, letters);
+
+    if(p){
+        printf("bulundu .. %c, index %d\n", *p, p - str);
+    } else {
+        printf("bulunamadi\n");
+    }
+
+
+
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+char *mystrpbrk(const char *str, const char *pchars)
+{
+    for (int i = 0; str[i] != '\0'; ++i) {
+        if(strchr(pchars, str[i])){
+            return (char *)str + i;
+        }
+    }
+
+    return NULL;
+}
+
+
+int main()
+{
+    char str[SIZE];
+    char letters[SIZE];
+
+    printf("icinde arama yapilacak yaziyi girin : ");
+    sgets(str);
+
+    printf("aranacak karaterleri igirin : ");
+    sgets(letters);
+
+    printf("(%s) yazisinda (%s) katerlerinden biri aranyiyor\n", str, letters);
+    char *p= mystrpbrk(str, letters);
+
+    if(p){
+        printf("bulundu .. %c, index %d\n", *p, p - str);
+    } else {
+        printf("bulunamadi\n");
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+string literalleri
+
+
+bunlar aslında elemanları char türden olan bir dizidir
+
+"orhan ozturk" --> derleyici tarafıdnan olusturlan bir 12 elemanlı dizi
+null karaterli olusturur
+
+
+derleyici string literallerini array decay'e cevirir
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+
+int main()
+{
+    putchar(*"orhan");
+    putchar('\n');
+    putchar("orhan"[3]);
+    putchar('\n');
+    putchar(2["orhan"]);
+    putchar('\n');
+
+    printf("%zu\n", strlen("orhan"));
+    printf("%p\n", "orhan");
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+//surekli aynı adres veriri
+//cunku string literalleri stak omurludur
+
+int main()
+{
+    for (int i = 0; i < 10; ++i) {
+        printf("%p\n", "orhan");
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+//burada string litralleri statik omurlu oldugu icin
+//tanımsız davranıs olusturmaz
+
+char *get_day_name(int weekday)
+{
+    switch (weekday) {
+    case 1: return "pazartesi";
+    case 2: return "sali";
+    case 3: return "carsamba";
+    case 4: return "persembe";
+    case 5: return "cuma";
+    case 6: return "cumartesi";
+    case 7: return "pazar";
+    }
+
+    return "gecersiz gun";
+}
+
+int main()
+{
+    int wd;
+
+    printf("haftanin kacinci gunu : ");
+    scanf("%d", &wd);
+
+    printf("haftanin %d. gunu %s\n", wd, get_day_name(wd));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+"alican" bu ifadenin türü
+
+
+C  de char [7]
+C++ const char [7]
+
+
+C dilinde string literalleri tür olarak const olmasada dizi olmaırna karsın
+bir string literalini değiştirme girişimi "tanımsız davranıstır"
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    char *psw = "kapi";
+
+
+    *psw = 'X'; //tanımsz davranıs olusturur
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    char *p = "kapi";
+
+    *p = 'm'; //tanısmız davranıs
+    p[3] = 'a'; //tanısmız davranıs
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    const char *p = "kapi";
+
+    *p = 'm'; //artık gecerli durum olmaz
+    p[3] = 'a'; //artık gecerli durum olmaz
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+//mulakat soru
+
+int main()
+{
+    //iki si arasındaki fark nedir
+    char str[] = "orhan"; //bu ilk deger ver sentaksı
+    //burada
+
+    str[0] = 'X';
+
+
+    char *p = "ozturk"; //bu ise statik string literal programın basından sonuna kadar omru devam eder
+    //degistirlemez tanımsız davranıs olur
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+//mulakat soru
+
+int main()
+{
+    const int x = 10;
+
+    int *p = (int *)&x; //C de gecerli
+
+    *p = 20; //tanımsız davranıs olusur
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+//mulakat soru
+
+int main()
+{
+    char *p = (char *)"orhan";
+
+    *p = 'X'; //tanımsız davranıs olsuru
+
+    //asla ve asla string literallerini degistirme durumunda bulunmayın
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    //unspecified behavior
+    //derleyici buna documante etmek zorunda degil
+    //hep aynı kodu uremek zorunda da degildir
+
+    char *p1 = "orhan";
+    char *p2 = "orhan";
+
+    //derleyici bu string literalleri aynı olsada aynı yerde veya farkı yerde tutabilirim tamamen bana baglı dikkat ol
+
+    //tanısmız davranıs
+    if(p1 == p2){
+        printf("evet esit\n");
+    }
+     else {
+        printf("hayir esit degil\n");
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+özdeş string literalleri
+
+a- tek bir dizi olarak
+b- farklı dizi olarak
+
+derleyici tarafından tutalabilir --
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    char *psw = "cikita";
+
+    //burada adres karsılastırması
+    //bunu yapmayın
+    if(psw == "cikita"){
+
+    }
+
+
+    //bu sekilde yapınıyız
+    if(strcmp(psw, "cikita")){
+
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+void func(char *);
+void fooo(const char *);
+
+int main()
+{
+   func("ceyhun"); //tanımsız davranıs
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+   char str[100] = "orhan";
+
+   //gecerli durum
+   if(!strcmp(str, "orhan"))
+   {
+
+   }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+   char name[100];
+
+
+   //oyle bir kod yazındakı name dizisi suleyman yazısını tuutsub
+
+
+   strcpy(name, "suleyman"); //bu sekıl yapmlıyız
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+   char old_file_name[SIZE];
+   char new_file_name[SIZE];
+
+   printf("dosyanin ismini girin : ");
+   scanf("%s", old_file_name);
+   strcpy(new_file_name, old_file_name);
+
+
+   //eger dosyaının uzantısı yok ise dosya uzantısı .dat oalcak
+   //dosyanın uzantısı .xls ise dosyanın uzantısı .txt oalcak
+   //dosya uznatısı .dox ise dosya uzantısı kalkacak
+   //dosya uzantısı .jpeg olarak degistirlecek diger kalan durumlarda
+
+
+   char *p = strrchr(new_file_name, '.');
+
+   if(!p){
+       strcat(new_file_name, ".dat");
+   }
+   else if(!strcmp(p, ".xls")){
+       strcpy(p, ".txt");
+   }
+   else if(!strcmp(p, ".doc"))
+   {
+       *p = '\0';
+   }
+   else {
+        strcpy(p, ".jpeg");
+   }
+
+   printf("(%s) ---> (%s) \n", old_file_name, new_file_name);
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+   printf("\x42URS\x41\xA");
+   printf("\102\101\102\101\012");
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+   printf("\\yavuz\\\n");
+   printf("\"yavuz\"\n");
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    const char *p = "\102\101\102\101\012";
+
+    printf("uzunluk = %zu\n", strlen(p));
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    printf("%d yavuz\n", 3);
+    printf("%3d yavuz\n", 3);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    //boyle bir yazı sabiti kullanamayız
+    "burda bir yazi sabiti var
+    ve alttan devam ediyor";
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+
+    //fakat tercih edilen yontem degil
+
+    const char *p = "burda bir yazi sabiti var \
+ve alttan devam ediyor";
+
+
+    puts(p);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+
+    //fakat tercih edilen yontem degil
+
+    const char *p = "ahmet"
+            "hasan"         "orhan"
+            "halis"  "recep"  "sema";
+
+    //derleyici compile t,imeda string literallerini birleştirir
+
+    puts(p);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+
+    printf("[1] Kayit ekle\n"
+           "[2] Kayit duzen\n"
+            "[3] Kayit yenile\n"
+            "[4] Kayit sil\n"
+            "[5] Kayit kapat\n"
+            );
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+sizeof
+operator
+keyword
+compile time opeatoru
+
+
+strlen
+fonksiyon
+identifier
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+
+  const char *p = "orhan";
+
+  printf("[1] %zu\n", sizeof p);
+  printf("[1] %zu\n", sizeof *p);
+  printf("[1] %zu\n", sizeof p[0]);
+  printf("[1] %zu\n", sizeof "orhan"); //6 elemanlu cahr dizi
+  printf("[1] %zu\n", strlen(p));
+  printf("[1] %zu\n", strlen(""));
+  printf("[1] %zu\n", strlen("orhan"));
+  printf("[1] %zu\n", sizeof ++p); //etkisi yok
+  printf("[1] %zu\n", strlen(p));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+
+  const char *p1 = "can"; //4 karakterli
+  const char *p2 = "an";
+  const char *p3 = "n";
+    const char *p4 = "";
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+pointer arrays -- gösterici dizileri
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    int x = 10;
+    int a[10];
+    int *ptr;
+
+    int *p[10];
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int x = 12;
+int y = 13;
+int z = 14;
+
+int main()
+{
+    int *p[3] = {&x, &y, &z};
+
+    printf("p[0] = %p\n", p[0]);
+    printf("&x = %p\n", &x);
+    *p[0] = 99;
+    printf("x = %d\n", x);
+    ++*p[0];
+    printf("x = %d\n", x);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int x = 12;
+int y = 13;
+int z = 14;
+int t = 40;
+
+int main()
+{
+    int *p[] = {&x, &y, &z, &t};
+
+    for (size_t i = 0; i < asize(p); ++i) {
+        ++*p[i];
+    }
+
+    for (size_t i = 0; i < asize(p); ++i) {
+        printf("%d\n", *p[i]);
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    int x = 10;
+    int y = 20;
+    int *p[10];
+    int *ptr = &y;
+
+    p[0] = &x;
+    p[1] = ptr;
+    p[2] = p[0];
+    p[3] = NULL;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int *ptr; //NULL
+int *p[5]; //NULL arrays
+
+int main()
+{
+    printf("%d\n", p[0] == NULL);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int x = 10;
+int y = 20;
+int z = 30;
+
+int main()
+{
+    int *p[5] = {&x, &y, &z}; //bos kalanları NULL ile doldurur
+    printf("%d\n", p[4] == NULL);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int a[] = {1, 2, 3, 4};
+
+int main()
+{
+    int *p[3] = {a}; //{a , NULL, NULL}
+
+    ++p[0][2];
+
+    print_array(a, 4);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int a[] = {1, 2, 3, 4};
+int b[] = {10, 20, 30 , 40};
+int c[] = {-10, -20, -30 , -40};
+
+int main()
+{
+    int *p[3] = {a, b, c}; //{a , NULL, NULL}
+
+    ++p[1];//b nin 2 ci elemanı
+    ++*p[1]; // b nin 20 deger i 21
+
+    print_array(b, 4);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    char *pdays[] = {"pazartesi", "sali", "carsamba", "persembe", "cuma", "cumartesi", "pazar"};
+
+    for (size_t i = 0; i < asize(pdays); ++i) {
+        puts(pdays[i]);
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    char *pdays[] = {"pazartesi", "sali", "carsamba", "persembe", "cuma", "cumartesi", "pazar"};
+
+    for (size_t i = 0; i < asize(pdays); ++i) {
+        printf("%p  --->  %s\n", pdays[i], pdays[i]);
+    }
+
+    putchar('\n');
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    char *pdays[] = {"pazartesi", "sali", "carsamba", "persembe", "cuma", "cumartesi", "pazar"};
+
+    for (size_t i = 0; i < asize(pdays); ++i) {
+        printf("%-12s  --->  %zu\n", pdays[i], strlen(pdays[i]));
+    }
+
+    putchar('\n');
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    char str[] = "orhan";
+
+    printf("%zu \n", sizeof *str);
+    printf("%zu \n", sizeof str);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    char *pdays[] = {"pazartesi", "sali", "carsamba", "persembe", "cuma", "cumartesi", "pazar"};
+
+    *pdays[4] = 'D'; //tanımsız davranıs olsuturur
+
+    //bu yzuden dısıyı bu sekılde const tanımlayın
+   //const char *pdays[] = {"pazartesi", "sali", "carsamba", "persembe", "cuma", "cumartesi", "pazar"};
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int x = 10;
+int z = 10;
+int y = 10;
+int t = 10;
+
+int main()
+{
+    int *const p[] = {&x, &y, &z, &t};
+
+    p[2] = &z; //gecersiz
+    *p[1] = 44; //gecerli
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int x = 10;
+int z = 10;
+int y = 10;
+int t = 10;
+
+int main()
+{
+    const int * p[] = {&x, &y, &z, &t};
+
+    p[2] = &z; //gecerli
+    *p[1] = 44; //gecersiz
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int x = 10;
+int z = 10;
+int y = 10;
+int t = 10;
+
+int main()
+{
+    const int * const p[] = {&x, &y, &z, &t};
+
+    p[2] = &z; //gecersiz
+    *p[1] = 44; //gecersiz
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    const char *p[] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+    };
+
+    printf("%zu\n", asize(p));
+    printf("%zu\n", sizeof (p) / sizeof (*p));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    const char *p[] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+    };
+
+    for (size_t i = 0; i < asize(p); ++i) {
+        printf("%s  ", p[i]);
+    }
+
+    putchar('\n');
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    const char *p[] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+    };
+
+    for (size_t i = 0; i < asize(p); ++i) {
+        printf("%s  ", p[i]);
+    }
+
+    size_t len;
+    printf("uzunluk degeri girin : ");
+    scanf("%zu", &len);
+
+    for (size_t i = 0; i < asize(p); ++i) {
+        if(strlen(p[i]) == len)
+            printf("%s  ", p[i]);
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    const char *p[] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+    };
+
+
+    //isimlerin ilk karaterlerinin yazdırın
+    for (size_t i = 0; i < asize(p); ++i) {
+            //printf("%c  ", p[i][0]);
+            printf("%c  ", *p[i]);
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    const char *p[] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+    };
+
+
+    //isimlerin son karaterlerinin yazdırın
+    for (size_t i = 0; i < asize(p); ++i) {
+            printf("%c  ", p[i][strlen(p[i]) -1]);
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    const char *p[] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+    };
+
+
+    int c;
+    printf("bir karater girin :");
+    c = getchar();
+
+    for (size_t i = 0; i < asize(p); ++i) {
+        if(p[i][0] == c)
+            printf("%s  ", p[i]);
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    const char *p[] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+    };
+
+
+    int c;
+    printf("bir karater girin :");
+    c = getchar();
+
+    for (size_t i = 0; i < asize(p); ++i) {
+        //if(strchr(p[i], c) != NULL)
+          if(strchr(p[i], c))
+            printf("%s  ", p[i]);
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

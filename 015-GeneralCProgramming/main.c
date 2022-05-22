@@ -5,45 +5,35 @@
 
 #define     SIZE        100
 
-//stricmp
-//kendimiz yazalım
-
-int mystricmp(const char *p1, const char *p2)
-{
-    while (toupper(*p1) == toupper(*p2)) {
-        if(*p1 == '\0')
-            return 0;
-        ++p1;
-        ++p2;
-    }
-
-
-    return toupper(*p1) - toupper(*p2);
-}
-
-
 int main()
 {
-    char s1[SIZE];
-    char s2[SIZE];
+    const char *p[] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+    };
 
-    printf("birinci yaziyi girin : ");
-    sgets(s1);
 
-    printf("ikinci yaziyi girin : ");
-    sgets(s2);
+    int c;
+    printf("bir karater girin :");
+    c = getchar();
 
-    if(!mystricmp(s1, s2))
-        printf("evet \n");
-    else
-        printf("hayir\n");
-
+    for (size_t i = 0; i < asize(p); ++i) {
+        //if(strchr(p[i], c) != NULL)
+          if(strchr(p[i], c))
+            printf("%s  ", p[i]);
+    }
 
 }
 
 
 /****************************************************/
 /****************************************************/
+
+
+
 
 
 
