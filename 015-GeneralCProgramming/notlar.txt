@@ -13824,6 +13824,958 @@ int main()
 /****************************************************/
 
 
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    const char *p[] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+        "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+        "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+        "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+        "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+        "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+    };
+
+
+    for(int c = 'a'; c <= 'z'; ++c){
+        int cnt = 0;
+        printf("icinde (%c) olan isimler\n", c);
+        for (size_t i = 0; i < asize(p); ++i) {
+              if(strchr(p[i], c)){
+                printf("%s  ", p[i]);
+                ++cnt;
+              }
+        }
+     printf("\topalm %d tane\n", cnt);
+     printf("\n*************************************************************************\n");
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    const char *const pmons[] = {
+        "Ocak",
+        "Subat",
+        "Mart",
+        "Nisan",
+        "Mayis",
+        "Haziran",
+        "Temmuz",
+        "Agutos",
+        "Eylul",
+        "Ekim",
+        "Kasim",
+        "Aralik",
+    };
+
+    int n;
+
+    printf("yilin kacinci ayi : ");
+    scanf("%d", &n);
+
+    printf("yilin %d. ayi %s\n", n, pmons[n-1]);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    const char *const pmons[] = {
+        "Ocak",
+        "Subat",
+        "Mart",
+        "Nisan",
+        "Mayis",
+        "Haziran",
+        "Temmuz",
+        "Agutos",
+        "Eylul",
+        "Ekim",
+        "Kasim",
+        "Aralik",
+    };
+
+    char entry[40];
+
+    printf("ay ismi girin : ");
+    scanf("%s", entry);
+
+    int i = 0;
+
+    //olur boyle bir kod ama yazmayın
+    for (; i < 12; ++i) {
+        if(!strcmp(entry, pmons[i]))
+            break;
+    }
+
+    if(i < 12){
+        printf("%s yilin %d. ayi\n", entry, i+1);
+    }
+    else{
+        printf("%s gecerli bir ay ismi degil\n", entry);
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    const char *const pmons[] = {
+        "Ocak",
+        "Subat",
+        "Mart",
+        "Nisan",
+        "Mayis",
+        "Haziran",
+        "Temmuz",
+        "Agutos",
+        "Eylul",
+        "Ekim",
+        "Kasim",
+        "Aralik",
+    };
+
+    char entry[40];
+
+    printf("ay ismi girin : ");
+    scanf("%s", entry);
+
+    int i = 0;
+
+    for (; i < 12 && strcmp(entry, pmons[i]); ++i)
+          ;
+
+    if(i < 12){
+        printf("%s yilin %d. ayi\n", entry, i+1);
+    }
+    else{
+        printf("%s gecerli bir ay ismi degil\n", entry);
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+int main()
+{
+    const char *const pmons[] = {
+        "Ocak",
+        "Subat",
+        "Mart",
+        "Nisan",
+        "Mayis",
+        "Haziran",
+        "Temmuz",
+        "Agutos",
+        "Eylul",
+        "Ekim",
+        "Kasim",
+        "Aralik",
+    };
+
+    for (; ; ) {
+        puts(pmons[rand() % asize(pmons)]);
+        getchar();
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+const char *p[] = {
+    "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+    "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+    "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+    "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+    "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+    "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+    "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+    "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+    "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+    "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+};
+
+int main()
+{
+
+    randomize();
+
+    for (; ; ) {
+        printf("%s", relem(p));
+        getchar();
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+const char *p[] = {
+    "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+    "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+    "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+    "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+    "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+    "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+    "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+    "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+    "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+    "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+};
+
+int main()
+{
+
+    char str[40];
+
+    printf("bir yazi girin : ");
+   scanf("%s", str);
+
+   for (size_t i = 0; i < asize(p); ++i) {
+       if(strstr(p[i], str)){
+           printf("%s ", p[i]);
+       }
+   }
+
+   printf("\n");
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+const char *p[] = {
+    "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+    "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+    "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+    "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+    "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+    "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+    "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+    "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+    "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+    "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+};
+
+int main()
+{
+
+    char str[40];
+
+    printf("bir yazi girin : ");
+   scanf("%s", str);
+
+   for (size_t i = 0; i < asize(p); ++i) {
+       if(strpbrk(p[i], str)){
+           printf("%s ", p[i]);
+       }
+   }
+
+   printf("\n");
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+const char *p[] = {
+    "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+    "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+    "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+    "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+    "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+    "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+    "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+    "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+    "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+    "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+};
+
+int main()
+{
+
+   //yazıları sıralam
+    //buble sort ile sıralayalım
+
+    for (size_t i = 0; i < asize(p); ++i) {
+        printf("%s ", p[i]);
+    }
+
+    printf("\n\n");
+
+    for (size_t i = 0; i < asize(p) - 1; ++i) {
+        for (size_t k = 0; k < asize(p) - 1 - i; ++k) {
+            if(strcmp(p[k], p[k+1]) > 0){
+                const char *ptemp = p[k];
+                p[k] = p[k+1];
+                p[k+1] = ptemp;
+            }
+        }
+    }
+
+    printf("siralama bitti\n");
+    for (size_t i = 0; i < asize(p); ++i) {
+        printf("%s ", p[i]);
+    }
+
+    printf("\n\n");
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+const char *p[] = {
+    "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+    "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+    "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+    "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+    "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+    "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+    "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+    "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+    "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+    "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+};
+
+int main()
+{
+
+   //yazıları sıralam
+    //buble sort ile sıralayalım
+
+    for (size_t i = 0; i < asize(p); ++i) {
+        printf("%s ", p[i]);
+    }
+
+    printf("\n\n");
+
+    for (size_t i = 0; i < asize(p) - 1; ++i) {
+        for (size_t k = 0; k < asize(p) - 1 - i; ++k) {
+            size_t len1 = strlen(p[k]);
+            size_t len2 = strlen(p[k+1]);
+            if(len1 > len2 || (len1 == len2 && strcmp(p[k], p[k+1]) > 0)){
+                const char *ptemp = p[k];
+                p[k] = p[k+1];
+                p[k+1] = ptemp;
+            }
+        }
+    }
+
+    printf("siralama bitti\n");
+    for (size_t i = 0; i < asize(p); ++i) {
+        printf("%s ", p[i]);
+    }
+
+    printf("\n\n");
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+//ödev sorusu
+
+const char *p[] = {
+    "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+    "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+    "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+    "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+    "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+    "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+    "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+    "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+    "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+    "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+};
+
+int main()
+{
+
+  //yukarıdaki dizide icinde aynı harften fazla olanları yazdırın
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+const char *p[] = {
+    "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+    "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+    "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+    "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+    "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+    "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+    "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+    "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+    "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+    "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+    NULL,
+};
+
+int main()
+{
+
+    int i = 0;
+
+    while(p[i] != NULL){
+        printf("%s ", p[i]);
+        ++i;
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        100
+
+
+
+int main()
+{
+    const char *const pmons[] = {
+        "", //null string
+        "Ocak",
+        "Subat",
+        "Mart",
+        "Nisan",
+        "Mayis",
+        "Haziran",
+        "Temmuz",
+        "Agutos",
+        "Eylul",
+        "Ekim",
+        "Kasim",
+        "Aralik",
+    };
+
+    int n;
+
+    printf("yilin kacinci ayi : ");
+    scanf("%d", &n);
+
+    printf("yilin %d. ayi %s\n", n, pmons[n]);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+pointer to pointer -- gösterici gösteren gösterici
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        100
+
+
+int main()
+{
+   int x = 23;
+   int *p = &x;
+
+   printf("&x   = %p\n", &x);
+   printf("p    = %p\n", p);
+   printf("&p   = %p\n", &p);
+
+   //&p  int ** dir türü
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        100
+
+
+int main()
+{
+   char *p;
+   double *dp;
+
+   &p; //char **
+    &dp; //double **
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        100
+
+
+int main()
+{
+   int x = 10;
+   int *ptr = &x;
+   int **p = &ptr;  //pointer to pointer
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        100
+
+
+int main()
+{
+   int x = 10;
+    int y = 55;
+
+   int *ptr = &x;
+   printf("*ptr = %d\n", *ptr);
+   int **p = &ptr;
+
+   printf("**p = %d\n", **p);
+
+   *p = &y;
+   printf("*ptr = %d\n", *ptr);
+   printf("**p = %p\n", **p);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        100
+
+
+int main()
+{
+   int x = 10;
+   int *ptr = &x;
+   int **p = &ptr;
+   **p = 99;
+
+   printf("x = %d\n", x);
+   printf("*ptr = %d\n", *ptr);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        100
+
+
+int main()
+{
+   int x = 10;
+   int *ptr = &x;
+   int **p = &ptr;
+   **p = 99;
+
+   printf("x = %d\n", x);
+
+   ++**p;
+
+   printf("x = %d\n", x);
+
+   ++*p; //++ptr
+
+   printf("*ptr = %d\n", *ptr);
+   printf("**p = %d\n", **p);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        100
+
+
+int main()
+{
+    int a[5] = {1, 4, 7, 8, 9};
+    int *ptr = a;
+    int **p = &ptr;
+
+    print_array(a, 5);
+    ++*p;//++ptr
+    ++**p;//{1, 5, 7, 8, 9};
+    print_array(a, 5);
+    print_array(ptr, 4);
+    print_array(p, 4);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        100
+
+
+int main()
+{
+    int x = 10;
+    int *ptr = &x;
+    int **p = &ptr;
+
+}
+
+expression       data type       value category
+x                int             Lvalue
+&x               int *           Rvalue
+ptr              int *           Lvalue
+*ptr             int             Lvalue
+&ptr             int **          Rvalue
+p                int **          Lvalue
+*p               int *           Lvalue
+**p              int             Lvalue
+&p               int ***         Rvalue
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        100
+
+
+int main()
+{
+    //uretimde boyle bir kod görmezsiniz
+
+    int x = 10;
+    int *p1 = &x;
+    int **p2 = &p1;
+    int ***p3 = &p2;
+    int ****p4 = &p3;
+    int *****p5 = &p4;
+    int ******p6 = &p5;
+    int *******p7 = &p6;
+    int ********p8 = &p7;
+    int *********p9 = &p8;
+    int **********p10 = &p9;
+    int ***********p11 = &p10;
+    int ************p12 = &p11;
+    int *************p13 = &p12;
+    int **************p14 = &p13;
+    int ***************p15 = &p14;
+    int ****************p16 = &p15;
+    int *****************p17 = &p16;
+    int ******************p18 = &p17;
+    int *******************p19 = &p18;
+    int ********************p20 = &p19;
+
+    ********************p20; //x
+
+    printf("********************p20 =   %d\n", ********************p20);
+
+    int y = 50;
+    p1 = &y;
+
+    printf("********************p20 =   %d\n", ********************p20);
+
+    int z = 12;
+    *******************p20 = &z; //p1
+
+    printf("*p1 = %d\n", *p1);
+    printf("********************p20 =   %d\n", ********************p20);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

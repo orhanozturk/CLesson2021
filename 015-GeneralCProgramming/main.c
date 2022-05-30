@@ -1,30 +1,49 @@
 #include <stdio.h>
 #include "utility.h"
-#include <string.h>
-#include <ctype.h>
 
 #define     SIZE        100
 
+
 int main()
 {
-    const char *p[] = {
-        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
-        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
-        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
-        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
-        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
-    };
+    //uretimde boyle bir kod görmezsiniz
 
+    int x = 10;
+    int *p1 = &x;
+    int **p2 = &p1;
+    int ***p3 = &p2;
+    int ****p4 = &p3;
+    int *****p5 = &p4;
+    int ******p6 = &p5;
+    int *******p7 = &p6;
+    int ********p8 = &p7;
+    int *********p9 = &p8;
+    int **********p10 = &p9;
+    int ***********p11 = &p10;
+    int ************p12 = &p11;
+    int *************p13 = &p12;
+    int **************p14 = &p13;
+    int ***************p15 = &p14;
+    int ****************p16 = &p15;
+    int *****************p17 = &p16;
+    int ******************p18 = &p17;
+    int *******************p19 = &p18;
+    int ********************p20 = &p19;
 
-    int c;
-    printf("bir karater girin :");
-    c = getchar();
+    ********************p20; //x
 
-    for (size_t i = 0; i < asize(p); ++i) {
-        //if(strchr(p[i], c) != NULL)
-          if(strchr(p[i], c))
-            printf("%s  ", p[i]);
-    }
+    printf("********************p20 =   %d\n", ********************p20);
+
+    int y = 50;
+    p1 = &y;
+
+    printf("********************p20 =   %d\n", ********************p20);
+
+    int z = 12;
+    *******************p20 = &z; //p1
+
+    printf("*p1 = %d\n", *p1);
+    printf("********************p20 =   %d\n", ********************p20);
 
 }
 
