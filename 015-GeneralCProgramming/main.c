@@ -1,49 +1,22 @@
 #include <stdio.h>
 #include "utility.h"
+#include <string.h>
 
-#define     SIZE        100
+#define     SIZE        10
+
 
 
 int main()
 {
-    //uretimde boyle bir kod görmezsiniz
 
-    int x = 10;
-    int *p1 = &x;
-    int **p2 = &p1;
-    int ***p3 = &p2;
-    int ****p4 = &p3;
-    int *****p5 = &p4;
-    int ******p6 = &p5;
-    int *******p7 = &p6;
-    int ********p8 = &p7;
-    int *********p9 = &p8;
-    int **********p10 = &p9;
-    int ***********p11 = &p10;
-    int ************p12 = &p11;
-    int *************p13 = &p12;
-    int **************p14 = &p13;
-    int ***************p15 = &p14;
-    int ****************p16 = &p15;
-    int *****************p17 = &p16;
-    int ******************p18 = &p17;
-    int *******************p19 = &p18;
-    int ********************p20 = &p19;
+    char source[100] = "okanersoy";
+    char dest[100] = "tarkanyesil";
 
-    ********************p20; //x
 
-    printf("********************p20 =   %d\n", ********************p20);
-
-    int y = 50;
-    p1 = &y;
-
-    printf("********************p20 =   %d\n", ********************p20);
-
-    int z = 12;
-    *******************p20 = &z; //p1
-
-    printf("*p1 = %d\n", *p1);
-    printf("********************p20 =   %d\n", ********************p20);
+    if(!strncmp(source +1, dest + 3, 3))
+        printf("yazilar esit\n");
+    else
+       printf("yazilar esit degil\n");
 
 }
 

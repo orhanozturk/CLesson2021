@@ -14644,6 +14644,1083 @@ int main()
 /****************************************************/
 
 
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        100
+
+
+int main()
+{
+  int x = 10;
+  int y = 20;
+  int *p1 = &x;
+  int *p2 = &y;
+
+  printf("*p1 = %d   *p2 = %d\n", *p1, *p2);
+
+  int *ptemp = p1;
+  p1 = p2;
+  p2 = ptemp;
+
+  printf("*p1 = %d   *p2 = %d\n", *p1, *p2);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        100
+
+void pswap(int **ptr1, int **ptr2)
+{
+    int *ptemp = *ptr1;
+    *ptr1 = *ptr2;
+    *ptr2 = ptemp;
+}
+
+int main()
+{
+  int x = 10;
+  int y = 20;
+  int *p1 = &x;
+  int *p2 = &y;
+
+  printf("*p1 = %d   *p2 = %d\n", *p1, *p2);
+
+  pswap(&p1, &p2);
+
+  printf("*p1 = %d   *p2 = %d\n", *p1, *p2);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        100
+
+void pswap(int **ptr1, int **ptr2)
+{
+    int *ptemp = *ptr1;
+    *ptr1 = *ptr2;
+    *ptr2 = ptemp;
+}
+
+int main()
+{
+  int x = 10;
+  int y = 20;
+  int *p1 = &x;
+  int *p2 = &y;
+
+  printf("*p1 = %d   *p2 = %d\n", *p1, *p2);
+
+  pswap(&p1, &p2);
+
+  printf("*p1 = %d   *p2 = %d\n", *p1, *p2);
+
+  swap(p1, p2);
+  printf("x = %d\n", x);
+  printf("y = %d\n", y);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        10
+
+
+void get_min_max(const int *pa, size_t size, int **ptr_min, int **ptr_max)
+{
+    *ptr_max = *ptr_min = (int *)pa;
+
+    for (size_t i = 1; i < size; ++i) {
+        if(pa[i] > **ptr_max)
+            *ptr_max = (int *)(pa + i);
+        else if(pa[i] < **ptr_min)
+            *ptr_min = (int *)(pa + i);
+    }
+}
+
+int main()
+{
+  int a[SIZE];
+  randomize();
+  set_array_random(a, SIZE);
+  print_array(a, SIZE);
+
+  int *pmin, *pmax;
+  get_min_max(a, SIZE, &pmin, &pmax);
+  printf("min = %d ve %d indisli elemani\n", *pmin, pmin - a);
+  printf("max = %d ve %d indisli elemani\n", *pmax, pmax - a);
+
+  swap(pmin, pmax);
+  print_array(a, SIZE);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        10
+
+
+int main()
+{
+  printf("sizeof (int *) = %zu\n", sizeof (int *));
+  printf("sizeof (int **) = %zu\n", sizeof (int **));
+  printf("sizeof (int ***) = %zu\n", sizeof (int ***));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        10
+
+
+int main()
+{
+  int **p = NULL;
+  int ******c = NULL;
+  double **dp = NULL;
+  char ** cp = 0;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        10
+
+
+void func(int **pa, size_t size)
+{
+    for (size_t i = 0; i < size; ++i) {
+        printf("p[%d] = %p\n", i, pa[i]);
+    }
+}
+
+int a = 12, b = 11, c = 55, d = 15;
+
+int main()
+{
+
+    int *w[] = {&a, &b, &c, &d};
+
+    printf("&a = %p\n", &a);
+    printf("&b = %p\n", &b);
+    printf("&c = %p\n", &c);
+    printf("&d = %p\n", &d);
+
+
+    func(w, 4);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        10
+
+void display_names(char **ptr, size_t size)
+{
+    for (size_t i = 0; i < size; ++i) {
+        printf("%s ", ptr[i]);
+    }
+
+    printf("\n***************************************\n");
+
+}
+
+int main()
+{
+
+    const char *p[] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+        "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+        "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+        "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+        "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+        "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+    };
+
+    display_names(p, asize(p));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+#define     SIZE        10
+
+void display_names(char **ptr, size_t size)
+{
+   while(size--) {
+        printf("%s ", *ptr++);
+    }
+
+    printf("\n***************************************\n");
+
+}
+
+int main()
+{
+
+    const char *p[] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+        "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+        "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+        "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+        "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+        "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+    };
+
+    display_names(p, asize(p));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+void display_names(char **ptr, size_t size)
+{
+   while(size--) {
+        printf("%s ", *ptr++);
+    }
+
+    printf("\n***************************************\n");
+
+}
+
+void cpswap(char **p1, char **p2)
+{
+    char *ptemp = *p1;
+    *p1 = *p2;
+    *p2 = ptemp;
+}
+
+void sort_names(char **pa, size_t size)
+{
+    for (size_t i = 0; i < size -1; ++i) {
+        for (size_t k = 0; k < size - 1 -i; ++k) {
+            if(strcmp(pa[k], pa[k+1]) > 0)
+                cpswap(pa+k, pa+k+1);
+        }
+    }
+}
+
+int main()
+{
+
+    const char *p[] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+        "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+        "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+        "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+        "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+        "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+    };
+
+    display_names(p, asize(p));
+    sort_names(p, asize(p));
+    display_names(p, asize(p));
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+int main()
+{
+    int a[10] = {0, 1, 2, 3, 5, 66, 77, 22, 11, 44};
+
+    int *p = a;
+    int **ptr = &p;
+
+    ++(*ptr)[5];
+
+    print_array(a, 10);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int a[10] = {0, 1, 2, 3, 5, 66, 77, 22, 11, 44};
+int b[10] = {0, 1, 2, 3, 5, 66, 77, 22, 11, 44};
+int c[10] = {0, 1, 2, 3, 5, 66, 77, 22, 11, 44};
+
+
+int *p1 = a;
+int *p2 = b;
+int *p3 = c;
+
+int main()
+{
+    int *w[] = {p1, p2, p3};
+
+    ++w[1][2];
+    //++p2[2];
+
+    printf("x = %d \n", w[1][2]);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+pointer to pointer  ve const keyword
+
+
+int * const p = &x;  //p yi degiştiremem
+const pointer to int
+top-level const
+
+const int *p = &x;  //x i degiştiremem
+pointer to const int
+low-level const
+
+
+* neden önce gelirse const olan odur
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+int main()
+{
+   int x = 10;
+   int *p = &x;
+   int y = 20;
+   int *q = &y;
+
+   int **ptr = &q;
+
+   ptr = &p;
+
+   *ptr = &y;
+   **ptr = 99;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+int main()
+{
+   int x = 10;
+   int *p = &x;
+   int y = 20;
+   int *w = &y;
+
+   int ** const ptr = &w;
+
+   ptr = &p; //sentaks
+   *ptr = &y;
+   **ptr = 99;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+int main()
+{
+   int x = 10;
+   int *p = &x;
+   int y = 20;
+   int *w = &y;
+
+   int * const * ptr = &w;
+
+   ptr = &p;
+   *ptr = &y; //sentaks hatası
+   **ptr = 99;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+int main()
+{
+   int x = 10;
+   int *p = &x;
+   int y = 20;
+   int *w = &y;
+
+   const int ** ptr = &w;
+
+   ptr = &p;
+   *ptr = &y;
+   **ptr = 99;//sentaks hatası
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+int main()
+{
+   int x = 10;
+   int *p = &x;
+   int y = 20;
+   int *w = &y;
+
+   const int * const * ptr = &w;
+
+   ptr = &p;
+   *ptr = &y;  //sentask hatası
+   **ptr = 99;//sentaks hatası
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+int main()
+{
+   int x = 10;
+   int *p = &x;
+   int y = 20;
+   int *w = &y;
+
+   const int * const * const ptr = &w;
+
+   ptr = &p;  //sentasks hatası
+   *ptr = &y;  //sentask hatası
+   **ptr = 99;//sentaks hatası
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+void func(int * const *ptr, int size)
+{
+    *ptr = NULL; //sentask shatası
+}
+
+int main()
+{
+
+    int *p[10];
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int *p1, *p2, *p3;
+
+int main()
+{
+
+    //böyle bir dizi olabilir
+    int **p[10] = {&p1, &p2, &p3};
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int **gptr;
+
+int **foo(void)
+{
+
+    ///
+
+    return gptr;
+}
+
+int main()
+{
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+//soru
+
+
+void foo(int **a, int **b)
+{
+    int c = **a;
+    **a = **b;
+    **b = c;
+}
+
+int main()
+{
+
+    int x = 10, *p = &x, y = 45, *q = &y;
+
+    printf("x = %d    y = %d\n", x, y);
+    foo(&p, &q);
+    printf("x = %d    y = %d\n", x, y);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+std string fonksilarından bazıları
+
+strncpy
+strncmp
+strncat
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+
+int main()
+{
+
+    char source[100] = "tugay";
+    char dest[100];
+
+    strncpy(dest, source, 3);
+    //tug
+    //null karateri koymuyor bu bize tanımsız davranışile karsı karsı ya bırakıyor
+
+    printf("%s\n", dest); ///tanımsız olusturacak
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+
+int main()
+{
+
+    char source[100] = "tugay";
+    char dest[100];
+
+    strncpy(dest, source, 6);
+    //tugay\0
+    //null karateri artık bulunuyor
+
+    printf("%s\n", dest); //tanısmız davranıs yok artık
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+
+int main()
+{
+
+    char source[100] = "tugay";
+    char dest[100];
+
+    strncpy(dest, source, 3);
+    dest[3] = '\0';
+
+    printf("%s\n", dest); //tanısmız davranıs yok artık
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+
+int main()
+{
+
+    char source[100] = "tugay";
+    char dest[100];
+
+    //böylede yazabiliriz
+    strncpy(dest, source, 3)[3] = '\0';
+
+    printf("%s\n", dest); //tanısmız davranıs yok artık
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+
+int main()
+{
+
+    char source[100] = "tugay";
+    char dest[100] = "0123456789";
+
+    //012uga6789 hale gerir
+
+    printf("%s\n", dest);
+    strncpy(dest + 3, source + 1, 3);
+
+    printf("%s\n", dest);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+
+int main()
+{
+
+    char source[100] = "tugay";
+    char dest[100] = "ahmet";
+
+    printf("%s\n", dest);
+    strncat(dest, source , 3);
+
+    puts(dest);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+
+int main()
+{
+
+    char source[100] = "tugay";
+    char dest[100] = "ahmet";
+
+    printf("%s\n", dest);
+    strncat(dest, source +1 , 3);
+
+    puts(dest);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+
+int main()
+{
+
+    char source[100] = "okanersoy";
+    char dest[100] = "tarkanyesil";
+
+
+    if(!strncmp(source +1, dest + 3, 3))
+        printf("yazilar esit\n");
+    else
+       printf("yazilar esit degil\n");
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+void pointers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
