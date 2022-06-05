@@ -15564,6 +15564,910 @@ int main()
 void pointers
 
 
+void C ve C++ da bir tür
+
+1- bir nesneinin türü void olamaz
+2- bir dizinin türü void olamz
+3- bir ifadenini türü void olamaz
+
+a- geri donuş türü void olan fonksiyon -- geri donusu yok demek
+b- ifadelerin türü void'e cast edebiliriz
+
+
+
+tür donusturm opeatoru hedef tür void oşabilir
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int foo(int);
+
+
+int main()
+{
+
+    foo(2);
+
+    //bilerek ve isteyer k yaptıgımı okuyucu ve derleyiciye soyleriz
+    (void)foo(2);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int foo(void); //benim parametrem yok
+int func();//benim parametrem hakkın bilgim yok
+
+
+int main()
+{
+    //foo(1, 2); //sentaks hatası
+
+    func(1, 2);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+void func(void *p);
+
+//vptr herhangi bir türden bir nesnenin adresinin tutabilir
+int main()
+{
+    int x = 10;
+    double dval = 2.31;
+    char str[] = "orhan";
+
+
+    void *vptr = &x;
+    vptr = &dval;
+    vptr = str;
+
+    func(&x);
+    func(&dval);
+    func(str);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+void func(void *p);
+
+//vptr herhangi bir türden bir nesnenin adresinin tutabilir
+int main()
+{
+    int x = 10;
+    void *vptr = &x;
+
+    //peki ne işe yarar .....
+    *vptr = 20; //gecerli  degil
+    vptr + 5;
+    vptr[2];
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+void func(void *p);
+
+//vptr herhangi bir türden bir nesnenin adresinin tutabilir
+int main()
+{
+    int x = 10;
+    char str[15] = "orhan";
+    void *vptr = &x;
+
+    vptr = str;
+    vptr = x; //C de yanlıs ama gecerli C++ sentask hatsı
+    vptr = 0; //gercerli
+    vptr = NULL; //gecerli
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+void func(void *p);
+
+//vptr herhangi bir türden bir nesnenin adresinin tutabilir
+int main()
+{
+    int x = 10;
+    char str[15] = "orhan";
+    void *vptr = &x;
+
+    if(vptr == &x)
+        printf("evet dogru\n");
+    else
+        printf("yanlis\n");
+
+    vptr =str;
+
+    if(vptr == &x)
+        printf("evet dogru\n");
+    else
+        printf("yanlis\n");
+
+
+    if(vptr == NULL)
+        printf("evet dogru\n");
+    else
+        printf("yanlis\n");
+
+    vptr = NULL;
+
+
+    if(vptr == NULL)
+        printf("evet dogru\n");
+    else
+        printf("yanlis\n");
+
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+T (void dısında ) herhangi bir tür olmak uzere
+
+T* ---> void * otomatik donusum var
+
+
+void * --->  T*
+
+C dilinde otomatik donusum var fakat C++ dilinde otomatik dobnusum yok
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+int main()
+{
+    int x = 10;
+    void *vptr = &x;
+
+    //int *iptr = vptr;  //C++ da gecersiz
+    //c de gecerli
+
+    int *iptr = (int *) vptr;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+int main()
+{
+    printf("sizeof(int *) = %zu\n", sizeof (int *));
+    printf("sizeof(double *) = %zu\n", sizeof (double *));
+    printf("sizeof(void *) = %zu\n", sizeof (void *));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+void *foo(void);
+
+int main()
+{
+
+    int *p;
+
+    p = foo(); //c++ da gecersiz
+
+    //c+++ gecerli hala getirmek icin cast etmemeiz laızm
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+öyle bir bir fonksiyon olsun ki
+
+aynı türden  (türleri ne olursa olsun) 2 değişkenin takas edebilmesi için kullanılabilsin
+
+
+böyle kodlara generik programlama denir
+
+C de genereik programalma void pointerlarla yapılır
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+void gswap(void *vp1, void *vp2, size_t n)
+{
+    char *p1 = (char *)vp1;
+    char *p2 = (char *)vp2;
+
+    while (n--) {
+        char temp = *p1;
+        *p1++ = *p2;
+        *p2++ = temp;
+    }
+}
+
+int main()
+{
+    int x = 45642;
+    int y = 91233;
+
+    gswap(&x, &y, sizeof (int));
+
+    printf("x  = %d   y = %d\n", x, y);
+
+    double d1 = 2.35;
+    double d2 = 44.5;
+
+    gswap(&d1, &d2, sizeof (double));
+
+    printf("d1  = %f   d2 = %f\n", d1, d2);
+
+
+int a[] = {1, 2, 3, 4, 5};
+int b[] = {6, 7, 8, 9, 10};
+
+gswap(a, b, sizeof (a));
+print_array(a, 5);
+print_array(b, 5);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int main()
+{
+    int a[SIZE];
+    int b[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    set_array_random(b, SIZE);
+    print_array(a, SIZE);
+    print_array(b, SIZE);
+
+
+    //a dizisinin ilk 4 elemanı ile
+    //b dizisin son 4 elemaının yerini değiştirecez
+
+    gswap(a, b + SIZE -4, 4* sizeof (int));
+
+    print_array(a, SIZE);
+    print_array(b, SIZE);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+bazı  std generik fonksiyonların
+
+string.h
+
+mem --> ile baslıyor
+
+mem --> memory kısaltmasından gelir
+
+memset
+memcpy
+memmove
+memchr
+memcmp
+
+memset  --> bir bellek blogunun bytlarını bir tam sayı ile dolduran fonksiyondur
+
+void *memset(void *vp, int val, size_t n);
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    //a dizisinin butun elemanırını 0 lamak ıstıyorum
+    memset(a, 0, sizeof (a));
+    //memset(a, 0, sizeof (int) * SIZE);
+
+    print_array(a, SIZE);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    memset(a, 0, sizeof (int) * 20);
+
+    print_array(a, SIZE);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    memset(a + 20, 0, sizeof (int) * 20);
+
+    print_array(a, SIZE);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int main()
+{
+    char str[100];
+    printf("bir yazi girin : ");
+    sgets(str);
+
+    //bu yazi 5 zunlugundan buyuk ise yaıznın 2. 3. 4. 5. karterleri ! karateri olsun
+
+    printf("%s\n", str);
+
+    if(strlen(str) > 5)
+        memset(str+1, '!', 4);
+
+    printf("%s\n", str);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+
+void *mymemset(void *vp, int val, size_t n)
+{
+    char *p = (char *)vp;
+
+    while (n--)
+        *p++ = (char)val;
+
+    return vp;
+}
+
+int main()
+{
+    char str[100];
+    printf("bir yazi girin : ");
+    sgets(str);
+
+    //bu yazi 5 zunlugundan buyuk ise yaıznın 2. 3. 4. 5. karterleri ! karateri olsun
+
+    printf("%s\n", str);
+
+    if(strlen(str) > 5)
+        mymemset(str+1, '!', 4);
+
+    printf("%s\n", str);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+void *mymemset(void *vp, int val, size_t n)
+{
+    char *p = (char *)vp;
+
+    while (n--)
+        *p++ = (char)val;
+
+    return vp;
+}
+
+//mulakat sorusu
+
+//int 4 byte
+
+//ekrana ne yazdırır
+int main()
+{
+    int x = 0;
+
+    memset(&x, 255, sizeof (x));//1111 1111
+    printf("x = %d\n", x);
+    memset(&x, 1, sizeof (x)); //0000 0001 0000 0001 0000 0001
+    printf("x = %d\n", x);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+memcpy  türden bagımsız kopyalama işlevidir
+bir bellek blogunu bir yerden bir başka yere kopyalamak için memcpy işlevini cagırırz
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    int a[SIZE];
+    int b[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+   // memcpy(b, a, sizeof (a));
+    memcpy(b, a, sizeof (int) * SIZE);
+    print_array(b, SIZE);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    int a[SIZE];
+    int b[SIZE] = {0};
+
+    randomize();
+    set_array_random(a, SIZE);
+
+    int idx_a;
+    int idx_b;
+    int n;
+
+    printf("a da hangi indeksten baslayarak ? :");
+    scanf("%d", &idx_a);
+    printf("b de hangi indeksten baslayarak ? :");
+    scanf("%d", &idx_b);
+    printf("kac oge kopyalanacak :");
+    scanf("%d", &n);
+
+    memcpy(b+idx_b, a+idx_a, sizeof (int) * n);
+
+
+    print_array(a, SIZE);
+    print_array(b, SIZE);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+
+void *mymemcpy(void *vpdest, const void *vpsource, size_t n)
+{
+    char *pdest = vpdest;
+    const char *psource = vpsource;
+
+    while (n--)
+        *pdest++ = *psource++;
+
+    return vpdest;
+}
+
+
+int main()
+{
+    int a[SIZE];
+    int b[SIZE] = {0};
+
+    randomize();
+    set_array_random(a, SIZE);
+
+    int idx_a;
+    int idx_b;
+    int n;
+
+    printf("a da hangi indeksten baslayarak ? :");
+    scanf("%d", &idx_a);
+    printf("b de hangi indeksten baslayarak ? :");
+    scanf("%d", &idx_b);
+    printf("kac oge kopyalanacak :");
+    scanf("%d", &n);
+
+    mymemcpy(b+idx_b, a+idx_a, sizeof (int) * n);
+
+    print_array(a, SIZE);
+    print_array(b, SIZE);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+overlapped bloklar
+
+strcpy aynı blok uzerınde calısma garantısı yok
+
+memcpy aynı blok uzerınde calısma garantısı yok
+
+
+C99 ile beraber
+
+restrict anahtar sözcüğü
+
+overlapped olmadıgını bildirmek için kullanılır
+
+
+memmove ile aynıu bloklar uzerınde işlem yapabilcez
+
+
+void *memcpy(void *restrict vpdest, const void *restrict vpsource, size_t n);
+void *memmove(void *vpdest, const void *vpsource, size_t n);
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+   int a[SIZE];
+   randomize();
+   set_array_random(a, SIZE);
+   print_array(a, SIZE);
+
+   //a nın ilk 40 elemanın 10 kaydırmak ıstıyorum
+
+   //auynı bloklar uzerınde bunu kullnama
+   //memcpy(a+10, a + 40, sizeof (int) * 40); //tnaımsız davranıs olusturur
+
+   memmove(a+10, a + 40, sizeof (int) * 40);
+   print_array(a, SIZE);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+   char str[SIZE];
+
+   printf("bir isim girin : ");
+   sgets(str);
+
+   strcpy(str +5, str); //tanımsız davranıs
+
+   printf("%s\n", str);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+   char str[SIZE];
+
+   printf("bir isim girin : ");
+   sgets(str);
+
+   memmove(str +5, str, strlen(str) + 1);
+
+   printf("%s\n", str);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

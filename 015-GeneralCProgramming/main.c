@@ -2,21 +2,19 @@
 #include "utility.h"
 #include <string.h>
 
-#define     SIZE        10
-
+#define     SIZE        100
 
 
 int main()
 {
+   char str[SIZE];
 
-    char source[100] = "okanersoy";
-    char dest[100] = "tarkanyesil";
+   printf("bir isim girin : ");
+   sgets(str);
 
+   memmove(str +5, str, strlen(str) + 1);
 
-    if(!strncmp(source +1, dest + 3, 3))
-        printf("yazilar esit\n");
-    else
-       printf("yazilar esit degil\n");
+   printf("%s\n", str);
 
 }
 

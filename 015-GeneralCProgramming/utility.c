@@ -113,7 +113,17 @@ void print_str(const char *p)
     putchar('\n');
 }
 
+void gswap(void *vp1, void *vp2, size_t n)
+{
+    char *p1 = (char *)vp1;
+    char *p2 = (char *)vp2;
 
+    while (n--) {
+        char temp = *p1;
+        *p1++ = *p2;
+        *p2++ = temp;
+    }
+}
 
 
 
