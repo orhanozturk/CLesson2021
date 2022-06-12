@@ -2,19 +2,21 @@
 #include "utility.h"
 #include <string.h>
 
-#define     SIZE        100
+#define     SIZE        10
 
 
 int main()
 {
-   char str[SIZE];
+    int x = 10;
+    int y = 20;
 
-   printf("bir isim girin : ");
-   sgets(str);
+    void *vp= &x;
 
-   memmove(str +5, str, strlen(str) + 1);
+    void **vptr = &vp;
+    *vptr = &y; //vp = &y
 
-   printf("%s\n", str);
+
+    printf("val = %d\n", *(int *)vp);
 
 }
 

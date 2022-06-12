@@ -16342,6 +16342,556 @@ int main()
 /****************************************************/
 /****************************************************/
 
+memchr
+
+bir bellek blogunda belirli bir tamsayı degerine sahip byte arar
+
+memchr(const void *vp, int val, size_t n)
+
+n byte kadar alanda val degeri aranıyor
+
+bulursa buldugu yerin adresi bulmazsa null pointer donduruyor
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+   char str[SIZE];
+
+   printf("bir isim girin : ");
+   sgets(str);
+
+   //yazının uzunlugu 15 den buyuk ise yazının 5 in ci karaterinden baslayarak
+   //10 karaterlik lnda i  karteri arayacaz
+
+
+   printf("%s\n", str);
+   if(strlen(str) > 15)
+   {
+       char *p = memchr(str + 5, 'i', 10);
+       if(p != NULL)
+       {
+           printf("bulundu .. yazinini %d indisli karateri\n", p - str);
+       }else{
+           printf("bulunamadi\n");
+       }
+   }
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+
+int main()
+{
+    unsigned char buffer[SIZE] = {0};
+
+    randomize();
+
+    for (int i = 0; i < 400; ++i) {
+        buffer[rand() % SIZE] = 1;
+    }
+
+    for (int i = 0; i <SIZE; ++i) {
+        printf("%d", buffer[i]);
+    }
+
+    printf("\n");
+
+    unsigned char *p = (unsigned char *)memchr(buffer, 0, SIZE);
+
+    if(!p){
+        printf("bulunamadi\n");
+    }
+    else{
+        printf("bulundu idx = %d\n", p - buffer);
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+void *mymemchr(const void *vp, int val, size_t n)
+{
+    const char *p = (const char *)vp;
+
+    while (n--) {
+        if(*p == val)
+            return (char *)p;
+        ++p;
+    }
+
+    return NULL;
+}
+
+
+int main()
+{
+    unsigned char buffer[SIZE] = {0};
+
+    randomize();
+
+    for (int i = 0; i < 400; ++i) {
+        buffer[rand() % SIZE] = 1;
+    }
+
+    for (int i = 0; i <SIZE; ++i) {
+        printf("%d", buffer[i]);
+    }
+
+    printf("\n");
+
+    unsigned char *p = (unsigned char *)mymemchr(buffer, 0, SIZE);
+
+    if(!p){
+        printf("bulunamadi\n");
+    }
+    else{
+        printf("bulundu idx = %d\n", p - buffer);
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+memcmp
+
+türden bagımsız 2 bellek blogunu karsılastırıyor ve bize karsılatırma sonucunu donduruyor
+
+void * memcmp(const void *vp1, const void *vp2, size_t n)
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int mymemcmp(const void *vp1, const void *vp2, size_t n)
+{
+    const unsigned char *p1 = vp1;
+    const unsigned char *p2 = vp2;
+
+    while (n--) {
+        if(*p1 != *p2)//byte'lar eşitmi değilmi
+            return *p1 > *p2 ? 1: -1;
+
+        ++p1;
+        ++p2;
+    }
+
+  return 0; //iki bellek blogu eslit ise basarlı demek
+}
+
+
+
+int main()
+{
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+int mymemcmp(const void *vp1, const void *vp2, size_t n)
+{
+    const unsigned char *p1 = vp1;
+    const unsigned char *p2 = vp2;
+
+    while (n--) {
+        if(*p1 != *p2)//byte'lar eşitmi değilmi
+            return *p1 > *p2 ? 1: -1;
+
+        ++p1;
+        ++p2;
+    }
+
+  return 0; //iki bellek blogu eslit ise basarlı demek
+}
+
+
+
+int main()
+{
+    int a[SIZE];
+    int b[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    memcpy(b, a, sizeof (a));
+
+    if(!memcmp(a, b, sizeof (a)))
+        printf("evet esit\n");
+    else
+        printf("hayir esit deil\n");
+
+    ++a[rand() % SIZE];
+
+    if(!memcmp(a, b, sizeof (a)))
+        printf("evet esit\n");
+    else
+        printf("hayir esit deil\n");
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        100
+
+//HomeWork
+
+
+int main()
+{
+    char s1[SIZE];
+    char s2[SIZE];
+
+    printf("birinci yaziyi girin : \n");
+    sgets(s1);
+    printf("ikinci yaziyi girin : \n");
+    sgets(s2);
+
+    int n;
+    printf("kac karater : "); //4
+    scanf("%d", &n);
+
+    //ilk 4 karaterler esit mi
+    //bu sınamyı memcmp ile yapınız
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+void *greverse(void *vpa, size_t size, size_t sz)
+{
+    char *p = (char *)vpa;
+
+    for (size_t i = 0; i < size / 2; ++i) {
+        //vpa[i] <<===>> vpa[size -1 -i];
+        gswap(p + i * sz, p + (size -1 -i) *sz, sz);
+    }
+
+    return vpa;
+}
+
+
+int main()
+{
+   int a[SIZE];
+   randomize();
+   set_array_random(a, SIZE);
+   print_array(a, SIZE);
+   greverse(a, SIZE, sizeof (int));
+   print_array(a, SIZE);
+
+   double b[] = {1.2, 3.4, 5.5, 6.6 , 7.7};
+   greverse(b, asize(b), sizeof (*b));
+
+   for (size_t i = 0; i < asize(b); ++i) {
+       printf("%f\n", b[i]);
+   }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+void *greverse(void *vpa, size_t size, size_t sz)
+{
+    char *ps = (char *)vpa;
+    char *pe = ps + (size - 1) *sz;
+
+    while (ps < pe) {
+        gswap(ps, pe, sz);
+        ps += sz;
+        pe -= sz;
+    }
+
+    return vpa;
+}
+
+
+int main()
+{
+   int a[SIZE];
+   randomize();
+   set_array_random(a, SIZE);
+   print_array(a, SIZE);
+   greverse(a, SIZE, sizeof (int));
+   print_array(a, SIZE);
+
+   double b[] = {1.2, 3.4, 5.5, 6.6 , 7.7};
+   greverse(b, asize(b), sizeof (*b));
+
+   for (size_t i = 0; i < asize(b); ++i) {
+       printf("%f\n", b[i]);
+   }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+void *gsearch(const *vpa, size_t size, size_t sz, const void *vpkey)
+{
+    const char *p = vpa;
+
+    for (size_t i = 0; i < size; ++i) {
+        if(!memcmp(p+i*sz, vpkey, sz))
+            return (void *)(p+i*sz);
+    }
+
+    return NULL;
+}
+
+int main()
+{
+   int a[SIZE];
+   randomize();
+   set_array_random(a, SIZE);
+   print_array(a, SIZE);
+
+   int ival;
+
+   printf("aranacak degeri girin : ");
+   scanf("%d", &ival);
+
+   int *p = (int *)gsearch(a, SIZE, sizeof (int), &ival);
+
+   if(p != NULL)
+       printf("bulundu...dizinini %d indisli elemani\n", p-a);
+   else
+       printf("bulunamadi\n");
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+void *gsearch(const *vpa, size_t size, size_t sz, const void *vpkey)
+{
+    const char *p = vpa;
+
+    while (size--) {
+        if(!memcmp(p, vpkey, sz))
+            return (void *)p;
+        p += sz;
+    }
+
+    return NULL;
+}
+
+int main()
+{
+   int a[SIZE];
+   randomize();
+   set_array_random(a, SIZE);
+   print_array(a, SIZE);
+
+   int ival;
+
+   printf("aranacak degeri girin : ");
+   scanf("%d", &ival);
+
+   int *p = (int *)gsearch(a, SIZE, sizeof (int), &ival);
+
+   if(p != NULL)
+       printf("bulundu...dizinini %d indisli elemani\n", p-a);
+   else
+       printf("bulunamadi\n");
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+int main()
+{
+    int x = 10;
+    int y = 20;
+
+    void *vp= &x;
+
+    void **vptr = &vp;
+    *vptr = &y; //vp = &y
+
+
+    printf("val = %d\n", *(int *)vp);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+function pointer
+
+
+türden bagımsız bir diziyi sıralamyan fonksiyon yazabilirmiyiz
+
+evet, std kutuphanede de boyle fonksiyon var
+
+qsort işlevi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
