@@ -16825,6 +16825,835 @@ evet, std kutuphanede de boyle fonksiyon var
 qsort işlevi
 
 
+function pointers
+object pointers
+
+bir fonksiyonun  adresi
+  fonksiyonun geri dönüş degeri türü
+  fonksiyonun parameterelerinin türü
+
+
+int foo(int);
+int bar(double);
+int baz(void);
+
+
+int toupper(int)
+int tolower(int)
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int foo(int);
+
+int main()
+{
+
+    //foo türü
+    //int(*)(int);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+strlen türü
+
+size_t(*)(const char *)
+
+
+1. yontem
+
+&foo --< fonksiyon adresi
+&strlen --> fonksiyon adresi
+
+
+2. yol
+
+function to pointer conversion
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int foo(double);
+
+int main()
+{
+    //bu ikşiside function pointer temsil eder
+
+   &foo;
+
+   foo; //derleyici bizim icin function to pointer conversion yapıyor
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int foo(double);
+
+int main()
+{
+
+   &foo; // türü int(*)(double)
+   &strcpy; // tüür char *(*)(char *, const char *)
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int foo(double);
+int bar(double);
+int baz(double);
+int func(int);
+
+int main()
+{
+
+   int(*fptr)(double); //function pointer
+   fptr = &foo;
+   fptr = &bar;
+   fptr = &baz;
+
+   fptr = &func; //C de yanlıs C++ da sentaks hatsı
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int foo(double);
+int bar(double);
+int baz(double);
+
+int main()
+{
+
+   int(*fptr)(double); //function pointer
+   fptr = foo;
+   fptr = bar;
+   fptr = baz;
+
+   //bu seildede atama yapabiliriz
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int foo(double);
+int bar(double);
+int baz(double);
+
+int main()
+{
+
+    // int(*fptr)(double) = &foo; //ilk deger verebiliriz
+
+    int(*fptr)(double) = NULL;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+bir fonksiyon pointer'ı
+
+a- global olablir
+b- yerel olabilir
+c- otomatik / statik ömürlü olabilir
+
+
+fonksiyonların parametreleri function pointer olabilir
+fonksiyonların geri dönüş türleri "function pointer" olabilir
+
+
+
+
+
+function pointer sizeof
+
+her function pointer ların sizeof degeri aynı
+her object adreslerinin sizeof degeri de aynı
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int foo(double);
+double func(double);
+
+
+int main()
+{
+  int x = 10;
+  double y = 1.2;
+
+  sizeof (&x) == sizeof (&y); //always true
+  sizeof (&foo) == sizeof (&func); //always true
+  sizeof (&x) == sizeof (&func); //farklı degerle alabilir
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+fonksiyon cagırma operatoru
+
+()
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int func(void)
+{
+    printf("func cagrildi\n");
+}
+
+
+int main()
+{
+  //ikiside gecerli fonksiyon cagrısı aynı seyi ifade eder
+  func();
+  (&func)();
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+void func(void)
+{
+    printf("func cagrildi\n");
+}
+
+
+int main()
+{
+  //ikiside gecerli fonksiyon cagrısı aynı seyi ifade eder
+  func();
+  (&func)();
+
+  void(*fp)(void) = &func;
+
+  fp();
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+void foo(void)
+{
+    printf("foo cagrildi\n");
+}
+
+void bar(void)
+{
+    printf("bar cagrildi\n");
+}
+
+void baz(void)
+{
+    printf("baz cagrildi\n");
+}
+
+int main()
+{
+
+    void(*fp)(void);
+    fp = foo;
+    fp();
+    fp = bar;
+    fp();
+    fp = baz;
+    fp();
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+
+int main()
+{
+
+    //int isprime(int);
+    int x;
+    int(*fp)(int) = &isprime;
+
+    printf("bir tam sayi girin : ");
+    scanf("%d", &x);
+
+    if(fp(x))
+        printf("%d asay sayi\n", x);
+    else
+        printf("%d asal sayi degil\n", x);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+int square(int a)
+{
+    return a*a;
+}
+
+void func(int(*fp)(int))
+{
+    int result = fp(20);
+    //call back yapsıı denir
+}
+
+int main()
+{
+    func(&square);
+    func(square);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+#define     SIZE        10
+
+void foo(void)
+{
+    printf("foo cagrildi\n");
+}
+
+void bar(void)
+{
+    printf("bar cagrildi\n");
+}
+
+void baz(void)
+{
+    printf("baz cagrildi\n");
+}
+
+void func(void(*fptr)(void))
+{
+    printf("func cagrildi ve simdi dunc kendisine (adresi) gonderilen fonksiyonu cagiracak\n");
+    fptr();
+    printf("--------------------------------\n\n");
+
+}
+
+int main()
+{
+    func(&foo);
+    func(&bar);
+    func(&baz);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        10
+
+void print_chars(const char *p, int(*fptr)(int))
+{
+    puts(p);
+    for (int i = 0; i < 128; ++i) {
+        if(fptr(i))
+            putchar(i);
+    }
+
+    printf("\n------------------------------------\n");
+}
+
+int main()
+{
+    print_chars("isupper", &isupper);
+    print_chars("islower", &islower);
+    print_chars("isalpha", &isalpha);
+    print_chars("ispunct", &ispunct);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+typedef bildirimleri ile fonksiyon adresi türlerine verieln eş isimler kullnaılar
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        10
+
+void foo(int (*fp)(const char *, const char *));
+void bar(int (*fp1)(const char *, const char *), int (*fp2)(const char *, const char *));
+void (*baz(int (*fp1)(const char *, const char *), int (*fp2)(const char *, const char *))); //geri türü fonksiyon
+
+
+int main()
+{
+    int (*fp)(const char *, const char *) = &strcmp;
+
+    int (**fptr)(const char *, const char *) = &fp;
+
+    int (*fa[10])(const char *, const char *) = {fp, fp}; //function pointers array -- ilerleyen zamanlarda detaylı görecez
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        10
+
+typedef int (*FPTR)(const char *, const char *);
+
+
+void foo(FPTR f);
+void bar(FPTR f1, FPTR f2);
+//void (*baz(int (*fp1)(const char *, const char *), int (*fp2)(const char *, const char *))); //geri türü fonksiyon
+FPTR baz(FPTR, FPTR);
+
+int main()
+{
+    FPTR fp = &strcmp;
+
+    //int (**fptr)(const char *, const char *) = &fp;
+    FPTR *fptr = &fp;
+
+    //int (*fa[10])(const char *, const char *) = {fp, fp}; //function pointers array -- ilerleyen zamanlarda detaylı görecez
+    FPTR fa[10] = {fp};
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+
+#define     SIZE        10
+
+void func(void)
+{
+    printf("func() cagrildi\n");
+}
+
+int main()
+{
+    void(*fp)(void) = &func;
+    fp();
+    (*fp)();
+
+    //(*fp)() cagrısı tercih edilir
+    //bir fonksiyon pointer cagrısı oldugunu gozlemleyebilmekk içn
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+qsort fonksiyonu
+
+stdlib.h baslık dosyasında bulunmakta
+
+quick sort algoritması olarka bilinir
+
+quick  sort olarak kullanmak zorunda değiliz
+
+
+int qsort(void *vpa, //sıralanacak dizinin adresi
+          size_t size, //dizinin boyutu
+          size_t sz, // elemanların sizeof degeri
+          int (*fp)(const void *, const void *)); //bu fonksiyona göre sırlama yapılacak
+
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+
+#define     SIZE        100
+
+int cmpfunc(const void *vpx, const void *vpy)
+{
+    if(*(const int *)vpx > *(const int *)vpy)
+        return 1;
+
+    if(*(const int *)vpx < *(const int *)vpy)
+        return -1;
+
+    return 0;
+}
+
+int main()
+{
+    int a[SIZE];
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    qsort(a, SIZE, sizeof (int), &cmpfunc);
+
+    print_array(a, SIZE);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+
+#define     SIZE        100
+
+int cmpfunc(const void *vpx, const void *vpy)
+{
+    if(*(const int *)vpx < *(const int *)vpy)
+        return 1;
+
+    if(*(const int *)vpx > *(const int *)vpy)
+        return -1;
+
+    return 0;
+}
+
+int main()
+{
+    int a[SIZE];
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    qsort(a, SIZE, sizeof (int), &cmpfunc);
+
+    print_array(a, SIZE);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+
+#define     SIZE        100
+
+int fcmp(const void *vpx, const void *vpy)
+{
+    if(*(const double *)vpx > *(const double *)vpy)
+        return 1;
+
+    if(*(const double *)vpx < *(const double *)vpy)
+        return -1;
+
+    return 0;
+}
+
+int main()
+{
+    double a[SIZE];
+    randomize();
+    for (int i = 0; i < SIZE; ++i) {
+        a[i] = rand() * 0.74566;
+    }
+
+    qsort(a, SIZE, sizeof (double), &fcmp);
+
+    for (int i = 0; i < SIZE; ++i) {
+        printf("%f\n", a[i]);
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+
+#define     SIZE        100
+
+int cmpfunc(const void *vpx, const void *vpy)
+{
+    if(*(const int *)vpx > *(const int *)vpy)
+        return 1;
+
+    if(*(const int *)vpx < *(const int *)vpy)
+        return -1;
+
+    return 0;
+}
+
+void gbsort(void *vpa, size_t size, size_t sz, int (*fcmp)(const void *, const void *))
+{
+    char *p = vpa;
+
+    for (size_t i = 0; i < size -1; ++i) {
+        for (size_t k = 0; k < size -1 -i; ++k) {
+            if(fcmp(p+k*sz, p+(k+1)*sz) > 0)
+                gswap(p+k*sz, p+(k+1)*sz, sz);
+        }
+    }
+
+}
+
+int main()
+{
+    int a[SIZE];
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    gbsort(a, SIZE, sizeof (int), &cmpfunc);
+
+    print_array(a, SIZE);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
