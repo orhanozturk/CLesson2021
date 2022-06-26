@@ -17544,1606 +17544,1158 @@ int main()
 /****************************************************/
 /****************************************************/
 
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 
+#define     SIZE        100
 
 
+void g_array_print(const void *vpa, size_t size, size_t sz, void (*fprint)(const void *vp))
+{
+    const char *p = vpa;
 
+    while (size--) {
+        fprint(p);
+        p += sz;
+    }
+}
 
+void myprint(void *vp)
+{
+    printf("%d ", *(const int*)vp);
+}
 
+int main()
+{
+    int a[SIZE];
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
 
+    g_array_print(a, SIZE, sizeof (int), &myprint);
+}
 
 
+/****************************************************/
+/****************************************************/
 
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 
+#define     SIZE        100
 
+//bsearch stdlib kutuphanesinde
+//aranan elelman varmı
 
+int icmp(const void *vp1, const void *vp2)
+{
+    return *(const int*)vp1 - *(const int*)vp2;
+}
 
 
+int main()
+{
+    int a[SIZE];
 
+    randomize();
+    set_array_random(a, SIZE);
+    qsort(a, SIZE, sizeof (*a), &icmp);
+    print_array(a, SIZE);
 
+    int key;
+    printf("aranacak degeri girin : ");
+    scanf("%d", &key);
+    int *p = (int *)bsearch(&key, a, SIZE, sizeof (*a), &icmp); //bulursa bulundugu yerin adresi nulmazsa null pointer
 
+    if(p){
+        printf("bulundu dizinin %d indisli elemani\n", p - a);
+    } else {
+        printf("bulunamdi\n");
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
+function pointer array
 
+dizi fonksiyon adresleri içerecek
 
 
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 
+#define     SIZE        100
 
+//function pointer array
+int (*a[10])(int);
+//a nin elelnalarınıın türü
+//int (*a)(int)
 
+int main()
+{
 
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 
+#define     SIZE        100
 
+typedef int (*FPTEST)(int);//function pointer
 
+int main()
+{
+    //function pointer array
+    const FPTEST a[] = {
+        &isupper,
+        &islower,
+        &isalpha,
+        &isdigit,
+        &isalnum,
+        &isxdigit,
+        &isprint,
+        &iscntrl,
+    };
 
+    int ch;
 
+    printf("bir karakter giriniz : ");
+    ch = getchar();
 
+    for (size_t i = 0; i < asize(a); ++i) {
+        if(a[i](ch)){
+            printf("OK\n");
+        }
+        else{
+            printf("NOT OK\n");
+        }
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 
+#define     SIZE        100
 
+typedef int (*FPTEST)(int);//function pointer
 
+int main()
+{
+    //function pointer array
+    const FPTEST a[] = {
+        &isupper,
+        &islower,
+        &isalpha,
+        &isdigit,
+        &isalnum,
+        &isxdigit,
+        &isprint,
+        &iscntrl,
+    };
 
+    const char * const p[] = {
+        "isupper",
+        "islower",
+        "isalpha",
+        "isdigit",
+        "isalnum",
+        "isxdigit",
+        "isprint",
+        "iscntrl",
+    };
 
+    int ch;
 
+    printf("bir karakter giriniz : ");
+    ch = getchar();
 
+    for (size_t i = 0; i < asize(a); ++i) {
+        if(a[i](ch)){
+            printf("for the test %s result %s", p[i], " OK\n");
+        }
+        else{
+            printf("for the test %s result %s", p[i], " NOT OK\n");
+        }
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 
+#define     SIZE        100
 
+typedef int (*FPTEST)(int);//function pointer
 
+int main()
+{
+    //function pointer array
+    const FPTEST a[] = {
+        &isupper,
+        &islower,
+        &isalpha,
+        &isdigit,
+        &isalnum,
+        &isxdigit,
+        &isprint,
+        &iscntrl,
+    };
 
+    const char * const p[] = {
+        "isupper",
+        "islower",
+        "isalpha",
+        "isdigit",
+        "isalnum",
+        "isxdigit",
+        "isprint",
+        "iscntrl",
+    };
 
+    int ch;
+    char entry[40];
 
+    printf("bir karakter giriniz : ");
+    ch = getchar();
 
+    printf("hangi test yapilsin : ");
+    scanf("%s", entry);
 
+    size_t i;
 
+    for (i = 0; i < asize(p) && strcmp(p[i], entry); ++i)
+        ;//null statement
 
+    if(i < asize(p)){
+        if(a[i](ch)){
+            printf("%s testi icin sonuc OK\n", p[i]);
+        }else{
+            printf("%s testi icin sonuc NOT OK\n", p[i]);
+        }
+    } else {
+        printf("boyle bir function pointer  bulnamadi\n");
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 
+#define     SIZE        100
 
+void dance(void)
+{
+    printf("savasci dans ediyor\n");
+}
 
 
+void jump(void)
+{
+    printf("savasci sicradi\n");
+}
 
+void chat(void)
+{
+    printf("savasci sohbet ediyor\n");
+}
 
+void eat(void)
+{
+    printf("savasci yemek yiyor\n");
+}
 
+void drink(void)
+{
+    printf("savasci içiyor\n");
+}
 
+int main()
+{
+    void (*fa[])(void) = {&dance, &jump, &drink, &eat, &chat};
 
+    randomize();
 
+    for (; ; ) {
+        fa[rand() % asize(fa)]();
+        getchar();
+    }
 
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 
+#define     SIZE        100
 
+void dance(void)
+{
+    printf("savasci dans ediyor\n");
+}
 
 
+void jump(void)
+{
+    printf("savasci sicradi\n");
+}
 
+void chat(void)
+{
+    printf("savasci sohbet ediyor\n");
+}
 
+void eat(void)
+{
+    printf("savasci yemek yiyor\n");
+}
 
+void drink(void)
+{
+    printf("savasci içiyor\n");
+}
 
+int main()
+{
+    void (*fa[])(void) = {&dance, &jump, &drink, &eat, &chat};
 
+    randomize();
 
+    for (; ; ) {
+        fa[rand() % asize(fa)]();
+        getchar();
+    }
 
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 
+#define     SIZE        100
 
 
+//HomeWork
+//standart qsort fonksiyonu ile p dizisini sıralayınız
+//kodunuz derlendiginde derleyci tür dönüşümlerine ilişkin hicbir uyarı mesajı vermemeli
 
 
+int main()
+{
+    const char *p[] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+        "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+        "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+        "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+        "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+        "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+    };
 
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
+bir fonksiyon default davranıs olarak bir fonksiyonu cagırma
 
+C++ kutuphanesinde
 
+terminate işlev default abort işlevi cagırır
+terminate default fonksiyonun degiştirilebilir
+set_terminate fonksiyonu ile degistirelebilir
+p = set_terminate(&myabort);
+set_terminate(p); //eski haline
 
 
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 
+#define     SIZE        100
 
+typedef void(*FPACTION)(void);
 
+void orhn(void)
+{
+    printf("orhn cagrildi\n");
+}
 
+FPACTION gf = &orhn;
 
+void do_something(void)
+{
+    gf();
+}
 
+FPACTION set_do_something(FPACTION f)
+{
+    FPACTION ftemp = gf;
+    gf = f;
+    return ftemp;
 
+}
 
 
+//client code
+void myfunc(void)
+{
+    printf("myfunc cagrildi\n");
+}
 
 
+int main()
+{
+    do_something();
+    FPACTION fp = set_do_something(&myfunc);
+    do_something();
 
+    set_do_something(fp);
+    do_something();
+}
 
 
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
 
+#define     MAX_NO_OF_FUNCTIONS  10
 
+typedef void(*FPTR)(void);
 
+FPTR ga[MAX_NO_OF_FUNCTIONS];
+int g_idx = 0;
 
+void foo(void)
+{
+    for (int i = 0; i < g_idx; ++i) {
+        ga[i]();
+    }
+}
 
+void foo_register(FPTR f)
+{
+    if(g_idx == MAX_NO_OF_FUNCTIONS)
+        return;
 
+    ga[g_idx++] = f;
+}
 
+void f1(void)
+{
+    printf("f1 cagrildi\n");
+}
 
+void f2(void)
+{
+    printf("f2 cagrildi\n");
+}
 
+void f3(void)
+{
+    printf("f3 cagrildi\n");
+}
 
+void f4(void)
+{
+    printf("f4 cagrildi\n");
+}
 
 
+int main()
+{
+    foo_register(f1);
+    foo_register(f2);
+    foo_register(f3);
+    foo_register(f4);
+    foo();
+    foo_register(f1);
+    foo_register(f2);
+    foo_register(f2);
+    foo();
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
 
 
+void f1(void)
+{
+    printf("f1 cagrildi\n");
+}
 
+void f2(void)
+{
+    printf("f2 cagrildi\n");
+}
 
+void f3(void)
+{
+    printf("f3 cagrildi\n");
+}
 
+void f4(void)
+{
+    printf("f4 cagrildi\n");
+}
 
 
+int main()
+{
+   atexit(f1);
+   atexit(f2);
+   atexit(f3);
+   exit(EXIT_FAILURE);
+}
 
 
+/****************************************************/
+/****************************************************/
 
+multi-dimensional arrays -- cok boyutlu diziler
 
+C de cok boyutlu bir dizi yoktur
 
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+int main()
+{
+    int a[5][10][20];
+    printf("boyut = %zu\n", asize(a));
+}
 
 
+/****************************************************/
+/****************************************************/
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+int main()
+{
+    int a[10][20];
+    //a lemanlaırnın int[20] türünden olan 10 elemanlaı bir dizidir
+    double b[5][30];
+    //b elemanları double[30] türüden olan 5 elemanlı bir dizidir
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+int main()
+{
+    int a[10][20];
+    //a lemanlaırnın int[20] türünden olan 10 elemanlaı bir dizidir
 
+    typedef int   inta20[20];
 
+    inta20 b[10];
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+int main()
+{
+    int a[10][20];
+    int b[20];
 
+    for (int i = 0; i < 20; ++i) {
+        a[5][i];
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
 
+int main()
+{
+    //int 4 byte
+    int a[10][20];
 
+    printf("sizeof(a) = %zu\n", sizeof (a));
+    printf("sizeof(a[0]) = %zu\n", sizeof (a[0]));
+    printf("sizeof(a[0][0]) = %zu\n", sizeof (a[0][0]));
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
 
+int main()
+{
+    int x;
+    int a[10];
+    int b[20][10];
+    int c[40][20][10];
+}
 
 
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
 
+int main()
+{
+    //her ay 4 hafta kabul ediliyor
+    //dizimiz her haftanın ortalama sıcaklıklarını turuan bir dizi olacak
+    //81 ilin verisis tutalcak
 
+    double a[81][12][4];
 
+    a[41][6][3];
+}
 
 
+/****************************************************/
+/****************************************************/
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
 
+int main()
+{
+    int a[5][8];
+    int b[4][10];
+    //a ve b aynı türmu hayır değil
+    //a[8]
+    //b[10]
 
+    int a1[5][10];
+    int b1[4][10];
+    //artık türleri eşitti
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
 
+int main()
+{
+    char a[10];
 
+    for (int i = 0; i < 10 ; ++i ) {
+        printf("%p   %p  \n", a+i, &a[i]);
+    }
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
 
+int main()
+{
+    int a[10];
 
+    for (int i = 0; i < 10 ; ++i ) {
+        printf("%p   %p  \n", a+i, &a[i]);
+    }
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
 
+int main()
+{
+    int a[10][32];
 
+    for (int i = 0; i < 10 ; ++i ) {
+        printf("%p   %p  \n", a+i, &a[i]);
+    }
+}
 
 
+/****************************************************/
+/****************************************************/
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
 
+int main()
+{
+    double a[10][32];
+    double (*ptr)[32] = a;
+    double *p = a;
 
+    for (int i = 0; i < 10 ; ++i ) {
+        printf("%p   %p   %p   %p\n", a+i, &a[i], ptr++, p++);
+    }
+}
 
 
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
 
+int main()
+{
+    int a[10][32];
 
+    //ikisi atnı seyi ifade etmez
+    int *p = a; //int byte artıs var
+    int (*p1)[32]; //int * 32 byte lık artıs
 
 
+    int *ptr = &a[0][0];
+    int *ptr1 = a[0];
+    int *ptr2 = (int *)a;
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+#define     ROW     5
+#define     COL     10
 
+int main()
+{
 
+    int a[ROW][COL];
 
+    randomize();
 
+    for (int i = 0; i < ROW; ++i) {
+        for (int k = 0; k < COL; ++k) {
+            a[i][k] = rand() % 10;
+        }
+    }
 
 
+    for (int i = 0; i < ROW; ++i) {
+        for (int k = 0; k < COL; ++k) {
+            printf("%d ", a[i][k]);
+        }
+        printf("\n");
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+#define     ROW     5
+#define     COL     10
 
+int main()
+{
 
+    int a[ROW][COL];
 
+    randomize();
 
+    for (int i = 0; i < ROW; ++i) {
+        set_array_random(a[i], COL);
+    }
 
 
+    for (int i = 0; i < ROW; ++i) {
+        print_array(a[i], COL);
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+#define     ROW     5
+#define     COL     10
 
+int main()
+{
 
+    int a[ROW][COL];
 
+    randomize();
 
+    for (int i = 0; i < ROW; ++i) {
+        set_array_random(a[i], COL);
+    }
 
 
+    for (int i = 0; i < ROW; ++i) {
+        print_array(a[i], COL);
+    }
 
+    printf("*****************************\n\n");
 
+    int *ptr = (int *)a;
 
+    for (int i = 0; i < ROW * COL; i++ ) {
+        printf("%d ", *ptr++);
+        getchar();
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+#define     ROW     5
+#define     COL     10
 
+int main()
+{
 
+    int a[4][3] = {
+        {1, 1, 1,},
+        {2, 2, 2,},
+        {3, 4, 2,},
+        {4, 4, 1,},
+    };
 
+    for (int i = 0; i < 4; ++i) {
+        for (int k = 0; k < 3; ++k) {
+            printf("%d ", a[i][k]);
+        }
+        printf("\n");
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+#define     ROW     5
+#define     COL     10
 
+int main()
+{
 
+    int a[4][3] = {
+        {1, 1, 1,},
+        {2,},
+        {3, 4, 2,},
+        {4, 4, 1,},
+    };
 
+    for (int i = 0; i < 4; ++i) {
+        for (int k = 0; k < 3; ++k) {
+            printf("%d ", a[i][k]);
+        }
+        printf("\n");
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+#define     ROW     5
+#define     COL     10
 
+int main()
+{
 
+    int a[4][3] = {
+        {1, 1, 1,},
+    };
 
+    for (int i = 0; i < 4; ++i) {
+        for (int k = 0; k < 3; ++k) {
+            printf("%d ", a[i][k]);
+        }
+        printf("\n");
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+#define     ROW     5
+#define     COL     10
 
+int main()
+{
 
+    int a[4][3] = {
+        1, 3, 5, 6, 7, 8, 9
+    };
 
+    for (int i = 0; i < 4; ++i) {
+        for (int k = 0; k < 3; ++k) {
+            printf("%d ", a[i][k]);
+        }
+        printf("\n");
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+//mulakat sorusu
 
+int main()
+{
+    //bunlardan hangisi veya hangileri gecerlidir
 
 
+    int a[][] = {1, 2, 3, 4, 5, 6, 7,};
+    int b[3][] = {1, 2, 3, 4, 5, 6, 7,};
+    int c[][3] = {1, 2, 3, 4, 5, 6, 7,}; //gecerli
 
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+//mulakat sorusu
 
+int main()
+{
+    //bunlardan hangisi veya hangileri gecerlidir
 
 
+    int c1[][3] = {1, 2, 3, 4, 5, 6, 7,};
+    int c2[][3] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
+    printf("c1 dizisinin boyutu %zu\n", asize(c1));
+    printf("c2 dizisinin boyutu %zu\n", asize(c2));
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+//mulakat sorusu
 
+int main()
+{
+    int a[10][5] = {
+        [4] = {1, 2, 3, 4, 5},
+        [7] = {2, 2, 1, 2, 3},
+        [9] = {5, 5, 5, 5, 5},
+    };
 
+    for (int i = 0; i < 10; ++i) {
+        for (int k = 0; k < 5; ++k) {
+            printf("%d ", a[i][k]);
+        }
+        printf("\n");
+    }
 
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/****************************************************/
+/****************************************************/
 
 
 

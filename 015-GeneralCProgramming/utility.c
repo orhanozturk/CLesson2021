@@ -81,7 +81,8 @@ void print_array(const int *p, size_t size)
         printf("%3d ", p[i]);
     }
 
-    dashline();
+   // dashline();
+    printf("\n");
 }
 
 
