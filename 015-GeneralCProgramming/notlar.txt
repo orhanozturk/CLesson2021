@@ -18698,144 +18698,1756 @@ int main()
 /****************************************************/
 
 
+int a[10][5]
+int a(*)[5] türü olmus olur
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+//mulakat sorusu
 
+int main()
+{
+    int a[64] = {0};
 
+    //a --> &a[0] derleyici bu hale geirrir
+    //&a  --> int(*)[64]  derleyici bu hale getirir
 
+    printf("a         = %p\n", a);
+    printf("a+1       = %p\n", a+1);
+    printf("a+2       = %p\n", a+2);
 
 
+    //64*4
+    printf("\n\n&a          = %p\n", &a);
+    printf("&a+1       = %p\n", &a+1);
+    printf("&a+2       = %p\n", &a+2);
+}
 
 
+/****************************************************/
+/****************************************************/
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+//mulakat sorusu
 
+int main()
+{
+    int a[64] = {0};
 
+    //bu ikiside aynı ifade
+    int *p  = a;
+    int *p1 = &a[0];
 
+    printf("%p\n", p1);
+    ++p1;
+    printf("%p\n", p1);
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+//mulakat sorusu
 
+int main()
+{
+    int a[64] = {0};
 
+    int (*p)[5] = &a;
 
+    for (int i = 0; i < 5; ++i) {
+        printf("%d ", (*p)[i]);
+    }
 
+    puts('\n');
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+//mulakat sorusu
 
+int main()
+{
+    int a[64] = {0};
 
+    int (*p)[5] = &a;
 
 
 
+    int *ptr = *p;
+    int *ptr1 = a;
 
+    //*p demek a demek
+    //hepsi aynı ifade demek
+    for (int i = 0; i < 5; ++i) {
+        printf("%d ", ptr[i]);
+        printf("%d ", a[i]);
+        printf("%d \n", (*p)[i]);
+    }
 
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+//mulakat sorusu
 
+int main()
+{
+    int a[5][4] = {
+        {1, 1, 1, 1,},
+        {2, 2, 2, 2,},
+        {3, 3, 3, 3,},
+        {4, 4, 4, 4,},
+        {5, 5, 5, 5,},
+    };
 
+    int (*p)[4] = &a;
 
+    for (int i = 0; i < 5; ++i) {
+        for (int k = 0; k < 4; ++k) {
+            printf("%d ", (*p)[k]);
+        }
+        printf("\n");
+        ++p;
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+//mulakat sorusu
 
+int main()
+{
+    int a[5][4] = {
+        {1, 1, 1, 1,},
+        {2, 2, 2, 2,},
+        {3, 3, 3, 3,},
+        {4, 4, 4, 4,},
+        {5, 5, 5, 5,},
+    };
 
+    //3 de aynı ifadeddir
+    int *p1 = &a[0][0];
+    int *p2 = a[0];
+    int *p3 = (int *)a;
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+//mulakat sorusu
 
+int main()
+{
+    int a[5][4] = {
+        {1, 1, 1, 1,},
+        {2, 2, 2, 2,},
+        {3, 3, 3, 3,},
+        {4, 4, 4, 4,},
+        {5, 5, 5, 5,},
+    };
 
+    int *p = &a[0][0];
 
+    for (int i = 0; i < 5*4; ++i) {
+        printf("%d ", *p++);
+    }
 
+    printf("\n");
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
+/*
+void set_matrix_4(int (*p)[4], size_t size)
+{
+    for (size_t i = 0; i < size; ++i) {
+        for (size_t k = 0; k < 4; ++k) {
+            p[i][k] = rand() % 10;
+        }
+    }
+}
+*/
 
+void set_matrix_4(int (*p)[4], size_t size)
+{
+    while(size--) {
+        for (size_t k = 0; k < 4; ++k) {
+            (*p)[k] = rand() % 10;
+        }
+        ++p;
+    }
+}
 
+void print_matrix_4(const int (*p)[4], size_t size)
+{
+    for (size_t i = 0; i < size; ++i) {
+        for (size_t k = 0; k < 4; ++k) {
+            printf("%d ", p[i][k]);
+        }
+        printf("\n");
+    }
+}
 
+int main()
+{
+    int a[5][4]; //int (*a)[4]
+    int b[10][4]; //int (*b)[4]
 
+    randomize();
+    set_matrix_4(a, 5);
+    print_matrix_4(a, 5);
 
+    printf("\n\n****************************************\n\n");
 
+    set_matrix_4(b, 10);
+    print_matrix_4(b, 10);
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
 
+void set_matrix_4(int (*p)[4], size_t size)
+{
+    while(size--) {
+        set_array_random(*p++, 4);
+    }
+}
 
+void print_matrix_4(const int (*p)[4], size_t size)
+{
+    while(size--) {
+        print_array(*p++, 4);
+    }
+}
 
+int main()
+{
+    int a[5][4]; //int (*a)[4]
+    int b[10][4]; //int (*b)[4]
 
+    randomize();
+    set_matrix_4(a, 5);
+    print_matrix_4(a, 5);
 
+    printf("\n\n****************************************\n\n");
 
+    set_matrix_4(b, 10);
+    print_matrix_4(b, 10);
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
+/ikisi aynı ifade demek
+void func(int *ptr, ???);
+void func(int ptr[], ???);
 
 
 
+/ikisi aynı ifade demek
+void func(int **ptr, ???);
+void func(int *ptr[], ???);
 
 
 
+/ikisi aynı ifade demek
+void func(int (*ptr)[10], ???);
+void func(int ptr[][10], ???);
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
 
+void set_matrix(int *p, size_t row, size_t col)
+{
+    for (size_t i = 0; i < row; ++i) {
+        for (size_t k = 0; k < col; ++k) {
+            p[i * col + k] = rand() % 10;
+        }
+    }
+}
 
+void print_matrix(const int *p, size_t row, size_t col)
+{
+    for (size_t i = 0; i < row; ++i) {
+        for (size_t k = 0; k < col; ++k) {
+            printf("%d ", p[i*col + k]);
+        }
+        printf("\n");
+    }
 
+    printf("\n\n-----------------------------------------------\n\n");
+}
 
+int main()
+{
+    //3 türde farklı
+    int a[10][20];//int (*a)[20]
+    int b[5][8]; //int (*b)[8]
+    int c[8][32]; //int (*c)[32]
 
+    set_matrix(a, 10, 20);
+    set_matrix(b, 5, 8);
+    set_matrix(c, 8, 32);
 
 
+    print_matrix(a, 10, 20);
+    print_matrix(b, 5, 8);
+    print_matrix(c, 8, 32);
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
 
+void set_matrix(void *vp, size_t row, size_t col)
+{
+    int *p = (int *)vp;
+    for (size_t i = 0; i < row; ++i) {
+        for (size_t k = 0; k < col; ++k) {
+            p[i * col + k] = rand() % 10;
+        }
+    }
+}
 
+void print_matrix(const void *vp, size_t row, size_t col)
+{
+    const int *p = (int *)vp;
+    for (size_t i = 0; i < row; ++i) {
+        for (size_t k = 0; k < col; ++k) {
+            printf("%d ", p[i*col + k]);
+        }
+        printf("\n");
+    }
 
+    printf("\n\n-----------------------------------------------\n\n");
+}
 
+int main()
+{
+    //3 türde farklı
+    int a[10][20];//int (*a)[20]
+    int b[5][8]; //int (*b)[8]
+    int c[8][32]; //int (*c)[32]
 
+    set_matrix(a, 10, 20);
+    set_matrix(b, 5, 8);
+    set_matrix(c, 8, 32);
 
 
+    print_matrix(a, 10, 20);
+    print_matrix(b, 5, 8);
+    print_matrix(c, 8, 32);
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
 
+int main()
+{
+    char str[][20] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+        "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+        "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+        "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+        "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+        "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+    };
 
+    printf("size str = %zu\n", asize(str));
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
 
 
+int main()
+{
+    char str[][20] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+        "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+        "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+        "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+        "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+        "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+    };
 
+    for (size_t i = 0; i < asize(str); ++i) {
+        printf("%s ", str[i]);
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <ctype.h>
+
+
+int main()
+{
+    char str[][20] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+        "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+        "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+        "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+        "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+        "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+    };
+
+    for (size_t i = 0; i < asize(str); ++i) {
+        str[i][0] = (char)toupper(str[i][0]);
+        str[i][strlen(str[i]) -1] = '!';
+    }
+
+    for (size_t i = 0; i < asize(str); ++i) {
+        printf("%s ", str[i]);
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <ctype.h>
+#include <string.h>
+
+
+void str_swap(char *p1, char *p2)
+{
+    char temp[20];
+    strcpy(temp, p1);
+    strcpy(p1, p2);
+    strcpy(p2, temp);
+}
+
+void strsort(char (*p)[20], size_t size)
+{
+    for (size_t i = 0; i < size - 1; ++i) {
+        for (size_t k = 0; k < size -1 -i; ++k) {
+            if(strcmp(p[k], p[k+1]) > 0)
+            {
+                str_swap(p[k], p[k+1]);
+            }
+        }
+    }
+}
+
+int main()
+{
+    char str[][20] = {
+        "orhan",         "esma",          "busra",         "azize",         "ahmet",        "nermin",        "cemile",
+        "naciye",       "meryem",          "sergen",        "cengiz",       "negun",        "melise",          "mahmur",
+        "halis",        "recep",            "sema",         "elif",         "murat",        "melike",          "rumeysa",
+        "okan",         "kazim",          "neriman",        "aysun",        "kemal",        "hacer",           "muhammed",
+        "nuran",        "fatma",           "engin",         "fikret",       "musatafa",      "yusuf",            "omer",
+        "ali",          "nurbanu",          "zehra",        "abdurrahman",  "ercan",        "fatih",            "suleyman",
+        "mine",         "melek",           "esad",          "enis",         "enes",         "tarik",            "su",
+        "osman",        "ertugrul",         "yildirim",     "kadir",        "ekrem",        "yunus",            "sefa",
+        "bengu",        "derya",            "gizem",        "ela",          "cansu",        "nur",              "ceza",
+        "sahin",        "guray",            "alp",          "abdullah",     "tarkan",       "nurullah",         "said",
+    };
+
+    //sort
+
+    strsort(str, asize(str));
+
+    for (size_t i = 0; i < asize(str); ++i) {
+        printf("%s ", str[i]);
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+endianness
+
+int x = 10;
+
+düşük anlamlı byte yüksek sayısal adreste yüksek anlamlı byte düşük sayısal adreste
+big endian  -- motorola mimari
+
+1200  0000 0000
+1201  0000 0000
+1202  0000 0000
+1203  0000 1111
+
+
+düşük anlamlı byte düşük sayısal adreste yüksek anlamlı byte yüksek sayısal adreste
+little endian  -- intel mimari
+
+1200  0000 1111
+1201  0000 0000
+1202  0000 0000
+1203  0000 0000
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <ctype.h>
+#include <string.h>
+
+
+int main()
+{
+
+    int x = 1;  // 0000 0000 0000 0001
+    char *p = (char *)&x;
+
+    if(*p){
+        printf("little endian\n");
+    } else{
+        printf("big endian\n");
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <ctype.h>
+#include <string.h>
+
+
+int main()
+{
+
+    int x = 1;  // 0000 0000 0000 0001
+
+    if(*(char *)&x){
+        printf("little endian\n");
+    } else{
+        printf("big endian\n");
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <ctype.h>
+#include <string.h>
+
+
+int main()
+{
+
+    unsigned int x = 0xACBEDF05;
+
+    unsigned char *p = (unsigned char *)&x;
+
+    printf("%02X\n", *p);
+    p++;
+    printf("%02X\n", *p);
+    p++;
+    printf("%02X\n", *p);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+atoi
+atof
+atol
+
+yazılar ile sayılar arasındaki donusumu saglar
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <ctype.h>
+#include <string.h>
+
+
+int main()
+{
+
+    char str[100];
+    printf("bir yazi giriniz : ");
+    scanf("%s", str);
+    printf("%s\n", str);
+
+    int x = 0;
+
+    for (int i = 0; str[i] != '\0'; ++i) {
+        x = x * 10 + str[i] - '0';
+    }
+
+    printf("x = %d\n", x);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+atoi --> alphabetic to integer
+
+stdlib.h
+
+int atoi(const char *p);
+double atof(const char *p);
+long atol(const char *p);
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <ctype.h>
+#include <string.h>
+
+
+int main()
+{
+
+    char str[100];
+    printf("bir yazi giriniz : ");
+    scanf("%s", str);
+    printf("%s\n", str);
+
+    int x = atoi(str);
+
+    printf("x = %d\n", x);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <ctype.h>
+#include <string.h>
+
+#define SIZE    100
+
+
+int main()
+{
+
+    char date[SIZE];
+    int mday, mon, year;
+
+
+    printf("bir tarig girin (gg-aa-yyyy) : ");
+    scanf("%s", date);
+
+    mday = atoi(date);
+    printf("%02d\n", mday);
+    mon = atoi(date+3);
+    printf("%02d/%02d\n", mday, mon);
+    year = atoi(date+6);
+    printf("%02d/%02d/%d\n", mday, mon, year);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+atof
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <ctype.h>
+#include <string.h>
+
+#define SIZE    100
+
+
+int main()
+{
+
+    char str[SIZE] = "234.34orhan";
+    int ival = atoi(str);
+
+    printf("ival = %d\n", ival);
+
+
+    double dval = atof(str);
+
+    printf("dval = %f\n", dval);
+
+
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+itoa --> standart değil ama derleyiciler genelde bunu bize verirr
+
+
+tamsayıyı yazıya cevirme
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <ctype.h>
+#include <string.h>
+
+#define SIZE    100
+
+
+int main()
+{
+
+    int x;
+    printf("bir tam sayi giriniz : ");
+    scanf("%d", &x);
+
+    char str[SIZE];
+    int idx = 0;
+    int temp = x;
+
+    while(temp){
+        str[idx++] = temp % 10 + '0';
+        temp /= 10;
+    }
+
+    str[idx] = '\0';
+
+    _strrev(str); //standart degil ama string.h string ters cevirme fonksiyonu
+
+    printf("%s     %d\n", str, x);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <ctype.h>
+#include <string.h>
+
+#define SIZE    100
+
+
+int main()
+{
+
+    int x;
+    printf("bir tam sayi giriniz : ");
+    scanf("%d", &x);
+
+    char str[SIZE];
+
+    _itoa(x, str, 10);
+    printf("decimal   : %s\n", str);
+
+    _itoa(x, str, 16);
+    printf("hex   : %s\n", str);
+
+    _itoa(x, str, 8);
+    printf("octal   : %s\n", str);
+
+    _itoa(x, str, 2);
+    printf("binary   : %s\n", str);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+bellek üstünde formatlı okuma yazma işlemleri
+
+printf --> formatlı cıkıs işleme
+scanf --> formatlı giriş işlemi
+
+
+<stdio.h>
+
+int printf(const char *pfm, ...); --> ekrana yazma
+int sprintf(const char *pbuf, const char *pfm, ...); --> birinci paramteresindeki adrese yazar
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <ctype.h>
+#include <string.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    char name[SIZE] = "OrhanOZTURK";
+    int mday = 5;
+    int mon = 6;
+    int year = 2002;
+
+    //printf("%s_%02d_%02d_%d\n", name, mday, mon, year);
+
+    char buffer[SIZE];
+    sprintf(buffer, "%s_%02d_%02d_%d", name, mday, mon, year);
+
+    //_strrev(buffer);
+
+    puts(buffer);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <ctype.h>
+#include <string.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    char name[SIZE] = "OrhanOZTURK";
+    int mday = 5;
+    int mon = 6;
+    int year = 2002;
+
+    //printf("%s_%02d_%02d_%d\n", name, mday, mon, year);
+
+    char buffer[SIZE];
+    sprintf(buffer, "%s;%x;%x%x;", name, mday, mon, year);
+
+    //_strrev(buffer);
+
+    puts(buffer);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <ctype.h>
+#include <string.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    char name[SIZE] = "Emirhan";
+    char surname[SIZE] = "Ulker";
+    int cnt = 123;
+
+    char file_name[SIZE];
+
+    sprintf(file_name, "%s_%s_%04d.jpg", surname, name, cnt);
+
+
+    printf("dosya ismi (%s)\n", file_name);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+int scanf(const char *pfm, ...); //kalvyeden veri girişi
+
+int sscanf(const char *pbuf, const char *pfm, ...); //adresinin verdiğ yerden
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <ctype.h>
+#include <string.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    char str[SIZE] = "977 2.33 orhan";
+
+    int ival;
+    double dval;
+    char name[40];
+
+    sscanf(str, "%d%lf%s", &ival, &dval, name);
+
+    printf("ival = %d\n", ival);
+    printf("dval = %f\n", dval);
+    printf("name = %s\n", name);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+printf
+sprintf
+fprintf
+
+
+
+scanf
+sscanf
+fscanf
+
+
+/****************************************************/
+/****************************************************/
+
+programı sonlandırmak icin std. fonksiyonlar
+
+
+stdlib.h
+
+
+void exit(int);
+int atexit(void(*)(void));
+void abort(void);
+
+
+
+
+void exit(int);
+
+programın çalışmasını sonlandırır
+
+
+exite gonderdiğimiz arguman programın neden sonlanacaıgına dair bilgi içerir
+
+
+exit(0); --> başarı SUCCESS
+exit(1); --> başarısızlık  FAILURE
+
+
+stdli lib te tanımlı 0 ve 1 in macroları var
+
+
+
+#define   EXIT_SUCCESS  0
+#define   EXIT_FAILURE  1
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+
+
+#define SIZE    100
+
+
+
+void f3(void)
+{
+    printf("f3 basladi\n");
+
+    //
+    exit(EXIT_FAILURE);
+
+    printf("f3 sonlaniyor\n");
+}
+
+void f2(void)
+{
+    printf("f2 basladi\n");
+    f3();
+    printf("f2 sonlaniyor\n");
+}
+
+void f1(void)
+{
+    printf("f1 basladi\n");
+    f2();
+    printf("f1 sonlaniyor\n");
+}
+
+
+int main()
+{
+    printf("main basladi\n");
+    f1();
+    printf("main sonlanıyor\n");
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+
+
+#define SIZE    100
+
+
+void do_something(const char *pfilename)
+{
+    FILE *f = fopen(pfilename, "rb");
+
+    if(f == NULL){
+        printf("cannot open file %s\n", pfilename);
+        exit(EXIT_FAILURE);
+    }
+    //
+
+}
+
+
+int main()
+{
+    do_something("orhan.dat");
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+
+
+#define SIZE    100
+
+
+int main()
+{
+    //C99 standartları önceden return gerekliydi ama artık derleyici return işini hallediyor
+
+    //bu iki ifadede aynı anlamagelir
+    //işlem başarılı
+    //hatta derleyici
+    //return 0 'ı arka tarafta  exit(EXIT_SUCCESS); secirir
+    return 0;
+    exit(EXIT_SUCCESS);
+
+
+    //bu iki ifadede aynı anlamagelir
+    //işlem başarısız
+    //hatta derleyici
+    //return 1 'ı arka tarafta  exit(EXIT_FAILER); ceviirir
+    return 1;
+    exit(EXIT_FAILURE);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+exit ile sonlandırmanın verdiği grantiler
+ - yazma amaçlı olan dosyalrın buffer'larını flush etmek
+ - exit programı sonlandırmadan önce, exit cagrılmasından önce
+ atexit ile kayıt edilmiş fonksiyonları cagırıyor ondan sonra porgramı sonlandırır
+
+
+
+
+nomral termination
+ exit ile sonlandırmak demek
+
+
+abnormal termination
+  abort ile sonlandırmak demek
+
+
+
+int atexit(void (*)(void));
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+
+
+#define SIZE    100
+
+
+void foo(void)
+{
+    printf("foo cagrildi\n");
+}
+
+
+void bar(void)
+{
+    printf("bar cagrildi\n");
+}
+
+
+void zar(void)
+{
+    printf("zar cagrildi\n");
+}
+
+
+void func(void)
+{
+
+    ////
+
+    exit(EXIT_SUCCESS);
+}
+
+int main()
+{
+
+    atexit(&foo);
+    atexit(&bar);
+    atexit(&zar);
+    //ilk giren son cıkar
+    //LIFO
+
+    //FIFO
+
+    func();
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+
+
+#define SIZE    100
+
+
+void foo(void)
+{
+    printf("foo cagrildi\n");
+}
+
+
+void bar(void)
+{
+    printf("bar cagrildi\n");
+}
+
+
+void zar(void)
+{
+    printf("zar cagrildi\n");
+}
+
+
+int main()
+{
+
+    atexit(&foo);
+    atexit(&bar);
+    atexit(&zar);
+
+    //return 0;
+
+    //exit(EXIT_SUCCESS);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+abort
+
+void abort(void);
+
+ben programı tak diye sonlandırırım benden bitşey istemyin size birşey grantisi vermem
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+
+
+#define SIZE    100
+
+
+//burada bir programalama hatası var
+//abort kullanıyoruz
+
+void func(int x)
+{
+    if(x == 0){
+        printf("fonksiyoa gelen deger 0 hata!!!");
+        abort();
+    }
+}
+
+int main()
+{
+
+    func(0);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+Dinamik bellek yonetimi
+dynamic memory management
+
+stroge duration // stroge class
+ automatic
+ static
+ dynamic --> istediği zaman da nesneyi hayata getirip istedigi zamanda nesnenin hayatını son erdirme
+
+
+
+stdlib.h
+
+malloc --> bellek alanı elde etmek
+calloc  --> bellek alanı elde etmek -- bellek alanını elde etiginde için veriler sıfır garantisi var
+realloc --> lanı genişletmek isityorsunu yada alanı kcultmek istiyorsunu
+free --> aldıgınız bellekleri geri vermek icin
+
+
+
+dinamik bellek yönetimi gerekli yerlerde kullanılmalı
+cünkü bir kod maliyeti var
+
+geri verilmeyen yerler bellek sızıntısına sebep olur
+
+hata yapama riskinin fazla oluyor
+
+
+dinamik bellek nesneleri
+heap dediğimz bir alanda tutulur
+
+
+otomatik omurlu nesneler
+stack dediğimiz bir alnda tutulur
+
+
+malloc
+
+void *malloc(size_t n);
+
+başarılı ise alınan bellek blogunun adresinin doner
+basarısız ise null pointer doner
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+
+
+#define SIZE    100
+
+
+
+int main()
+{
+    size_t n;
+
+    printf("kac elemanki bir dizi : ");
+    scanf("%zu", &n);
+
+    int *pd = (int *)malloc(n * sizeof (int));
+
+    if(pd == NULL){
+        fprintf(stderr, "bellek yetersiz\n");
+        exit(EXIT_FAILURE);
+    }
+
+    set_array_random(pd, n);
+    print_array(pd, n);
+
+    free(pd);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+
+
+#define SIZE    100
+
+
+
+int main()
+{
+    size_t n;
+
+    printf("kac elemanki bir dizi : ");
+    scanf("%zu", &n);
+
+    int *pd;
+
+    if((pd  = (int *)malloc(n * sizeof (int))) == NULL){
+        fprintf(stderr, "bellek yetersiz\n");
+        exit(EXIT_FAILURE);
+    }
+
+    set_array_random(pd, n);
+    print_array(pd, n);
+
+    free(pd);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+
+
+#define SIZE    100
+
+
+
+int main()
+{
+    size_t n;
+
+    printf("kac elemanki bir dizi : ");
+    scanf("%zu", &n);
+
+    int *pd;
+
+    if((pd  = (int *)calloc(n, sizeof (int))) == NULL){
+        fprintf(stderr, "bellek yetersiz\n");
+        exit(EXIT_FAILURE);
+    }
+
+    //set_array_random(pd, n);
+    print_array(pd, n);
+
+    free(pd);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+#define SIZE    100
+
+
+
+int main()
+{
+    size_t n;
+
+    printf("kac elemanki bir dizi : ");
+    scanf("%zu", &n);
+
+    int *pd;
+
+    if((pd  = (int *)malloc(n * sizeof (int))) == NULL){
+        fprintf(stderr, "bellek yetersiz\n");
+        exit(EXIT_FAILURE);
+    }
+
+    //set_array_random(pd, n);
+
+    //alınan yerleri 0 ile doldurmak icin
+    memset(pd, 0, n*sizeof (int));
+    print_array(pd, n);
+
+    free(pd);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+dikkat
+
+malloc alınan bir bellek blogunu buyutmek zorun değildir
+
+asla ve asla önceden alınmıl bellek blogunu buyutmek icin malloc işlevini kullanmayın
+
+
+
+free
+
+bellek blogunu bosalatmak
+
+void free(void *vp);
+
+
+
+
+free ile geri verildikten sonra
+
+o pointer nesnesini kullanmaya dangling pointer denir
+
+geri verilen yeri kullanamyın
+
+
+
+/////////////////////
+
+Asla dinamik nellek işlevinleriyle elde edilmemil olan bellek bloklarını free etme girişimde bulunmayın
+tanımsız davranıs
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+#define SIZE    100
+
+
+
+int main()
+{
+    char str[SIZE];
+    char *p = str;
+
+    free(p);//tnısmız davranıs
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+ free işleviyle dinamik bellek blogunu kücültmeyin
+
+ free cagrsından sonra bellek blogunun adresni tutmakta olan pointer gecersiz (invalid ) pointer olur
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+#define SIZE    100
+
+
+
+int main()
+{
+    size_t n;
+
+    printf("kac elemanki bir dizi : ");
+    scanf("%zu", &n);
+
+    int *pd;
+
+    if((pd  = (int *)malloc(n * sizeof (int))) == NULL){
+        fprintf(stderr, "bellek yetersiz\n");
+        exit(EXIT_FAILURE);
+    }
+
+    //set_array_random(pd, n);
+
+    memset(pd, 0, n*sizeof (int));
+    print_array(pd, n);
+
+    free(pd);
+
+    //böyle bir kullanım yok
+    print_array(pd, n); //tanımsız davranıs
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+free edilmiş bellek blogunu tekrar dan free edilmesi tanımsız davranış
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+#define SIZE    100
+
+
+
+int main()
+{
+    size_t n;
+
+    printf("kac elemanki bir dizi : ");
+    scanf("%zu", &n);
+
+    int *pd;
+
+    if((pd  = (int *)malloc(n * sizeof (int))) == NULL){
+        fprintf(stderr, "bellek yetersiz\n");
+        exit(EXIT_FAILURE);
+    }
+
+    //set_array_random(pd, n);
+
+    memset(pd, 0, n*sizeof (int));
+    print_array(pd, n);
+
+    free(pd);
+
+    //
+
+
+    free(pd); //tanımsız davranıs
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+ dinamik bellek blogunu free edilmemsi
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+#define SIZE    100
+
+int icmp(const void *vp1, const void *vp2)
+{
+    return *(const int *)vp1 - *(const int *)vp2;
+}
+
+int get_median(const int *p, size_t size)
+{
+    int *pd = malloc(size * sizeof (int));
+
+    if(!pd){
+        printf("bellek yetrsiz\n");
+        exit(EXIT_FAILURE);
+    }
+
+    memcpy(pd, p, size * sizeof (int));
+    qsort(pd, size, sizeof (*pd), &icmp);
+
+    //bunu sakın sakına ypamayın bellek sızıntısı olur
+    return pd[size / 2];
+
+    //alınan bloklar eri verilmeli
+
+    //yapmamız geren işlem bu
+    /*
+    int result = pd[size / 2];
+
+    free(pd);
+
+    return result;
+    */
+}
+
+int main()
+{
+    int a[SIZE];
+
+    randomize();
+    set_array_random(a, SIZE);
+    print_array(a, SIZE);
+
+    int median = get_median(a, SIZE);
+    printf("median = %d\n", median);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+ free işlevine null pointer gonderilirse tanısmız davranıs olmaz
+
+void free(void *vp)
+{
+  if(vp == NULL)
+    retunr vp;
+ ///
+
+}
 
 
 
