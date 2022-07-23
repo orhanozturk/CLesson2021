@@ -5,48 +5,40 @@
 
 #define SIZE    100
 
-int icmp(const void *vp1, const void *vp2)
-{
-    return *(const int *)vp1 - *(const int *)vp2;
-}
 
-int get_median(const int *p, size_t size)
+int *create_random_array(size_t n, int low, int high)
 {
-    int *pd = malloc(size * sizeof (int));
+    int *pd = (int *)malloc(n * sizeof (int));
 
-    if(!pd){
-        printf("bellek yetrsiz\n");
+    if(pd == NULL){
+        printf("bellek yetersiz\n");
         exit(EXIT_FAILURE);
     }
 
-    memcpy(pd, p, size * sizeof (int));
-    qsort(pd, size, sizeof (*pd), &icmp);
+    for (size_t i = 0; i < n; ++i) {
+        pd[i] = rand() % (high - low + 1);
+    }
 
-    //bunu sakın sakına ypamayın bellek sızıntısı olur
-    return pd[size / 2];
-
-    //alınan bloklar eri verilmeli
-
-    //yapmamız geren işlem bu
-    /*
-    int result = pd[size / 2];
-
-    free(pd);
-
-    return result;
-    */
+    return pd;
 }
+
 
 int main()
 {
-    int a[SIZE];
+    size_t n;
+    int low, high;
 
-    randomize();
-    set_array_random(a, SIZE);
-    print_array(a, SIZE);
+    printf("kac elemanli dizi : ");
+    scanf("%zu", &n);
+    printf("aralik degerleri : ");
+    scanf("%d%d", &low, &high);
 
-    int median = get_median(a, SIZE);
-    printf("median = %d\n", median);
+    int *pd = create_random_array(n, low, high);
+    print_array(pd, n);
+    sort_array(pd, n);
+    dashline();
+    print_array(pd, n);
+    free(pd);
 
 }
 

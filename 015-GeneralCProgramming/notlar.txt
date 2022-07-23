@@ -20439,7 +20439,7 @@ int main()
 /****************************************************/
 /****************************************************/
 
- free işlevine null pointer gonderilirse tanısmız davranıs olmaz
+free işlevine null pointer gonderilirse tanısmız davranıs olmaz
 
 void free(void *vp)
 {
@@ -20448,6 +20448,281 @@ void free(void *vp)
  ///
 
 }
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+#define SIZE    100
+
+char *mystrdup(const char *p)
+{
+    char *pd = malloc(strlen(p) + 1);
+    if(!pd)
+        return pd;
+
+    return  strcpy(pd, p);;
+}
+
+int main()
+{
+    char str[SIZE];
+    printf("bir yazi girin :  ");
+    sgets(str);
+
+    char *pd = mystrdup(str);
+
+    if(!pd){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+    printf("(%s) (%s)\n", str, pd);
+    _strrev(pd);
+    printf("(%s) (%s)\n", str, pd);
+
+    free(pd);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+T * foo(..);
+
+
+adres döndüren işlevler
+
+a- static ömürlü nesne adresi
+  1- global degişken
+  2- static yerel değişkenler
+  3- string literal
+
+b- çağırandan aldıgı adresi cagırana geri döndüren mekanizması ile ileten fonksiyonlar
+
+c- dinamik ömürlü nesne adresi döndürme
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+#define SIZE    100
+
+//hatali bir kod örnegi
+
+char *get_name(void)
+{
+    static char buffer[SIZE];
+
+    printf("isim girin  : ");
+    sgets(buffer);
+    return buffer;
+}
+
+int main()
+{
+    char *p[5];
+
+    for(int i = 0; i < 5; ++i){
+        p[i] = get_name();
+    }
+
+    for(int i = 0; i < 5; ++i){
+        puts(p[i]);
+    }
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+#define SIZE    100
+
+//hatali bir kod örnegi
+
+char *get_name(void)
+{
+    static char buffer[SIZE];
+
+    printf("isim girin  : ");
+    sgets(buffer);
+
+    char *pd = (char *)malloc(strlen(buffer) + 1);
+    if(pd == NULL){
+        printf("bellek yetersiz\n");
+        exit(EXIT_FAILURE);
+    }
+
+    return strcpy(pd, buffer);
+}
+
+int main()
+{
+    char *p[5];
+
+    for(int i = 0; i < 5; ++i){
+        p[i] = get_name();
+    }
+
+    for(int i = 0; i < 5; ++i){
+        puts(p[i]);
+    }
+
+    for(int i = 0; i < 5; ++i){
+        free(p[i]);
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+#define SIZE    100
+
+//orhan  s1
+//öztürk s2
+
+//a + b --> s1 + s2
+//orhan öztürk
+
+char *str_concat(const char *p1 , const char *p2)
+{
+    char *pd = (char *)malloc(strlen(p1) + strlen(p2) + 1);
+    if(!pd){
+        printf("bellek yetersiz\n");
+        exit(EXIT_FAILURE);
+    }
+
+    return strcat(strcpy(pd, p1), p2);
+}
+
+
+int main()
+{
+    char s1[SIZE];
+    char s2[SIZE];
+
+    printf("bir yazi girin : ");
+    scanf("%s", s1);
+    printf("ikinci yazi girin : ");
+    scanf("%s", s2);
+
+
+    char *p = str_concat(s1, s2);
+
+    printf("(%s) + (%s) = (%s)\n", s1, s2, p);
+    _strrev(p);
+    _strupr(p);
+    printf("(%s) + (%s) = (%s)\n", s1, s2, p);
+
+    free(p);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+#define SIZE    100
+
+
+int *create_random_array(size_t n, int low, int high)
+{
+    int *pd = (int *)malloc(n * sizeof (int));
+
+    if(pd == NULL){
+        printf("bellek yetersiz\n");
+        exit(EXIT_FAILURE);
+    }
+
+    for (size_t i = 0; i < n; ++i) {
+        pd[i] = rand() % (high - low + 1);
+    }
+
+    return pd;
+}
+
+
+int main()
+{
+    size_t n;
+    int low, high;
+
+    printf("kac elemanli dizi : ");
+    scanf("%zu", &n);
+    printf("aralik degerleri : ");
+    scanf("%d%d", &low, &high);
+
+    int *pd = create_random_array(n, low, high);
+    print_array(pd, n);
+    sort_array(pd, n);
+    dashline();
+    print_array(pd, n);
+    free(pd);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+calloc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

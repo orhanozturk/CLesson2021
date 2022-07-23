@@ -126,8 +126,21 @@ void gswap(void *vp1, void *vp2, size_t n)
     }
 }
 
+int icmp(const void *vp1, const void *vp2)
+{
+    if(*(const int *)vp1 > *(const int *)vp2)
+        return 1;
 
+    if(*(const int *)vp1 < *(const int *)vp2)
+        return -1;
 
+    return 0;
+}
+
+void sort_array(int *p, size_t size)
+{
+    qsort(p, size, sizeof (*p), &icmp);
+}
 
 
 

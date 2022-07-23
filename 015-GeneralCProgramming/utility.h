@@ -18,6 +18,8 @@ void sgets(char *p);
 void swap(int *a, int *b);
 void print_str(const char *);
 void gswap(void *vp1, void *vp2, size_t n);
+int icmp(const void *vp1, const void *vp2);
+void sort_array(int *p, size_t size);
 
 
 #endif // UTILITY_H
