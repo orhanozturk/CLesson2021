@@ -20694,6 +20694,880 @@ int main()
 
 calloc
 
+malloc ile aynı işe yarar sadece ufak farklılıklar var
+
+malloc alıdıgı yer garbage value ile doludur
+
+calloc ise aldıgı bellek blogunu clear eder
+
+
+void *malloc(size_t);
+void *calloc(size_t n, size_t sz);
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    size_t n;
+
+    printf("kac elemanli dizi : ");
+    scanf("%zu", &n);
+
+    int *pd = (int *)malloc(n * sizeof (int));
+    if(!pd){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+    print_array(pd, n); //garbage value
+    free(pd);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    size_t n;
+
+    printf("kac elemanli dizi : ");
+    scanf("%zu", &n);
+
+    int *pd = (int *)malloc(n * sizeof (int));
+    if(!pd){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+    memset(pd, 0, n * sizeof (int));
+    print_array(pd, n); //garbage value
+    free(pd);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    size_t n;
+
+    printf("kac elemanli dizi : ");
+    scanf("%zu", &n);
+
+    int *pd = (int *)calloc(n, sizeof (int));
+    if(!pd){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+    print_array(pd, n); //garbage value
+    free(pd);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+eger malloc işlevine gonderilen arguman 0 degeri ise
+
+1- malloc NULL pointer döndürebilir
+2- malloc NULL pointer olmayan bir adres döndürebilir
+
+her iki durumda da malloc un geri donus degeri tanımsız davranıs olmadan free işlevine gecilebilir
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    int *p = malloc(0);
+
+    if(p != NULL){
+        printf("malloc returned the adress : %p\n", p);
+    }else{
+        printf("malloc returned NULL pointer\n");
+    }
+
+    free(p);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+dinamik olarak pointer dizisi elde edilmesi
+
+matris olusturmak
+satır ve stun sayısı run timeda belli olsun
+
+
+2 farklı yontem ile yapacam
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    size_t row, col;
+
+    randomize();
+    printf("matrisin satir ve sutun sayisini giriniz : ");
+    scanf("%zu%zu", &row, &col);
+
+    int **pd = (int **)malloc(row *sizeof (int));
+
+    if(pd == NULL){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+    for (size_t i = 0; i < row; ++i) {
+        pd[i] = (int *) malloc(col *sizeof (int));
+        if(pd[i] == NULL){
+            printf("bellek yetersiz\n");
+            return 1;
+        }
+    }
+
+    for (size_t i = 0; i < row; ++i) {
+        for (size_t k = 0; k < col; ++k) {
+            pd[i][k] = rand() % 10;
+        }
+    }
+
+    for (size_t i = 0; i < row; ++i) {
+        for (size_t k = 0; k < col; ++k) {
+            printf("%d ", pd[i][k]);
+        }
+        printf("\n");
+    }
+
+    //free
+    for (size_t i = 0; i < row; ++i) {
+        free(pd[i]);
+    }
+
+    free(pd);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <conio.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    size_t row, col;
+
+    randomize();
+    printf("matrisin satir ve sutun sayisini giriniz : ");
+    scanf("%zu%zu", &row, &col);
+
+    int **pd = (int **)malloc(row *sizeof (int));
+
+    if(pd == NULL){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+    for (size_t i = 0; i < row; ++i) {
+        pd[i] = (int *) malloc(col *sizeof (int));
+        if(pd[i] == NULL){
+            printf("bellek yetersiz\n");
+            return 1;
+        }
+    }
+
+
+
+    for (size_t i = 0; i < row; ++i) {
+        for (size_t k = 0; k < col; ++k) {
+            pd[i][k] = rand() % 10;
+        }
+    }
+
+    for (size_t i = 0; i < row; ++i) {
+        for (size_t k = 0; k < col; ++k) {
+            printf("%d ", pd[i][k]);
+        }
+        printf("\n");
+    }
+
+
+    printf("\n\n");
+    int *ptr = pd[0];
+    int n = row * col;
+
+    while(n--){
+        printf("%d ", *ptr++);
+        _getch();
+    }
+
+    printf("\n\n");
+
+    //free
+    for (size_t i = 0; i < row; ++i) {
+        free(pd[i]);
+    }
+
+    free(pd);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <conio.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    size_t row, col;
+
+    randomize();
+    printf("matrisin satir ve sutun sayisini giriniz : ");
+    scanf("%zu%zu", &row, &col);
+
+    int *pd = (int *)malloc(row * col * sizeof (int));
+
+    if(pd == NULL){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+    for (size_t i = 0; i < row; ++i) {
+        for (size_t k = 0; k < col; ++k) {
+            pd[i * col + k] = rand() % 10;
+        }
+    }
+
+    for (size_t i = 0; i < row; ++i) {
+        for (size_t k = 0; k < col; ++k) {
+            printf("%d ", pd[i * col + k]);
+        }
+        printf("\n");
+    }
+
+    free(pd);
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <conio.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    size_t row, col;
+
+    randomize();
+    printf("matrisin satir ve sutun sayisini giriniz : ");
+    scanf("%zu%zu", &row, &col);
+
+    int *pd = (int *)malloc(row * col * sizeof (int));
+
+    if(pd == NULL){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+    for (size_t i = 0; i < row; ++i) {
+        for (size_t k = 0; k < col; ++k) {
+            pd[i * col + k] = rand() % 10;
+        }
+    }
+
+    for (size_t i = 0; i < row; ++i) {
+        for (size_t k = 0; k < col; ++k) {
+            printf("%d ", pd[i * col + k]);
+        }
+        printf("\n");
+    }
+
+    printf("\n\n");
+    int *ptr = pd;
+    int n = row * col;
+
+    while(n--){
+        printf("%d ", *ptr++);
+        _getch();
+    }
+
+    printf("\n\n");
+
+    free(pd);
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <conio.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    size_t row, col;
+
+    randomize();
+    printf("matrisin satir ve sutun sayisini giriniz : ");
+    scanf("%zu%zu", &row, &col);
+
+    int **pd = (int **)malloc(row * sizeof (int *));
+
+    if(pd == NULL){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+    int **pp = (int **)malloc(row * sizeof (int *));
+    if(pp == NULL){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+
+    for (size_t i = 0; i < row; ++i) {
+        pp[i] = pd + i * col;
+    }
+
+
+    for (size_t i = 0; i < row; ++i) {
+        for (size_t k = 0; k < col; ++k) {
+            printf("%d ", pp[i][k]);
+        }
+        printf("\n");
+    }
+
+    free(pd);
+    free(pp);
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+realloc
+
+dinamik olarak aldıgını yeri buyutme veya kuculktmede kullanılır
+
+void *realloc(void *vp, size_t newisize);
+
+buyutme veya kuculktme işlemi basarısız olurse eski bellek blogunu korur
+
+pd -> 0x001 -- aynı yerde buyutur ise aynı adresi doner
+eger yer yetersiz ise baska yerde buyutme yapar ve butun veriyi buraya kopyalar
+pd -> 0x005 buyumte işlemi yeni adresi
+
+eger hiç bir yerde buyutme yapamıyorsa eski veriyi koruyor
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <conio.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    int n;
+
+
+    printf("kac tam sayi : ");
+    scanf("%d", &n);
+
+    int *pd = (int *)malloc(n * sizeof (int));
+    if(!pd){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+    randomize();
+    set_array_random(pd, n);
+    print_array(pd, n);
+
+
+    printf("kac tam sayi daha ekleyelim : ");
+    int nplus;
+    scanf("%d", &nplus);
+    pd = realloc(pd, (n % nplus) * sizeof (int));
+    if(!pd){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+    set_array_random(pd + n, nplus); //yeni eklenen yere rastgele sayılar doldurmak amac
+    print_array(pd, n + nplus);
+
+    free(pd);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <conio.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    int n;
+
+
+    printf("kac tam sayi : ");
+    scanf("%d", &n);
+
+    int *pd = (int *)malloc(n * sizeof (int));
+    if(!pd){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+    printf("malloc %p adresinin aldi\n", pd);
+
+    randomize();
+    set_array_random(pd, n);
+    //print_array(pd, n);
+
+
+    printf("kac tam sayi daha ekleyelim : ");
+    int nplus;
+    scanf("%d", &nplus);
+    pd = realloc(pd, (n % nplus) * sizeof (int));
+    if(!pd){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+    printf("realloc %p adresinin aldi\n", pd);
+
+    set_array_random(pd + n, nplus); //yeni eklenen yere rastgele sayılar doldurmak amac
+    //print_array(pd, n + nplus);
+
+    free(pd);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+realloc maliyetlidir zaman alır
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <conio.h>
+
+#define SIZE    100
+
+
+int main()
+{
+    int c;
+    int ival;
+
+    randomize();
+
+    int *pd = NULL;
+    int count = 0;
+
+    for (; ; ) {
+        printf("tam sayi girecekmisiniz : ");
+        while ((c = _getch()) != 'e' && c != 'h')
+            ;
+
+        printf("%c\n", c);
+        if(c == 'h')
+            break;
+
+        printf("tam sayi girin : ");
+        ival = rand();
+        printf("%d\n", ival);
+
+        pd = realloc(pd, (count + 1) * sizeof (int));//malloc gibi davrandırdık
+
+        if(!pd){
+            printf("bellek yetersiz\n");
+            return 1;
+        }
+
+        pd[count++] = ival;
+    }
+
+    if(count == 0){
+        printf("hic sayi girmediniz\n");
+    }else{
+        printf("toplam %d sayi girdiniz\n", count);
+        printf("\ngirlen sayilar\n\n\n");
+        print_array(pd, count);
+        sort_array(pd, count);
+        printf("\n\nbir tusa basin siralamak icin\n\n\n");
+        _getch();
+        print_array(pd, count);
+        free(pd);
+    }
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+dynamic array - dinamik dizi veri yapısı
+
+data structure
+
+dinamik dizi veri yapısı
+
+cok fazla kullanılır - verri yapsıı kullnaımında en fazla kulanılan veri yapsııdır
+
+
+C++ std kutuphanesi vector sınıfı
+
+-dinamik dizide veriler ardısık olarak tutulur
+-dinamik dizide run time da degişikliler yapıalabilir
+-dinamik dizide index i ni bildigimiz bir ogeye constant time da erişim vardır
+ butun elemnaların erişim maliyeti aynııdır -- önemli avantajlarında bir tanesisidir
+
+
+-en cok yapılan davranıslar
+ eleman ekleme (insert) -- push back sondan eklem - bastan ekleme yapıyor isek push front denir
+ eleman cıkartma remove / erase -- sondan eleman cıkartma popback -- bastan eleman cıkartmaya popfront denir
+
+
+maliyeti constant time
+
+
+size - tutulan eleman sayınnı göstermekte
+capacity - tutulacak elemanlar ayrılan yer
+
+
+capacity == size bu durumu sagladıgında
+
+capacity = size * 2  kadar yer alır -- genelde bu kat kadar yer alır
+
+
+/****************************************************/
+/****************************************************/
+
+
+HomeWork
+
+program
+
+isim girecek misiniz (e) (h)
+e
+isim girin : remzi
+isim girecek misiniz (e) (h)
+e
+isim girin : orhan
+isim girecek misiniz (e) (h)
+e
+isim girin : mehmet
+isim girecek misiniz (e) (h)
+e
+isim girin : orhan
+.
+.
+.
+
+bu isim daha önceden girildi
+yeni isim giriniz : mahmut
+..
+..
+.
+
+isim girecek misiniz (e) (h)
+h
+
+toplam isim sayisi 50 girdiniz
+
+isimler -> remzi orhan mehmet mahmut ...
+
+ve alınan bellek bloklarını geri vereceksiniz
+
+bu örnek dinamik bellek yonetimi ile yapıalcak
+
+
+/****************************************************/
+/****************************************************/
+
+storage clas specifier
+
+auto
+register
+static  -- önemli
+extern -- önemli
+
+
+type qualifier
+
+const  -- önemli
+volatile -- önemli
+restrict (C99) -- önemli
+
+
+
+değişken bildiriminde ve fonksiyon kullnımında
+
+
+auto --> otomatikten kısaıltılmıstılarak uydurulmustur
+
+global degiskenlerde kullanmak yasaktır
+yerel degişkenlerde kullanımalı
+
+tanımlanan degişkenin otomatik omurlu oldugunu soyleriz
+fakat bu anahtar sözcük kullanımdan düşmüştür
+
+zaten bizim normal olarak tanımladıgımız deigşkenler otomatik omurludur
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <conio.h>
+
+#define SIZE    100
+
+
+
+int main()
+{
+    int y; //otomatik omurlu
+    auto int x; //otomatik omurlu
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+C++ auto cok fazla kullanılır ve anlama farklıdır değiştirilmiştir anlmaı
+
+type deduction -- tür cıkarımında kullanılır
+
+/****************************************************/
+/****************************************************/
+
+
+register
+
+kullanımdan neredeyse düştü düşecek
+
+yazmaç -- işelmin yazmacına yazamak için
+
+register derleyiciye aslında rica bulunuyor
+
+register int a = 5; // senin uygunsa işlemci yazmacına yazarmısın
+
+register sizin işlemleri hızlı yapmaınız için işlemciye yazmayı saglar
+
+neredeyse kullanımdan düştü düşecek
+
+deryicilerin bir opmizayon olayı demiştik demi , bu optimazsyon sayesinde derleyicinin
+derleyici sizin için çıkarttıgı kod parcaıklarında makine kodunda hangisini işlemciye yazacıgını sizden daha iyi kesgtiriyor
+
+bu sebepten kullanımı düşmüştür
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <conio.h>
+
+#define SIZE    100
+
+
+
+int main()
+{
+    register int x = 10;
+
+    int *p = &x; //atayamazsınız register ile olsutrdugunuz nesneyi
+}
+
+
+/****************************************************/
+/****************************************************/
+
+static
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
