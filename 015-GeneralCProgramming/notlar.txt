@@ -21494,6 +21494,483 @@ int main()
 /****************************************************/
 
 static
+   iki ayrı anlam içerir
+
+farklı yerel olması ve global olmasına göre değişir
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+
+//static degişkenler hayata bir defa gelip ömürlerini sonuna kadar devam ettiriyor
+
+static int g = 5; //file scope
+
+int main()
+{
+    static int x = 12; //yerel scope alanı
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+yerel değişkenler
+
+otomatik ömürlü
+static ömür olabilir
+
+global değişkenler
+static ömürlü olmak zorunda
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+
+int main()
+{
+    //anlam farkı yoktur
+    static int y = 12;
+    int static x = 16;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+
+void foo(void)
+{
+     static int y = 12;//hayata bir defa gelecek program sonan kadar hayatı devam edecek
+     //degerinin degiştirebiliriz
+}
+
+int main()
+{
+
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+
+void foo(void)
+{
+    int x = 10;
+    static int y = 12;
+
+    printf("x = %d    y = %d\n", x, y);
+    ++x;
+    ++y;
+}
+
+int main()
+{
+
+    for (int i = 0; i < 10; ++i) {
+        foo();
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+int y = 12;
+
+void foo(void)
+{
+    int x = 10;
+    printf("x = %d    y = %d\n", x, y);
+    ++x;
+    ++y;
+}
+
+int main()
+{
+
+    for (int i = 0; i < 10; ++i) {
+        foo();
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+void foo(void)
+{
+    static char str[100] = "orhan";
+
+    puts(str);
+    strcat(str, " can");
+
+}
+
+int main()
+{
+
+    for (int i = 0; i < 10; ++i) {
+        foo();
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+static yerel degişkenin kullanıldıgı tipik temalar
+
+
+1. satik omurşu bir yerel deigişknein adredsini donduren fonksiyonlar
+
+
+T herhangi bir tür olsun
+
+T* foo(??)
+{
+  static T tx;
+
+  return &T;
+
+}
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+//random password uretimi
+
+char *random_psw(char *pbuf)
+{
+    int len = rand() % 15 + 4;
+    for (int i = 0; i < len; ++i) {
+        pbuf[i] = rand() % 26 + 'A';
+    }
+
+    pbuf[len] = '\0';
+    return pbuf;
+}
+
+int main()
+{
+
+    char buffer[100];
+
+    randomize();
+
+    for (int i = 0; i < 10; ++i) {
+        random_psw(buffer);
+        puts(buffer);
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+//random password uretimi
+
+char *random_psw()
+{
+    static char buffer[100];
+    int len = rand() % 15 + 4;
+    for (int i = 0; i < len; ++i) {
+        buffer[i] = rand() % 26 + 'A';
+    }
+
+    buffer[len] = '\0';
+    return buffer;
+}
+
+int main()
+{
+    randomize();
+
+    char *p = random_psw();
+    puts(p);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+//random password uretimi
+
+char *random_psw(void)
+{
+    int len = rand() % 15 + 4;
+    char *pd = (char *)malloc(len + 1);
+    for (int i = 0; i < len; ++i) {
+        pd[i] = rand() % 26 + 'A';
+    }
+
+    pd[len] = '\0';
+    return pd;
+}
+
+int main()
+{
+    randomize();
+
+    char *p1 = random_psw();
+    char *p2 = random_psw();
+    char *p3 = random_psw();
+
+    puts(p1);
+    puts(p2);
+    puts(p3);
+
+
+    free(p1);
+    free(p2);
+    free(p3);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <stdbool.h>
+
+
+void foo(void)
+{
+    static bool first_call_flag = true;
+
+    if(first_call_flag){
+        printf("sadece ilk cagrida yapilmasi gerekn isler\n");
+        first_call_flag = false;
+    }
+
+    printf("gerekalna tum cagrida yapilmasi gerekn isler\n");
+}
+
+
+int main()
+{
+    for (int i = 0; i < 10; ++i) {
+        foo();
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <stdbool.h>
+
+#define  URAND_MAX      100
+
+//unique random number generator
+//0 dahil 100 haric bu aralıkta arstgele uretecek
+//fonksiyon uretecek sayı kalmadıgında -1 hatası dondurecek
+
+int urand(void)
+{
+    static int a[URAND_MAX] = {0};
+    static int count = 0;
+
+    if(count == URAND_MAX){
+        return -1;
+    }
+
+    int val;
+    for (; ; ) {
+        val = rand() % URAND_MAX;
+        if(a[val] == 0)
+            break;
+    }
+
+    a[val] = 1;
+    ++count;
+    return val;
+}
+
+int main()
+{
+    randomize();
+    for (int i = 0; i < URAND_MAX; ++i) {
+        printf("%d ", urand());
+    }
+
+    printf("\n");
+    printf("%d ", urand()); //-1
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <stdbool.h>
+
+#define  URAND_MAX      100
+
+//unique random number generator
+//0 dahil 100 haric bu aralıkta arstgele uretecek
+//fonksiyon uretecek sayı kalmadıgında -1 hatası dondurecek
+
+int urand(void)
+{
+    static int a[URAND_MAX] = {0};
+    static int count = 0;
+
+    if(count == URAND_MAX){
+        return -1;
+    }
+
+    int val;
+    while(a[val = rand() % URAND_MAX])
+        ;
+
+    a[val] = 1;
+    ++count;
+    return val;
+}
+
+int main()
+{
+    randomize();
+    for (int i = 0; i < URAND_MAX; ++i) {
+        printf("%d ", urand());
+    }
+
+    printf("\n");
+    printf("%d ", urand()); //-1
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

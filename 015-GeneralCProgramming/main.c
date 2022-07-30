@@ -2,17 +2,42 @@
 #include <stdlib.h>
 #include "utility.h"
 #include <string.h>
-#include <conio.h>
+#include <stdbool.h>
 
-#define SIZE    100
+#define  URAND_MAX      100
 
+//unique random number generator
+//0 dahil 100 haric bu aralıkta arstgele uretecek
+//fonksiyon uretecek sayı kalmadıgında -1 hatası dondurecek
 
+int urand(void)
+{
+    static int a[URAND_MAX] = {0};
+    static int count = 0;
+
+    if(count == URAND_MAX){
+        return -1;
+    }
+
+    int val;
+    while(a[val = rand() % URAND_MAX])
+        ;
+
+    a[val] = 1;
+    ++count;
+    return val;
+}
 
 int main()
 {
-    register int x = 10;
+    randomize();
+    for (int i = 0; i < URAND_MAX; ++i) {
+        printf("%d ", urand());
+    }
 
-    int *p = &x; //atayamazsınız register ile olsutrdugunuz nesneyi
+    printf("\n");
+    printf("%d ", urand()); //-1
+
 }
 
 
