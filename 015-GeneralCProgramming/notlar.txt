@@ -21921,6 +21921,635 @@ int main()
 /****************************************************/
 
 
+char *strtok(char *pstr, const char *delim);
+
+Orhan bugun nerde kaldı! sen, ben ve o gieczmi ankara'ya....
+
+
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <stdbool.h>
+
+#define  SIZE      100
+
+
+int main()
+{
+
+    char str[SIZE];
+
+    printf("yazi girin : ");
+    sgets(str);
+
+    char *p = strtok(str, " \t.!;?,");
+
+
+    while (p != NULL) {
+        printf("%s\n", p);
+        p = strtok(NULL, " \t.!;?,");
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <stdbool.h>
+
+#define  SIZE      100
+
+
+int main()
+{
+
+    char str[SIZE];
+
+    printf("yazi girin : ");
+    sgets(str);
+
+    char *p = strtok(str, "1234567890");
+
+
+    while (p != NULL) {
+        printf("%s\n", p);
+        p = strtok(NULL, "1234567890");
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+orhan\0 baris\0 emirhan\0
+
+bunun sizde yazaiblirsiniz
+
+
+/****************************************************/
+/****************************************************/
+
+baglantı - linkage
+
+
+external linkage -- dıs baglantı
+internal linkage -- ic baglantı
+no linkage
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int g; //ben bir global feğişken tanımladım statik olarak
+extern int x; //x değişkeni yerinin bir baska kaynak doya tarafından ayrıldıgını bize bilriyor
+
+int main()
+{
+
+    x  = 10;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int main()
+{
+
+    printf("%d\n", primes[11]);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <errno.h>
+
+
+int main()
+{
+    errno = 12; //extern bildirimi yapıl std kutuphanede
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+auto
+register
+static
+
+
+type qualifier
+const
+volatile
+restrict - c99 ile eklendi c++ da yok
+
+
+/****************************************************/
+/****************************************************/
+
+const
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    const int x = 12;
+    //x = 10; //stanks hatsı
+    //++x; //sentask hatası
+
+    const int a[5] = {1, 2, 3, 4, 5};
+    a[2] = 12; //sentaks hatası
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+    int y = 12;
+
+    int *const ptr = &x;
+    //ptr'nin kendisi const
+    //ptr hayatı boyunca x'in adrresini tutacak
+    //const pointer to int
+    //top level const
+    //right const
+
+    *ptr = 55;
+    ptr = &y;//sentaks hatası
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+    int y = 12;
+
+    const int* ptr = &x;
+    //*ptr gosterdigi yerdegi degişkenin degeri degiştirilemez
+    //low level const
+    //left const
+
+    *ptr = 45; //sentaks hatası
+    ptr = &y; //gecersli
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+    int y = 12;
+
+    const int* const ptr = &x;
+
+    *ptr = 45; //sentaks hatası
+    ptr = &y; //sentaks hatası
+
+
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+    int y = 12;
+
+    int *p1 = &x;
+    int *p2 = &y;
+
+    int ** const ptr = &p1;
+    ptr = &p2; //sentaks hatası
+    *ptr = &y;
+    **ptr = 123423;
+
+
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+    int y = 12;
+
+    int *p1 = &x;
+    int *p2 = &y;
+
+    int * const *ptr = &p1;
+    ptr = &p2;
+    *ptr = &y; //sentaks hatası
+    **ptr = 123423;
+
+
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+    int y = 12;
+
+    int *p1 = &x;
+    int *p2 = &y;
+
+    int const **ptr = &p1;
+    ptr = &p2;
+    *ptr = &y;
+    **ptr = 123423;//sentaks hatası
+
+
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+int main()
+{
+    int x = 10;
+    int y = 12;
+
+    int *p1 = &x;
+    int *p2 = &y;
+
+    int const * const* const ptr = &p1;
+    ptr = &p2;
+    *ptr = &y;
+    **ptr = 123423;//sentaks hatası
+
+
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+typedef int*    IPTR;
+
+int main()
+{
+    int x = 11;
+    int y = 123;
+
+    const IPTR p = &x;
+    //int * const p = &x; //bu hale getirir derleyici
+
+    p = &y; //sentaks hatası
+
+    *p = 555;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+int x, y, z;
+
+int main()
+{
+    const int *pa[] = {&x, &y, &z};
+
+    pa[0] = &y;
+    *pa[0] = 55; // sentaks hatası
+
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+int x, y, z;
+
+int main()
+{
+    int * const pa[] = {&x, &y, &z};
+
+    pa[0] = &y;// sentaks hatası
+    *pa[0] = 55;
+
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+
+int main()
+{
+
+    const int x = 10, y = 55, z = 66;
+
+    //butun degişkenler constmudur
+
+   // x = 123;
+    y = 123; //sentask hatası
+    z = 5555; //sentask hatası
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+volatile
+
+
+volatile olarka tanımlanan değişken benim program dışı kaynaklar tarafıdn değiştirilmiş o0labilir
+
+
+int countLed = 100;
+
+//ara ptogram gir count'un degerini degiştirdi
+//programcı bunu biliyor
+//fakat erleyici buyna göre kod uretmıyor
+//volatile ile bildirisek ramden gidiyor yein ve dogru veriyi cekip bize getiriyor
+
+
+while(count){
+
+ ///
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+volatile int countLed = 100;
+
+//interupt
+//git led bak gel kac yanıp sonmus
+//countLed baska kyanak dosya işlendi
+
+while(countLed){
+
+ ///
+}
+
+
+/****************************************************/
+/****************************************************/
+
+restrict - c99 dile eklendi
+c++ da yok
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+
+int main()
+{
+    int x = 5;
+    int *restrict p = &x; //sadece pointer oncesinde kullanılır
+
+     //int * p1 = &x; //sentask hatası restrict bu sekilde tanımlamada kullanılmaz
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+//derleyiciye diyoruz ki bu fonksiyon içinde p'nin gosterdiği adrese erişimin tek yolu p yi kullanmaktır
+//baska pointer değişken var ise billki p'nin gosterdiği degeri gostermez
+
+void func(int *restrict p)
+{
+
+}
+
+
+int main()
+{
+    int a;
+
+    func(&a);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+//derleyiciye diyoruz ki bu fonksiyon içinde p'nin gosterdiği adrese erişimin tek yolu p yi kullanmaktır
+//baska pointer değişken var ise billki p'nin gosterdiği degeri gostermez
+
+void func(int * restrict px, int *py, const int *pz)
+{
+    *px += *pz;
+    *py += *pz;
+}
+
+
+int main()
+{
+    int x = 10, y = 5, z = 8;
+
+    func(&x, &y, &x); //tanımsız davranısa duser
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+user-defined types
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -9,6 +9,14 @@
 #include <Windows.h>
 #endif
 
+
+const int primes[] = {
+    2, 3, 5, 7, 11, 13, 17, 19, 23, 29,
+    31, 37, 41, 47, 53, 59, 61, 67, 71,
+    73, 79, 83, 89, 97, 101, 103, 107,
+    109, 113, 127, 131, 137, 139, 149, 151,
+};
+
 int isprime(int val)
 {
     if(val == 0 || val == 1)
@@ -126,7 +134,8 @@ void gswap(void *vp1, void *vp2, size_t n)
     }
 }
 
-int icmp(const void *vp1, const void *vp2)
+//internal linkage
+static int icmp(const void *vp1, const void *vp2)
 {
     if(*(const int *)vp1 > *(const int *)vp2)
         return 1;

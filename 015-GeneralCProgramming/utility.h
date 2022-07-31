@@ -7,6 +7,8 @@
 #define     asize(x)        (sizeof(x) / sizeof(x[0]))
 #define     relem(a)        a[rand() % asize(a)]
 
+extern const int primes[];
+
 int isprime(int);
 int ndigit(int);
 void dashline(void);
