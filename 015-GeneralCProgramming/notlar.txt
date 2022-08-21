@@ -22492,6 +22492,1697 @@ int main()
 user-defined types
 
 
+C de user-defined types olusturmak için 3 yontem var
+
+
+structures - yapılar
+unions -- birlikler
+
+enumarations -- integer types
+
+
+
+
+structures - yapılar
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+//Data bir isim değil bir tag dir
+//Yapıların en az bir elemanı olmalıdır
+
+struct Data{
+    int x;
+};
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+//Data bir isim değil bir tag dir
+//Yapıların en az bir elemanı olmalıdır
+
+//yapı elemanları
+struct Data{
+    int x;
+    double md;
+    int *ptr;
+    char str[100];
+    int a, b, c;
+};
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+//Data bir isim değil bir tag dir
+//Yapıların en az bir elemanı olmalıdır
+
+//yapı elemanları
+struct Data{
+    int x;
+};
+
+int main()
+{
+    printf("sizeof struct Data = %zu\n", sizeof (struct Data));
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+//Data bir isim değil bir tag dir
+//Yapıların en az bir elemanı olmalıdır
+
+//yapı elemanları
+struct Data{
+    int x;
+    int y;
+    double dval;
+    char str[32];
+};
+
+int main()
+{
+    printf("sizeof struct Data = %zu\n", sizeof (struct Data));
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+//Data bir isim değil bir tag dir
+//Yapıların en az bir elemanı olmalıdır
+
+//yapı elemanları
+struct Data{
+    int x;
+    int y;
+    double dval;
+    char str[32];
+};
+
+int main()
+{
+    struct Data mydata;
+    Data mydata2; //suan için gecerli değil
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+//Data bir isim değil bir tag dir
+//Yapıların en az bir elemanı olmalıdır
+
+
+void foo()
+{
+//local tanımlama
+    struct Data{
+        int x;
+        int y;
+        double dval;
+        char str[32];
+    };
+
+    struct Data data;
+}
+
+int main()
+{
+
+    struct Data x; //gecersiz
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+//Data bir isim değil bir tag dir
+//Yapıların en az bir elemanı olmalıdır
+
+//yapı elemanları
+struct Data{
+    int x;
+    int y;
+    double dval;
+    char str[32];
+};
+
+
+struct Data g;
+//g nin member elemnaları hayata 0 degeri ile baslar
+
+const struct Data g2;
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+//Data bir isim değil bir tag dir
+//Yapıların en az bir elemanı olmalıdır
+
+//yapı elemanları
+struct Data{
+    int x;
+    int y;
+    double dval;
+    char str[32];
+};
+
+void func(struct Data x)
+{
+    //yerel degişken
+    struct Data y;
+
+    //static ömürlü
+    static struct Data z;
+}
+
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+//Data bir isim değil bir tag dir
+//Yapıların en az bir elemanı olmalıdır
+
+//yapı elemanları
+struct Data{
+    int x;
+    int y;
+    double dval;
+    char str[32];
+};
+
+
+int main()
+{
+    struct Data mydata;
+    struct Data *ptrData; //pointer değişken tanımlayabiliriz
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+//Data bir isim değil bir tag dir
+//Yapıların en az bir elemanı olmalıdır
+
+//yapı elemanları
+struct Data{
+    int x;
+    int y = 5; //yapı içinde ilk deger veremeyiz
+    double dval;
+    char str[32];
+};
+
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+member selection operators
+
+
+yapı da elemanlara erişmek için iki tane operator var
+
+dot operator -- nokta operator
+arrow opeatoru -- ok operator
+
+
+bu operatorlerin öncelik seviyesi
+
+1. öncelik seviyesinde () [] . -> bulunmakata soldan saga
+
+
+dot operatoru
+nokta operatorunu solunda operandı bir yapı türünden nesne olmak zorudna
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+//Data bir isim değil bir tag dir
+//Yapıların en az bir elemanı olmalıdır
+
+//yapı elemanları
+struct Data{
+    int x, y;
+    double dval;
+    char str[32];
+};
+
+int main()
+{
+    struct Data mydata;
+    mydata.x = 10;
+
+    ++mydata.x;
+
+    struct Data d1;
+    struct Data d2;
+
+    d1.x = d2.x;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+//Data bir isim değil bir tag dir
+//Yapıların en az bir elemanı olmalıdır
+
+//yapı elemanları
+struct Data{
+    int a[4][10];
+    char str[50];
+    int *ptr;
+    int (*p)(int);
+};
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+//Data bir isim değil bir tag dir
+//Yapıların en az bir elemanı olmalıdır
+
+//yapı elemanları
+struct Date{
+    int d, m, y;
+};
+
+struct Student {
+    int no;
+    char name[40];
+    struct Date bdate;
+};
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+Bir yapı nesnesi sadece ve sadece 4 operatorün operandı olabilir
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Orhan{
+    int x, y;
+    double d1, d2;
+};
+
+int main()
+{
+    struct Orhan orhn1;
+
+    //1- nokta operatoru
+    orhn1.d2;
+
+    //2- sizeof operatoru
+    printf("sizeof = %z\n", sizeof (orhn1));
+
+    //3- adres operatorunun operandı oalbilir
+    &orhn1;
+
+    struct Orhan a[100];
+    a + 1;
+
+    //4- atama operatoru
+
+    struct Orhan x = {1, 2, 4.5, 5.5};
+    struct Orhan y;
+
+    y = x;
+
+    //aynı yapı türğnden nesnelere atama yapılır
+    // farklı yapı türünden veya primitive(int, double...) türlerinden atama yapılmaz
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct A{
+    int x, y;
+};
+
+
+struct B{
+    int x, y;
+};
+
+int main()
+{
+    struct A a1;
+    struct B b1;
+
+    a1 = b1; //sentaks hatası
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int x, y, z;
+    double dval;
+};
+
+int main()
+{
+    struct Data a = {10, 20, 30, 4.5};
+    struct Data b;
+
+    b = a; //bu gecerli fakat maliyetli
+
+    //bu şekilde atama yaparsak daha hızlı olur
+    memcpy(&b, &a, sizeof (struct Data));
+    memcpy(&b, &a, sizeof (a));
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int a[5];
+};
+
+int main()
+{
+    struct Data a = {10, 20, 30, 4.5};
+    struct Data b;
+
+    b = a;
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int a[5];
+    void foo(void);
+    //bir yapının elemanı fonksiyon olmaz fonksiyon pointer'ı olur
+
+};
+
+int main()
+{
+
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+Yapı nesnelerine ilk deger verme
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int a, b;
+    double dval;
+};
+
+int main()
+{
+    struct Data mydata = {10, 20, 5.5};
+
+    printf("%d %d %f\n", mydata.a, mydata.b, mydata.dval);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int a, b;
+    double dval;
+};
+
+int main()
+{
+    struct Data mydata = {10}; //geri kalanı sıfır ile doldurur
+
+    printf("%d %d %f\n", mydata.a, mydata.b, mydata.dval);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int a, b;
+    double dval;
+};
+
+int main()
+{
+    struct Data mydata = {0}; //geri kalanı sıfır ile doldurur
+
+    printf("%d %d %f\n", mydata.a, mydata.b, mydata.dval);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int a, b;
+    double dval;
+};
+
+int main()
+{
+    struct Data mydata = {}; //gecerlid değil
+
+    printf("%d %d %f\n", mydata.a, mydata.b, mydata.dval);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int x;
+    int a[4];
+    double dval;
+};
+
+int main()
+{
+    struct Data mydata = {20, {1, 2, 3, 4}, 5.6};
+
+    printf("mydata.x = %d\n", mydata.x);
+    printf("mydata.dval = %f\n", mydata.dval);
+
+    print_array(mydata.a, 4);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int x;
+    int a[4];
+    double dval;
+};
+
+int main()
+{
+    struct Data mydata = {20, 1, 2, 3, 4, 5.6};//gecerli ama bu sekilde ilk deger vermeyin
+
+    printf("mydata.x = %d\n", mydata.x);
+    printf("mydata.dval = %f\n", mydata.dval);
+
+    print_array(mydata.a, 4);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int x, y;
+    int a[4];
+    double dval;
+};
+
+int main()
+{
+    struct Data mydata = {
+      .x = 10,
+      .y = 20,
+      .dval = 2.1
+    };
+
+    printf("mydata.x = %d\n", mydata.x);
+    printf("mydata.dval = %f\n", mydata.dval);
+
+    print_array(mydata.a, 4);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int x, y;
+    int a[4];
+    double dval;
+};
+
+int main()
+{
+    struct Data mydata = {
+        .a = {1, 3, 5, 9}
+    };
+
+    printf("mydata.x = %d\n", mydata.x);
+    printf("mydata.dval = %f\n", mydata.dval);
+
+    print_array(mydata.a, 4);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int x, y;
+    char str[40];
+};
+
+int main()
+{
+    struct Data mydata = {10, 30, "mehmet"};
+
+    strcpy(mydata.str, "orhan");
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+
+//iki ifade de aynı ifade
+/*
+struct Data{
+    int a, b;
+    double d1, d2;
+}x, y;
+*/
+
+struct Data{
+    int a, b;
+    double d1, d2;
+};
+
+struct Data x, y;
+
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+
+
+
+struct Data{
+    int a, b;
+    double d1, d2;
+}x = {1, 3, 1.1, 2.2}, *ptr = &x;
+
+//aslın bunu demiş oluyoruz
+//struct Data x = {1, 3, 1.1, 2.2}, *ptr = &x;
+
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+//bu yapı türünden sadece x1 ve x2 değişkenleri var başka değişken olusturamazsınız
+struct{
+    int a, b;
+    double d1, d2;
+}x1 = {1, 3, 1.1, 2.2}, x2;
+
+
+int main()
+{
+    x2 = x1;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct{
+    int a, b, c;
+}x1 = {1, 3, 5};
+
+struct{
+    int a, b, c;
+}x2;
+
+int main()
+{
+    x2 = x1;//sentaks hatası geçersiz
+}
+
+
+/****************************************************/
+/****************************************************/
+
+Pointer to structure object
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int a, b, c;
+};
+
+struct Data *foo(void);
+
+int main()
+{
+    struct Data mydata;
+    struct Data a[10];
+
+    struct Data *p = &mydata;
+
+    p = a;
+
+    p = foo();
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int a, b, c;
+    char str[100];
+    int ar[30];
+};
+
+struct Data *foo(void);
+
+int main()
+{
+   printf("sizeof(struct Data) = %zu\n", sizeof (struct Data));
+   printf("sizeof(struct Data *) = %zu\n", sizeof (struct Data *));
+   printf("sizeof(int *) = %zu\n", sizeof (int *));
+   printf("sizeof(double *) = %zu\n", sizeof (double *));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+ok operatoru - arrow operator
+
+member selection aporator
+
+
+a -> b
+
+
+ok operatorunun sol operandı bir yapı nesnesi adresi olmalı
+ok operaotrunun sag operandı sol openradı olan adresteki yapı nesnesinini elemanlarından biri olmalı
+
+
+ptr -> b
+
+(*ptr).b
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int x, y;
+    double dval;
+};
+
+int main()
+{
+    struct Data a = {10, 20, 5.7};
+    struct Data *p = &a;
+
+    printf("%d   %d \n", (*p).x, p->x);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int x, y;
+    double dval;
+};
+
+int main()
+{
+    struct Data a[3] = {{1, 2, 3.5}, {2, 5, 2.2}, {5, 5, 1.1}};
+
+    a->x; //a nın ilke elemanın x ine erişmiş oluruz
+
+    a[0].x = 22; //aynı ifade demektir
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int x, y;
+    double dval;
+};
+
+struct Data *foo(void);
+
+int main()
+{
+    foo()->x = 5;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int x, y;
+    double dval;
+};
+
+void foo(struct Data *ptr);
+
+int main()
+{
+    struct Data mydata = {1, 3, 4.5};
+
+    foo(&mydata);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int x, y;
+    double dval;
+};
+
+
+int main()
+{
+    const struct Data mydata = {1, 3, 4.5};
+
+    mydata.x = 233; //sentaks hatası
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int x, y;
+    double dval;
+    char buffer[40];
+};
+
+
+static struct Data cdata = {1, 2, 4.5, "murat"}; //sadece bu modulde gecerli erişim vardır
+
+
+int main()
+{
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int Data;
+    int x, y;
+};
+
+
+int main()
+{
+    struct Data Data; //gecerli
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+yapı türleirnde typedef bildirimleri -- typedef son ve 3 bölümü
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int x, y;
+    double dval;
+};
+
+typedef struct Data Data; //eş ismi oldu Data
+
+int main()
+{
+    Data mydata = {1, 4, 2.2};
+    Data *ptr = &mydata;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int x, y;
+    double dval;
+};
+
+typedef struct Data Data; //eş ismi oldu Data
+typedef struct Data* DataPtr;
+typedef Data* DataPtr;
+typedef const Data* CDataPtr;
+
+
+int main()
+{
+    Data mydata = {1, 4, 2.2};
+    Data *ptr = &mydata;
+    DataPtr p = &mydata;
+
+    CDataPtr p1 = &mydata;
+
+    p1->dval = 3.3; //sentaks hatası
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Data{
+    int x, y;
+    double dval;
+};
+
+typedef struct Data* DataPtr;
+
+int main()
+{
+    struct Data mydata = {1, 5, 3.5};
+
+    const DataPtr myptr = &mydata;
+    //const struct Data *myptr = &mydata; //bu durum degildir
+    //struct Data * const myptr = &mydata; // bu hale gelir yukarıdaki tanım
+
+    struct Data mydata2 = {1, 2, 3.3};
+
+    myptr = &mydata2;//sentaks hatası
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+typedef struct Data{
+    int x, y;
+    double dval;
+}Data; //eş isim
+
+
+int main()
+{
+    struct Data a;
+    Data b;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+typedef struct{
+    int x, y;
+    double dval;
+}Data; //eş isim
+
+
+int main()
+{
+    struct Data a; //gecersiz durumda
+    Data b;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+typedef struct{
+    int x, y;
+    double dval;
+}Data, *DataPtr; //eş isim
+
+
+int main()
+{
+    Data b;
+    DataPtr c;
+
+    c->x = 55;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+typedef struct{
+    int x, y;
+    double dval;
+}Data, Fata; //eş isim
+
+
+int main()
+{
+    Data bdata = {3, 5, 5.5};
+    Fata fdata = {1, 2, 2.2};
+
+    bdata = fdata;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+typedef struct{
+    int x, y;
+    double dval;
+}*Dptr; //eş isim
+
+
+int main()
+{
+    Dptr p = (Dptr)malloc(sizeof (*p));
+
+    p->x = 10;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+Yapı nesnelerinde işlem yapan fonksiyonlar
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Employee{
+    int id;
+    char name[20];
+    char surname[30];
+    double wage;
+};
+
+
+void foo(struct Employee e)
+{
+    e.id = 123123;
+    printf("%d  %s  %s  %.2f\n", e.id, e.name, e.surname, e.wage);
+}
+
+
+int main()
+{
+    struct Employee emp = {20, "orhan", "ozturk", 45.3};
+
+    foo(emp);//call by value // copylama işlemi olur amliyeti yuksek
+
+    printf("%d  %s  %s  %.2f\n", emp.id, emp.name, emp.surname, emp.wage);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Employee{
+    int id;
+    char name[20];
+    char surname[30];
+    double wage;
+};
+
+
+void foo(struct Employee *e) //setter
+{
+    e->id = 123123;
+    printf("%d  %s  %s  %.2f\n", e->id, e->name, e->surname, e->wage);
+}
+
+
+int main()
+{
+    struct Employee emp = {20, "orhan", "ozturk", 45.3};
+
+    foo(&emp);//call by reference
+
+    printf("%d  %s  %s  %.2f\n", emp.id, emp.name, emp.surname, emp.wage);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+struct Employee{
+    int id;
+    char name[20];
+    char surname[30];
+    double wage;
+};
+
+
+void set_employee(struct Employee *e) //setter
+{
+    e->id = 123123;
+    e->wage = 111.;
+}
+
+
+void print_employee(const struct Employee *e) //getter
+{
+    printf("%d  %s  %s  %.2f\n", e->id, e->name, e->surname, e->wage);
+}
+
+int main()
+{
+    struct Employee emp = {20, "orhan", "ozturk", 45.3};
+
+    printf("%d  %s  %s  %.2f\n", emp.id, emp.name, emp.surname, emp.wage);
+    set_employee(&emp);//call by reference
+    print_employee(&emp);//call by reference
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+typedef struct Employee{
+    int id;
+    char name[20];
+    char surname[30];
+    double wage;
+}Employee;
+
+
+//typedef struct Employee Employee;
+
+void set_employee(Employee *e) //setter
+{
+    e->id = 123123;
+    e->wage = 111.;
+    _strupr(e->name);
+    _strupr(e->surname);
+}
+
+
+void print_employee(const Employee *e) //getter
+{
+    printf("%d  %s  %s  %.2f\n", e->id, e->name, e->surname, e->wage);
+}
+
+int main()
+{
+    struct Employee emp = {20, "orhan", "ozturk", 45.3};
+
+    printf("%d  %s  %s  %.2f\n", emp.id, emp.name, emp.surname, emp.wage);
+    set_employee(&emp);//call by reference
+    print_employee(&emp);//call by reference
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+fonksiyon yapı türünden döndürmesi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
