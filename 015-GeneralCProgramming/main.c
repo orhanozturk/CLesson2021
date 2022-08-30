@@ -1,38 +1,29 @@
 #include <stdio.h>
+#include <time.h>
+#include <locale.h>
 #include "utility.h"
-#include <string.h>
 
-typedef struct Employee{
-    int id;
-    char name[20];
-    char surname[30];
-    double wage;
-}Employee;
+#define   SIZE   200000
 
-
-//typedef struct Employee Employee;
-
-void set_employee(Employee *e) //setter
-{
-    e->id = 123123;
-    e->wage = 111.;
-    _strupr(e->name);
-    _strupr(e->surname);
-}
-
-
-void print_employee(const Employee *e) //getter
-{
-    printf("%d  %s  %s  %.2f\n", e->id, e->name, e->surname, e->wage);
-}
 
 int main()
 {
-    struct Employee emp = {20, "orhan", "ozturk", 45.3};
+    //su andan 50 gun 15 saat 30 sanyie onceki olan timepoint'i hesaplayalım
 
-    printf("%d  %s  %s  %.2f\n", emp.id, emp.name, emp.surname, emp.wage);
-    set_employee(&emp);//call by reference
-    print_employee(&emp);//call by reference
+    time_t t;
+    time(&t);
+    struct tm x = *localtime(&t);
+
+    x.tm_mday -= 50;
+    x.tm_hour -= 15;
+    x.tm_sec  -= 30;
+
+    time_t result = mktime(&x);
+
+    if(result == -1)
+        printf("donuturme islmei yapilamadi\n");
+    else
+        printf("%s", asctime(&x));
 
 }
 

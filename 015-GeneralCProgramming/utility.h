@@ -22,6 +22,8 @@ void print_str(const char *);
 void gswap(void *vp1, void *vp2, size_t n);
 int icmp(const void *vp1, const void *vp2);
 void sort_array(int *p, size_t size);
+void clear_input_buffer(void);
+void sleep(int millisecond);
 
 
 #endif // UTILITY_H

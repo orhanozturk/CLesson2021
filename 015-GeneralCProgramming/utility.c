@@ -152,4 +152,23 @@ void sort_array(int *p, size_t size)
 }
 
 
+void clear_input_buffer(void)
+{
+    int c;
+
+    while((c = getchar()) != '\n' && c != EOF)
+        ;
+}
+
+void sleep(int millisecond)
+{
+    clock_t start = clock();
+
+    while (1) {
+        clock_t newclock = clock();
+        if((double)(newclock - start) / CLOCKS_PER_SEC * 1000 > millisecond)
+            return;
+    }
+}
+
 

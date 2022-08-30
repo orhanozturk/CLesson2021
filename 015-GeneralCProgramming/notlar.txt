@@ -23913,6 +23913,863 @@ int main()
 fonksiyon yapı türünden döndürmesi
 
 
+Data f1();
+Data *f1();
+const Data *f1();
+
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+typedef struct Employee{
+    int id;
+    char name[20];
+    char surname[30];
+    double wage;
+}Employee;
+
+
+//typedef struct Employee Employee;
+
+void set_employee(Employee *e) //setter
+{
+    e->id = 123123;
+    e->wage = 111.;
+    _strupr(e->name);
+    _strupr(e->surname);
+}
+
+
+void print_employee(const Employee *e) //getter
+{
+    printf("%d  %s  %s  %.2f\n", e->id, e->name, e->surname, e->wage);
+}
+
+struct Employee create_random_employee(void)
+{
+    struct Employee emp;
+    emp.id = rand();
+
+    strcpy(emp.name, "orhan");
+    strcpy(emp.surname, "ozturk");
+    emp.wage = 14.22;
+}
+
+int main()
+{
+    struct Employee e;
+
+    e = create_random_employee(); // böyle fir fonksiyon cagırımı maliyetlidir
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+typedef struct Employee{
+    int id;
+    char name[20];
+    char surname[30];
+    double wage;
+}Employee;
+
+
+//typedef struct Employee Employee;
+
+Employee *foo(void);
+
+int main()
+{
+    Employee *p = foo(); //maliyet dusuk
+
+    p->name;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+typedef struct Employee{
+    int id;
+    char name[20];
+    char surname[30];
+    double wage;
+}Employee;
+
+
+//typedef struct Employee Employee;
+
+Employee *f1(void);
+
+const Employee *f2(void);
+
+int main()
+{
+    Employee *p = f1(); //maliyet dusuk
+
+    const Employee *p2 = f1(); //maliyet dusuk
+
+    p->name;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+typedef struct Employee{
+    int id;
+    char name[20];
+    char surname[30];
+    double wage;
+}Employee;
+
+
+//typedef struct Employee Employee;
+
+Employee *f1(void)
+{
+    Employee e = {0};
+
+    //yerel degiskenin adresini dorudurmek tnaımsız davranıstır
+    return &e;
+}
+
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+
+typedef struct Employee{
+    int id;
+    char name[20];
+    char surname[30];
+    double wage;
+}Employee;
+
+
+//typedef struct Employee Employee;
+
+Employee *f1(void)
+{
+    static Employee e = {0};
+
+    return &e;//artık gecerli
+}
+
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include <string.h>
+#include <stdlib.h>
+
+typedef struct Employee{
+    int id;
+    char name[20];
+    char surname[30];
+    double wage;
+}Employee;
+
+
+//typedef struct Employee Employee;
+
+Employee *create_employee(void)
+{
+    Employee *pd = (Employee *)malloc(sizeof (Employee));
+    pd->id = 122;
+    pd->wage = 23.33;
+
+    return pd;
+}
+
+int main()
+{
+    Employee *pd = create_employee();
+
+
+    free(pd); //kaynak geri verilmeli yoksa kaynak sızıntısı olusur
+}
+
+
+/****************************************************/
+/****************************************************/
+
+time.h kutuphanesi
+
+
+time_t --> celander time
+clock_t
+
+yapı
+struct tm  -- standart butun derleyicilerde aynı
+
+broken-down time denir struct tm ye --- parçalarına ayrılmıs zaman demek
+
+
+
+epoche  --- 01-01-1970 00:00 baslangıc olarak kabul edilen zaman
+
+celander time --- iki zmana arasındaki farkı temsil eder
+
+
+
+struct tm{
+  int tm_year;  //+1900
+  int tm_mon; // 0 1  11
+  int tm_mday; //ayın gunu
+  int tm_wday; //haftanın gunu
+  int tm_yday; //yılın gunu
+  int tm_hour; // 0 23
+  int tm_min; // 0 59
+  int tm_sec; //0 59
+  int tm_isdst; // gunısıgı taraffu modu demek
+};
+
+
+
+
+
+#include <stdio.h>
+#include <time.h>
+
+struct tm *func(void);
+
+int main()
+{
+    struct tm *p = func();
+
+    printf("%02s-%02d-%d\n", p->tm_mday, p->tm_mon + 1, p->tm_year + 1900);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <time.h>
+
+struct tm *func(void);
+
+int main()
+{
+    time_t timer;
+
+    time(&timer);
+
+    printf("epoche'tan gecen saniye sayisi =  %lld\n", time(NULL));
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+struct tm * p = localtime(const time_t *)
+
+
+#include <stdio.h>
+#include <time.h>
+
+static const char * const pmons[] = {
+    "Ocak",
+    "Subat",
+    "Mart",
+    "Nisan",
+    "Mayis",
+    "Haziran",
+    "Temmuz",
+    "Agustos",
+    "Eylul",
+    "Ekim",
+    "Kasim",
+    "Aralik"
+};
+
+static const char * const pdays[] = {
+    "Pazartesi",
+    "Sali",
+    "Carsamba",
+    "Persembe",
+    "Cuma",
+    "Cumartesi",
+    "Pazar",
+};
+
+
+int main()
+{
+    time_t timer;
+
+    time(&timer); //calender time
+
+    struct tm *p = localtime(&timer);
+
+    //printf("%02d %02d\n", p->tm_mday, p->tm_mon + 1);
+    printf("%02d %s %d %s %02d:%02d:%02d\n", p->tm_mday, pmons[p->tm_mon], p->tm_year + 1900,
+            pdays[p->tm_wday], p->tm_hour, p->tm_min, p->tm_sec);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <time.h>
+
+static const char * const pmons[] = {
+    "Ocak",
+    "Subat",
+    "Mart",
+    "Nisan",
+    "Mayis",
+    "Haziran",
+    "Temmuz",
+    "Agustos",
+    "Eylul",
+    "Ekim",
+    "Kasim",
+    "Aralik"
+};
+
+static const char * const pdays[] = {
+    "Pazartesi",
+    "Sali",
+    "Carsamba",
+    "Persembe",
+    "Cuma",
+    "Cumartesi",
+    "Pazar",
+};
+
+
+int main()
+{
+    time_t timer;
+
+    for(;;){
+    time(&timer); //calender time
+
+    struct tm *p = localtime(&timer);
+
+    //printf("%02d %02d\n", p->tm_mday, p->tm_mon + 1);
+    printf("%02d %s %d %s %02d:%02d:%02d\r", p->tm_mday, pmons[p->tm_mon], p->tm_year + 1900,
+            pdays[p->tm_wday], p->tm_hour, p->tm_min, p->tm_sec);
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <time.h>
+
+static const char * const pmons[] = {
+    "Ocak",
+    "Subat",
+    "Mart",
+    "Nisan",
+    "Mayis",
+    "Haziran",
+    "Temmuz",
+    "Agustos",
+    "Eylul",
+    "Ekim",
+    "Kasim",
+    "Aralik"
+};
+
+static const char * const pdays[] = {
+    "Pazartesi",
+    "Sali",
+    "Carsamba",
+    "Persembe",
+    "Cuma",
+    "Cumartesi",
+    "Pazar",
+};
+
+
+int main()
+{
+    time_t timer;
+
+    time(&timer); //calender time
+
+    printf("kac saniye oncesi  : ");
+    int sec;
+    scanf("%d", &sec);
+
+    timer -= sec;
+
+
+    struct tm *p = localtime(&timer);
+
+    //printf("%02d %02d\n", p->tm_mday, p->tm_mon + 1);
+    printf("%02d %s %d %s %02d:%02d:%02d\n", p->tm_mday, pmons[p->tm_mon], p->tm_year + 1900,
+            pdays[p->tm_wday], p->tm_hour, p->tm_min, p->tm_sec);
+
+    if(p->tm_isdst < 0)
+        printf("gun isigi tasarffu modu bilgisisne sahip degilim\n");
+
+    if(p->tm_isdst)
+        printf("gun isigi tasarruf modundadir\n");
+    else{
+        printf("gun isigi tasarruf modunda degildir\n");
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <time.h>
+
+static const char * const pmons[] = {
+    "Ocak",
+    "Subat",
+    "Mart",
+    "Nisan",
+    "Mayis",
+    "Haziran",
+    "Temmuz",
+    "Agustos",
+    "Eylul",
+    "Ekim",
+    "Kasim",
+    "Aralik"
+};
+
+static const char * const pdays[] = {
+    "Pazartesi",
+    "Sali",
+    "Carsamba",
+    "Persembe",
+    "Cuma",
+    "Cumartesi",
+    "Pazar",
+};
+
+#define   BUFFER_SIZE   80
+
+char *get_current_time(void)
+{
+    static char buffer[BUFFER_SIZE];
+
+    time_t timer;
+    time(&timer); //calender time
+    struct tm *p = localtime(&timer);
+
+    sprintf(buffer, "%d_%02d_%02d_%02d_%02d_%02d.log",
+            p->tm_year + 1900,
+            p->tm_mon + 1,
+            p->tm_mday,
+            p->tm_hour,
+            p->tm_min,
+            p->tm_sec);
+
+    return buffer;
+}
+
+
+int main()
+{
+
+    puts(get_current_time());
+
+    FILE *f = fopen(get_current_time(), "w");
+
+    //
+
+    fclose(f);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+char * ctime(const time_t *);
+char * asctime(const struct tm*);
+
+
+
+#include <stdio.h>
+#include <time.h>
+
+
+#define   BUFFER_SIZE   80
+
+
+int main()
+{
+    time_t timer;
+    time(&timer);
+    struct tm *p = localtime(&timer);
+
+    //printf("(%s)", ctime(&timer));
+    printf("(%s)", asctime(p));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+locale
+
+sisteme bagımlı veya sisteme bagımlı degil
+
+
+<locale.h>
+
+setlocale(...)
+
+
+
+#include <stdio.h>
+#include <time.h>
+#include <locale.h>
+
+#define   BUFFER_SIZE   80
+
+
+int main()
+{
+    double dval = 27.1235;
+
+    printf("dval = %f\n", dval);
+
+    char *p = setlocale(LC_ALL, "turkish");
+
+    if(!p){
+        printf("locale degisikligi yaoilamiyor\n");
+    }
+    else{
+        printf("locale degisikligi yapildi resmi ismi : %s\n", p);
+    }
+
+    printf("dval = %f\n", dval);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <time.h>
+#include <locale.h>
+
+#define   BUFFER_SIZE   80
+
+
+int main()
+{
+    double x;
+    printf("bir gercek sayi girin : ");
+    scanf("%lf", &x);
+    printf("x = %f\n", x);
+
+    double dval = 27.1235;
+
+    printf("dval = %f\n", dval);
+
+    char *p = setlocale(LC_ALL, "turkish");
+
+    if(!p){
+        printf("locale degisikligi yaoilamiyor\n");
+    }
+    else{
+        printf("locale degisikligi yapildi resmi ismi : %s\n", p);
+    }
+
+    printf("dval = %f\n", dval);
+
+    clear_input_buffer();
+
+    printf("bir gercek sayi girin : ");
+    scanf("%lf", &x);
+    printf("x = %f\n", x);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+size_t strftime(char *pbuf, size_t size, const char *pfm, const struct tm *p);
+
+
+
+#include <stdio.h>
+#include <time.h>
+#include <locale.h>
+
+#define   BUFFER_SIZE   80
+
+
+int main()
+{
+    char buffer[BUFFER_SIZE];
+    time_t timer;
+    time(&timer);
+    struct tm *p = localtime(&timer);
+
+    size_t n = strftime(buffer, BUFFER_SIZE, "weekday : %A month : %B year : %Y", p);
+
+    printf("n = %d\n", n);
+    printf("(%s)\n", buffer);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <time.h>
+#include <locale.h>
+
+#define   BUFFER_SIZE   80
+
+
+int main()
+{
+    char buffer[BUFFER_SIZE];
+    time_t timer;
+    time(&timer);
+    struct tm *p = localtime(&timer);
+
+
+    setlocale(LC_ALL, "italian");
+
+    strftime(buffer, BUFFER_SIZE, "%A %B %Y", p);
+
+    printf("(%s)\n", buffer);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+clock_t türünden bir deger süreye ilişkin
+
+clock tick denir
+
+clock_t clock(void);
+
+
+
+
+#include <stdio.h>
+#include <time.h>
+#include <locale.h>
+#include "utility.h"
+
+#define   SIZE   200000
+
+
+int main()
+{
+    int a[SIZE];
+
+    clock_t start = clock();
+    set_array_random(a, SIZE);
+    sort_array(a, SIZE);
+    clock_t end = clock();
+
+    printf("%f saniye\n", (double)(end - start) / CLOCKS_PER_SEC);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <time.h>
+#include <locale.h>
+#include "utility.h"
+
+#define   SIZE   200000
+
+
+int main()
+{
+    for (; ;) {
+        putchar(rand() % 26 + 'A');
+        sleep(100);
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+mktime
+
+time_t mktime(struct tm *p);
+
+
+
+#include <stdio.h>
+#include <time.h>
+#include <locale.h>
+#include "utility.h"
+
+#define   SIZE   200000
+
+
+int main()
+{
+    //su andan 50 gun 15 saat 30 sanyie onceki olan timepoint'i hesaplayalım
+
+    time_t t;
+    time(&t);
+    struct tm x = *localtime(&t);
+
+    x.tm_mday -= 50;
+    x.tm_hour -= 15;
+    x.tm_sec  -= 30;
+
+    time_t result = mktime(&x);
+
+    if(result == -1)
+        printf("donuturme islmei yapilamadi\n");
+    else
+        printf("%s", asctime(&x));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
