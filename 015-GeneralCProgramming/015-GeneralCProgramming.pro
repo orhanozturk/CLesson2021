@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        date.c \
         main.c \
         utility.c
 
@@ -12,4 +13,5 @@ DISTFILES += \
  notlar.txt
 
 HEADERS += \
+ date.h \
  utility.h

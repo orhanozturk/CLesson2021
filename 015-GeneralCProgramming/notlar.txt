@@ -24689,6 +24689,400 @@ int main()
 /****************************************************/
 
 
+complete types / incomplete types
+
+
+void türü dilin kurallarına göre incomplete type
+
+bir türden değişken tanımlayabilmek için söz konusu türün "complete type" olması gerekir
+incomplete türlerden nesne tanımlayamayız.
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+//incomplete type
+struct Data;
+
+
+//complete type
+struct Data{
+    int y;
+};
+
+
+int main()
+{
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+//incomplete type
+struct Data;
+
+//fonksiyonun geri donus ve parametresi olabilir
+struct Data foo(struct Data *, struct Data *);
+
+int main()
+{
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+//incomplete type
+struct Data;
+
+typedef struct Data Data;
+
+int main()
+{
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+
+
+//incomplete type
+struct Data;
+
+int main()
+{
+    struct Data *ptr;
+
+    struct Data data; //gecersiz
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+
+
+//incomplete type
+struct Data;
+
+
+extern struct Data gdata;
+
+int main()
+{
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+
+//orhn.h -- suan include etmedim
+//incomplete type
+struct Data;
+
+struct Data *p; //bunu yapabiliriz
+
+int main()
+{
+    struct Data *p; //bunu yapabiliriz
+    struct Data a; //bunun yapabilmem için struct tanımlandıgı kutuphaneyi include etmem lazım
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include "date.h"
+
+int main()
+{
+    Date mydate;
+
+    set_date(&mydate, 04, 9, 2022);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include "date.h"
+
+int main()
+{
+    Date d1;
+    set_date(&d1, 12, 2, 2022);
+
+    Date d2;
+    set_date_today(&d1);
+
+    Date d3;
+    set_date_random(&d3);
+
+    Date d4;
+    set_date_str(&d4, "04-09-2022");
+
+
+    set_year(&d4, 2033);
+    set_month(&d4, 12);
+    set_month_day(&d4, 11);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include "date.h"
+
+int main()
+{
+    Date d1;
+
+    printf("bir tarih girin : ");
+    scan_date(&d1);
+    print_date(&d1);
+
+    randomize();
+    for (int i = 0; i < 100; ++i) {
+        print_date(set_date_random(&d1));
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "utility.h"
+#include "date.h"
+
+int main()
+{
+    Date mydate;
+    set_date_today(&mydate);
+    print_date(&mydate);
+
+    int n;
+
+    printf("kac gun : ");
+    scanf("%d", &n);
+
+
+    printf("%d gun sonrasi : ");
+    Date future_date;
+    ndays_date(&future_date, &mydate, n);
+    print_date(&future_date);
+
+    printf("%d gun oncesi : ");
+    Date pas_date;
+    ndays_date(&pas_date, &mydate, n);
+    print_date(&pas_date);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "utility.h"
+#include "date.h"
+
+int main()
+{
+    Date birth_date;
+
+    printf("dogum tarhinizi girin : ");
+    scan_date(&birth_date);
+    printf("dogum tarhiniz : ");
+    print_date(&birth_date);
+
+    Date today;
+    set_date_today(&today);
+    printf("bugun tarihi : ");
+    print_date(&today);
+
+    printf("bugun hayatiniziin %d gunu\n", date_diff(&birth_date, &today));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include "date.h"
+#include <stdlib.h>
+#include <time.h>
+
+//n degeri buyuk bir sayi olmak üzere standart inputtan alınacak
+//n elemanlı dinamik bir date dizisi olsuturulacak
+//dizinin elemanari rastgele degerlerle set edilecek
+//dizi standart qsort işleviyle kucukten buyuge sıralanacak
+//sırlanmıs dizi standart outputa yazdıralacak
+//sıralmaa kac sanıye sürecek hesaplanıp ekrana yazdıralacak
+
+int dcmp(const void *vp1, const void *vp2)
+{
+    return cmp_date((const Date *)vp1, (const Date *)vp2);
+}
+
+void set_date_array_random(Date *pa, size_t size)
+{
+    while (size--) {
+        set_date_random(pa++);
+    }
+}
+
+void print_date_array(const Date *pa, size_t size)
+{
+    while (size--) {
+        print_date(pa++);
+    }
+}
+
+int main()
+{
+    int n;
+
+    printf("kac tarih :");
+    scanf("%d", &n);
+
+    Date *p = (Date*)malloc(n * sizeof (Date*));
+
+    if(!p){
+        printf("bellek yetersiz\n");
+        return 1;
+    }
+
+    set_date_array_random(p, n);
+    printf("siralama basladi\n");
+    clock_t start = clock();
+    qsort(p, n, sizeof (*p), &dcmp);
+    clock_t end = clock();
+    printf("siralama bitti %f saniye\n", (double)(end - start) / CLOCKS_PER_SEC);
+    clear_input_buffer();
+    printf("bir tusa basin\n");
+    getchar();
+    print_date_array(p, n);
+
+
+    free(p);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
