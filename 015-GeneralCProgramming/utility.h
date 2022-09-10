@@ -3,7 +3,7 @@
 
 #include <stddef.h>
 
-#define     isleap(y)       ((y) % 4 == 0 && ((y) % 100 || (y) % 400 == 0))
+//#define     isleap(y)       ((y) % 4 == 0 && ((y) % 100 || (y) % 400 == 0))
 #define     asize(x)        (sizeof(x) / sizeof(x[0]))
 #define     relem(a)        a[rand() % asize(a)]
 
