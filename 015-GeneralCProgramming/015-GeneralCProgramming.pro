@@ -6,6 +6,7 @@ CONFIG -= qt
 SOURCES += \
         date.c \
         main.c \
+        person.c \
         utility.c
 
 DISTFILES += \
@@ -14,4 +15,5 @@ DISTFILES += \
 
 HEADERS += \
  date.h \
+ person.h \
  utility.h
