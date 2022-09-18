@@ -138,6 +138,37 @@ PUBLIC void print_date(const Date * p)
     printf("%02d %s %d %s\n", day(p), pmons[mon(p)], year(p), pdays[get_week_day(p)]);
 }
 
+PUBLIC void print_date_to_file(FILE *f, const Date * p)
+{
+    static const char *const pmons[] = {
+        "",
+        "Ocak",
+        "Subat",
+        "Mart",
+        "Nisan",
+        "Mayis",
+        "Haziran",
+        "Temmuz",
+        "Agustos",
+        "Eylul",
+        "Ekim",
+        "Kasim",
+        "Aralik"
+    };
+
+    static const char * const pdays[] = {
+        "Pazar",
+        "Pazartesi",
+        "Sali",
+        "Carsamba",
+        "Persembe",
+        "Cuma",
+        "Cumartesi",
+    };
+
+    fprintf(f, "%02d %s %d %s\n", day(p), pmons[mon(p)], year(p), pdays[get_week_day(p)]);
+}
+
 PUBLIC Date * scan_date(Date *p)
 {
     int d, m, y;

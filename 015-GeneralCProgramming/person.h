@@ -15,5 +15,6 @@ typedef struct {
 Person* set_person_random(Person *);
 void print_person(const Person *);
 int cmp_person(const Person *p1, const Person *p2);
+void print_person_to_file(FILE *f, const Person *);
 
 #endif // PERSON_H

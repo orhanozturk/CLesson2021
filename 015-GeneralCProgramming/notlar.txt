@@ -25231,6 +25231,696 @@ int main()
 /****************************************************/
 
 
+#include <stdio.h>
+#include "person.h"
+#include <stdlib.h>
+#include "utility.h"
+#include <time.h>
+
+void set_person_array(Person *p, size_t size)
+{
+    while (size--) {
+        set_person_random(p++);
+    }
+}
+
+void print_person_array(const Person *p, size_t size)
+{
+    while (size--) {
+        print_person(p++);
+    }
+}
+
+int pcmp(const void *p1, const void *p2)
+{
+    return cmp_person((const Person *)p1, (const Person *)p2);
+}
+
+int main()
+{
+    int n;
+    printf("kac kisi : ");
+    scanf("%d", &n);
+
+    Person *pd = (Person *)malloc(n * sizeof (Person));
+
+    if(!pd){
+        fprintf(stderr, "bellek yetersiz\n");
+        return 1;
+    }
+
+    set_person_array(pd, n);
+
+    printf("siralama basladi\n");
+    clock_t start = clock();
+    qsort(pd, n, sizeof (*pd), &pcmp);
+    clock_t end = clock();
+    printf("siralama bitti %f saniye\n", (double)(end-start) / CLOCKS_PER_SEC);
+    clear_input_buffer();
+    (void)getchar();
+    print_person_array(pd, n);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "person.h"
+#include <stdlib.h>
+#include "utility.h"
+#include <time.h>
+
+void set_person_array(Person *p, size_t size)
+{
+    while (size--) {
+        set_person_random(p++);
+    }
+}
+
+void print_person_array(const Person *p, size_t size)
+{
+    while (size--) {
+        print_person(p++);
+    }
+}
+
+void print_person_array_to_file(FILE *f, const Person *p, size_t size)
+{
+    while (size--) {
+        print_person_to_file(f, p++);
+    }
+}
+
+int pcmp(const void *p1, const void *p2)
+{
+    return cmp_person((const Person *)p1, (const Person *)p2);
+}
+
+int main()
+{
+    int n;
+    printf("kac kisi : ");
+    scanf("%d", &n);
+
+    Person *pd = (Person *)malloc(n * sizeof (Person));
+
+    if(!pd){
+        fprintf(stderr, "bellek yetersiz\n");
+        return 1;
+    }
+
+    set_person_array(pd, n);
+
+    printf("siralama basladi\n");
+    clock_t start = clock();
+    qsort(pd, n, sizeof (*pd), &pcmp);
+    clock_t end = clock();
+    printf("siralama bitti %f saniye\n", (double)(end-start) / CLOCKS_PER_SEC);
+    clear_input_buffer();
+    (void)getchar();
+
+    FILE *f = fopen("person.txt", "w");
+    if(!f){
+        printf("dosya olusturulamadi\n");
+        return 1;
+    }
+
+    print_person_array_to_file(f, pd, n);
+
+    fclose(f);
+    free(f);
+
+    return 0;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+Baglı Liste  -- Linked List bir veri yapsısı, en cok kullanılan veri yapsıı değildir
+Veriler ardısık değil
+Karmasıklık O(n)
+
+
+Dynamic array(dinamik dizi) -- en cok kullanılan veri yapsı, dersin sonuna dogru ele alacaz
+Veriler ardısık olaraktır -- erişim constant time
+Karmasıklık O(n)
+
+
+Baglı listelerin vanatajı herhangi konumdan veri ekelme veya silme işlemi yapılabilmesi
+constant time da yapıyor
+
+singly linked list(tekli baglı liste)--> sonraki veri bilgisi tutulur sadece
+double linked list(çifte baglı liste)--> sonraki ve önceki veri bilgisi tutulur önceki bilgiyede erişim olur
+
+
+baglı listeleri cache mekanizmasına almak uygun değildir
+
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "person_list.h"
+#include "utility.h"
+
+int main()
+{
+    Person per;
+
+    randomize();
+
+    for (int i = 0; i < 10; ++i) {
+        set_person_random(&per);
+        print_person(&per);
+        push_front(&per);
+    }
+
+    printf("listedeki kisiler yazdiriliyor\n");
+    print_list();
+    make_empty();
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "person_list.h"
+#include "utility.h"
+#include <time.h>
+
+int main()
+{
+    Person per;
+    int n;
+
+    printf("listeye kac person eklensin : ");
+    scanf("%d", &n);
+
+    randomize();
+
+    clock_t start = clock();
+    for (int i = 0; i < n; ++i) {
+        set_person_random(&per);
+        push_front(&per);
+    }
+    clock_t end = clock();
+
+    printf("listeye %zu person %f saniyede ekelendi\n", get_size(), (double)(end-start) / CLOCKS_PER_SEC);
+    print_list();
+    make_empty();
+
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include "person_list.h"
+#include "utility.h"
+#include <time.h>
+
+int main()
+{
+    Person per;
+    int n;
+
+    printf("listeye kac person eklensin : ");
+    scanf("%d", &n);
+
+    randomize();
+
+    for (int i = 0; i < n; ++i) {
+        set_person_random(&per);
+        push_front(&per);
+    }
+
+    while (!is_empty()) {
+        printf("listede %zu kisi var\n", get_size());
+        print_list();
+        pop_front();
+        _getch();
+        system("cls");
+    }
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "person_list.h"
+#include "utility.h"
+#include <time.h>
+
+int main()
+{
+    ListHandle h = create_list();
+
+    Person per;
+
+    randomize();
+    for (int i = 0; i < 10; ++i) {
+        set_person_random(&per);
+        print_person(&per);
+        push_front(h, &per);
+    }
+
+    printf("listedeki kisiler yazdiriliyor\n");
+    print_list(h);
+    destroy_list(h);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "person_list.h"
+#include "utility.h"
+#include <time.h>
+
+int main()
+{
+    ListHandle h = create_list();
+
+    Person per;
+    int n;
+
+    printf("listeye kac kisi eklensin : ");
+    scanf("%ld", &n);
+
+    randomize();
+    for (int i = 0; i < n; ++i) {
+        set_person_random(&per);
+        push_front(h, &per);
+    }
+
+    while (!is_empty(h)) {
+        printf("listede %zu kisi var\n", get_size(h));
+        print_list(h);
+        pop_front(h);
+        _getch();
+        system("cls");
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "person_list.h"
+#include "utility.h"
+#include <time.h>
+
+int main()
+{
+    ListHandle male_list = create_list();
+    ListHandle female_list = create_list();
+    ListHandle child_list = create_list();
+
+    Person per;
+
+    push_front(male_list, &per);
+    push_front(female_list, &per);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include "person_list.h"
+#include "utility.h"
+#include <time.h>
+
+int main()
+{
+     Person per;
+
+     randomize();
+
+     ListHandle h1 = create_list();
+     for (int i = 0; i < 10; ++i) {
+         set_person_random(&per);
+         push_front(h1, &per);
+     }
+
+     ListHandle h2 = create_list();
+     for (int i = 0; i < 5; ++i) {
+         set_person_random(&per);
+         push_front(h2, &per);
+     }
+
+
+     ListHandle h3 = create_list();
+     for (int i = 0; i < 25; ++i) {
+         set_person_random(&per);
+         push_front(h3, &per);
+     }
+
+
+     printf("1. liste\n");
+     print_list(h1);
+     (void)_getch();
+
+
+     printf("2. liste\n");
+     print_list(h2);
+     (void)_getch();
+
+
+     printf("3. liste\n");
+     print_list(h3);
+     (void)_getch();
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include "person_list.h"
+#include "utility.h"
+#include <time.h>
+
+#define    NLIST        1000
+
+int main()
+{
+    ListHandle a[NLIST];
+
+    Person per;
+
+    for (int i = 0; i < NLIST; ++i) {
+        a[i] = create_list();
+    }
+
+    randomize();
+
+    for (int i = 0; i < NLIST; ++i) {
+        int n = rand() % 10 + 10;
+        while(n--){
+            set_person_random(&per);
+            push_front(a[i], &per);
+        }
+    }
+
+    for (int i = 0; i < NLIST; ++i) {
+        printf("%d. listede %d kisi var\n", i, get_size(a[i]));
+        print_list(a[i]);
+        //_getch();
+        //system("cls");
+    }
+
+    for (int i = 0; i < NLIST; ++i) {
+        destroy_list(a[i]);
+    }
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+
+int main()
+{
+    FILE *f1 = fopen("test.txt", "w");
+    FILE *f2 = fopen("test.txt", "w");
+
+    fprintf(f1, "hava guzel");
+    fputc('\n', f1);
+
+    fclose(f1);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+yapılarla ilgili bazı onemli bilgiler
+
+
+
+
+
+
+#include <stdio.h>
+
+
+struct Owner{
+    int c1, c2;
+    struct Member {
+        int m1, m2;
+    };
+};
+
+
+int main()
+{
+   printf("sizeof struct Owner = %zu\n", sizeof (struct Owner));
+
+   struct Member mx; //gecerli
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+
+struct Owner{
+    int c1, c2;
+    struct{ //anonimous structure
+        int m1, m2;
+    };
+};
+
+
+int main()
+{
+   printf("sizeof struct Owner = %zu\n", sizeof (struct Owner));
+
+   struct Owner mx; //gecerli
+
+   mx.m1;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+//C11 ile standart hale geldi
+struct Owner{
+    int c1, c2;
+    struct{ //anonimous structure
+        int m1, m2;
+    };
+};
+
+
+int main()
+{
+   printf("sizeof struct Owner = %zu\n", sizeof (struct Owner));
+
+   struct Owner mx; //gecerli
+
+   mx.m1;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+alignment (hizalama)
+
+char türü için alignment deger 1 byte
+
+
+
+
+#include <stdio.h>
+
+
+typedef struct{
+    char c;
+    int i;
+    double d;
+} Data;
+
+
+int main()
+{
+    printf("alignment requirement for char is %zu\n", _Alignof (char));
+    printf("alignment requirement for short is %zu\n", _Alignof (short));
+    printf("alignment requirement for int is %zu\n", _Alignof (int));
+    printf("alignment requirement for double is %zu\n", _Alignof (double));
+    printf("alignment requirement for Data is %zu\n", _Alignof (Data));
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+//padding byte
+//hole
+
+struct Data{
+    char c1;
+    int ival;
+    char c2;
+};
+
+
+int main()
+{
+    printf("size struct Data = %zu\n", sizeof (struct Data));
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+//padding byte
+//hole
+
+struct Data{
+    int ival;
+    char c1;
+    char c2;
+};
+
+
+int main()
+{
+    printf("size struct Data = %zu\n", sizeof (struct Data));
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+neden hizalam yapılıyor
+
+elemanlara erişimi kolaylastırmak
+
+verimi yukseltmek
+
+işlemciye göre değişiklik gösterebilir
+
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

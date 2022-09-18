@@ -3,6 +3,8 @@
 
 //pragma ilede aynı guvenlık saglanır
 
+#include <stdio.h>
+
 typedef struct{
     int md, mm, my;
 }Date;
@@ -39,6 +41,11 @@ Date * scan_date(Date *p);
 Date *ndays_date(Date *dest, const Date* psource, int n);
 int date_diff(const Date *p1, const Date *p2);
 int cmp_date(const Date*p1, const Date *p2);
+
+
+void print_date_to_file(FILE *f, const Date *p);
+
+
 
 
 #endif // DATE_H

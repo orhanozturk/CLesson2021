@@ -7,6 +7,7 @@ SOURCES += \
         date.c \
         main.c \
         person.c \
+        person_list.c \
         utility.c
 
 DISTFILES += \
@@ -16,4 +17,5 @@ DISTFILES += \
 HEADERS += \
  date.h \
  person.h \
+ person_list.h \
  utility.h

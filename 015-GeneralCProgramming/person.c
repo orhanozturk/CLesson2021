@@ -19,6 +19,12 @@ void print_person(const Person *p)
     print_date(&p->m_bdate);
 }
 
+void print_person_to_file(FILE *f, const Person *p)
+{
+    fprintf(f, "%-6d %-18s %-24s %-16s", p->m_id, p->m_name, p->m_surname, p->m_town);
+    print_date_to_file(f, &p->m_bdate);
+}
+
 int cmp_person(const Person *p1, const Person *p2)
 {
     int cmp_result = strcmp(p1->m_surname, p2->m_surname);
