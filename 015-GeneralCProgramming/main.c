@@ -1,18 +1,21 @@
 #include <stdio.h>
 
-//padding byte
-//hole
 
-struct Data{
-    char c1;
-    char c2;
-    int ival;
-};
+#pragma pack(1)
+
+
+enum Color{White, Gray, Yellow, Green, Red, Brown, Black};
+
+const char *const pcolor[] = {"White", "Gray", "Yellow", "Green", "Red", "Brown", "Black"};
+
 
 
 int main()
 {
-    printf("size struct Data = %zu\n", sizeof (struct Data));
+
+    enum Color c = Gray;
+
+    printf("%s\n", pcolor[c]);
 }
 
 

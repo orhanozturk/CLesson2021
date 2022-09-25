@@ -25849,9 +25849,1214 @@ verimi yukseltmek
 işlemciye göre değişiklik gösterebilir
 
 
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+
+//padding byte
+//hole
+
+typedef struct Data{
+    char c1;
+    int ival;
+    char c2;
+}Data;
+
+
+
+int main()
+{
+    Data mydata;
+
+    char *c = &mydata.c1;
+
+    printf("c + 1 = %p\n", c + 1);
+    printf("&mydata.ival = %p\n", &mydata.ival);
+}
+
 
 /****************************************************/
 /****************************************************/
+
+offsetof makrosu
+
+stddef.h baslık dosyasında
+
+
+
+
+
+#include <stdio.h>
+#include <stddef.h>
+
+//padding byte
+//hole
+
+typedef struct Data{
+    char c1;
+    int ival;
+    char c2;
+}Data;
+
+
+
+int main()
+{
+    printf("offsetof c1 = %zu\n", offsetof(Data, c1));
+    printf("offsetof ival = %zu\n", offsetof(Data, ival));
+    printf("offsetof c2 = %zu\n", offsetof(Data, c2));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stddef.h>
+
+//padding byte
+//hole
+
+typedef struct Data{
+    char c1;
+    int ival;
+    char c2;
+}Data;
+
+
+
+int main()
+{
+   Data mydata;
+
+   //yapı nesnesi ile yapının ilk elemanın adresi arasında padding byte olmaz
+   printf("&mydata = %p\n", &mydata);
+   printf("&mydata.c1 = %p\n", &mydata.c1);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stddef.h>
+
+//padding byte
+//hole
+
+typedef struct Data{
+    char c1;
+    int ival;
+    char c2;
+}Data;
+
+
+
+int main()
+{
+    Data mydata;
+
+    char *c = &mydata.c1;
+
+    printf("c + offsetof(Data, ival) = %p\n", c + offsetof(Data, ival));
+    printf("&mydata.ival = %p\n", &mydata.ival);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stddef.h>
+#include <string.h>
+
+//padding byte
+//hole
+
+typedef struct Data{
+    char c1;
+    int ival;
+    char c2;
+}Data;
+
+
+
+int main()
+{
+    Data d1;
+    Data d2;
+
+    memset(&d1, 0, sizeof (d1));
+    memset(&d2, 0, sizeof (d2));
+
+
+    d1.c1 = 'A';
+    d1.c2 = 'B';
+    d1.ival = 123;
+
+    d2.c1 = 'A';
+    d2.c2 = 'B';
+    d2.ival = 123;
+
+    //uzun yol, hata yapma riskin var
+    /*if(d1.c1 == d2.c1 && d1.c2 == d2.c2 && d1.ival == d2.ival)
+    {
+        printf("d1 ve d2 esit\n");
+    }*/
+
+    if(!memcmp(&d1, &d2, sizeof (Data))){
+        printf("evet esit\n");
+    }else{
+        printf("esit degilll\n");
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+derleyicinin yapısı ile oynayalım
+
+
+derleyiciyi alignment requirement çiğneyecek şekilde
+elemanlarını konumlandıralım
+
+
+
+#include <stdio.h>
+#include <stddef.h>
+#include <string.h>
+
+//windows için gecerli
+#pragma pack(push)
+#pragma pack(1)
+typedef struct Data{
+    char c1;
+    int ival;
+    char c2;
+}Data;
+#pragma pack(pop)
+
+
+//unix sistemler
+typedef struct Data{
+    char c1;
+    int ival;
+    char c2;
+}Data __attribute__((packed));
+
+int main()
+{
+    printf("struct data sizeof  = %zu\n", sizeof(struct Data));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+Unions -- Birlikler
+
+
+sentaks olarak yapıalra benzer neredeyse aynı
+
+
+
+
+#include <stdio.h>
+#include <stddef.h>
+#include <string.h>
+
+
+union Data{
+    int a;
+    double d;
+    char s[12];
+};
+
+int main()
+{
+    union Data mydata;
+    union Data *p = &mydata;
+
+    mydata.d = 12.2222;
+    p->a = 44;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include <stddef.h>
+#include <string.h>
+
+#pragma pack(1)
+
+typedef struct{
+    int a;
+}Sdata;
+
+typedef union{
+    int a;
+}Udata;
+
+int main()
+{
+    printf("sizeof(Sdata) = %zu\n", sizeof(Sdata));
+    printf("sizeof(Udata) = %zu\n", sizeof(Udata));
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+#include <stdio.h>
+#include <stddef.h>
+#include <string.h>
+
+#pragma pack(1)
+
+typedef struct{
+    int a, b;
+    double d1, d2;
+    char str[12];
+}Sdata;
+
+typedef union{
+    int a, b;
+    double d1, d2;
+    char str[12];
+}Udata;
+
+int main()
+{
+    printf("sizeof(Sdata) = %zu\n", sizeof(Sdata));
+    printf("sizeof(Udata) = %zu\n", sizeof(Udata));
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include <stddef.h>
+#include <string.h>
+
+#pragma pack(1)
+
+typedef union{
+    int a;
+    double dval;
+    char str[12];
+}Udata;
+
+int main()
+{
+    Udata mydata;
+
+    printf("&mydata         = %p\n", &mydata);
+    printf("&mydata.a       = %p\n", &mydata.a);
+    printf("&mydata.dval    = %p\n", &mydata.dval);
+    printf("&mydata.str     = %p\n", mydata.str);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stddef.h>
+#include <string.h>
+
+#pragma pack(1)
+
+typedef union{
+    int a;
+    double dval;
+    char str[12];
+}Udata;
+
+int main()
+{
+    Udata mydata = {12, 2.22, "Orhan"}; //ilk deger verme gecerli değil
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stddef.h>
+#include <string.h>
+
+#pragma pack(1)
+
+typedef union{
+    int a;
+    double dval;
+    char str[12];
+}Udata;
+
+int main()
+{
+    Udata mydata = { "Orhan"}; //ilk deger verme
+    Udata mydata = { 3.4}; //ilk deger verme
+    Udata mydata = { .a = 10}; //ilk deger verme
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stddef.h>
+#include <string.h>
+#include <stdint.h>
+
+#pragma pack(1)
+
+typedef struct{
+    uint16_t lowbytes;
+    uint16_t highbytes;
+}Word;
+
+typedef union{
+    uint32_t uval;
+    uint8_t a[4];
+    Word word;
+}Utype;
+
+int main()
+{
+    printf("sizeof(Utype) = %zu\n", sizeof(Utype));
+
+
+    Utype x = {76234566u};
+
+    for(size_t i = 0; i < sizeof(Utype); ++i)
+        printf("%u\n", x.a[i]);
+
+    x.word.lowbytes;
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stddef.h>
+#include <string.h>
+#include <stdint.h>
+
+#pragma pack(1)
+
+typedef struct{
+  int id;
+  char name[32];
+  double wage;
+  union{
+      struct{
+          char place[16];
+          int status;
+          int duration;
+      }
+      char maiden_name[32];
+  };
+
+}Employee;
+
+
+
+int main()
+{
+    Employee e1; //erkek calısan
+    Employee e2; //kadın calısan
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stddef.h>
+#include <string.h>
+#include <stdint.h>
+#include "date.h"
+
+#pragma pack(1)
+
+typedef struct{
+    union{
+        int ival;
+        double dval;
+        Date date;
+        char name[16];
+    };
+
+    int type;
+
+}Data;
+
+
+
+int main()
+{
+   Data mydata;
+
+   mydata.type = 1;
+   mydata.dval = 3.5;
+
+   mydata.type = 2;
+
+   ///.....
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+#include <stdio.h>
+#include <stddef.h>
+#include <string.h>
+#include <stdint.h>
+#include "date.h"
+
+#pragma pack(1)
+
+
+#define     CHAR        0
+#define     INT         1
+#define     DOUBLE      2
+#define     DATE        3
+
+typedef struct{
+    union{
+        int ival;
+        double dval;
+        Date date;
+        char c;
+    };
+
+    int type;
+
+}Data;
+
+
+void print_data(Data *p)
+{
+    switch(p->type){
+        case CHAR: printf("%c\n", p->c); break;
+        case INT: printf("%d\n", p->ival); break;
+        case DOUBLE: printf("%f\n", p->dval); break;
+        case DATE: print_data(&p->date); break;
+    };
+}
+
+
+int main()
+{
+    Data mydata = {.ival = 10, .type = INT};
+
+    print_data(&mydata);
+
+    mydata.type = DOUBLE;
+    mydata.dval = 2.2;
+
+    print_data(&mydata);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+enumarations - numaralandırmalar
+
+
+user_defined types
+integer types
+
+
+
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+//enum  tag
+enum Suit{
+    Club, Diamond, Heart, Spade
+};
+
+int main()
+{
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+//enumarator constant
+//tam sayı sabitlerine verilmiş isimler den olusan kume
+typedef enum{
+    Club, Diamond, Heart, Spade
+}Suit;
+
+int main()
+{
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+//enumarator constant
+//tam sayı sabitlerine verilmiş isimler den olusan kume
+typedef enum{
+    Club, Diamond, Heart, Spade
+}Suit;
+
+//C++ underlying_type programcı tarafından belirlenebilir
+
+int main()
+{
+    Suit s = Diamond;
+
+    s = Spade;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+int türünün sizeof kac ise sistemde enum türüde sizeof o dur
+
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+//enumarator constant
+//tam sayı sabitlerine verilmiş isimler den olusan kume
+typedef enum{
+    Club, Diamond, Heart, Spade
+}Suit;
+
+//C++ underlying_type programcı tarafından belirlenebilir
+
+int main()
+{
+    printf("sizeof(Suit) = %zu\n", sizeof (Suit));
+    printf("sizeof(int) = %zu\n", sizeof (int));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+typedef enum Color{White, Gray, Yellow, Green, Red, Brown, Black} Color;
+
+int main()
+{
+    Color c = Yellow;
+
+    printf("c = %d\n", c);
+
+    printf("White = %d\n", White);
+    printf("Gray = %d\n", Gray);
+    printf("Yellow = %d\n", Yellow);
+    printf("Green = %d\n", Green);
+    printf("Red = %d\n", Red);
+    printf("Brown = %d\n", Brown);
+    printf("Black = %d\n", Black);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+typedef enum Color{White = 75, Gray, Yellow, Green = 255, Red, Brown, Black = 15} Color;
+
+int main()
+{
+    Color c = Yellow;
+
+    printf("c = %d\n", c);
+
+    printf("White   = %d\n", White);
+    printf("Gray    = %d\n", Gray);
+    printf("Yellow  = %d\n", Yellow);
+    printf("Green   = %d\n", Green);
+    printf("Red     = %d\n", Red);
+    printf("Brown   = %d\n", Brown);
+    printf("Black   = %d\n", Black);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+typedef enum Color{White = -75, Gray, Yellow, Green = -255, Red, Brown, Black = -15} Color;
+
+int main()
+{
+    Color c = Yellow;
+
+    printf("c = %d\n", c);
+
+    printf("White   = %d\n", White);
+    printf("Gray    = %d\n", Gray);
+    printf("Yellow  = %d\n", Yellow);
+    printf("Green   = %d\n", Green);
+    printf("Red     = %d\n", Red);
+    printf("Brown   = %d\n", Brown);
+    printf("Black   = %d\n", Black);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+typedef enum Color{White = 20, Gray = 20, Yellow = 11, Green = 11, Red, Brown, Black = -15} Color;
+
+int main()
+{
+    Color c = Yellow;
+
+    printf("c = %d\n", c);
+
+    printf("White   = %d\n", White);
+    printf("Gray    = %d\n", Gray);
+    printf("Yellow  = %d\n", Yellow);
+    printf("Green   = %d\n", Green);
+    printf("Red     = %d\n", Red);
+    printf("Brown   = %d\n", Brown);
+    printf("Black   = %d\n", Black);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+typedef enum Color{White, Gray, Yellow, Green, Red, Brown, Black} Color;
+
+int main()
+{
+    Color c1 = Yellow;
+    Color c2 = Gray;
+
+    if(c1 > c2)
+        printf("dgoru\n");
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+typedef enum{
+    Club, Diamond, Spade, Heart
+}Suit;
+
+typedef enum{Two = 2, Three = 3, Four = 4, Five = 5, Six = 6, Seven = 7, Eight = 8, Nine = 9, Ten = 10,
+            Jack = 10, Queen = 10, King = 10, Ace = 11}Face;
+
+
+int main()
+{
+
+    //.....
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+typedef enum{
+    Club, Diamond, Spade, Heart
+}Suit;
+
+typedef enum{Two = 2, Three = 3, Four = 4, Five = 5, Six = 6, Seven = 7, Eight = 8, Nine = 9, Ten = 10,
+            Jack = 10, Queen = 10, King = 10, Ace = 11}Face;
+
+typedef struct{
+    Suit s;
+    Face face;
+}Card;
+
+int main()
+{
+
+    Card mycard = {.s = Heart, .face = Ace};
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+//eger sizin kullanıdıgınız sistem in ttürü 2 byte ise enumda 2 byte tır
+
+//-32768 - 32767 arasında olmalı
+
+typedef enum Color{White, Gray, Yellow, Green, Red, Brown, Black} Color;
+
+
+int main()
+{
+    printf("sizeof(enum Color) = %zu\n", sizeof (enum Color));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+enum  tür dönüşümler
+
+int türünün dönüşüm özellikelrinin hepsine sahiptir
+
+
+
+
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+typedef enum Color{White, Gray, Yellow, Green, Red, Brown, Black} Color;
+
+
+int main()
+{
+    enum Color c;
+    int ival = 123;
+
+    c = 444;
+
+    c = ival;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+typedef enum Color{White, Gray, Yellow, Green, Red, Brown, Black} Color;
+
+typedef enum Pos{On, Off} ;
+
+int main()
+{
+    enum Color c = White;
+
+    enum Pos pos = Off;
+
+    c = pos; //gecerli
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+//dikkat aynı scope alanında enumlara verilen elemnaların isimleri aynı olmaz
+
+//ScreenColor.h
+enum ScreenColor{
+    White,
+    Gray,
+    Yellow,
+};
+
+//TrafficLight.h
+enum TrafficLight{
+    White,
+    Gray,
+    Yellow,
+};
+
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+//dikkat aynı scope alanında enumlara verilen elemnaların isimleri aynı olmaz
+
+//ScreenColor.h
+enum ScreenColor{
+    ScreenColorWhite,
+    ScreenColorGray,
+    ScreenColorYellow,
+};
+
+//TrafficLight.h
+enum TrafficLight{
+    TrafficLightWhite,
+    TrafficLightGray,
+    TrafficLightYellow,
+};
+
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+//C++ da kendi scope alanları olusturabiliriz enumlarda
+
+//ScreenColor.h
+enum class ScreenColor{
+    White,
+    Gray,
+    Yellow,
+};
+
+//TrafficLight.h
+enum class TrafficLight{
+    White,
+    Gray,
+    Yellow,
+};
+
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+
+#pragma pack(1)
+
+
+enum Color{White, Gray, Yellow, Green, Red, Brown, Black};
+
+const char *const pcolor[] = {"White", "Gray", "Yellow", "Green", "Red", "Brown", "Black"};
+
+
+
+int main()
+{
+
+    enum Color c = Gray;
+
+    printf("%s\n", pcolor[c]);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+Bitwise operations - bitsel işlemler
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
