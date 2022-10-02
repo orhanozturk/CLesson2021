@@ -271,5 +271,10 @@ const char * random_town(void)
 }
 
 
-
+void bprint(int x)
+{
+    static char buffer[40];
+    _itoa(x, buffer, 2);
+    printf("%032s\r", buffer);
+}
 

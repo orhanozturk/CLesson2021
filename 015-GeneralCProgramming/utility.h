@@ -24,6 +24,7 @@ int icmp(const void *vp1, const void *vp2);
 void sort_array(int *p, size_t size);
 void clear_input_buffer(void);
 void sleep(int millisecond);
+void bprint(int x);
 
 const char * random_name(void);
 const char * random_surname(void);

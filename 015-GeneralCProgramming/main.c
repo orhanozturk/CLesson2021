@@ -1,21 +1,16 @@
 #include <stdio.h>
-
-
-#pragma pack(1)
-
-
-enum Color{White, Gray, Yellow, Green, Red, Brown, Black};
-
-const char *const pcolor[] = {"White", "Gray", "Yellow", "Green", "Red", "Brown", "Black"};
-
-
+#include "utility.h"
 
 int main()
 {
+    int x = -1;
 
-    enum Color c = Gray;
+    while (x) {
+        bprint(x);
+        x &= ~(1 << (rand() % 32));
+        sleep(100);
+    }
 
-    printf("%s\n", pcolor[c]);
 }
 
 
