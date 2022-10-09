@@ -7,7 +7,10 @@
 #define     asize(x)        (sizeof(x) / sizeof(x[0]))
 #define     relem(a)        a[rand() % asize(a)]
 
+#define     SETBITCOUNT(x)  (sbc_[(x) & 255] + sbc_[(x) >> 8 & 255] + sbc_[(x) >> 16 & 255] + sbc_[(x) >> 24 & 255])
+
 extern const int primes[];
+extern const int sbc_[];
 
 int isprime(int);
 int ndigit(int);

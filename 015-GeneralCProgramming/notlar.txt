@@ -27695,26 +27695,54 @@ int main()
 /****************************************************/
 
 
+bir tam sayının belirli bir bitini değiştirmek
+to toogle the bir
+to flip the bit
 
 
+x biti filip edilecek tam sayı olsun
+n   x'in flip edilecek bitinin indeksi olsun
 
 
+x ^ (1 << n)
+x ^= (1 << n)
 
 
 
 
 
 
+#include <stdio.h>
+#include "utility.h"
 
+int main()
+{
+    long x = 1;
 
+    while (x) {
+        bprint(x);
+        x ^= (1 << (rand() % 32));
+        sleep(10);
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
+x biti get edilecek tam sayı olsun  (bir mi sıfır mı)
+n   x'in get edilecek bitinin indeksi olsun
 
+101010100101000111111
+000000000001000000000
 
+000000000000000000000
+000000000001000000000
 
+if(x & (1 << n))
 
+x & (1 << n) ? ex2 : exp3
 
 
 
@@ -27722,156 +27750,892 @@ int main()
 
 
 
+#include <stdio.h>
+#include "utility.h"
 
+int main()
+{
+    int x = 453453;
+    int n;
 
+    bprint(x);
+    printf("kacinci bit : ");
+    scanf("%d", &n);
 
+    if(x & (1 << n))
+        printf("sayininizin %d. bitti 1\n", n);
+    else
+        printf("sayininizin %d. bitti 0\n", n);
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include "utility.h"
 
+int main()
+{
+    int x = 298453;
 
+    bprint(x);
 
+    for (int i = 0; i < 32; ++i) {
+        if(x & (1 << i))
+            printf("sayininizin %d. bitti 1\n", i);
+        else
+            printf("sayininizin %d. bitti 0\n", i);
 
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include "utility.h"
 
+int main()
+{
+    int x = 123;
 
+    if(x % 2 != 0) //sayı tek
+        ;
 
+    //0. bitini get etmiş olur isem
+    //010101010101
+    //000000000001
 
+    //bu bitsel işlemlede sayının çift tek oldugunu görebiliriz
+    if(x & 1){
 
+    }
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
 
 
+#include <stdio.h>
+#include "utility.h"
 
+//sayıın son 4 bitini ogrenmek ıstoyrum
+int main()
+{
+    int x;
 
+    printf("bir tams sayi girin : ");
+    scanf("%d", &x);
 
+    bprint(x);
 
+    //10101001010101010 1010
+    //00000000000000000 1111
+    //00000000000000000 1010
+    printf("%d\n", x & 15);
+    bprint(x & 15);
 
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
 
+#include <stdio.h>
+#include "utility.h"
 
+//sayıın son 8 bitini ogrenmek ıstoyrum
+int main()
+{
+    int x;
 
+    printf("bir tams sayi girin : ");
+    scanf("%d", &x);
 
+    bprint(x);
 
+    //1010100101010 1010 1010
+    //0000000000000 1111 1111
+    //0000000000000 1010 1010
+    printf("%d\n", x & 255);
+    bprint(x & 255);
 
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
 
+#include <stdio.h>
+#include "utility.h"
 
+//sayıın son 8 bitini ogrenmek ıstoyrum
+int main()
+{
+    int x;
 
+    printf("bir tams sayi girin : ");
+    scanf("%d", &x);
 
+    bprint(x);
 
+    //1111 1110 1011 1010 1011 0011
+    //0000 0000 0000 0000 1111 1111
 
+    //0000 0000 0000 0000 1011 1010
+    printf("%d\n", (x >> 8) & 255);
+    bprint((x >> 8) & 255);
 
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
 
+bu ornege bakılacak
 
 
+#include <stdio.h>
+#include "utility.h"
 
+//eger 2'nin kuvveti ise sayının sadece 1 bit 1 dir
 
 
+int main()
+{
+    int x;
 
+    printf("bir tams sayi girin : ");
+    scanf("%d", &x);
 
+    bprint(x);
 
+    //0000000000000000
+    if(x && !(x & (x - 1)))
+        printf("%d 2'nin kuvveti\n", x);
+    else
+        printf("%d 2'nin kuvveti degil\n", x);
 
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
 
+#include <stdio.h>
+#include "utility.h"
 
 
+int main()
+{
+    int x, y;
 
+    //0 01010010101
+    //1 11010010101
 
+    //1 01010101010
 
+    printf("iki tams sayi girin : ");
+    scanf("%d%d", &x, &y);
 
+    if((x ^ y) < 0){
+        printf("%d ve %d zir isaretli\n", x, y);
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include "utility.h"
+#include <limits.h>
 
+void bprint2(int x)
+{
+    for (int i = (int)(sizeof (int) * CHAR_BIT - 1); i >= 0; --i) {
+        putchar(x >> i & 1 ? '1':'0');
+    }
+    putchar('\n');
+}
 
+void bprint3(int x)
+{
+    unsigned int mask = ~(~0u >> 1);
 
+    while (mask) {
+        putchar(x & mask ? '1': '0');
+        mask >>= 1;
+    }
 
+    putchar('\n');
+}
 
+int main()
+{
+    int x;
+    printf("bir tam sayi girin : ");
+    scanf("%d", &x);
 
+    bprint(x);
+    bprint2(x);
+    bprint3(x);
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
 
 
+#include <stdio.h>
+#include "utility.h"
+#include <limits.h>
 
 
+int setbit_count(int x)
+{
+    unsigned int mask = ~(~0u >> 1);
+    int cnt = 0;
 
+    while (mask) {
+        if(x & mask)
+            ++cnt;
+        mask >>= 1;
+    }
 
+    return cnt;
+}
 
+int main()
+{
+    int x;
+    printf("bir tam sayi girin : ");
+    scanf("%d", &x);
 
+    bprint(x);
+    printf("%d sayisiniin %d bit 1\n", x, setbit_count(x));
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
 
+#include <stdio.h>
+#include "utility.h"
+#include <limits.h>
 
 
+int setbit_count(int x)
+{
+    unsigned int mask = ~(~0u >> 1);
+    int cnt = 0;
 
+    while (mask) {
+        if(x & mask)
+            ++cnt;
+        mask >>= 1;
+    }
 
+    return cnt;
+}
 
+int main()
+{
+    for (int i = 0; i < 256; ++i) {
+        if(i && i % 16 == 0)
+            printf("\n");
+        printf("%d, ", setbit_count(i));
+    }
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
 
+#include <stdio.h>
+#include "utility.h"
+#include <limits.h>
 
+const int sbc[] = {
+    0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4,
+    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+    4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8,
+};
 
 
 
 
+int main()
+{
+    int x;
+    printf("bir tamsayi girin : ");
+    scanf("%d", &x);
 
+    printf("%d sayisinin %d bit 1\n", x, sbc[x]);
 
+}
 
 
+/****************************************************/
+/****************************************************/
 
 
 
+#include <stdio.h>
+#include "utility.h"
+#include <limits.h>
 
+const int sbc[] = {
+    0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4,
+    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+    4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8,
+};
 
 
+
+
+int main()
+{
+    int x;
+    printf("bir tamsayi girin : ");
+    scanf("%d", &x);
+
+    bprint(x);
+
+    printf("%d sayisinin %d bit 1\n", x, sbc[x & 255] +
+            sbc[x >> 8 & 255] +
+            sbc[x >> 16 & 255] +
+            sbc[x >> 24 & 255]);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <limits.h>
+#include <stdint.h>
+
+
+
+
+int main()
+{
+    int x;
+    printf("bir tamsayi girin : ");
+    scanf("%d", &x);
+
+    bprint(x);
+
+    printf("%d sayisinin %d bit 1\n", x, SETBITCOUNT(x));
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <limits.h>
+#include <stdint.h>
+
+
+int main()
+{
+    uint16_t x;
+
+    //x in 5 bitini 1 liyorum
+    x |= (1 << 5);
+
+
+    //5 inci biti 1 mi 0 mi
+
+    x & 1 << 5;
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <limits.h>
+#include <stdint.h>
+
+
+//directory
+//hidden
+//archive
+//read only
+//system
+//.......
+
+
+#define     DIRECTORY       (0x1)
+#define     HIDDEN          (0x2)
+#define     ARCHIVE         (0x4)
+#define     READONLY        (0x8)
+#define     SYSTEM          (0x10)
+
+
+struct fstm{
+  uint16_t file_info;
+};
+
+struct fstm * get_file_info(void);
+
+int main()
+{
+
+    struct fstm f;
+
+    f.file_info |= ARCHIVE;
+
+    f.file_info & HIDDEN;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include "utility.h"
+#include <limits.h>
+#include <stdint.h>
+#include "myctype.h"
+
+
+
+int main()
+{
+
+    int ch;
+    printf("bir karater girin : ");
+
+    ch = getchar();
+
+    if(is_upper(ch)){
+        printf("evet buyuk harf\n");
+    }else{
+        printf("hayir buyuk harf degil\n");
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+bitfield members (of struct)
+
+bit alanı elemanları
+
+
+
+
+
+
+#include <stdio.h>
+
+//bitfield lar constant ifade olmak zorunda ü
+
+
+struct Data{
+    unsigned int x : 3; //bitfield member
+    unsigned int y : 4; //bitfield member
+    unsigned int z : 1; //bitfield member
+};
+
+int main()
+{
+    struct Data mydata;
+
+    mydata.x = 5;
+
+    struct Data *p = &mydata;
+
+    p->y = 4;
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+//bitfield lar constant ifade olmak zorunda ü
+
+//bitfield alanları 0 olamaz
+//ama bitfield alanların ileride ogrenecegimiz bir hile ile bunu yapabilcez
+
+struct Data{
+    int ival;
+    double dval;
+    unsigned int x : 3; //bitfield member
+    unsigned int y : 4; //bitfield member
+    unsigned int z : 1; //bitfield member
+};
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+
+//bitfield lar constant ifade olmak zorunda ü
+
+//bitfield alanları 0 olamaz
+//ama bitfield alanların ileride ogrenecegimiz bir hile ile bunu yapabilcez
+
+struct Data{
+    unsigned int x : 3; //bitfield member
+    unsigned int y : 4; //bitfield member
+};
+
+int main()
+{
+    printf("sizeof struct data = %zu\n", sizeof (struct Data));
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+
+//bitfield lar constant ifade olmak zorunda ü
+
+//bitfield alanları 0 olamaz
+//ama bitfield alanların ileride ogrenecegimiz bir hile ile bunu yapabilcez
+
+struct Data{
+    unsigned int x1 : 7; //bitfield member
+    unsigned int x2 : 7; //bitfield member
+    unsigned int x3 : 7; //bitfield member
+    unsigned int x4 : 7; //bitfield member
+    unsigned int x5 : 5; //bitfield member
+};
+
+int main()
+{
+    printf("sizeof struct data = %zu\n", sizeof (struct Data));
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+//bitfield lar constant ifade olmak zorunda ü
+
+//bitfield alanları 0 olamaz
+//ama bitfield alanların ileride ogrenecegimiz bir hile ile bunu yapabilcez
+
+struct Data{
+    unsigned int x1 : 7; //bitfield member
+    unsigned int x2 : 7; //bitfield member
+    unsigned int x3 : 7; //bitfield member
+    unsigned int x4 : 7; //bitfield member
+    unsigned int x5 : 4; //bitfield member
+};
+
+int main()
+{
+    struct Data mydata = {2, 3, 5, 2, 1};//ilk deger
+
+    struct Data mydata1 = {.x2 = 4, .x4 = 1};//ilk deger verebilirz
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+//bitfield lar constant ifade olmak zorunda ü
+
+//bitfield alanları 0 olamaz
+//ama bitfield alanların ileride ogrenecegimiz bir hile ile bunu yapabilcez
+
+struct Data{
+    int ival;
+    unsigned int x1 : 7; //bitfield member
+    unsigned int x2 : 7; //bitfield member
+    unsigned int x3 : 7; //bitfield member
+    unsigned int x4 : 7; //bitfield member
+    unsigned int x5 : 4; //bitfield member
+};
+
+int main()
+{
+    struct Data mydata = {2, 3, 5, 2, 1};//ilk deger
+
+    &mydata.ival;
+
+    &mydata.x2;//sentaks hatası adres erişimi olmaz bitfield alanlarına
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+Mulakat sorusu
+
+DOS işletim sistemi
+
+
+
+date ve time bilgisi az yer kaplasın diye
+
+
+//16 bit date
+//16 bit time
+
+
+
+
+#include <stdio.h>
+
+//16 bit
+// 1 1111
+// 1111
+// 111 1111
+struct DosDate{
+    unsigned int mday : 5;
+    unsigned int mon  : 4;
+    unsigned int year : 7; // 1980 yili baslangic kabul ederiz
+
+};
+
+
+// 14:55:44
+// 14:55:46
+// 14:55:48
+
+//16 bit
+//11 111
+struct DosTime{
+    unsigned int hour : 5;
+    unsigned int min  : 6;
+    unsigned int sec  : 5; //16 bite tarihi sıkıstırmak sebebinden doalyı 2 ser 2 ser artar saniye
+    //saniyeyi 2 ile çarmak durumunda kalınca sürekli çift sayı elde edil
+};
+
+
+int main()
+{
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stdint.h>
+
+typedef union{
+    struct{
+        unsigned int mday : 5;
+        unsigned int mon  : 4;
+        unsigned int year : 7;
+        unsigned int hour : 5;
+        unsigned int min  : 6;
+        unsigned int sec  : 5;
+
+    };
+
+    uint32_t uval;
+
+}DateTime;
+
+
+int main()
+{
+    DateTime dt = {.mday = 9, .mon = 10 -1, .year = 2022 - 1980, .hour = 12, .min = 30, .sec = 48 / 2,};
+
+    printf("%u\n", dt.uval);
+
+    DateTime d1 = {.uval = 3284948265u};
+
+    printf("%u-%u-%u  %02u:%02u:%02u\n", dt.mday, dt.mon + 1, dt.year + 1980,
+           dt.hour, dt.min, dt.sec);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <stdint.h>
+
+typedef union{
+    struct{
+        unsigned int bit0 : 1;
+        unsigned int bit1 : 1;
+        unsigned int bit2 : 1;
+        unsigned int bit3 : 1;
+        unsigned int bit4 : 1;
+        unsigned int bit5 : 1;
+        unsigned int bit6 : 1;
+        unsigned int bit7 : 1;
+        unsigned int bit8 : 1;
+        unsigned int bit9 : 1;
+        unsigned int bit10 : 1;
+        unsigned int bit11 : 1;
+        unsigned int bit12 : 1;
+        unsigned int bit13 : 1;
+        unsigned int bit14 : 1;
+        unsigned int bit15 : 1;
+        unsigned int bit16 : 1;
+        unsigned int bit17 : 1;
+        unsigned int bit18 : 1;
+        unsigned int bit19 : 1;
+        unsigned int bit20 : 1;
+        unsigned int bit21 : 1;
+        unsigned int bit22 : 1;
+        unsigned int bit23 : 1;
+        unsigned int bit24 : 1;
+        unsigned int bit25 : 1;
+        unsigned int bit26 : 1;
+        unsigned int bit27 : 1;
+        unsigned int bit28 : 1;
+        unsigned int bit29 : 1;
+        unsigned int bit30 : 1;
+        unsigned int bit31 : 1;
+    };
+
+    uint32_t uval;
+
+}Bits;
+
+int main()
+{
+    Bits bs = {.uval = 897234581};
+
+    printf("%u\n", bs.bit10);
+    printf("%u\n", bs.bit11);
+    printf("%u\n", bs.bit12);
+
+    bs.uval = 0;
+
+    printf("\n\n%u\n", bs.bit10);
+    printf("%u\n", bs.bit11);
+    printf("%u\n", bs.bit12);
+
+    bs.bit0 = 0;
+    bs.bit13 = 1;
+    bs.bit14 = 1;
+
+    printf("uval = %d\n", bs.uval);
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
 
 
 
