@@ -28639,6 +28639,486 @@ int main()
 
 
 
+#include <stdio.h>
+#include <stdint.h>
+
+struct Data{
+    int x : 4;
+    int y : 2;
+    int z : 3;
+};
+
+struct Data1{
+    int x : 4;
+    int y : 2;
+    int   : 2; //hizlama için bu yontem kullanılır
+    int z : 3;
+};
+
+
+//---- ---- ---
+
+int main()
+{
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stdint.h>
+
+struct Data{
+    int x : 7;
+    int y : 5;
+    int reserved : 4; //bu 4 biti kullanmıyoruz baska yerlerde kullanılması için
+};
+
+int main()
+{
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+komut satırı argümanları
+command-line arguments
+
+//ikisi aynı ifade
+
+#include <stdio.h>
+
+int main(int argc, char ** argv)
+{
+
+}
+
+
+int main(int argc, char *argv[])
+{
+
+}
+
+
+argc --> argument count tan uydurulma
+argv --> argument vector den uydurma
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+
+int main(int argc, char **argv)
+{
+    printf("argc = %d\n", argc);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+
+int main(int argc, char **argv)
+{
+    printf("argc = %d\n", argc);
+
+    for (int i = 0; i < argc; ++i) {
+        printf("argv[%d] = %s\n", i, argv[i]);
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "date.h"
+
+int main(int argc, char **argv)
+{
+   int day = atoi(argv[1]);
+   int mon = atoi(argv[2]);
+   int year = atoi(argv[3]);
+
+   Date mydate;
+
+   set_date(&mydate, day, mon, year);
+   print_date(&mydate);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "date.h"
+
+int main(int argc, char **argv)
+{
+   if(argc != 4){
+       printf("usage : <weeakday> <month day> <month> <year>\n");
+       return 1;
+   }
+
+   int day = atoi(argv[1]);
+   int mon = atoi(argv[2]);
+   int year = atoi(argv[3]);
+
+   Date mydate;
+
+   set_date(&mydate, day, mon, year);
+   print_date(&mydate);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "date.h"
+
+
+//orhan.exe recep.txt mehmet.txt
+
+int main(int argc, char **argv)
+{
+   if(argc != 3){
+       fprintf(stderr, "usage : <orhan.exe> <soruce.txt> <destination.txt>\n");
+       return 1;
+   }
+
+   //
+   //
+
+   printf("%s dosyasi %s isimli kopyasi olsutruldu\n", argv[1], argv[2]);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "date.h"
+#include <string.h>
+
+
+//orhan.exe recep.txt mehmet.txt
+
+int main(int argc, char **argv)
+{
+    char source_file_name[80];
+    char dest_file_name[80];
+
+   if(argc != 3){
+        printf("kaynak dosya ismi:");
+        scanf("%s", source_file_name);
+        printf("hedef dosya ismi:");
+        scanf("%s", dest_file_name);
+   }else{
+       strcpy(source_file_name, argv[1]);
+       strcpy(dest_file_name, argv[2]);
+   }
+
+   //
+   //
+
+   printf("%s dosyasi %s isimli kopyasi olsutruldu\n", source_file_name, dest_file_name);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "date.h"
+#include <string.h>
+
+
+//hesap  5 * 7
+//35
+
+int main(int argc, char **argv)
+{
+    if(argc != 4){
+        fprintf(stderr, "kullanim : <hesap> <op1> <operator+-/*> <op2>\n");
+        return 1;
+    }
+
+    int op_left = atoi(argv[1]);
+    int op_right = atoi(argv[3]);
+
+    switch (*argv[2]) {
+        case '+' : printf("%d\n", op_left + op_right); break;
+        case '-' : printf("%d\n", op_left - op_right); break;
+        case '*' : printf("%d\n", op_left * op_right); break;
+        case '/' :
+            if(op_right == 0)
+                printf("sifira bolunma hatasi\n");
+            else
+                printf("%f\n", (double)op_left / op_right);
+            break;
+        default:
+            printf("gecersiz operator\n");
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "date.h"
+#include <string.h>
+
+
+
+int main(int argc, char **argv)
+{
+
+    //eger girdiginiz comut eleman sayısından buyuk bir index'e ulırsanız NULL pointer
+    //olma garantisi veriliyor
+
+    int i = 0;
+
+    while (argv[i] != NULL) {
+        puts(argv[i++]);
+    }
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+File operations -- Dosya işlemleri
+
+
+file
+101010101010010001001010101010101
+.txt
+.mp3
+...
+
+<stdio.h> baslık altında inceleyecez
+
+
+FILE * fopen(const char *fname, const char *popenmode);
+
+eger basarısız olursa NULL pointer doner
+
+
+
+read -- okuma -- dosya varsa çaılacak / yoksa açılmayacak   --  dosya okuma işlemi yapar / dosya yazma işlemi yapamaz
+write -- yazma -- dosya varsa sıfırlayacak(truncate) / yoksa dosya olusturacak  -- dosya yazma işlemi yapar / dosya okuma işlemi yapamaz
+append -- sona ekleme -- dosya varsa açılacak (sıfırlanamyacak) / yoksa olusturulacak -- dosya yazma(souna ekleme ) işlemi yapar / dosya okuma işlemi yapamaz
+
+read+ -- okuma -- dosya varsa çaılacak / yoksa açılmayacak   --  dosya okuma işlemi yapar / dosya yazma işlemi yapabilirim
+write+ -- yazma -- dosya varsa sıfırlayacak(truncate) / yoksa dosya olusturacak  -- dosya yazma işlemi yapar / dosya okuma işlemi yapabilirim
+append+ -- sona ekleme -- dosya varsa açılacak (sıfırlanamyacak) / yoksa olusturulacak -- dosya yazma(souna ekleme ) işlemi yapar / dosya okuma işlemi yapabilirim
+
+
+
+text / binary modu
+
+------------------
+
+"r"    "rb"
+"r+"   "r+b"    "rb+"
+
+
+"w"    "wb"
+"w+"   "wb+"    "w+b"
+
+
+"a"    "ab"
+"a+"   "ab+"   "a+b"
+
+
+
+
+
+
+
+
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    FILE *f = fopen("orhan.txt", "w");
+
+    if(!f){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    printf("dosya acildi\n");
+
+    fclose(f);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    char file_name[80];
+    FILE *f;
+
+    printf("olusturulacak dosya ismi: ");
+    scanf("%s", file_name);
+
+    if((f = fopen(file_name, "w")) == NULL){
+        fprintf(stderr, "%s dosyasi olusturulamadi \n", file_name);
+        return 1;
+    }
+
+    printf("%s dosyasi olusturuldu\n", file_name);
+
+    fprintf(f, "Bgun gunlerden pazar\nSaat 13:06\n");
+
+
+    fclose(f);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+eger dosya fclose ile kapatılmazsa
+
+normal
+abnormal --- termination olarak kapanırsa veri kaybı yasayabiliriz
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    FILE *f1 = fopen("orhan.txt", "w");
+    FILE *f2 = fopen("ozturk.txt", "w");
+    FILE *f3 = fopen("mehmet.txt", "w");
+    FILE *f4 = fopen("recep.txt", "w");
+
+    ///
+
+
+
+    //fclose(f1);
+    //fclose(f2);
+
+
+    int n = _fcloseall();
+
+
+    printf("%d dosyas kapatildi\n", n);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
