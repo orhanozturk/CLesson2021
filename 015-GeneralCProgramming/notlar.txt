@@ -29078,6 +29078,182 @@ int main()
 /****************************************************/
 
 
+Dosyadan okuma ve dosyaya yazma işlemleri
+
+
+ ---------------------------------------------------------------
+
+sequential access --> sürekli okuyorum sürekli yazıyorum
+random access --> istedigin yerden okuma yazma
+
+
+dosya okuma Fonksiyonları.
+    fgetc, fscanf, fgets, fread
+
+
+dosyaya yazma fonksiyonları
+    fputc, fprintf, fputs, fwrite
+
+
+file pointer -- dosya konumu gosterici
+    fseek, fteel, rewind, fsetpos, fgetpos
+
+
+
+----------------------------------------
+
+
+fgetc
+
+byte byte okuma yapar
+
+
+dosya konumu sona gelindiginde -1 hata kodu doner
+
+EOF  makro su kullnabiliriz --> -1 karsılıgı
+
+
+
+
+
+#include <stdio.h>
+
+
+int main()
+{
+
+    FILE *f = fopen("orhan.txt", "r");
+
+    if(!f){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    int ch;
+
+    while ((ch = fgetc(f)) != EOF) {
+        putchar(ch);
+    }
+
+    fclose(f);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <conio.h>
+
+int main()
+{
+
+    FILE *f = fopen("orhan.txt", "r");
+
+    if(!f){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    int ch;
+
+    while ((ch = fgetc(f)) != EOF) {
+        putchar(ch);
+        _getch();
+    }
+
+    fclose(f);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <conio.h>
+
+//ekranaYaz.exe orhan.txt
+
+int main(int argc, char **argv)
+{
+    if(argc != 2){
+        fprintf(stderr, "kullanim : <ekranaYaz.exe> <orhan.txt>\n");
+        return 1;
+    }
+
+    FILE *f = fopen(argv[1], "r");
+
+    if(!f){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 2;
+    }
+
+    int ch;
+
+    while ((ch = fgetc(f)) != EOF) {
+        putchar(ch);
+    }
+
+    fclose(f);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <conio.h>
+
+//karaterSay.exe orhan.txt  k
+
+int main(int argc, char **argv)
+{
+    if(argc != 3){
+        fprintf(stderr, "kullanim : <karaterSay.exe> <orhan.txt> <karakter>\n");
+        return 1;
+    }
+
+    FILE *f = fopen(argv[1], "r");
+
+    if(!f){
+        fprintf(stderr, "%s dosyasi acilamadi\n", argv[1]);
+        return 2;
+    }
+
+    int ch;
+    int count = 0;
+    int total_chars = 0;
+
+    while ((ch = fgetc(f)) != EOF) {
+        if(ch == *argv[2])
+            ++count;
+        ++total_chars;
+    }
+
+    fclose(f);
+
+    printf("%d / (%d)\n", count , total_chars);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
