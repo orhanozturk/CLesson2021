@@ -29245,6 +29245,450 @@ int main(int argc, char **argv)
 
 
 
+#include <stdio.h>
+#include <ctype.h>
+
+//butun karaterler sayılacak
+
+//AllKarSay.exe orhan.txt
+
+int main(int argc, char **argv)
+{
+    if(argc != 2){
+        fprintf(stderr, "kullanim : <AllKarSay.exe> <orhan.txt>\n");
+        return 1;
+    }
+
+    FILE *f = fopen(argv[1], "r");
+
+    if(!f){
+        fprintf(stderr, "%s dosyasi acilamadi\n", argv[1]);
+        return 2;
+    }
+
+    int ch;
+    int counts[26] = {0};
+
+    while ((ch = fgetc(f)) != EOF) {
+        if(isalpha(ch))
+            ++counts[toupper(ch) - 'A'];
+    }
+
+    fclose(f);
+
+    for (int i = 0; i < 26; ++i) {
+        printf("%c   %d\n", 'A' + i, counts[i]);
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+//butun karaterleri sıralı olarak sayacak
+
+//AllKarSay.exe orhan.txt
+
+typedef struct{
+    int count;
+    int ch;
+}Data;
+
+int cmp(const void *vp1, const void *vp2)
+{
+    return ((const Data *)vp1)->count - ((const Data *)vp2)->count;
+}
+
+int main(int argc, char **argv)
+{
+    if(argc != 2){
+        fprintf(stderr, "kullanim : <AllKarSay.exe> <orhan.txt>\n");
+        return 1;
+    }
+
+    FILE *f = fopen(argv[1], "r");
+
+    if(!f){
+        fprintf(stderr, "%s dosyasi acilamadi\n", argv[1]);
+        return 2;
+    }
+
+    Data counts[26];
+
+    for (int i = 0; i < 26; ++i) {
+        counts[i].ch = 'A' + i;
+        counts[i].count = 0;
+    }
+
+    int c;
+
+    while ((c = fgetc(f)) != EOF) {
+        if(isalpha(c))
+            ++counts[toupper(c) - 'A'].count;
+    }
+
+    fclose(f);
+
+    qsort(counts, 26, sizeof (Data), &cmp);
+
+    for (int i = 0; i < 26; ++i) {
+        if(counts[i].count)
+            printf("%c   %d\n", counts[i].ch, counts[i].count);
+    }
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+fputc
+
+int fputc(int c, FILE *f);
+
+dosyaya 1 byte yazan formatsız çıkış fonksiyonu
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+
+
+int main(int argc, char **argv)
+{
+    FILE *f = fopen("orhan.txt", "w");
+
+    if(!f){
+        fprintf(stderr, "dosya olusturulamadi\n");
+        return 1;
+    }
+
+    for (int i = 'A'; i <= 'Z'; ++i) {
+        fputc(i, f);
+    }
+
+    fputc('\n', f);
+
+    for (int i = 'a'; i <= 'z'; ++i) {
+        fputc(i, f);
+    }
+
+    fputc('\n', f);
+
+    for (int i = '0'; i <= '9'; ++i) {
+        fputc(i, f);
+    }
+
+    fclose(f);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+
+//create random file
+
+//crf orhan.txt 40000 20 50
+
+int get_random_char(void)
+{
+    int ch;
+
+    while(!isalnum(ch = rand() % 127))
+        ;
+
+    return ch;
+
+}
+
+int main(int argc, char **argv)
+{
+    if(argc != 5){
+        fprintf(stderr, "usage :  <crf> <file name> <no of lines> <min chars per line> <max chars per line>\n");
+        return 1;
+    }
+
+    FILE *f = fopen(argv[1], "w");
+
+    if(!f){
+        fprintf(stderr, "file %s cannot be created\n", argv[1]);
+        return 2;
+    }
+
+    int nlines = atoi(argv[2]);
+    int min_length = atoi(argv[3]);
+    int max_length = atoi(argv[4]);
+
+
+    randomize();
+
+    for (int i = 0; i < nlines; ++i) {
+        int length = rand() % (max_length - min_length + 1) + min_length;
+
+        while (--length) {
+            fputc(get_random_char(), f);
+        }
+
+        fputc('\n', f);
+    }
+
+    fclose(f);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+Dosyaların text modunda ve binary modunda açılması
+
+
+text modu
+
+test dosyaları üstünde text'r dayalı işlemlerin yapılması için varsayılan açış modu
+
+binary mod
+
+text dosyası olmyan dosyaların yada yapılacak işlmeler dosyasının içeriği ile ilgili değildir
+
+
+
+Dikkat
+
+Wİndows'ta
+dosyanın binary ve text modunda acmanın ciddi farklılıkları var
+
+
+'\n' karteri
+
+13 10 olarak bunları yazar
+
+buda  2 byte  yazmamıza neden olur
+
+
+
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+
+
+
+int main(int argc, char **argv)
+{
+    FILE *f = fopen("orhan.txt", "w"); //text modu
+
+    for (int i = 0; i < 1000; ++i) {
+        fputc('\n', f);
+    }
+
+    fclose(f);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+
+
+
+int main(int argc, char **argv)
+{
+    FILE *f = fopen("orhan.txt", "rb");
+
+    int c;
+
+    while ((c = fgetc(f)) != EOF) {
+        printf("%d ", c);
+    }
+
+    fclose(f);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+Çok önemli NOT: Eger dosyanızın text dosyası değil ise sakın text modunda acmayın.
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+
+
+//filcopy ali.exe recep.exe
+
+
+int main(int argc, char **argv)
+{
+    if(argc != 3){
+        fprintf(stderr, "usage : <fcop> <source file name> <dest file name>\n");
+        return 1;
+    }
+
+    FILE *fs = fopen(argv[1], "rb");
+    if(!fs){
+        fprintf(stderr, "file %s cannot opened to read\n", argv[1]);
+        return 2;
+    }
+
+    FILE *fd = fopen(argv[2], "wb");
+    if(!fd){
+        fprintf(stderr, "file %s cannot opened to read\n", argv[2]);
+        fclose(fs);
+        return 3;
+    }
+
+    int c;
+    int byte_count = 0;
+
+    while ((c = fgetc(fs)) != EOF) {
+        fputc(c, fd);
+        ++byte_count;
+    }
+
+
+    fclose(fs);
+    fclose(fd);
+
+    printf("the file %s of %d bytes copied as files %s\n", argv[1], byte_count, argv[2]);
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+
+#define   MAX_FILE_NAME_LEN 80
+
+//dosyalar parcalanacak bolunecek
+
+//bol.exe recep.exe 1000
+//parca_001.par 1000
+//parca_002.par 1000
+//parca_003.par 555
+
+
+int main(int argc, char **argv)
+{
+    char source_file_name[MAX_FILE_NAME_LEN + 1];
+    char dest_file_name[40];
+    int chunk;
+    int file_count = 0;
+    int byte_count = 0;
+    int c;
+
+    FILE *fs, *fd;
+
+
+    if(argc != 3){
+        printf("bolunecek dosya ismi : ");
+        scanf("%s", source_file_name);
+        printf("kac byte'lik parcalara bolunsun : ");
+        scanf("%d", &chunk);
+    } else {
+        strcpy(source_file_name, argv[1]);
+        chunk = atoi(argv[2]);
+    }
+
+    if((fs = fopen(source_file_name, "rb")) == NULL){
+        fprintf(stderr, "bolunecek %s dosyasi acilamadi\n", source_file_name);
+        return 2;
+    }
+
+    fd = NULL;
+
+    while((c = fgetc(fs)) != EOF){
+        if(fd == NULL){
+            sprintf(dest_file_name, "parca%03d.png", file_count + 1);
+            fd = fopen(dest_file_name, "wb");
+            if(fd == NULL){
+                fprintf(stderr, "%s dosyasi olusturulamadi\n", dest_file_name);
+                return 2;
+            }
+            ++file_count;
+        }
+        fputc(c, fd);
+        ++byte_count;
+        if(byte_count % chunk == 0){
+            fclose(fd);
+            fd = NULL;
+        }
+
+    }
+
+    if(fd)
+        fclose(fd);
+
+    fclose(fs);
+
+
+    printf("%d byte'lik %s dosyasi %d byte'lik %d dosyaya bolundu\n", byte_count, source_file_name, chunk, file_count);
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
