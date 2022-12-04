@@ -29665,6 +29665,616 @@ int main(int argc, char **argv)
 /****************************************************/
 
 
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+
+#define   MAX_FILE_NAME_LEN 80
+
+//dosyalar parcalanacak bolunecek
+
+//birles.exe destfilename
+
+
+int main(int argc, char **argv)
+{
+    char source_file_name[40];
+    char dest_file_name[40];
+    int chunk;
+    int file_count = 0;
+    int byte_count = 0;
+    int c;
+
+    FILE *fs, *fd;
+
+
+    if(argc != 2){
+        printf("hedef dosya ismi : ");
+        scanf("%s", dest_file_name);
+    } else {
+        strcpy(dest_file_name, argv[1]);
+    }
+
+    if((fd = fopen(dest_file_name, "wb")) == NULL){
+        fprintf(stderr, "%s dosyasi acilamadi\n", dest_file_name);
+        return 1;
+    }
+
+    while(1){
+        sprintf(source_file_name, "parca%03d.txt", file_count + 1);
+        if((fs = fopen(source_file_name, "rb")) == NULL)
+            break;
+
+        ++file_count;
+
+        while ((c = fgetc(fs)) != EOF) {
+            fputc(c, fd);
+            ++byte_count;
+        }
+
+        fclose(fs);
+
+    }
+
+    fclose(fd);
+
+
+    for (int i = 0; i < file_count; ++i) {
+        sprintf(source_file_name, "parca%03d.txt", i + 1);
+        if(remove(source_file_name)){
+            fprintf(stderr, "dosya silindi\n");
+        }
+    }
+
+
+    printf("%d adet %d byte'lik %s dosyasi olarak birlestirildi\n", file_count, byte_count, dest_file_name);
+
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+
+//dosyayı basit olarak kriptolama
+
+// 0101010111  --> 0101001100
+
+//  a ^ 123 -->   0101001100
+//  a ^ 123 -->   0101010111
+
+
+//enc.exe bol.exe  1235566  -- kripto
+//enc.exe bol.exe  1235566  -- kripto cozulmus hali
+
+
+int main(int argc, char **argv)
+{
+
+    int c;
+    FILE *fs, *fd;
+
+    if(argc != 3){
+        fprintf(stderr, "kullanim: <enc> <dosya ismi> <anahtar deger>\n"
+        "anahatar 0 - 2.157.000.000 araligiinda olamli\n");
+        return 1;
+    }
+
+    if((fs = fopen(argv[1], "rb")) == NULL){
+        fprintf(stderr, "%s dosyasi acilamadi\n", argv[1]);
+        return 1;
+    }
+
+    char temp_file_name[L_tmpnam];
+    tmpnam(temp_file_name);
+
+    if((fd = fopen("temp.par", "wb")) == NULL){
+        fprintf(stderr, "gecici dosya olsuturulamadi\n");
+        return 2;
+    }
+
+    srand((unsigned)atoi(argv[2]));
+
+    while ((c = fgetc(fs)) != EOF) {
+        fputc(c ^ rand(), fd);
+    }
+
+    fclose(fs);
+    fclose(fd);
+
+    if(remove(argv[1])){
+        fprintf(stderr, "dosya silindi\n");
+    }
+
+    if(rename("temp.dat", argv[1])){
+        fprintf(stderr, "dosya ismi degistirildi\n");
+        return 4;
+    }
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+formatlı okuma ve yazma fonksiyonları
+
+printf ---> standart outputa yazıyor
+sprintf ---> bellege yazıyor
+fprintf ---> dosyaya yazıyor
+
+
+scanf --> standart inputta karater alıyor
+sscanf---> karateri bellekten alıyor
+fscanf --> karateri dosyadan alıyor
+
+
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+
+
+int main(int argc, char **argv)
+{
+
+    FILE *f = fopen("deneme.txt", "w");
+
+    if(!f){
+        printf("dosya olusturulamadi\n");
+        return 1;
+    }
+
+    fprintf(f, "orhan ozutkr\n");
+
+    for (int i = 0; i < 100; ++i) {
+        fprintf(f, "%d\n", i);
+    }
+
+    fclose(f);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+
+
+int main(int argc, char **argv)
+{
+
+    FILE *f = fopen("person.txt", "w");
+
+    if(!f){
+        printf("dosya olusturulamadi\n");
+        return 1;
+    }
+
+
+    randomize();
+
+    for (int i = 0; i < 1000; ++i) {
+        fprintf(f, "%-8d %-16s %-16s %s\n", rand(), random_name(), random_surname(), random_town());
+    }
+
+    fclose(f);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+
+//n asala sayisini bir text yazdiran
+
+//asal_yaz isimli
+//n standart giris akimindan alınacak
+
+//n--> 1000
+//primes_1000.txt
+
+int main(int argc, char **argv)
+{
+    int n;
+
+    printf("ilk kac asal sayi : ");
+    scanf("%d", &n);
+    char file_name[100];
+    sprintf(file_name, "primes_%d.txt", n);
+
+    FILE *f = fopen(file_name, "w");
+
+    if(!f){
+        printf("dosya olusturulamadi\n");
+        return 1;
+    }
+
+    int prime_count = 0;
+    int x = 2;
+
+    while (prime_count < n) {
+        if(isprime(x)){
+            if(prime_count && prime_count  % 10 == 0)
+                fprintf(f, "\n");
+            fprintf(f, "%-16d", x);
+            ++prime_count;
+        }
+        ++x;
+    }
+
+    fclose(f);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+
+//fscanf
+
+int main(int argc, char **argv)
+{
+    FILE *f = fopen("primes_100.txt", "r");
+
+    if(!f){
+        printf("dosya acilamadi\n");
+        return 1;
+    }
+
+    int ival;
+
+    while (fscanf(f, "%d", &ival) != EOF) {
+        printf("%d ", ival);
+        _getch();
+    }
+
+    fclose(f);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+
+//fscanf
+
+int main(int argc, char **argv)
+{
+    FILE *f = fopen("primes_100.txt", "r");
+
+    if(!f){
+        printf("dosya acilamadi\n");
+        return 1;
+    }
+
+    int x, y;
+
+    while (fscanf(f, "%d %d", &x, &y) != EOF) {
+        printf("%d %d\n", x, y);
+        _getch();
+    }
+
+    fclose(f);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+
+//fscanf
+
+int main(int argc, char **argv)
+{
+    FILE *f = fopen("person.txt", "r");
+
+    if(!f){
+        printf("dosya acilamadi\n");
+        return 1;
+    }
+
+    int no;
+    char name[40];
+    char surname[40];
+    char town[40];
+
+
+    while (fscanf(f, "%d%s%s%s", &no, name, surname, town) != EOF) {
+        printf("%-16s %-16s %-16s %d\n", town, surname, name, no);
+        _getch();
+    }
+
+    fclose(f);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+
+//fscanf
+
+int main(int argc, char **argv)
+{
+    FILE *f = fopen("person.txt", "w");
+
+    if(!f){
+        printf("dosya acilamadi\n");
+        return 1;
+    }
+
+    randomize();
+
+
+    for (int i = 0; i < 100000; ++i){
+        fprintf(f, "%-8d %-16s %-16s %s\n", rand(), random_name(), random_surname(), random_town());
+    }
+
+    fclose(f);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+
+//fscanf
+
+int main(int argc, char **argv)
+{
+    FILE *f = fopen("person.txt", "r");
+
+    if(!f){
+        printf("dosya acilamadi\n");
+        return 1;
+    }
+
+    char town_entr[40];
+    int ival;
+
+    printf("ili ve sayi giriniz: ");
+    scanf("%s%d", town_entr, &ival);
+
+    int no;
+    char name[40], surname[40], town[40];
+
+    while (fscanf(f, "%d%s%s%s", &no, name, surname, town) != EOF) {
+        if(no > ival && !strcmp(town, town_entr))
+            printf("%-8d %-16s %-16s %s\n", no, name, surname, town);
+    }
+
+    fclose(f);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+
+static const char* const ptowns[] = {
+"izmir", "afyonkarahisar", "kilis", "bolu", "yalova", "giresun", "tunceli", "manisa", "cankiri", "canakkale",
+"mugla", "isparta", "ankara", "kahramanmaras", "nigde", "kirklareli", "artvin", "kirikkale", "bursa", "bingol",
+"sirnak", "erzincan", "gaziantep", "bayburt", "tekirdag", "kocaeli", "trabzon", "ardahan", "elazig", "karabuk",
+"samsun", "malatya", "aksaray", "van", "kars", "amasya", "kirsehir", "balikesir", "eskisehir", "sanliurfa",
+"adiyaman", "mardin", "bilecik", "hakkari", "mus", "kayseri", "agri", "sinop", "istanbul", "mersin",
+"aydin", "sivas", "yozgat", "igdir", "sakarya", "burdur", "antalya", "osmaniye", "konya", "tokat",
+"zonguldak", "corum", "batman", "adana", "usak", "denizli", "edirne", "karaman", "ordu", "diyarbakir",
+"siirt", "kutahya", "bitlis", "bartin", "nevsehir", "rize", "kastamonu", "duzce", "erzurum", "gumushane",
+"hatay", };
+
+
+
+int main(int argc, char **argv)
+{
+    clock_t start = clock();
+
+    FILE *fa[asize(ptowns)];
+    FILE *fs = fopen("person.txt", "r");
+
+    if(!fs){
+        printf("dosya acilamadi\n");
+        return 1;
+    }
+
+    for (size_t i = 0; i < asize(fa); ++i) {
+        char name[40];
+        sprintf(name, "%s.txt", ptowns[i]);
+        fa[i] = fopen(name, "w");
+        if(!fa[i]){
+            printf("%s dosyasi olsuturulamadi\n", name);
+        }
+    }
+
+    int no;
+    char name[40], surname[40], town[40];
+
+    while (fscanf(fs, "%d%s%s%s", &no, name, surname, town) != EOF) {
+        size_t i;
+        for (i = 0; i < asize(ptowns); ++i) {
+            if(!strcmp(ptowns[i], town))
+                break;
+        }
+
+        if(i == asize(ptowns)){
+            printf("sehir ismi bulanamdi!!!!\n");
+            return 1;
+        }
+
+        fprintf(fa[i], "%-8d %-16s %-16s %s\n", no, name, surname, town);
+    }
+
+    _fcloseall();
+
+    clock_t end = clock();
+
+    printf("%d saniyede\n", (double) (end - start) / CLOCKS_PER_SEC);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+Dosyadan satır satrı okuma
+
+fgets fonksiyıonu
+
+dosyadan okunacak byte kalmadıgında NULL pointer doner
+
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+
+
+int main(int argc, char **argv)
+{
+    FILE *f = fopen("person.txt", "r");
+
+    if(!f){
+        printf("dosya acilamadi\n");
+        return 1;
+    }
+
+
+    char buffer[1000];
+
+
+    while (fgets(buffer, 1000, f)) {
+        //_strrev(buffer);
+        printf("%s", buffer);
+        _getch();
+    }
+
+    fclose(f);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
