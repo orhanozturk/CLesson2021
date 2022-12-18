@@ -4,28 +4,25 @@
 #include "utility.h"
 #include <string.h>
 #include <time.h>
+#include "person.h"
 
+
+#define         BUFFER_SIZE 100
 
 int main(int argc, char **argv)
 {
-    FILE *f = fopen("person.txt", "r");
+    FILE *fs = fopen("person.dat", "rb");
 
-    if(!f){
-        printf("dosya acilamadi\n");
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
         return 1;
     }
 
+    fseek(fs, 0L, SEEK_END);
 
-    char buffer[1000];
+    printf("the value of the file is %ld\n", ftell(fs));
 
-
-    while (fgets(buffer, 1000, f)) {
-        //_strrev(buffer);
-        printf("%s", buffer);
-        _getch();
-    }
-
-    fclose(f);
+    fclose(fs);
 }
 
 

@@ -30216,6 +30216,887 @@ int main(int argc, char **argv)
 /****************************************************/
 
 
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+
+//fsort ali.txt
+//alfabetik sıraya göre sıralı yazdıralım
+
+#define         BUFFER_SIZE     200
+
+int scmp(const void *vp1, const void *vp2)
+{
+    return strcmp(*(char**)vp1, *(char **)vp2);
+}
+
+int main(int argc, char **argv)
+{
+    char buffer[BUFFER_SIZE];
+
+    if(argc != 2){
+        fprintf(stderr, "usage, <fsort> <text file name>\n");
+        return 0;
+    }
+
+    FILE *f = fopen(argv[1], "r");
+    if(!f){
+        fprintf(stderr, "file %s acilamadi\n", argv[1]);
+        return 1;
+    }
+
+    char **p = NULL;
+    int line_count = 0;
+
+
+    while (fgets(buffer, BUFFER_SIZE, f) != NULL) {
+        p = realloc(p, sizeof (char *) * (line_count + 1));
+
+        if(!p)
+        {
+            fprintf(stderr, "cannot allocate memory\n");
+            return 3;
+        }
+
+        p[line_count++] = _strdup(buffer);
+    }
+
+    printf("line count : %d", line_count);
+
+    qsort(p, line_count, sizeof (*p), &scmp);
+
+    for (int i = 0; i < line_count; ++i) {
+        printf("[%-5d]  %s", i + 1, p[i]);
+    }
+
+    fclose(f);
+
+    for (int i = 0; i < line_count; ++i) {
+        free(p[i]);
+    }
+
+    free(p);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+
+#define         BUFFER_SIZE     200
+
+
+int main(int argc, char **argv)
+{
+    char str[BUFFER_SIZE];
+
+    FILE *fs, *fd;
+    fs = fopen("person.txt", "r");
+
+    if(!fs){
+        fprintf(stderr, "file %s acilamadi\n", "person.txt");
+        return 1;
+    }
+
+    fd = fopen("person2.txt", "w");
+
+    if(!fs){
+        fprintf(stderr, "file %s olusturlamdi\n", "person2.txt");
+        return 1;
+    }
+
+    while (fgets(str, BUFFER_SIZE, fs) != NULL) {
+        fputs(str, fd);
+    }
+
+    fclose(fs);
+    fclose(fd);
+
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+fread
+fwrite
+
+dosyadan dosyaya
+
+dosyadan formatsız (unformetted) okuma donksiyonu ---> fread
+dosyaya formatsız (unformetted) yazma donksiyonu ---> fwrite
+
+
+
+size_t fwrite(const void *vp, size_t sz, size_t n, FILE *f);
+size_t fread(void *vp, size_t sz, size_t n, FILE *f);
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+
+
+int main(int argc, char **argv)
+{
+    FILE *fs = fopen("asal.dat", "w");
+
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    int prime_count = 0;
+    int x = 2;
+
+    while (prime_count < 100000) {
+        if(isprime(x)){
+            fwrite(&x, sizeof (int), 1, fs);
+            ++prime_count;
+        }
+        ++x;
+    }
+
+    fclose(fs);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+#include "person.h"
+
+
+int main(int argc, char **argv)
+{
+    Person per;
+
+    FILE *fs = fopen("person.dat", "wb");
+
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    randomize();
+
+    for (int i = 0; i < 10000; ++i) {
+        set_person_random(&per);
+        fwrite(&per, sizeof (per), 1, fs);
+    }
+
+    fclose(fs);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+#include "person.h"
+
+
+int main(int argc, char **argv)
+{
+    Person per;
+
+    FILE *fs = fopen("asal.dat", "rb");
+
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    int ival;
+
+    while (fread(&ival, sizeof (int), 1, fs) != 0) {
+        printf("%d ", ival);
+        _getch();
+    }
+
+    fclose(fs);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+#include "person.h"
+
+
+int main(int argc, char **argv)
+{
+    Person per;
+
+    FILE *fs = fopen("asal.dat", "rb");
+
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    int a[2];
+
+    while (fread(a, sizeof (int), 2, fs) != 0) {
+        if(a[1] - a[0] == 2)
+            printf("%d   %d\n", a[0], a[1]);
+    }
+
+    fclose(fs);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+#include "person.h"
+
+
+int main(int argc, char **argv)
+{
+    Person per;
+
+    FILE *fs = fopen("asal.dat", "rb");
+
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    int a[2];
+    size_t n;
+
+    while ((n = fread(a, sizeof (int), 2, fs)) != 0) {
+        print_array(a, n);
+        _getch();
+    }
+
+    fclose(fs);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+#include "person.h"
+
+#define  SIZE   10
+
+int main(int argc, char **argv)
+{
+    Person per;
+
+    FILE *fs = fopen("asal.dat", "rb");
+
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    int a[SIZE];
+    size_t n;
+
+    n = fread(a, sizeof (int), SIZE, fs);
+    printf("n = %d\n", n);
+    n = fread(a, sizeof (int), SIZE, fs);
+    printf("n = %d\n", n);
+    n = fread(a, sizeof (int), SIZE, fs);
+    printf("n = %d\n", n);
+
+
+    fclose(fs);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+#include "person.h"
+
+#define  SIZE   10
+
+int main(int argc, char **argv)
+{
+    Person per;
+
+    FILE *fs = fopen("asal.dat", "rb");
+
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    int a[SIZE];
+    size_t n;
+
+    while((n = fread(a, sizeof (int), SIZE, fs)) != 0){
+        print_array(a, n);
+        _getch();
+    }
+
+
+
+    fclose(fs);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+#include "person.h"
+
+
+int main(int argc, char **argv)
+{
+    FILE *fs = fopen("person2.dat", "rb");
+
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    printf("isim girin : ");
+    char name_entry[20];
+
+    scanf("%s", name_entry);
+
+    Person per;
+
+    while (fread(&per, sizeof (per), 1, fs)) {
+        if(!strcmp(name_entry, per.m_name)){
+            print_person(&per);
+            _getch();
+        }
+    }
+
+    fclose(fs);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+#include "person.h"
+
+
+int main(int argc, char **argv)
+{
+    FILE *fs = fopen("person2.dat", "rb");
+
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    printf("ayin kacinci gunu doganlar girin : ");
+    int mday;
+
+    scanf("%d", &mday);
+
+    Person per;
+
+    while (fread(&per, sizeof (per), 1, fs)) {
+        if(mday == per.m_bdate.md){
+            print_person(&per);
+            //_getch();
+        }
+    }
+
+    fclose(fs);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+#include "person.h"
+
+
+//mulakat sorusu
+//fread ve fwrite fonksiyonunu kullanaran
+//bir dosyanın kopyasıını olusturun
+
+//kopyala.exe   ali.exe  recep.exe
+
+
+#define         BUFFER_SIZE 100
+
+int main(int argc, char **argv)
+{
+    FILE *fs, *fd;
+    char buffer[BUFFER_SIZE];
+    int read_bytes = 0;
+    size_t n;
+
+    if (argc != 3) {
+        printf("kullanim: <kopyala> <kyanak dosya ismi> <hedef dosya ismi>\n");
+        return 1;
+    }
+
+    if((fs = fopen(argv[1], "rb")) == NULL){
+        fprintf(stderr, "%s dosyasi acilamadi\n", argv[1]);
+        return 2;
+    }
+
+
+    if((fd = fopen(argv[2], "wb")) == NULL){
+        fprintf(stderr, "%s dosyasi olusturulamadi\n", argv[2]);
+        return 3;
+    }
+
+    while ((n = fread(buffer, 1, BUFFER_SIZE, fs)) != 0) {
+        fwrite(buffer, 1, n, fd);
+        read_bytes += n;
+    }
+
+    fclose(fs);
+    fclose(fd);
+
+    printf("%zu byte'lik %s isimli dosyanin %s isimli kopyasi olusturuldu\n", read_bytes, argv[1], argv[2]);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+Dosya konum göstericisine ilişkin standart C fonksiyonları
+
+File pointer fonksiyonları
+
+
+fseek
+rewind
+ftell
+fsetpos
+fgetpos
+
+
+
+fseek
+
+geri donus degeri 0 basarısızlık 1 basarılı
+
+int fseek(FILE *f, long n, int origin);
+
+SEEK_SET 0
+SEEK_CUR 1
+SEEK_END 2
+
+fseek(f, 100L, SEEK_SET);
+fseek(f, -30L, SEEK_END);
+
+
+fseek(f, 0L, SEEK_SET);
+
+rewind
+
+rewind(f);
+fseek(f, 0L, SEEK_SET);
+
+
+iki tamamiyel aynı analamda dosya basında basla demektir
+
+aralarındaki tek fark rewind geri donus degeri yoktur
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+#include "person.h"
+
+
+//mulakat sorusu
+//fread ve fwrite fonksiyonunu kullanaran
+//bir dosyanın kopyasıını olusturun
+
+//kopyala.exe   ali.exe  recep.exe
+
+
+#define         BUFFER_SIZE 100
+
+int main(int argc, char **argv)
+{
+    FILE *fs = fopen("deneme2.txt", "r+");
+
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    fseek(fs, 7L, SEEK_SET);
+    fputc('!', fs);
+    fseek(fs, 0L, SEEK_SET);
+    fputc('*', fs);
+
+
+    fseek(fs, 3L, SEEK_SET);
+    fprintf(fs, "C language");
+
+    fclose(fs);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+eğer son yapılan işlem dosyadan okuma
+bir sonraki işlem dosyaya yazma olacaksa
+
+
+eğer son yapılan işlem dosyadan yazma ise
+bir sonraki işlem dosyadan okumak olacaksa
+
+mutlaka
+dosya konum gösterisi set edilmeli
+
+okumadan yazmaya geçişte
+yazmadan okumaya geçişte
+
+Dosya konum göstercisi mutlaka set edilmeli yoksa tanımsız davranıs olur
+
+
+
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+#include "person.h"
+
+
+#define         BUFFER_SIZE 100
+
+int main(int argc, char **argv)
+{
+    int n;
+
+    printf("kacinci asal sayi : ");
+    scanf("%d", &n);
+
+    FILE *fs = fopen("asal.dat", "rb");
+
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    int x;
+
+    fseek(fs, (n-1) * (long)sizeof (int), SEEK_SET);
+    fread(&x, sizeof (int), 1, fs);
+
+    printf("%d.asal sayi %d\n", n, x);
+
+    fclose(fs);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+#include "person.h"
+
+
+#define         BUFFER_SIZE 100
+
+int main(int argc, char **argv)
+{
+    FILE *fs = fopen("asal.dat", "rb");
+
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    int x;
+
+    for (int i = 0; i <= 10000; i += 100 -1) {
+        fseek(fs, i * (long)sizeof (int), SEEK_SET);
+        fread(&x, sizeof (int), 1, fs);
+        printf("%d.asal sayi %d\n", i, x);
+
+    }
+
+    fclose(fs);
+}
+
+
+/****************************************************/
+/****************************************************/
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+#include "person.h"
+
+
+#define         BUFFER_SIZE 100
+
+int main(int argc, char **argv)
+{
+    int n;
+    FILE *fs = fopen("person.dat", "rb");
+
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    printf("kacinci kayit : ");
+    scanf("%d", &n);
+
+    Person per;
+
+    fseek(fs, (n-1) * (long)sizeof (Person), SEEK_SET);
+    fread(&per, sizeof (per), 1, fs);
+    print_person(&per);
+
+    fclose(fs);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+ftell
+
+ftell konum gostericisinin degerini gosteriyor dosya konumun basından itibaren
+
+
+geri donus degeri long
+
+long ftell(FILE *f);
+
+basarasız oldugunda long turunden -1 degeri dondurur
+
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+#include "person.h"
+
+
+#define         BUFFER_SIZE 100
+
+int main(int argc, char **argv)
+{
+    FILE *fs = fopen("person.dat", "rb");
+
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    printf("the value of the file is %ld\n", ftell(fs));
+
+    fclose(fs);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "utility.h"
+#include <string.h>
+#include <time.h>
+#include "person.h"
+
+
+#define         BUFFER_SIZE 100
+
+int main(int argc, char **argv)
+{
+    FILE *fs = fopen("person.dat", "rb");
+
+    if(!fs){
+        fprintf(stderr, "dosya acilamadi\n");
+        return 1;
+    }
+
+    fseek(fs, 0L, SEEK_END);
+
+    printf("the value of the file is %ld\n", ftell(fs));
+
+    fclose(fs);
+}
+
+
+/****************************************************/
+/****************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
